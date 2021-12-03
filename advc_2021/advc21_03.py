@@ -1,5 +1,3 @@
-import fileinput
-
 def solve1(lines):
 	cntZeros = [0] * len(lines[0])
 	for line in lines:
@@ -76,7 +74,7 @@ def main(filename):
 	fo = open(filename, "r")
 	lines = fo.read().splitlines()
 	solve1(lines)
-	solve2(lines)	 # 3414905 too high
+	solve2(lines)
 
 
 main("../../../data/advc21_03.txt");
