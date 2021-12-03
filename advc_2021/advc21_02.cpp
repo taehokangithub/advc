@@ -67,6 +67,5 @@ int main()
 	}
 
 	cout << "ans : " << (pos * depth) << endl;
-	// 1690020 too high
 
 }
