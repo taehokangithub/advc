@@ -132,7 +132,7 @@ class Board
 		}
 		return 0;
 	}
-};
+}
 
 Board.bingoPatterns = [];
 
@@ -144,7 +144,7 @@ class Solver
 		this.cardDeck = [];
 		this.addBoard = (b) => this.boards.push(b);
 		this.setCardDeck = (c) => this.cardDeck = c;
-		this.hasCardDeck = () => (this.cardDeck.length != 0)
+		this.hasCardDeck = () => (this.cardDeck.length != 0);
 		this.bingoPattern = [];
 	}
 
@@ -247,7 +247,7 @@ function solveMain(inputFilePath)
 	{
 		solver.playBingo();
 		solver.playBingoLastWin();
-	})
+	});
 }
 
 solveMain("../../data/advc20_04.txt");
