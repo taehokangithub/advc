@@ -255,7 +255,6 @@ namespace advc20_24
 		console.log("ans2 = " + ans2);
 	}	
 
-	main("../data/advc20_24.txt");
-	//main("../data/advc20_24.sample.txt");
+	main("../../data/advc20_24.txt");
 }
 
