@@ -1,3 +1,6 @@
+declare var require: any
+export {};
+
 const fs = require("fs");
 
 namespace advc20_24
