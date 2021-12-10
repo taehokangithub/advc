@@ -9,7 +9,6 @@ class Advc21_10
 
     const string s_opener = "([{<";
     const string s_closer = ")]}>";
-
     static bool s_debugWrite = false;
 
     static void debugWrite(string s)
@@ -89,17 +88,17 @@ class Advc21_10
         return ret;
     }
 
-	static void solve(string path)
-	{
-		var lines = File.ReadLines(path);
+    static void solve(string path)
+    {
+        var lines = File.ReadLines(path);
 
         int solve1Ans = 0;
         var solve2Scores = new List<long>();
 
-		foreach(string line in lines)
-		{
-			if (line.Length > 0)
-			{
+        foreach(string line in lines)
+        {
+            if (line.Length > 0)
+            {
                 var stack = new Stack<char>();
 
                 int corruptScore = getCorruptedLineScore(line, stack);
@@ -117,26 +116,26 @@ class Advc21_10
                     debugWrite($"Autoscore {autoScore}");
                     solve2Scores.Add(autoScore);
                 }
-			}
-		}
+            }
+        }
 
         solve2Scores.Sort();
         long solve2Ans = solve2Scores[solve2Scores.Count / 2];
 
         Console.WriteLine($"Solve1 {solve1Ans}");
         Console.WriteLine($"Solve2 {solve2Ans}");
-	}
+    }
 
-	static void Run()
-	{
-		Console.WriteLine("Starting Advc21_05");
+    static void Run()
+    {
+        Console.WriteLine("Starting Advc21_05");
 
-		solve("../../data/advc21_10 sample.txt");
+        solve("../../data/advc21_10 sample.txt");
         solve("../../data/advc21_10.txt");
-	}
+    }
 
-	static void Main()
-	{
-		Run();
-	}    
+    static void Main()
+    {
+        Run();
+    }    
 }
