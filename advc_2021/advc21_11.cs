@@ -37,13 +37,11 @@ class Advc21_11
 
     class Grid
     {
-        private enum Dir { Up, Down, Left, Right };
-
-        private List<List<Point>> m_points = new List<List<Point>>();
         private int m_maxX = 0;
         private int m_maxY = 0;
-        private HashSet<Point> m_flashed = new HashSet<Point>();
         private int m_totalFlash = 0;
+        private HashSet<Point> m_flashed = new HashSet<Point>();
+        private List<List<Point>> m_points = new List<List<Point>>();
 
         public void addLine(List<int> numbers)
         {
@@ -111,6 +109,7 @@ class Advc21_11
             m_flashed.Add(p);
             m_totalFlash ++;
             debugWrite($"Flashing {p}");
+
             IncreaseAndFlash(GetPointAt(p.X - 1, p.Y - 1));
             IncreaseAndFlash(GetPointAt(p.X - 1, p.Y - 0));
             IncreaseAndFlash(GetPointAt(p.X - 1, p.Y + 1));
@@ -170,16 +169,16 @@ class Advc21_11
 
     }
     
-	static void solve(string path)
-	{
-		var lines = File.ReadLines(path);
+    static void solve(string path)
+    {
+        var lines = File.ReadLines(path);
 
         Grid grid1 = new Grid();
         Grid grid2 = new Grid();
-		foreach(string line in lines)
-		{
-			if (line.Length > 0)
-			{
+        foreach(string line in lines)
+        {
+            if (line.Length > 0)
+            {
                 var numbers = new List<int>();
                 foreach (char c in line)
                 {
@@ -188,23 +187,23 @@ class Advc21_11
                 }
                 grid1.addLine(new List<int>(numbers));
                 grid2.addLine(new List<int>(numbers));
-			}
-		}
+            }
+        }
 
         grid1.SolvePart1(100);
         grid2.SolvePart2();
-	}
+    }
 
-	static void Run()
-	{
-		Console.WriteLine("Starting Advc21_11");
+    static void Run()
+    {
+        Console.WriteLine("Starting Advc21_11");
 
         solve("../../data/advc21_11_sample.txt");
-		solve("../../data/advc21_11.txt");
-	}
+        solve("../../data/advc21_11.txt");
+    }
 
-	static void Main()
-	{
-		Run();
-	}    
+    static void Main()
+    {
+        Run();
+    }    
 }
