@@ -78,7 +78,6 @@ class Advc21_12
 
             return str;
         }
-
     }
 
     class PathFinder
@@ -191,45 +190,44 @@ class Advc21_12
         }
     }
 
-	static void SolveMain(string path)
-	{
+    static void SolveMain(string path)
+    {
         Console.WriteLine($"Reading File {path}");
-		var lines = File.ReadLines(path);
+        var lines = File.ReadLines(path);
 
         PathFinder pathFinder1 = new PathFinder();
         PathFinder pathFinder2 = new PathFinder();
 
-		foreach(string line in lines)
-		{
+        foreach(string line in lines)
+        {
 
-			if (line.Length > 0)
-			{
+            if (line.Length > 0)
+            {
                 string[] caveNames = line.Split("-");
                 pathFinder1.AddConnection(caveNames[0], caveNames[1]);
                 pathFinder2.AddConnection(caveNames[0], caveNames[1]);
-			}
-		}
+            }
+        }
 
         pathFinder1.Solve1();
         pathFinder2.Solve2();
-	}
+    }
 
-
-	static void Run()
-	{
+    static void Run()
+    {
         var classType = new StackFrame().GetMethod()?.DeclaringType;
         string className = classType != null? classType.ToString() : "Advc";
 
-		Console.WriteLine($"Starting {className}");
+        Console.WriteLine($"Starting {className}");
         className.ToString().ToLower();
 
         SolveMain($"../../data/{className}_sample.txt");
         SolveMain($"../../data/{className}_sample2.txt");
-		SolveMain($"../../data/{className}.txt");
-	}
+        SolveMain($"../../data/{className}.txt");
+    }
 
-	static void Main()
-	{
-		Run();
-	}
+    static void Main()
+    {
+        Run();
+    }
 }
