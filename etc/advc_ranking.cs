@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -19,9 +20,9 @@ class Advc_Ranking
 {
 	class User
 	{
-		public string Name { get; set; }
-		public int ID { get; set; }
-		public int LocalScore { get; set; }
+		public string Name { get; set; } = "";
+		public int ID { get; set; } = 0;
+		public int LocalScore { get; set; } = 0;
 	}
 
 	class UserSolveRecord
@@ -59,9 +60,9 @@ class Advc_Ranking
 			{
 
 				int part = int.Parse(partRecord.Key);
-				long time = partRecord.Value["get_star_ts"].ToObject<long>();
+				long? time = partRecord.Value?["get_star_ts"]?.ToObject<long>();
 
-				UserSolveRecord userSolveRecord = new UserSolveRecord(user, time);
+				UserSolveRecord userSolveRecord = new UserSolveRecord(user, time ?? 0);
 				Records[part - 1].Add(userSolveRecord);
 			}
 			sorted = false;
@@ -89,23 +90,30 @@ class Advc_Ranking
 		public void AddUserJObject(JObject member)
 		{
 			User user = new User();
-			user.ID = member["id"].ToObject<int>();
-			user.LocalScore = member["local_score"].ToObject<int>();
-			user.Name = member["name"].ToObject<string>();
+			user.ID = member?["id"]?.ToObject<int>() ?? 0;
+			user.LocalScore = member?["local_score"]?.ToObject<int>() ?? 0;
+			user.Name = member?["name"]?.ToObject<string>() ?? "";
 			user.Name = user.Name.Substring(0, Math.Min(user.Name.Length, 20));
 
 			m_users[user.ID] = user;
 
-			JObject completionData = member["completion_day_level"] as JObject;
+			JObject? completionData = member?["completion_day_level"] as JObject;
 
-			foreach (JValue dayProperty in completionData.Properties().Select(p => p.Name))
-			{
-				Day day = GetDayOrCreate(dayProperty.ToObject<int>());
+            if (completionData != null)
+            {
+                foreach (JValue dayProperty in completionData.Properties().Select(p => p.Name))
+                {
+                    Day day = GetDayOrCreate(dayProperty.ToObject<int>());
 
-				JObject dayRecord = completionData[dayProperty.ToString()] as JObject;
+                    JObject? dayRecord = completionData[dayProperty.ToString()] as JObject;
 
-				day.AddRecord(user, dayRecord);
-			}
+                    if (dayRecord != null)
+                    {
+                        day.AddRecord(user, dayRecord);
+                    }
+                }
+            }
+
 		}
 
 		public void PrintPerDay()
@@ -119,23 +127,22 @@ class Advc_Ranking
 				Console.WriteLine($"* DAY {item.Key} :");
 				for (int i = 0; i < day.Records[0].Count; i ++)
 				{
-					UserSolveRecord u1 = day.Records[0]?[i];
+					UserSolveRecord? u1 = day.Records[0]?[i];
 
-					string line = String.Format("{0,20} {1}", u1.User.Name, u1.GetTimeString());
+					string line = String.Format("{0,20} {1}", u1?.User.Name ?? "", u1?.GetTimeString() ?? "");
 					if (day.Records[1].Count > i)
 					{
-						UserSolveRecord u2 = day.Records[1]?[i];
-						line += String.Format("\t{0,20} {1}", u2.User.Name, u2.GetTimeString());
+						UserSolveRecord? u2 = day.Records[1]?[i];
+						line += String.Format("\t{0,20} {1}", u2?.User.Name ?? "", u2?.GetTimeString() ?? "");
 					}
 					Console.WriteLine(line);
 				}
-				
 			}
 		}
 
 		private Day GetDayOrCreate(int day)
 		{
-			Day ret;
+			Day? ret;
 			if (!m_days.TryGetValue(day, out ret))
 			{
 				ret = new Day();
@@ -145,19 +152,18 @@ class Advc_Ranking
 		}
 	}
 
-
     static void Run()
     {
 		var jsonText = File.ReadAllText("advc_data.json");
 
-		JObject jsonObject = JsonConvert.DeserializeObject<JObject>(jsonText);
-		JToken membersObject = jsonObject.GetValue("members");
+		JObject? jsonObject = JsonConvert.DeserializeObject<JObject>(jsonText);
+		JToken? membersObject = jsonObject?.GetValue("members");
 		
-		List<JToken> members = membersObject.Values().ToList();
+		List<JToken>? members = membersObject?.Values().ToList();
 
 		Leaderboard board = new Leaderboard();
 
-		foreach(JObject member in members)
+		foreach(JObject member in members ?? new List<JToken>())
 		{
 			board.AddUserJObject(member);
 		}
