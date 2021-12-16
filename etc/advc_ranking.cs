@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -152,9 +153,10 @@ class Advc_Ranking
 		}
 	}
 
-    static void Run()
+    public static void Run()
     {
-		var jsonText = File.ReadAllText("advc_data.json");
+		//var jsonText = File.ReadAllText("advc_data.json");
+		string jsonText = APITest.GetJsonText();
 
 		JObject? jsonObject = JsonConvert.DeserializeObject<JObject>(jsonText);
 		JToken? membersObject = jsonObject?.GetValue("members");
@@ -170,6 +172,44 @@ class Advc_Ranking
 
 		board.PrintPerDay();
     }
+
+	class APITest
+	{
+		static bool s_isFinished = false;
+		static string s_jsonText = "";
+
+		static async void SendAPI()
+		{
+			HttpClient client = new HttpClient();
+			string uri = "https://adventofcode.com/2021/leaderboard/private/view/786608.json";
+			//string uri = "http://si-scr-lin-01:7072/api/JetGetClubInfo";
+			client.BaseAddress = new Uri(uri);
+    		var message = new HttpRequestMessage(HttpMethod.Get, "");
+
+			//! You need session cookie here
+    		message.Headers.Add("Cookie", "session=");
+
+			HttpResponseMessage response = client.Send(message);
+
+			s_jsonText = await response.Content.ReadAsStringAsync();
+			//Console.WriteLine($"Response : [{response.ToString()}]\nContents : [{txt}]");	
+
+			s_isFinished = true;
+		}
+
+		public static string GetJsonText()
+		{
+			SendAPI();
+
+			while(!s_isFinished)
+			{
+				System.Threading.Thread.Sleep(100);
+			}
+
+			return s_jsonText;
+		}
+
+	}
 
     static void Main()
     {

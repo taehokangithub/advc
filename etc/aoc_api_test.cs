@@ -36,13 +36,17 @@ namespace SI.Jet.JetPOC
 			else if (jsonText.Length == 0 || jsonTime.AddMinutes(15) < DateTime.Now)
 			{
 				HttpClient client = new HttpClient();
-				//string uri = "https://adventofcode.com/2021/leaderboard/private/view/786608.json";
-				string uri = "http://si-scr-lin-01:7072/api/JetGetClubInfo";
+				string uri = "https://adventofcode.com";
+				string param = "/2021/leaderboard/private/view/786608.json";
 				client.BaseAddress = new Uri(uri);
-				HttpResponseMessage response = await client.GetAsync("");
+
+				var message = new HttpRequestMessage(HttpMethod.Get, param);
+
+				message.Headers.Add("Cookie", $"session={JetPocCommon.APICookie}");
+				HttpResponseMessage response = await client.SendAsync(message);
 
 				string txt = await response.Content.ReadAsStringAsync();
-				Console.WriteLine($"Response : [{response.ToString()}]\nContents : [{txt}]");
+				Console.WriteLine($"Response : [{response.ToString()}]");
 				jsonTime = DateTime.Now;
 				jsonText = txt;
 			}
@@ -156,10 +160,10 @@ namespace SI.Jet.JetPOC
 					<link href='//fonts.googleapis.com/css?family=Source+Code+Pro:300&subset=latin,latin-ext' rel='stylesheet' type='text/css'/>
 					<link rel='shortcut icon' href='/favicon.png'/>
 					</head>	<body>
-					<table style = 'width:100%; padding:20px; color:#cccccc; font-family:""Source Code Pro"", monospace;
+					<table border=0 style = 'width:100%; padding:30px; color:#cccccc; font-family:""Source Code Pro"", monospace;
 					background:#0f0f23; font-size: 12pt; min-width: 60em;'>
-					<tr style='color:#A0A0A0; font-size: 9pt'> <td> &nbsp; </td> </td> <td> &nbsp; </td> </td> <td> &nbsp; </td> 
-					<td> Table refreshes every 15 minutes <br> Last Refreshed : " + jsonTime + @" 
+					<tr style='color:#A0A0A0; font-size: 9pt'> <td width='20%'> &nbsp; </td> <td width='30%'> &nbsp; </td> </td> <td width='20%'> &nbsp; </td> 
+					<td width='30%'> Table refreshes every 15 minutes <br> Last Refreshed : " + jsonTime + @" 
 					</td> </tr>
 				";
 
@@ -175,12 +179,12 @@ namespace SI.Jet.JetPOC
 					{
 						UserSolveRecord u1 = day.Records[0]?[i];
 
-						response += "<tr> <td> " + u1.User.Name + "</td> <td> " + u1.GetTimeString() + "</td>";
+						response += "<tr> <td style='text-align:right'> " + u1.User.Name + "</td> <td style='text-align:center'> " + u1.GetTimeString() + "</td>";
 
 						if (day.Records[1].Count > i)
 						{
 							UserSolveRecord u2 = day.Records[1]?[i];
-							response += "<td> " + u2.User.Name + "</td> <td> " + u2.GetTimeString() + "</td> </tr>";
+							response += "<td style='text-align:right'> " + u2.User.Name + "</td> <td style='text-align:center'> " + u2.GetTimeString() + "</td> </tr>";
 						}
 						else
 						{
