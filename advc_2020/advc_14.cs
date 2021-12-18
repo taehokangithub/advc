@@ -232,7 +232,7 @@ class Advc20_14
 			}
         }
 
-		debugWrite(memory.ToString());
+		debugWrite(memory1.ToString());
 		memory1.GetSum();
 		memory2.GetSum();
     }
