@@ -244,7 +244,8 @@ class Advc21_23
         public SolveState Last { get => Answer[Answer.Count - 1]; }
         public long Cost { get => Last.Cost; }
         
-        HashSet<string> m_previousStates = new HashSet<string>();
+        //HashSet<string> m_previousStates = new HashSet<string>();
+        Dictionary<string, long> m_previousStateCost = new Dictionary<string, long>();
 
         public SolveStateList(SolveState state)
         {
@@ -271,18 +272,22 @@ class Advc21_23
         public bool AddNewState(SolveState state)
         {
             string str = state.BeastPosRepresentation();
-            if (m_previousStates.Contains(str))
+            if (m_previousStateCost.ContainsKey(str))
             {
-                return false;
+                if (m_previousStateCost[str] < state.Cost)
+                {
+                    Console.WriteLine($"dup state {str}");
+                    return false;
+                }
             }
-            m_previousStates.Add(str);
+            m_previousStateCost[str] = state.Cost;
             Answer.Add(new SolveState(state));
             return true;
         }
 
         public void PrintAllStates()
         {
-            foreach (string str in m_previousStates)
+            foreach (string str in m_previousStateCost.Keys)
             {
                 Console.WriteLine($"  previous : {str}");
             }
@@ -398,12 +403,13 @@ class Advc21_23
 
                 foreach (Point point in possibleMoves)
                 {
-                    //Console.WriteLine($"   Adding new possible  move for beast {beast.Type} to {point}");
+                    
                     SolveStateList newStateList = new SolveStateList(stateList);
                     SolveState newState = new SolveState(newStateList.Last);
 
                     newState.MoveBeastLocation(beast.Loc, point);
 
+                    Console.WriteLine($"   Trying to add new possible  move for beast {beast.Type} to {point}");
                     if (newStateList.AddNewState(newState))
                     {
                         hasDoneAnything = true;
@@ -473,7 +479,7 @@ class Advc21_23
 
                 while(HasCell(curPos) && state.HasBeast(curPos) == false)
                 {
-                    if (GetCell(curPos).Type == Cell.CellType.Entrance )
+                    if (GetCell(curPos).Type == Cell.CellType.Entrance)
                     {
                         Point go = curPos.GetDirPoint(Dir.Down);
                         
@@ -527,6 +533,24 @@ class Advc21_23
                         if (GetCell(go).IsMovable())
                         {
                             ans.Add(go);
+                        }
+                        else
+                        {
+                            // Go down
+                            Point godown = go.GetDirPoint(Dir.Down);
+                            
+                            while(HasCell(godown) && !state.HasBeast(godown) && GetCell(godown).RoomFor == beast.Type)
+                            {
+                                Point furtherGo = godown.GetDirPoint(Dir.Down);
+
+                                if (!HasCell(furtherGo) || (state.HasBeast(furtherGo) && state.GetBeast(furtherGo).Fixed))
+                                {
+                                    Console.WriteLine($" found downside {godown}");
+                                    ans.Add(godown);
+                                    break;
+                                }
+                                godown = furtherGo;
+                            }                            
                         }
                         go = go.GetDirPoint(dir);
                     }
