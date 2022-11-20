@@ -1,2 +1,2 @@
 ﻿
-Advc2019.Problem01.Start();
+Advc2019.Problem02.Start();
