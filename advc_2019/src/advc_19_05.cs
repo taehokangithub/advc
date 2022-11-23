@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Advc2019
 {
-    class Problem05
+    class Computer05
     {
         private enum Opcode 
         {
@@ -26,7 +26,7 @@ namespace Advc2019
         private int m_input = 0;
         private List<int> m_output = new();
 
-        public Problem05(List<int> initalMemory) 
+        public Computer05(List<int> initalMemory) 
         {
             m_memory = new(initalMemory);
         }
@@ -172,31 +172,34 @@ namespace Advc2019
         }
         
         public string Solve1()
-		{
+        {
             Run(1);
 
-			return string.Join(',', m_output);
-		}
+            return string.Join(',', m_output);
+        }
 
-		public string Solve2()
-		{
+        public string Solve2()
+        {
             Run(5);
 
-			return string.Join(',', m_output);
-		}
+            return string.Join(',', m_output);
+        }
+    }
 
-		public static void Start() 
-		{
-			var textData = File.ReadAllText("data/input05.txt");
-			var textArr = textData.Split(',');
-			var intList = textArr.Select(t => int.Parse(t)).ToList();
-            var problem1 = new Problem05(intList);
-            var problem2 = new Problem05(intList);
-			var ans1 = problem1.Solve1();
-			var ans2 = problem2.Solve2();
+    class Problem05
+    {
+        public static void Start() 
+        {
+            var textData = File.ReadAllText("data/input05.txt");
+            var textArr = textData.Split(',');
+            var intList = textArr.Select(t => int.Parse(t)).ToList();
+            var problem1 = new Computer05(intList);
+            var problem2 = new Computer05(intList);
+            var ans1 = problem1.Solve1();
+            var ans2 = problem2.Solve2();
 
-			Console.WriteLine($"ans = {ans1}, {ans2}");
-		}
+            Console.WriteLine($"ans = {ans1}, {ans2}");
+        }
     }
 }
 
