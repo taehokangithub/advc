@@ -24,8 +24,8 @@ namespace Advc2019
             Problem0X prob1 = new();
             Problem0X prob2 = new();
 
-            int ans1 = prob1.Solve1(intList);
-            int ans2 = prob2.Solve2(intList);
+            var ans1 = prob1.Solve1(intList);
+            var ans2 = prob2.Solve2(intList);
 
             Console.WriteLine($"ans = {ans1}, {ans2}");
         }
