@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace advc.util.MapUtil
+namespace Advc.Utils.MapUtil
 {
     public struct Point
     {
