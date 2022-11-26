@@ -40,8 +40,8 @@ namespace Advc2019
         public void Run(Queue<int> inputs)
         {
             m_inputs = inputs;
-
-            LogDetail($"Program started with input {inputs}");
+            m_isBlockedForInput = false;
+            LogDetail($"Program started with input {string.Join(",",inputs)} at {m_excutionPtr}");
 
             while (!m_isHalted && !m_isBlockedForInput)
             {
