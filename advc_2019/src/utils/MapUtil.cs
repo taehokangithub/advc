@@ -6,6 +6,7 @@ namespace Advc.Utils.MapUtil
 {
     public struct Point
     {
+        public static Point Dummy = new Point();
         public static int s_dimension = 3;
 
         public int w, x, y, z;
@@ -53,25 +54,13 @@ namespace Advc.Utils.MapUtil
         public static readonly Point Left = new Point(-1, 0);
         public static readonly Point Right = new Point(1, 0);
     }
-
-    public interface IMap<ValueType>
-    {
-        void SetMax(int x, int y, int z = 0, int w = 0);
-        void SetMax(Point p);
-        void SetMin(int x, int y, int z = 0, int w = 0);
-        void SetMin(Point p);
-
-        void SetAt(ValueType v, int x, int y, int z = 0, int w = 0);
-        void SetAt(ValueType v, Point p);
-
-        ValueType GetAt(int x, int y, int z = 0, int w = 0);
-        ValueType GetAt(Point p);
-    }
-
     abstract class MapBase<ValueType>
     {
         private Point? m_min = null;
         private Point? m_max = null;
+
+        public Point Max => m_max.HasValue ? (Point) m_max : Point.Dummy;
+        public Point Min => m_min.HasValue ? (Point) m_min : Point.Dummy;
 
         public virtual void SetMax(Point max)
         {
@@ -144,7 +133,7 @@ namespace Advc.Utils.MapUtil
         protected abstract ValueType OnGetAt(Point p);
     }
 
-    class MapByDictionary<ValueType> : MapBase<ValueType>, IMap<ValueType>
+    class MapByDictionary<ValueType> : MapBase<ValueType>
     {
         private Dictionary<Point, ValueType> m_map = new();
 
@@ -163,9 +152,9 @@ namespace Advc.Utils.MapUtil
         }
     }
 
-    class MapByList<ValueType> : MapBase<ValueType>, IMap<ValueType>
+    class MapByList<ValueType> : MapBase<ValueType>
     {
-        public List<List<ValueType>> m_map = new();
+        private List<List<ValueType>> m_map = new();
 
         public override void SetMin(Point min)
         {
