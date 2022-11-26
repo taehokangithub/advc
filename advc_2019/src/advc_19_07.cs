@@ -8,7 +8,7 @@ namespace Advc2019
 {
     class Problem07Defs
     {
-        public static bool m_logDetail = true;
+        public static bool m_logDetail = false;
         public static void LogDetail(string str)
         {
             if (m_logDetail)
@@ -27,15 +27,16 @@ namespace Advc2019
         public Thruster(IReadOnlyList<int> instructions)
         {
             m_computer = new Computer05(instructions);
+            m_computer.AllowLogDetail = false;
         }
 
         public int Run(List<int> inputs)
         {
             m_computer.Run(new(inputs));
 
-            Debug.Assert(m_computer.Output.Count == 1);
+            Debug.Assert(m_computer.OutputCount == 1);
 
-            return m_computer.Output.First();
+            return m_computer.Output;
         }
     }
 
@@ -70,16 +71,15 @@ namespace Advc2019
             Queue<int> stateQueue = new(states);
 
             int lastOutput = 0;
-            int index = 0;
+
             foreach (var thruster in thrusters)
             {
                 var input = lastOutput;
                 var state = stateQueue.Dequeue();
 
-                //Problem07Defs.LogDetail($"[Amp] Running thruster [{++index}] state {state} input {input}");
                 lastOutput = thruster.Run(new List<int> { state, input });
             }
-            //Problem07Defs.LogDetail($"[Amp/sequence] state {string.Join("", states)} => output {lastOutput}");
+            Problem07Defs.LogDetail($"[Amp/sequence] state {string.Join("", states)} => output {lastOutput}");
 
             return lastOutput;
         }
@@ -92,10 +92,16 @@ namespace Advc2019
             Queue<int> stateQueue = new(states);
 
             int lastOutput = 0;
-            int index = 0;
+            const int maxLoop = 1000;
+            int curLoop = 0;
 
             while (!thrusters.Last().IsHalted)
             {
+                if (++curLoop >= maxLoop)
+                {
+                    throw new Exception("Max loop reached");
+                }
+
                 foreach (var thruster in thrusters)
                 {
                     var inputs = new List<int> {};
@@ -107,8 +113,6 @@ namespace Advc2019
                     inputs.Add(lastOutput);
 
                     lastOutput = thruster.Run(inputs);
-
-                    Problem07Defs.LogDetail($"[Amp] thruster [{++index}] inputs {string.Join(",", inputs)} output {lastOutput} isBlocked {thruster.IsBlocked}, isHalted {thruster.IsHalted}");
                 }
             }
 
@@ -157,7 +161,6 @@ namespace Advc2019
         public static void Start()
         {
             var textData = File.ReadAllText("data/input07.txt");
-            //var textData = ("3,23,3,24,1002,24,10,24,1002,23,-1,23,101,5,23,23,1,24,23,23,4,23,99,0,0");
             var textArr = textData.Split(',');
             var intList = textArr.Select(t => int.Parse(t)).ToList();
             var problem = new Problem07(intList);

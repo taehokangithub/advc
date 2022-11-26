@@ -23,13 +23,14 @@ namespace Advc2019
         private int m_excutionPtr = 0;
         private bool m_isHalted = false;
         private bool m_isBlockedForInput = false;
-        private bool m_logDetail = false;
         private Queue<int> m_inputs = new();
-        private List<int> m_output = new();
+        private Queue<int> m_output = new();
 
-        public IReadOnlyList<int> Output => m_output;
+        public int Output => m_output.Dequeue();
+        public int OutputCount => m_output.Count;
         public bool IsHalted => m_isHalted;
         public bool IsBlocked => m_isBlockedForInput;
+        public bool AllowLogDetail { get; set; }
 
         public Computer05(IReadOnlyList<int> initalMemory) 
         {
@@ -132,7 +133,7 @@ namespace Advc2019
                 case Opcode.Output:
                 {
                     int val = fetchParam();
-                    m_output.Add(val);
+                    m_output.Enqueue(val);
                     LogDetail($"[Inst] [{m_excutionPtr}] ({paramModeStr}) {(Opcode)opcode} {val}");
                     break;
                 }
@@ -145,6 +146,7 @@ namespace Advc2019
                     bool shouldJump = (opcode == Opcode.JumpIfFalse ? (op1 == 0) 
                                     : (opcode == Opcode.JumpIfTrue ? (op1 != 0)
                                     : throw new Exception($"Unknown opcode for jump : {opcode}")));
+                    LogDetail($"[Inst] [{m_excutionPtr}] ({paramModeStr}) {(Opcode)opcode} : {shouldJump}");
                     if (shouldJump)
                     {
                         m_excutionPtr = op2;
@@ -165,7 +167,7 @@ namespace Advc2019
 
         private int Fetch()
         {
-            LogDetail($"[Fetch] {m_excutionPtr} => {m_memory[m_excutionPtr]}");
+            //LogDetail($"[Fetch] {m_excutionPtr} => {m_memory[m_excutionPtr]}");
             return m_memory[m_excutionPtr++];
         }
 
@@ -176,7 +178,7 @@ namespace Advc2019
 
         public void LogDetail(string str)
         {
-            if (m_logDetail)
+            if (AllowLogDetail)
             {
                 Console.WriteLine(str);
             }
