@@ -22,22 +22,27 @@ namespace Advc2019
         private List<int> m_memory;
         private int m_excutionPtr = 0;
         private bool m_isHalted = false;
+        private bool m_isBlockedForInput = false;
         private bool m_logDetail = false;
-        private int m_input = 0;
+        private Queue<int> m_inputs = new();
         private List<int> m_output = new();
 
-        public Computer05(List<int> initalMemory) 
+        public IReadOnlyList<int> Output => m_output;
+        public bool IsHalted => m_isHalted;
+        public bool IsBlocked => m_isBlockedForInput;
+
+        public Computer05(IReadOnlyList<int> initalMemory) 
         {
             m_memory = new(initalMemory);
         }
 
-        public void Run(int input)
+        public void Run(Queue<int> inputs)
         {
-            m_input = input;
+            m_inputs = inputs;
 
-            LogDetail($"Program started with input {input}");
+            LogDetail($"Program started with input {inputs}");
 
-            while (!m_isHalted)
+            while (!m_isHalted && !m_isBlockedForInput)
             {
                 RunInstruction();
             }
@@ -111,7 +116,13 @@ namespace Advc2019
 
                 case Opcode.Input:
                 {
-                    int val = m_input;
+                    if (m_inputs.Count == 0)
+                    { 
+                        m_isBlockedForInput = true;
+                        m_excutionPtr--;
+                        break;
+                    }
+                    int val = m_inputs.Dequeue();
                     int dst = Fetch();
                     LogDetail($"[Inst] [{m_excutionPtr}] ({paramModeStr}) {(Opcode)opcode} {val} at {dst}");
                     SetAt(dst, val);
@@ -173,14 +184,14 @@ namespace Advc2019
         
         public string Solve1()
         {
-            Run(1);
+            Run(new(new[] { 1 }));
 
             return string.Join(',', m_output);
         }
 
         public string Solve2()
         {
-            Run(5);
+            Run(new(new[] { 5 }));
 
             return string.Join(',', m_output);
         }
