@@ -3,57 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Advc.Utils.MapUtil
-{
-    public struct Point
-    {
-        public static Point Dummy = new Point();
-        public static int s_dimension = 3;
-
-        public int w, x, y, z;
-
-        public Point()
-        {
-            w = x = y = z = 0;
-        }
-
-        public Point(int _x, int _y, int _z = 0, int _w = 0)
-        {
-            x = _x;
-            y = _y;
-            z = _z;
-            w = _w;
-        }
-
-        public void Add(Point p)
-        {
-            x += p.x;
-            y += p.y;
-            z += p.z;
-            w += p.w;
-        }
-
-        public override string ToString()
-        {
-            switch (s_dimension)
-            {
-                case 2:
-                    return $"[{x}:{y}]";
-                case 3:
-                    return $"[{x}:{y}:{z}]";
-                case 4:
-                    return $"[{x}:{y}:{z}:{w}]";
-            }
-            throw new Exception($"[Point] Unknown dimension {s_dimension}");
-        }
-    }
-
-    public static class Direction
-    {
-        public static readonly Point Up = new Point(0, -1);
-        public static readonly Point Down = new Point(0, 1);
-        public static readonly Point Left = new Point(-1, 0);
-        public static readonly Point Right = new Point(1, 0);
-    }
+{    
     abstract class MapBase<ValueType>
     {
         private Point? m_min = null;
@@ -92,19 +42,7 @@ namespace Advc.Utils.MapUtil
             return GetAt(new Point(x, y, z, w));
         }
 
-        public void SetAt(ValueType v, Point p)
-        {
-            CheckBoundary(p);
-            OnSetAt(v, p);
-        }
-
-        public ValueType GetAt(Point p)
-        {
-            CheckBoundary(p);
-            return OnGetAt(p);
-        }
-
-        private void CheckBoundary(Point p)
+        public virtual bool CheckBoundary(Point p)
         {
             if (m_max.HasValue)
             {
@@ -113,7 +51,7 @@ namespace Advc.Utils.MapUtil
                     || m_max.Value.z < p.z
                     || m_max.Value.w < p.w)
                 {
-                    throw new ArgumentException($"Point {p} out of max boundary {m_max.Value}");
+                    return false;
                 }
             }
 
@@ -124,12 +62,33 @@ namespace Advc.Utils.MapUtil
                     || m_min.Value.z > p.z
                     || m_min.Value.w > p.w)
                 {
-                    throw new ArgumentException($"Point {p} out of max boundary {m_min.Value}");
+                    return false;
                 }
             }
+
+            return true;
         }
 
-        protected abstract void OnSetAt(ValueType v, Point p);
+        public void SetAt(ValueType v, Point p)
+        {
+            if (!CheckBoundary(p))
+            {
+                throw new ArgumentException($"[SetAt] Point {p} out of boundary");
+            }
+            OnSetAt(v, p);
+        }
+
+        public ValueType GetAt(Point p)
+        {
+            if (!CheckBoundary(p))
+            {
+                throw new ArgumentException($"[GetAt] Point {p} out of boundary");
+            }
+            return OnGetAt(p);
+        }
+
+
+        protected abstract void OnSetAt(ValueType val, Point p);
         protected abstract ValueType OnGetAt(Point p);
     }
 
@@ -137,9 +96,9 @@ namespace Advc.Utils.MapUtil
     {
         private Dictionary<Point, ValueType> m_map = new();
 
-        protected override void OnSetAt(ValueType v, Point p)
+        protected override void OnSetAt(ValueType val, Point p)
         {
-            m_map[p] = v;
+            m_map[p] = val;
         }
 
         protected override ValueType OnGetAt(Point p)
@@ -154,7 +113,8 @@ namespace Advc.Utils.MapUtil
 
     class MapByList<ValueType> : MapBase<ValueType>
     {
-        private List<List<ValueType>> m_map = new();
+        private List<List<ValueType>> m_map = new();    // [y][x] coordiation (in order to add a line by line)
+        private Point m_addPointer = new();
 
         public override void SetMin(Point min)
         {
@@ -170,26 +130,67 @@ namespace Advc.Utils.MapUtil
                 throw new ArgumentException("MapByList does not support 3D/4D");
             }
 
-            for (int x = 0; x < max.x; x ++)
+            for (int y = 0; y < max.y; y++)
             {
                 List<ValueType> list = new();
                 m_map.Add(list);
 
-                for (int y = 0; y < max.y; y++)
+                for (int x = 0; x < max.x; x ++)
                 {
                     list.Add(default!);
                 }
             }
         }
 
-        protected override void OnSetAt(ValueType v, Point p)
+        public override bool CheckBoundary(Point p)
         {
-            m_map[p.x][p.y] = v;
+            return p.x < Max.x && p.y < Max.y && p.x >= 0 && p.y >= 0;
+        }
+
+        public void Add(ValueType val)
+        {
+            SetAt(val, m_addPointer);
+
+            m_addPointer.x ++;
+            if (m_addPointer.x >= Max.x)
+            {
+                m_addPointer.x = 0;
+                m_addPointer.y++;
+            }
+        }
+
+        // This is for read-only! Collection must not modified while iteration
+        public void ForEach(Action<ValueType, Point> callback)
+        {
+            Point curPos = new();
+
+            foreach (var line in m_map)
+            {
+                foreach (ValueType val in line)
+                {
+                    callback(val, curPos);
+                    curPos.x ++;
+                }
+                curPos.y ++;
+                curPos.x = 0;
+            }
+        }
+
+        public bool CheckAddFinished()
+        {
+            // Pointing to the last available point + (1,0) == (0, max)
+            return m_addPointer.x == 0
+                    && m_addPointer.y == Max.y;
+        }
+
+        protected override void OnSetAt(ValueType val, Point p)
+        {
+            m_map[p.y][p.x] = val;
         }
 
         protected override ValueType OnGetAt(Point p)
         {
-            return m_map[p.x][p.y];
+            return m_map[p.y][p.x];
         }
     }
 }

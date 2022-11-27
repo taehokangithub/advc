@@ -66,20 +66,18 @@ namespace Advc2019
         public void Print()
         {
             Console.WriteLine($"-----------Print Layer------------");
-            for (int y = 0; y < m_map.Max.y; y ++)
+            m_map.ForEach((pixel, p) =>
             {
-                for (int x = 0; x < m_map.Max.x; x ++)    
+                if (p.x == 0)
                 {
-                    var myVal = m_map.GetAt(x, y);
-                    char c = (myVal == Pixel.White ? 'X'
-                            : myVal == Pixel.Black ? ' '
-                            : '?');
-                    Console.Write(c);
+                    Console.WriteLine("");
                 }
-                Console.WriteLine("");
-            }
+                char c = (pixel == Pixel.White ? 'O'
+                        : pixel == Pixel.Black ? ' '
+                        : '?');
+                Console.Write(c);
+            });
         }
-
     }
     class Problem08
     {
