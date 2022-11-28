@@ -3,6 +3,8 @@ namespace Advc.Utils.MapUtil
 {
     public struct Point
     {
+        public enum Axis { x, y, z, w };
+
         public static Point Dummy = new Point();
         public static int LogDimension { get; set; } = 2;
 
@@ -35,6 +37,30 @@ namespace Advc.Utils.MapUtil
             y += p.y;
             z += p.z;
             w += p.w;
+        }
+
+        public int GetAxisValue(Axis axis)
+        {
+            switch (axis)
+            {
+                case Axis.x : return x;
+                case Axis.y : return y;
+                case Axis.z : return z;
+                case Axis.w : return w;
+            }
+            throw new Exception($"Unknown axis for GetAxis : {axis}");
+        }
+
+        public void SetAxisValue(int val, Axis axis)
+        {
+            switch (axis)
+            {
+                case Axis.x : x = val; break;
+                case Axis.y : y = val; break;
+                case Axis.z : z = val; break;
+                case Axis.w : w = val; break;
+            }
+            throw new Exception($"Unknown axis for SetAxis : {axis}");
         }
 
         public Point AddedPoint(Point p)
@@ -126,6 +152,11 @@ namespace Advc.Utils.MapUtil
             z = Math.Min(z, p.z);
             w = Math.Min(w, p.w);
         }
+
+        public long ManhattanDistance()
+        {
+            return Math.Abs(x) + Math.Abs(y) + Math.Abs(z);
+        }
     }
 
     public static class Direction
@@ -134,5 +165,17 @@ namespace Advc.Utils.MapUtil
         public static readonly Point Down = new Point(0, 1);
         public static readonly Point Left = new Point(-1, 0);
         public static readonly Point Right = new Point(1, 0);
+    }
+
+    public class MovingObject
+    {
+        // As Point is a struct, should not use properties here. Property getters return copied struct
+        public Point Position;
+        public Point Velocity;
+
+        public void Move()
+        {
+            Position.Add(Velocity);
+        }
     }
 }
