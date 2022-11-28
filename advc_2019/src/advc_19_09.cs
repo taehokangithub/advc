@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Advc2019
 {
-    class Computer09
+    class Computer09 : Advc.Utils.LogUtils.Loggable
     {
         private enum FetchMode
         {
@@ -38,7 +38,6 @@ namespace Advc2019
         public int OutputCount => m_output.Count;
         public bool IsHalted => m_isHalted;
         public bool IsBlocked => m_isBlockedForInput;
-        public bool AllowLogDetail { get; set; } = true;
 
         public Computer09(IReadOnlyList<long> initalMemory) 
         {
@@ -65,11 +64,15 @@ namespace Advc2019
             {
                 RunInstruction();
             }
-            LogDetail($"Program running finished");
+            LogDetail($"Program running finished. Halted {m_isHalted}, blocked {m_isBlockedForInput}");
         }
 
         public long GetAt(long index)
         {
+            if (!m_memory.ContainsKey(index))
+            {
+                m_memory[index] = 0;
+            }
             return m_memory[index];
         }
 
@@ -231,14 +234,6 @@ namespace Advc2019
             var result = GetAt(targetAddr);
             LogDetail($"[FetchRelative] ({orgVal} + {m_relativeBase}) = {targetAddr} => {result}");
             return result;
-        }
-
-        public void LogDetail(string str)
-        {
-            if (AllowLogDetail)
-            {
-                Console.WriteLine(str);
-            }
         }
     }
 

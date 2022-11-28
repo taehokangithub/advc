@@ -4,7 +4,7 @@ namespace Advc.Utils.MapUtil
     public struct Point
     {
         public static Point Dummy = new Point();
-        public static int s_dimension = 3;
+        public static int LogDimension { get; set; } = 2;
 
         public int w, x, y, z;
 
@@ -99,7 +99,7 @@ namespace Advc.Utils.MapUtil
 
         public override string ToString()
         {
-            switch (s_dimension)
+            switch (LogDimension)
             {
                 case 2:
                     return $"[{x}:{y}]";
@@ -108,7 +108,23 @@ namespace Advc.Utils.MapUtil
                 case 4:
                     return $"[{x}:{y}:{z}:{w}]";
             }
-            throw new Exception($"[Point] Unknown dimension {s_dimension}");
+            throw new Exception($"[Point] Unknown dimension {LogDimension}");
+        }
+
+        public void UpdateMaxCoordinate(Point p)
+        {
+            x = Math.Max(x, p.x);
+            y = Math.Max(y, p.y);
+            z = Math.Max(z, p.z);
+            w = Math.Max(w, p.w);
+        }
+
+        public void UpdateMinCoordinate(Point p)
+        {
+            x = Math.Min(x, p.x);
+            y = Math.Min(y, p.y);
+            z = Math.Min(z, p.z);
+            w = Math.Min(w, p.w);
         }
     }
 

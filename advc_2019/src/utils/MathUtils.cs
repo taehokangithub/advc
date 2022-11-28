@@ -28,7 +28,6 @@ namespace Advc.Utils.MathUtil
 
     class Angles
     {
-        
         public static double Rad2Deg(double rad)
         {
             return rad * 180f / Math.PI;
@@ -39,6 +38,18 @@ namespace Advc.Utils.MathUtil
         {
            var standard = (Rad2Deg(MathF.Atan2(p.y, p.x)) + 360.01f) % 360f;
            return (standard + 90f) % 360f;
+        }
+
+        // Beware this coordinate system has reverted left/right directinon
+        // because y axis is reverted (Up == -1, Down == 1)
+        public static Point RotateRight(Point p)
+        {
+            return new(-p.y, p.x);
+        }
+
+        public static Point RotateLeft(Point p)
+        {
+            return new(p.y, -p.x);
         }
 
     }

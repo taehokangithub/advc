@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace Advc2019
@@ -22,10 +23,9 @@ namespace Advc2019
             var intList = textArr.Select(t => int.Parse(t)).ToList();
 
             Problem0X prob1 = new();
-            Problem0X prob2 = new();
 
             var ans1 = prob1.Solve1(intList);
-            var ans2 = prob2.Solve2(intList);
+            var ans2 = 0;
 
             Console.WriteLine($"ans = {ans1}, {ans2}");
         }

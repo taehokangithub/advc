@@ -9,8 +9,13 @@ namespace Advc.Utils.MapUtil
         private Point? m_min = null;
         private Point? m_max = null;
 
+        // Input Restrictions
         public Point Max => m_max.HasValue ? (Point) m_max : Point.Dummy;
         public Point Min => m_min.HasValue ? (Point) m_min : Point.Dummy;
+
+        // Actual data min/max
+        public Point ActualMax = new();
+        public Point ActualMin = new();
 
         public virtual void SetMax(Point max)
         {
@@ -75,6 +80,8 @@ namespace Advc.Utils.MapUtil
             {
                 throw new ArgumentException($"[SetAt] Point {p} out of boundary");
             }
+            ActualMax.UpdateMaxCoordinate(p);
+            ActualMin.UpdateMinCoordinate(p);
             OnSetAt(v, p);
         }
 
@@ -86,7 +93,6 @@ namespace Advc.Utils.MapUtil
             }
             return OnGetAt(p);
         }
-
 
         protected abstract void OnSetAt(ValueType val, Point p);
         protected abstract ValueType OnGetAt(Point p);

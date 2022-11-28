@@ -147,7 +147,6 @@ namespace Advc2019
                     }
                     Console.WriteLine("");
                 }
-                
 
                 if (sortedStars.Count >= toVaporise)
                 {
@@ -170,7 +169,6 @@ namespace Advc2019
 
         public static void Start()
         {
-            Advc.Utils.MapUtil.Point.s_dimension = 2;
             var textData = File.ReadAllText("data/input10.txt");
 
             Problem10 prob = new(textData);

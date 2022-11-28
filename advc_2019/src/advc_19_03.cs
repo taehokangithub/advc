@@ -92,7 +92,7 @@ namespace Advc2019
     {
         public static int Solve1(List<string> arr1, List<string> arr2)
         {
-            Point.s_dimension = 2;
+            Point.LogDimension = 2;
 
             var wireMap = new WireMap(arr1, arr2);
             wireMap.RunOps();
