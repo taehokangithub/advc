@@ -41,6 +41,16 @@ namespace Advc2019
 
         public Computer09(IReadOnlyList<long> initalMemory) 
         {
+            InitMemory(initalMemory);
+        }
+
+        public Computer09(IReadOnlyList<int> initalMemory) 
+        {
+            InitMemory(initalMemory.Select(p => (long)p).ToList());
+        }
+
+        private void InitMemory(IReadOnlyList<long> initalMemory)
+        {
             long address = 0;
             foreach (var val in initalMemory)
             {
