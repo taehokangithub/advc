@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 
 namespace Advc2019_14
 {
@@ -27,8 +28,7 @@ namespace Advc2019_14
 
         public override string ToString()
         {
-            string isFuelMark = (Name == FUEL) ? "*" : "";
-            return $"[{isFuelMark}{Name}{isFuelMark}:{Amount}]";
+            return $"[{Name}:{Amount}]";
         }
     }
 
@@ -93,31 +93,103 @@ namespace Advc2019_14
             return (RemnantBankMap.ContainsKey(name) ? RemnantBankMap[name] : 0);
         }
 
-        public void MultipliBalance(long multiplier)
+        public void FromString(string str)
         {
+            RemnantBankMap.Clear();
+
+            if (str.Length == 0)
+            {
+                return;
+            }
+            var items = str.Split(",");
+
+            foreach (var item in items)
+            {
+                var keyVal = item.Split(":");
+
+                try
+                {
+                    RemnantBankMap[keyVal[0]] = long.Parse(keyVal[1]);
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine($"[{item}] from [{str}] caused an exception ====> {e}");
+                    throw;
+                }
+            }
+
+            LogDetail($"from string : {this}");
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new();
+
             foreach (var item in RemnantBankMap)
             {
-                RemnantBankMap[item.Key] *= multiplier;
+                if (item.Value > 0)
+                {
+                    sb.Append($"{item.Key}:{item.Value},");
+                }
+            }
+            if (sb.Length > 0)
+            {
+                sb.Length--;
+            }
+            return sb.ToString();
+        }
+    }
+
+    class IntermediateRemnantBankStateMap
+    {
+        public class StateOut
+        {
+            public string RemnantBankState { get; set; } = string.Empty;
+            public long CosumedORE { get; set; } = 0;
+            public static StateOut Dummy = new();
+        }
+        public Dictionary<string, StateOut> Dict { get; init; } = new();
+        public long TotalTry { get; private set; } = 0;
+        public long TotalHit { get; private set; } = 0;
+
+        public void AddState(Ingredient ingredient, string inputStateRemnant, string outputState, long consumedORE)
+        {
+            if (ingredient.Name != Ingredient.FUEL)
+            {
+                return;
+            }
+
+            Dict.Add(
+              inputStateRemnant
+            , new StateOut {
+                RemnantBankState = outputState,
+                CosumedORE = consumedORE
+            });
+
+            if (Dict.Count % 10000 == 0)
+            {
+                Console.WriteLine($"[{Reactions.m_cnt}] AddState - {Dict.Count} states, hit ratio {TotalHit} / {TotalTry} = {(float)TotalHit/TotalTry}");
             }
         }
 
-        public long RoughlyTotalBalance()
+        public bool TryGetState(Ingredient ingredient, string inputStateRemnant, out StateOut outputState)
         {
-            long ans = 0;
-            foreach (var item in RemnantBankMap)
+            if (ingredient.Name != Ingredient.FUEL)
             {
-                ans += RemnantBankMap[item.Key];
-            }  
-            return ans;
-        }
-
-        public void PrintBalance()
-        {
-            LogDetail($"-----------------------------------");
-            foreach (var item in RemnantBankMap)
-            {
-                LogDetail($"[Bank] balance {item.Key} {item.Value}");
+                outputState = StateOut.Dummy;
+                return false;
             }
+            TotalTry ++;
+
+            if (Dict.ContainsKey(inputStateRemnant))
+            {
+                outputState = Dict[inputStateRemnant];
+                TotalHit ++;
+                return true;
+            }
+
+            outputState = StateOut.Dummy;
+            return false;
         }
     }
 
@@ -141,33 +213,25 @@ namespace Advc2019_14
             RemantBank remnantBank = new();
             remnantBank.AllowLogDetail = AllowLogDetail;
             var fuelEquation = EquationMap[Ingredient.FUEL];
-            long ore = GetRequredORE(fuelEquation.Output, remnantBank) / fuelEquation.Output.Amount;
-            remnantBank.PrintBalance();
+            long ore = GetRequredORE(fuelEquation.Output, remnantBank, new()) / fuelEquation.Output.Amount;
             return (int)ore;
         }
 
+        public static int m_cnt = 0;
         public long GetFuelsByORE(long ore)
         {
             RemantBank remnantBank = new();
             remnantBank.AllowLogDetail = AllowLogDetail;
             var fuelEquation = EquationMap[Ingredient.FUEL];
+            IntermediateRemnantBankStateMap dpMap = new();
 
-            long cnt = 0;
-            long oreConsumed = GetRequredORE(fuelEquation.Output, remnantBank);
-            long expectedBatches = ore / oreConsumed;
-            expectedBatches = (long) (expectedBatches * 0.99);
-
-            
-            ore -= oreConsumed * expectedBatches; 
-            Console.WriteLine($"expectedBatches {expectedBatches} oreConsumed {oreConsumed} ORE {ore} {oreConsumed * expectedBatches}");
-            cnt += expectedBatches;
-            remnantBank.MultipliBalance(expectedBatches);
-            
-            Console.WriteLine($"starting final loop with {ore}, cur cnt {cnt}");
-
-            while (ore > 0)
+            int cnt = 0;
+            long oreConsumed = 0;
+              while (ore > 0)
             {
-                oreConsumed = GetRequredORE(fuelEquation.Output, remnantBank);
+                m_cnt = cnt;
+
+                oreConsumed = GetRequredORE(fuelEquation.Output, remnantBank, dpMap);
                 if (ore >= oreConsumed)
                 {
                     cnt ++;
@@ -175,26 +239,37 @@ namespace Advc2019_14
                 }
                 else
                 {
-                    Console.WriteLine($"[{cnt}] FIN!! ore {ore} consumed {oreConsumed} balance {remnantBank.RoughlyTotalBalance()}");
+                    Console.WriteLine($"[{cnt}] FIN!! ore {ore} consumed {oreConsumed} {dpMap.Dict.Count} states : {remnantBank.ToString()}");
                     break;
                 }
-
-                if (cnt % 10000 == 0)
+                if (cnt % 1000 == 0)
                 {
-                    Console.WriteLine($"[{cnt}] ore {ore} consumed {oreConsumed} balance {remnantBank.RoughlyTotalBalance()}");
+                    Console.WriteLine($"[{cnt}] ore {ore} consumed {oreConsumed} {dpMap.Dict.Count} states : {remnantBank.ToString()}");
                 }
             }
-            
             return cnt;
-        }        
+        }
 
-        private long GetRequredORE(Ingredient requiredIngr, RemantBank remnantBank)
+        private long GetRequredORE(Ingredient requiredIngr, RemantBank remnantBank, IntermediateRemnantBankStateMap dpMap)
         {
             if (requiredIngr.Name == Ingredient.ORE)
             {
                 return requiredIngr.Amount; // that's the thing we're looking for
             }
-            
+
+            string initialRemnantState = string.Empty;
+#if false
+            if (requiredIngr.Name == Ingredient.FUEL)
+            {
+                initialRemnantState = remnantBank.ToString();
+
+                if (dpMap.TryGetState(requiredIngr, initialRemnantState, out var outputState))
+                {
+                    remnantBank.FromString(outputState.RemnantBankState);
+                    return outputState.CosumedORE;
+                }
+            }
+#endif
             if (remnantBank.Withdraw(requiredIngr.Name, requiredIngr.Amount))
             {
                 LogDetail($"[GetRequiredORE] Returning 0 after withdrawing {requiredIngr} from bank");
@@ -228,23 +303,24 @@ namespace Advc2019_14
                 return  0;
             }
 
-            long ore = 0;
-            for (int i = 0; i < multiplier; i ++)
+            long consumedORE = 0;
             {
                 foreach (var ingr in eq.InputList)
                 {
-                    var amount = GetRequredORE(ingr, remnantBank);
-                    ore += amount;
-
-                    if (i > 1000 && (i % 1000 == 0))
-                    {
-                        LogDetail($"{eq} {ingr} batch {i}/{multiplier} amount {amount} ore {ore}");
-                    }
+                    Ingredient multipliedIngr = new(ingr.Name, ingr.Amount * multiplier);
+                    var amount = GetRequredORE(multipliedIngr, remnantBank, dpMap);
+                    consumedORE += amount;
                 }
             }
-            
+
             remnantBank.Save(eq.Output.Name, remnamt);
-            return ore;
+#if false
+            if (requiredIngr.Name == Ingredient.FUEL)
+            {
+                dpMap.AddState(requiredIngr, initialRemnantState, remnantBank.ToString(), consumedORE);
+            }
+#endif
+            return consumedORE;
         }
 
         public void PrintAllEquations()
@@ -274,8 +350,8 @@ namespace Advc2019
         }
         public static void Start()
         {
-            var textData = File.ReadAllText("data/input14-s2.txt");
-            
+            var textData = File.ReadAllText("data/input14.txt");
+
             Advc2019_14.Reactions reactions = new(textData);
 
             Problem14 prob1 = new();
@@ -288,6 +364,3 @@ namespace Advc2019
 
     }
 }
-
-
-// 3992600 low
