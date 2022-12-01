@@ -115,6 +115,22 @@ namespace Advc.Utils.MapUtil
             }
             return default(ValueType)!;
         }
+
+        public void ForEach(Action<ValueType, Point> callback)
+        {
+            for (int z = ActualMin.z; z <= ActualMax.z; z ++)
+            {
+                for (int y = ActualMin.y; y <= ActualMax.y; y ++)
+                {
+                    for (int x = ActualMin.x; x <= ActualMax.x; x ++)    
+                    {
+                        Point p = new(x, y, z);
+                        callback(GetAt(p), p);
+                    }
+                }            
+            }
+        }
+
     }
 
     class MapByList<ValueType> : MapBase<ValueType>

@@ -161,10 +161,14 @@ namespace Advc.Utils.MapUtil
 
     public static class Direction
     {
+        public enum Dir {
+            Up, Down, Left, Right
+        }
         public static readonly Point Up = new Point(0, -1);
         public static readonly Point Down = new Point(0, 1);
         public static readonly Point Left = new Point(-1, 0);
         public static readonly Point Right = new Point(1, 0);
+        public static readonly List<Point> DirVectors = new List<Point>{Up, Down, Left, Right};
     }
 
     public class MovingObject
