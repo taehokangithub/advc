@@ -49,6 +49,17 @@ namespace Advc2019
             InitMemory(initalMemory.Select(p => (long)p).ToList());
         }
 
+        public Computer09(Computer09 other)
+        {
+            InitMemory(other.m_memory.Values.ToList());
+            m_excutionPtr = other.m_excutionPtr;
+            m_inputs = new(other.m_inputs);
+            m_output = new(other.m_output);
+            m_isBlockedForInput = other.m_isBlockedForInput;
+            m_isHalted = other.m_isHalted;
+            m_relativeBase = other.m_relativeBase;
+        }
+
         private void InitMemory(IReadOnlyList<long> initalMemory)
         {
             long address = 0;

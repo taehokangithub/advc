@@ -5,7 +5,7 @@ namespace Advc.Utils.LogUtils
     {
         public bool AllowLogDetail { get; set; } = false;
 
-        protected void LogDetail(string str)
+        public void LogDetail(string str)
         {
             if (AllowLogDetail)
             {

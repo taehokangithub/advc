@@ -16,6 +16,7 @@ namespace Advc2019
         {
             return 0;
         }
+        
         public static void Start()
         {
             var textData = File.ReadAllText("data/input0X.txt");
