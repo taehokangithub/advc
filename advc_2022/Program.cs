@@ -1,2 +1,2 @@
 ﻿
-Advc2022.Problem00.Start();
+Advc2022.Problem01.Start();

@@ -16,6 +16,7 @@ namespace Advc2022
         {
             return 0;
         }
+        
         public static void Start()
         {
             var textData = File.ReadAllText("data/input00.txt");
