@@ -1,5 +1,6 @@
+using System;
 
-namespace Advc.Utils.LogUtils
+namespace Advc.Utils
 {
     class Loggable
     {

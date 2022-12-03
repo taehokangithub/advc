@@ -1,12 +1,11 @@
-using Advc.Utils.MapUtil;
-using Advc.Utils.MathUtil;
+using Advc.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Advc2019
 {
-    class Problem10 : Advc.Utils.LogUtils.Loggable
+    class Problem10 : Advc.Utils.Loggable
     {
         private MapByList<bool> m_map = new();
         private HashSet<Point> m_stars = new();

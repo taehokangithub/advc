@@ -1,5 +1,4 @@
-using Advc.Utils.MapUtil;
-using Advc.Utils.MathUtil;
+using Advc.Utils;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -19,7 +18,7 @@ namespace Advc2019
         }
     }
 
-    class Problem12: Advc.Utils.LogUtils.Loggable
+    class Problem12: Advc.Utils.Loggable
     {
         private List<Star> m_stars = new();
 

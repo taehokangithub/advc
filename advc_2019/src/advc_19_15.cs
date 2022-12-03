@@ -1,4 +1,4 @@
-using Advc.Utils.MapUtil;
+using Advc.Utils;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Advc2019
 {
-    class Problem15 : Advc.Utils.LogUtils.Loggable
+    class Problem15 : Advc.Utils.Loggable
     {
         public enum Dir 
         {
@@ -64,7 +64,7 @@ namespace Advc2019
                 return remainingCount;
             }
 
-            public int CountOxygenSpread(Advc.Utils.LogUtils.Loggable log)
+            public int CountOxygenSpread(Advc.Utils.Loggable log)
             {
                 int turn = 1;
                 int remainingCount = 0;

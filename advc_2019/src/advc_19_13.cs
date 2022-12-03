@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Advc2019
 {
-    class Problem13 : Advc.Utils.LogUtils.Loggable
+    class Problem13 : Advc.Utils.Loggable
     {
         enum Tile 
         {

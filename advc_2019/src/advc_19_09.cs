@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Advc2019
 {
-    class Computer09 : Advc.Utils.LogUtils.Loggable
+    class Computer09 : Advc.Utils.Loggable
     {
         private enum FetchMode
         {

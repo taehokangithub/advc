@@ -1,5 +1,4 @@
-using Advc.Utils.MapUtil;
-using Advc.Utils.MathUtil;
+using Advc.Utils;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -7,7 +6,7 @@ using System.Linq;
 
 namespace Advc2019
 {
-    class Problem11 : Advc.Utils.LogUtils.Loggable
+    class Problem11 : Advc.Utils.Loggable
     {
         enum TurnDir : long
         {

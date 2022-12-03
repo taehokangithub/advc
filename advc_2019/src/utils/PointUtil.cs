@@ -1,5 +1,9 @@
 
-namespace Advc.Utils.MapUtil
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Advc.Utils
 {
     public struct Point
     {

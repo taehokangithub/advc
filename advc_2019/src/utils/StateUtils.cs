@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace Advc.Utils.StateUtil
+namespace Advc.Utils
 {
     class PossibleStates
     {

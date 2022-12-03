@@ -55,7 +55,7 @@ namespace Advc2019_14
         }
     }
 
-    class RemantBank : Advc.Utils.LogUtils.Loggable
+    class RemantBank : Advc.Utils.Loggable
     {
         private Dictionary<string, long> RemnantBankMap { get; set; } = new();
         public void Save(string name, long amount)
@@ -193,7 +193,7 @@ namespace Advc2019_14
         }
     }
 
-    class Reactions : Advc.Utils.LogUtils.Loggable
+    class Reactions : Advc.Utils.Loggable
     {
         private Dictionary<string, Equation> EquationMap { get; set; } = new();
 
@@ -336,7 +336,7 @@ namespace Advc2019_14
 namespace Advc2019
 {
 
-    class Problem14 : Advc.Utils.LogUtils.Loggable
+    class Problem14 : Advc.Utils.Loggable
     {
         public long Solve1(Advc2019_14.Reactions reactions)
         {
