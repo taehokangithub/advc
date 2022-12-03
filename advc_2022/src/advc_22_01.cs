@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Advc2022
 {
-    class Problem01 : Advc.Utils.LogUtils.Loggable
+    class Problem01 : Advc.Utils.Loggable
     {
         public static long Solve1(List<List<int>> intLists)
         {

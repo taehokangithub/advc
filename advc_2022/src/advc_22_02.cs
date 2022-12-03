@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Advc2022
 {
-    class Problem02 : Advc.Utils.LogUtils.Loggable
+    class Problem02 : Advc.Utils.Loggable
     {
         public enum Shape { Rock, Paper, Scissor }
         public enum Result { Win, Draw, Lose }

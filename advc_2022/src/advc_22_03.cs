@@ -39,7 +39,7 @@ namespace Advc2022
         }
     }
 
-    class Problem03 : Advc.Utils.LogUtils.Loggable
+    class Problem03 : Advc.Utils.Loggable
     {
         private int GetPriority(char c)
         {

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Advc.Utils.MapUtil
+namespace Advc.Utils
 {    
     abstract class MapBase<ValueType>
     {
