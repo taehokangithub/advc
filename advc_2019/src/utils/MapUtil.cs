@@ -198,11 +198,16 @@ namespace Advc.Utils
             }
         }
 
-        public bool CheckAddFinished()
+        public bool CheckAddFinished(bool throwException)
         {
             // Pointing to the last available point + (1,0) == (0, max)
-            return m_addPointer.x == 0
+            bool ret = m_addPointer.x == 0
                     && m_addPointer.y == Max.y;
+            if (throwException && !ret)
+            {
+                throw new Exception($"{m_addPointer.x} != 0 || {m_addPointer.y} != {Max.y}");
+            }
+            return ret;
         }
 
         protected override void OnSetAt(ValueType val, Point p)
