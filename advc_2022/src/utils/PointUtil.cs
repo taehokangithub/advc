@@ -1,6 +1,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace Advc.Utils
@@ -161,6 +162,19 @@ namespace Advc.Utils
         {
             return Math.Abs(x) + Math.Abs(y) + Math.Abs(z);
         }
+
+        public void Move(Direction.Dir dir)
+        {
+            Point dirVector = Direction.DirVectors[(int)dir];
+            Add(dirVector);
+        }
+
+        public Point MovedPoint(Direction.Dir dir)
+        {
+            Point target = new(this);
+            target.Move(dir);
+            return target;
+        }
     }
 
     public static class Direction
@@ -173,6 +187,29 @@ namespace Advc.Utils
         public static readonly Point Left = new Point(-1, 0);
         public static readonly Point Right = new Point(1, 0);
         public static readonly List<Point> DirVectors = new List<Point>{Up, Down, Left, Right};
+        public static Point GetDirVector(Dir dir) => DirVectors[(int)dir];
+        public static Dir GetDirByVector(Point p) 
+        {
+            Debug.Assert(p.x * p.y == 0, $"Invalid vector {p}");
+            Debug.Assert(Math.Abs(p.x + p.y) == 1, $"Invalid vector {p}");
+            var found = DirVectors.FindIndex(v => v.Equals(p));
+            return (Dir) found;
+        }
+        public static Dir Rotate(Dir curDir, Dir rotateDir)
+        {
+            Point vec = GetDirVector(curDir);
+            
+            switch (rotateDir)
+            {
+                case Dir.Down : vec = new(-vec.x, -vec.y); break;
+                case Dir.Left : vec = Angles.RotateLeft(vec); break;
+                case Dir.Right : vec = Angles.RotateRight(vec); break;
+                case Dir.Up : break;
+                default: throw new ArgumentException($"Unknown dir {rotateDir}");
+            }
+
+            return GetDirByVector(vec);
+        }
     }
 
     public class MovingObject
