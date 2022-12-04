@@ -11,33 +11,12 @@ namespace Advc2022
 
         public long Solve1(List<List<Section>> sectionPairList)
         {
-            int cnt = 0;
-            foreach (var sectionPair in sectionPairList)
-            {
-                if (sectionPair.First().end >= sectionPair.Last().end)
-                {
-                    cnt ++;
-                }
-                else if (sectionPair.Last().start <= sectionPair.First().start)
-                {
-                    cnt ++;
-                }
-            }
-            return cnt;
+            return sectionPairList.FindAll(p => p.First().end >= p.Last().end || p.Last().start <= p.First().start).Count;
         }
 
         public long Solve2(List<List<Section>> sectionPairList)
         {
-            int cnt = 0;
-            foreach (var sectionPair in sectionPairList)
-            {
-                if (sectionPair.First().end >= sectionPair.Last().start)
-                {
-                    cnt ++;
-                }
-            }
-            return cnt;            
-
+            return sectionPairList.FindAll(p => p.First().end >= p.Last().start).Count;
         }
         
         public static void Start()
