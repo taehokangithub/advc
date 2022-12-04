@@ -23,9 +23,11 @@ namespace Advc2019
             Newline = 10,
         }
 
-        private record Step(Direction.Dir dir, int step);
-        private string StepString(Step step) => $"{step.dir.ToString().First()}{step.step}";
-      
+        private const int NoReplacement = -1;
+        private record Step(Direction.Dir dir, int step, int replacement);
+        private string SteptoString(Step step) => $"{step.dir.ToString().First()},{step.step}";
+        private string PatternToString(List<Step> pattern) => string.Join(",", pattern.Select(k => SteptoString(k)));
+
         private TileMap m_tileMap = new();
 
         private void DrawMap(TileMap map)
@@ -136,12 +138,12 @@ namespace Advc2019
                 }
 
                 LogDetail($"Goind dir {curDir} (turned {turnDir}), {steps} steps");
-                path.Add(new(turnDir, steps));
+                path.Add(new(turnDir, steps, NoReplacement));
             }
 
             if (AllowLogDetail)
             {
-                LogDetail(string.Join(",", path.Select(p => StepString(p))));
+                LogDetail(string.Join(",", path.Select(p => SteptoString(p))));
             }
             return path;
         }
@@ -196,6 +198,109 @@ namespace Advc2019
             return map;
         }
 
+        private int m_fitIndex = 0;
+        private bool FitInPatterns(List<Step> path, IReadOnlyList<List<Step>> possiblePatterns, HashSet<List<Step>> selectedPatterns, int maxPatterns)
+        {
+            var pathToString = (List<Step> p) => 
+            {
+                StringBuilder sb = new();
+                foreach (var step in p)
+                {
+                    if (step.replacement == NoReplacement)
+                    {
+                        sb.Append($"{SteptoString(step)},");
+                    }
+                    else
+                    {
+                        sb.Append($"[REPLACE {step.replacement}],");
+                    }
+                }
+                return sb.ToString();
+            };
+
+            int fitIndex = m_fitIndex ++;
+            //LogDetail($"<Fit {fitIndex}> start - {selectedPatterns.Count} selected, path : {pathToString(path)}");
+            bool allReplaced = true;
+            foreach (var step in path)
+            {
+                if (step.replacement == NoReplacement)
+                {
+                    allReplaced = false;
+                    break;
+                }
+            }
+
+            if (allReplaced)
+            {
+                LogDetail($"All replaced!! {pathToString(path)}");
+                return true;
+            }
+
+            if (selectedPatterns.Count >= maxPatterns)
+            {
+                //LogDetail($"<Fit {fitIndex}> returning false for reaching max - {path.Count} paths, {selectedPatterns.Count} selected");
+                return false;
+            }
+
+            foreach (var pattern in possiblePatterns)
+            {
+                List<Step> localPatternPath = new();
+
+                int occurence = 0;
+                for (int startIndex = 0; startIndex < path.Count; startIndex ++)
+                {
+                    bool hasMatched = false;
+
+                    if (startIndex <= path.Count - pattern.Count)
+                    {
+                        hasMatched = true;
+                        for (int i = 0; i < pattern.Count; i ++)
+                        {
+                            if (path[startIndex + i] != pattern[i])
+                            {
+                                hasMatched = false;
+                                break;
+                            }
+                        }
+
+                        if (hasMatched)
+                        {
+                            occurence ++;
+                            localPatternPath.Add(new Step(Direction.Dir.Up, 0, selectedPatterns.Count));
+                            startIndex += pattern.Count - 1;
+                        }
+                    }
+
+                    if (!hasMatched)
+                    {
+                        localPatternPath.Add(path[startIndex]);
+                    }
+                }
+
+                if (occurence > 0)
+                {
+                    HashSet<List<Step>> localSelectedPatterns = new(selectedPatterns);
+                    localSelectedPatterns.Add(pattern);
+
+                    //LogDetail($"<Fit {fitIndex}> Replaced Pattern : [{PatternToString(pattern)}] {occurence} occurrences, so far {localSelectedPatterns.Count} selected, going deeper.");
+
+                    if (FitInPatterns(localPatternPath, possiblePatterns, localSelectedPatterns, maxPatterns))
+                    {
+                        foreach (var p in localSelectedPatterns)
+                        {
+                            selectedPatterns.Add(p);
+                        }
+                        LogDetail($"<Fit {fitIndex}> returning true , path : {pathToString(localPatternPath)}");
+                        path.Clear();
+                        path.AddRange(localPatternPath);
+                        return true;
+                    }
+                }
+            }
+            //LogDetail($"<Fit {fitIndex}> returning false - {selectedPatterns.Count} selected {path.Count} paths");
+            return false;
+        }
+
         public int Solve1(List<long> arr)
         {
             AllowLogDetail = false;
@@ -208,48 +313,44 @@ namespace Advc2019
         public int Solve2(List<long> arr)
         {
             AllowLogDetail = false;
+            const int maxPatterns = 3;
+            
             var path = GetPath(m_tileMap);
-            var patterns = PatternUtil.FindPatterns<Step>(path);
+            Dictionary<List<Step>, int> allPatternsDic = PatternUtil.FindPatterns<Step>(path);
+            var possiblePatterns = new List<List<Step>>();
 
-            foreach (var pattern in patterns)
+            foreach (var patternPair in allPatternsDic)
             {
-                var patternStrs = pattern.Key.Select(k => $"{k.dir.ToString().First()},{k.step}");
-                var totalStr = string.Join(",", patternStrs);
+                var patternStr = PatternToString(patternPair.Key);
 
-                if (totalStr.Length <= 20)
+                if (patternStr.Length <= 20)
                 {
-                    LogDetail($"{totalStr} => {pattern.Value} times");
+                    LogDetail($"Possible pattern {patternStr} => {patternPair.Value} times");
+                    possiblePatterns.Add(patternPair.Key);
                 }
             }
 
-            /*
-                No idea how to select 3 patterns to replace all individual steps
-                So I did manually here 
+            HashSet<List<Step>> selectedPatterns = new();
+            
+            var result = FitInPatterns(path, possiblePatterns, selectedPatterns, maxPatterns);
+            Debug.Assert(result);
+            List<string> inputLines = new();
 
-                R12,L8,R12,R8,R6,R6,R8,R12,L8,R12,R8,R6,R6,R8,R8,L8,R8,R4,R4,R8,L8,R8,R4,R4,R8,R6,R6,R8,R8,L8,R8,R4,R4,R8,R6,R6,R8,R12,L8,R12
+            // add main program
+            inputLines.Add(string.Join(",", path.Select(p => (char)(p.replacement + 'A'))));
 
-                B,A,B,A,C,C,A,C,A,B
-                A R8,R6,R6,R8
-                B R12,L8,R12
-                C R8,L8,R8,R4,R4
+            foreach (var pattern in selectedPatterns)
+            {
+                inputLines.Add(PatternToString(pattern));
+            }
 
-                R,8,R,6,R,6,R,8
-                R,12,L,8,R,12
-                R,8,L,8,R,8,R,4,R,4
-            */
-
-            List<string> inputLines = new List<string> {
-                "B,A,B,A,C,C,A,C,A,B",
-                "R,8,R,6,R,6,R,8",
-                "R,12,L,8,R,12",
-                "R,8,L,8,R,8,R,4,R,4",
-                "n"
-            };
+            inputLines.Add("n"); // no to visual tracking
 
             Queue<long> inputQueue = new();
 
             foreach (var line in inputLines)
             {
+                LogDetail($"[Input Line] {line}");
                 foreach (char c in line)
                 {
                     inputQueue.Enqueue(c);
@@ -261,7 +362,6 @@ namespace Advc2019
             Computer09 com = new(arr);
             com.Run(inputQueue);
 
-            LogDetail($"Computer output starts here ======");
             long output = 0;
             while (com.OutputCount > 0)
             {
@@ -272,7 +372,7 @@ namespace Advc2019
                     Console.Write((char)output);
                 }
             }
-            LogDetail($"Computer output finished ======");
+
             return (int)output;
         }
         
