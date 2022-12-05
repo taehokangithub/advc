@@ -1,7 +1,9 @@
+using Advc.Utils;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 
 namespace Advc2022
 {
@@ -26,7 +28,7 @@ namespace Advc2022
             Problem00 prob1 = new();
 
             var ans1 = prob1.Solve1(intList);
-            var ans2 = 0;
+            var ans2 = prob1.Solve2(intList);
 
             Console.WriteLine($"ans = {ans1}, {ans2}");
         }
