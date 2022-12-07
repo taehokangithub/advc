@@ -9,25 +9,19 @@ namespace Advc2022
 {
     class Problem06 : Advc.Utils.Loggable
     {
-        public int Solve(string textData, int sigLength)
+        public int Solve(string textData, int sigLengthToFind)
         {
             Queue<char> recvQ = new();
             for (int i = 0; i < textData.Length; i ++)
             {
-                char c = textData[i];
-                recvQ.Enqueue(c);
-                if (recvQ.Count > sigLength)
+                recvQ.Enqueue(textData[i]);
+                if (recvQ.Count > sigLengthToFind)
                 {
                     recvQ.Dequeue();
                 }
-                LogDetail($"received {c}");
-                if (recvQ.Count == sigLength)
+                if (recvQ.ToHashSet().Count == sigLengthToFind)
                 {
-                    HashSet<char> signal = recvQ.ToHashSet();
-                    if (signal.Count == sigLength)
-                    {
-                        return i + 1;
-                    }
+                    return i + 1;               
                 }
             }
             return 0;

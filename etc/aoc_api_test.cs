@@ -38,11 +38,17 @@ namespace SI.Jet.JetPOC
 				HttpClient client = new HttpClient();
 				string uri = "https://adventofcode.com";
 				string param = "/2021/leaderboard/private/view/786608.json";
+				// https://adventofcode.com/2019/leaderboard/private/view/786608.json
 				client.BaseAddress = new Uri(uri);
 
 				var message = new HttpRequestMessage(HttpMethod.Get, param);
 
-				message.Headers.Add("Cookie", $"session={JetPocCommon.APICookie}");
+				var cookie = JetPocCommon.APICookie;
+				if (cookie.Length == 0)
+				{
+					cookie = "53616c7465645f5f7f1c933796d53957e9779df3592b23762bce5b39616d6dc789c51a27939244c21c8ca0c4632abaea159fe148ad8228bc7aec03b85bf72374";
+				}
+				message.Headers.Add("Cookie", $"session={cookie}");
 				HttpResponseMessage response = await client.SendAsync(message);
 
 				string txt = await response.Content.ReadAsStringAsync();
