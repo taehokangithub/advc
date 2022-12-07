@@ -169,8 +169,9 @@ namespace Advc.Utils
             return p.x < Max.x && p.y < Max.y && p.x >= 0 && p.y >= 0;
         }
 
-        public void Add(ValueType val)
+        public Point Add(ValueType val)
         {
+            Point curLoc = m_addPointer;
             SetAt(val, m_addPointer);
 
             m_addPointer.x ++;
@@ -179,6 +180,7 @@ namespace Advc.Utils
                 m_addPointer.x = 0;
                 m_addPointer.y++;
             }
+            return curLoc;
         }
 
         // This is for read-only! Collection must not modified while iteration
