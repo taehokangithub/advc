@@ -29,9 +29,14 @@ namespace Advc2022
             Debug.Assert(parent.IsDir());
 
             var childName = $"{parent.Name}{name}/";
-            AddNode(parent.Name, childName);
+            var childNode = TryGetNodeByName(childName);
 
-            return GetNodeByName(childName);
+            if (childNode == null)
+            {
+                AddNode(parent.Name, childName);
+                childNode = GetNodeByName(childName);
+            }
+            return childNode;
         }
 
         public void AddFile(TreeNode parent, string fileName, long size)

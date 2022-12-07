@@ -129,13 +129,14 @@ namespace Advc.Utils
             var nodeParent = GetOrCreateNodeByName(parent);
             var nodeChild = GetOrCreateNodeByName(child);
 
-            if (!nodeParent.Children.Any(n => n.Name == child))
-            {
-                nodeParent.Children.Add(nodeChild);
-                nodeChild.Parent = nodeParent;
+            // Allow only new relationship
+            Debug.Assert(!nodeParent.Children.Any(n => n.Name == child));
+            Debug.Assert(nodeChild.Parent == null);
 
-                LogDetail($"{nodeParent.Name} adding a child {nodeChild.Name}, now {nodeParent.Children.Count} children [{string.Join(",",nodeParent.Children.Select(c => c.Name))}]");                
-            }
+            nodeParent.Children.Add(nodeChild);
+            nodeChild.Parent = nodeParent;
+
+            LogDetail($"{nodeParent.Name} adding a child {nodeChild.Name}, now {nodeParent.Children.Count} children [{string.Join(",",nodeParent.Children.Select(c => c.Name))}]");                
             
             if (!HasAnyRootSet || Root == nodeChild)
             {
@@ -156,7 +157,7 @@ namespace Advc.Utils
             {
                 return GetNodeByName(name);
             }
-            //LogDetail($"couldn't find {name} from [{string.Join(",",m_nodes.Select(n => n.Key))}]");
+            
             return null;
         }
 
