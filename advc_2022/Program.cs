@@ -7,9 +7,10 @@ Advc2022.Problem03.Start();
 Advc2022.Problem04.Start();
 Advc2022.Problem05.Start();
 Advc2022.Problem06.Start();
+Advc2022.Problem07.Start();
 #endif
 
-Advc2022.Problem07.Start();
+Advc2022.Problem08.Start();
 
 
 
