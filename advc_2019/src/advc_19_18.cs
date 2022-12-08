@@ -18,7 +18,7 @@ namespace Advc2019
         class Map : MapByList<Tile>
         {
             public HashSet<Tile> Keys { get; } = new();
-            public Point Entrance { get; set; }
+            public List<Point> Entrances { get; } = new();
 
             public Map(List<string> textArray, Loggable logger)
             {
@@ -32,7 +32,7 @@ namespace Advc2019
                         var curLoc = Add(t);
                         if (t == Tile.Entrance)
                         {
-                            Entrance = curLoc;
+                            Entrances.Add(curLoc);
                         }
                         else if (t != Tile.Empty && t != Tile.Wall && Char.IsLower(c))
                         {
@@ -59,25 +59,33 @@ namespace Advc2019
         class State
         {
             public HashSet<Tile> UnlockedKeys { get; } = new();
-            public Point CurLoc { get; set; }
+            public List<Point> Locations { get; }
             public int Steps { get; set; }
-
             public State(Map map)
             {
-                CurLoc = map.Entrance;
+                Locations = new(map.Entrances);
             }
 
-            public State() {}
+            public State() 
+            {
+                Locations = new();
+            }
+
             public State(State other)
             {
                 UnlockedKeys = new(other.UnlockedKeys);
-                CurLoc = other.CurLoc;
                 Steps = other.Steps;
+                Locations = new(other.Locations);
+            }
+
+            public string LocationString()
+            {
+                return string.Join(",", Locations);
             }
 
             public override string ToString()
             {
-                return $"[{CurLoc}/{Steps}] <UL {UnlockedKeys.Count} : {UnlockedStateString()}>";
+                return $"[{LocationString()}/{Steps}] <UL {UnlockedKeys.Count} : {UnlockedStateString()}>";
             }
 
             public string UnlockedStateString()
@@ -88,7 +96,7 @@ namespace Advc2019
 
             public string StateWithoutStepString()
             {
-                return $"[{CurLoc}] <Unlocked {UnlockedStateString()}>";
+                return $"[{LocationString()}] <Unlocked {UnlockedStateString()}>";
             }
 
             public bool IsTerminal(Map map)
@@ -106,7 +114,11 @@ namespace Advc2019
             List<State> result = new();
 
             searchQ.Push(new(incomingState));
-            visited.Add(incomingState.CurLoc);
+
+            foreach (var loc in incomingState.Locations)
+            {
+                visited.Add(loc);
+            }
 
             while (searchQ.Count > 0)
             {
@@ -125,49 +137,52 @@ namespace Advc2019
                 }
                 LogDetail($"[FindingPath] begin state {state}, QLen {searchQ.Count}");
 
-                foreach (var dir in Enum.GetValues(typeof(Direction.Dir)).Cast<Direction.Dir>())
+                for (int locIndex = 0; locIndex < state.Locations.Count; locIndex ++)
                 {
-                    Point searchPoint = state.CurLoc.MovedPoint(dir);
-                    if (!visited.Contains(searchPoint))
+                    foreach (var dir in Enum.GetValues(typeof(Direction.Dir)).Cast<Direction.Dir>())
                     {
-                        visited.Add(searchPoint);
-                        Tile t = map.GetAt(searchPoint);
-                        char c = (char)t;
-
-                        LogDetail($"[FindingPath] {state} searching at {searchPoint}, tile {c}");
-                        if (t == Tile.Wall)
+                        Point searchPoint = state.Locations[locIndex].MovedPoint(dir);
+                        if (!visited.Contains(searchPoint))
                         {
-                            continue;
-                        }
+                            visited.Add(searchPoint);
+                            Tile t = map.GetAt(searchPoint);
+                            char c = (char)t;
 
-                        if (t != Tile.Empty && t != Tile.Entrance)
-                        {
-                            Debug.Assert(Char.IsLetter(c));
-                            if (Char.IsLower(c)) // key
+                            LogDetail($"[FindingPath] {state} searching at {searchPoint}, tile {c}");
+                            if (t == Tile.Wall)
                             {
-                                if (!state.UnlockedKeys.Contains(t))
+                                continue;
+                            }
+
+                            if (t != Tile.Empty && t != Tile.Entrance)
+                            {
+                                Debug.Assert(Char.IsLetter(c));
+                                if (Char.IsLower(c)) // key
                                 {
-                                    State resultState = new(state);
-                                    resultState.CurLoc = searchPoint;
-                                    resultState.Steps ++;
-                                    resultState.UnlockedKeys.Add(t);                     
-                                    result.Add(resultState);  // found a new key
-                                    continue;
+                                    if (!state.UnlockedKeys.Contains(t))
+                                    {
+                                        State resultState = new(state);
+                                        resultState.Locations[locIndex] = searchPoint;
+                                        resultState.Steps ++;
+                                        resultState.UnlockedKeys.Add(t);                     
+                                        result.Add(resultState);  // found a new key
+                                        continue;
+                                    }
+                                }
+                                else // door
+                                {
+                                    var key = (Tile)Char.ToLower(c);
+                                    if (!state.UnlockedKeys.Contains(key))
+                                    {
+                                        continue;
+                                    }
                                 }
                             }
-                            else // door
-                            {
-                                var key = (Tile)Char.ToLower(c);
-                                if (!state.UnlockedKeys.Contains(key))
-                                {
-                                    continue;
-                                }
-                            }
+                            State newState = new(state);
+                            newState.Locations[locIndex] = searchPoint;
+                            newState.Steps ++;
+                            searchQ.Push(newState);
                         }
-                        State newState = new(state);
-                        newState.CurLoc = searchPoint;
-                        newState.Steps ++;
-                        searchQ.Push(newState);
                     }
                 }
             }
@@ -198,7 +213,7 @@ namespace Advc2019
                     }
 
                     string stateWithoutSteps = nextState.StateWithoutStepString();
-    #if true
+    
                     if (shortedToState.ContainsKey(stateWithoutSteps))
                     {
                         if (shortedToState[stateWithoutSteps] <= nextState.Steps)
@@ -206,7 +221,7 @@ namespace Advc2019
                             continue;
                         }
                     }
-    #endif
+    
                     shortedToState[stateWithoutSteps] = nextState.Steps;
                     searchQ.Enqueue(nextState);
 
@@ -221,7 +236,7 @@ namespace Advc2019
             return candidate;
         }
 
-        public int Solve1(List<string> textArr)
+        public int Solve(List<string> textArr)
         {
             AllowLogDetail = true;
             Map map = new(textArr, this);
@@ -229,21 +244,20 @@ namespace Advc2019
 
             return state.Steps;
         }
-
-        public int Solve2(List<int> arr)
-        {
-            return 0;
-        }
         
         public static void Start()
         {
             var textData = File.ReadAllText("data/input18.txt");
             var textArr = textData.Split(Environment.NewLine).ToList();
+
+            var textDataB = File.ReadAllText("data/input18B.txt");
+            var textArrB = textDataB.Split(Environment.NewLine).ToList();
             
             Problem18 prob1 = new();
-
-            var ans1 = prob1.Solve1(textArr);
-            var ans2 = 0;
+            Problem18 prob2 = new();
+            
+            var ans1 = 0; //prob1.Solve(textArr);
+            var ans2 = prob2.Solve(textArrB);
 
             Console.WriteLine($"ans = {ans1}, {ans2}");
         }
