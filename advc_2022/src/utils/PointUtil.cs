@@ -175,6 +175,27 @@ namespace Advc.Utils
             target.Move(dir);
             return target;
         }
+
+        private static int BaseValue(int val)
+        {
+            return val == 0 ? 0 : val / Math.Abs(val);
+        }
+        
+        public void MakeBase()
+        {
+            x = BaseValue(x);
+            y = BaseValue(y);
+            z = BaseValue(z);
+            w = BaseValue(w);
+        }
+
+        public Point GetBasePoint()
+        {
+            Point p = new(this);
+
+            p.MakeBase();
+            return p;
+        }
     }
 
     public static class Direction
