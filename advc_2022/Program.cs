@@ -9,9 +9,10 @@ Advc2022.Problem05.Start();
 Advc2022.Problem06.Start();
 Advc2022.Problem07.Start();
 Advc2022.Problem08.Start();
+Advc2022.Problem09.Start();
 #endif
 
-Advc2022.Problem09.Start();
+Advc2022.Problem10.Start();
 
 
 
