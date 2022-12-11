@@ -7,15 +7,19 @@ using System.Text;
 
 namespace Advc2022
 {
-    class Problem00 : Advc.Utils.Loggable
+    class Problem00 : Loggable
     {
         public int Solve1(List<int> arr)
         {
+            AllowLogDetail = true;
+
             return 0;
         }
 
         public int Solve2(List<int> arr)
         {
+            AllowLogDetail = true;
+
             return 0;
         }
         
