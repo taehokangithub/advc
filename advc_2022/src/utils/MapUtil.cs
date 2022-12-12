@@ -135,8 +135,8 @@ namespace Advc.Utils
 
     class MapByList<ValueType> : MapBase<ValueType>
     {
-        private List<List<ValueType>> m_map = new();    // [y][x] coordiation (in order to add a line by line)
-        private Point m_addPointer = new();
+        protected List<List<ValueType>> m_map = new();    // [y][x] coordiation (in order to add a line by line)
+        protected Point m_addPointer = new();
 
         public override void SetMin(Point min)
         {
