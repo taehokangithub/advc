@@ -14,8 +14,8 @@ namespace Advc.Utils
         public Point Min => m_min.HasValue ? (Point) m_min : Point.Dummy;
 
         // Actual data min/max
-        public Point ActualMax = new();
-        public Point ActualMin = new();
+        public Point ActualMax = new(int.MinValue, int.MinValue, int.MinValue, int.MinValue);
+        public Point ActualMin = new(int.MaxValue, int.MaxValue, int.MaxValue, int.MaxValue);
 
         public virtual void SetMax(Point max)
         {
@@ -74,6 +74,12 @@ namespace Advc.Utils
             return true;
         }
 
+        public void SetBoundaryByActualMinMax()
+        {
+            SetMin(ActualMin.AddedPoint(new Point(-1, -1, -1, -1)));
+            SetMax(ActualMax.AddedPoint(new Point(1, 1, 1, 1)));
+        }
+
         public void SetAt(ValueType v, Point p)
         {
             if (!CheckBoundary(p))
@@ -127,9 +133,21 @@ namespace Advc.Utils
                         Point p = new(x, y, z);
                         callback(GetAt(p), p);
                     }
-                }            
+                }
             }
         }
+
+        public bool Contains(Point p)
+        {
+            return m_map.ContainsKey(p);
+        }
+
+        public bool Contains(int x, int y, int z = 0, int w = 0)
+        {
+            return Contains(new Point(x, y, z, w));
+        }
+
+
 
     }
 
