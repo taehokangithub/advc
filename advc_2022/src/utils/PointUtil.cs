@@ -44,6 +44,22 @@ namespace Advc.Utils
             w += p.w;
         }
 
+        public void SetMax(Point p)
+        {
+            x = Math.Max(x, p.x);
+            y = Math.Max(y, p.y);
+            z = Math.Max(z, p.z);
+            w = Math.Max(w, p.w);
+        }
+
+        public void SetMin(Point p)
+        {
+            x = Math.Min(x, p.x);
+            y = Math.Min(y, p.y);
+            z = Math.Min(z, p.z);
+            w = Math.Min(w, p.w);            
+        }
+
         public int GetAxisValue(Axis axis)
         {
             switch (axis)
@@ -160,7 +176,7 @@ namespace Advc.Utils
 
         public long ManhattanDistance()
         {
-            return Math.Abs(x) + Math.Abs(y) + Math.Abs(z);
+            return Math.Abs(x) + Math.Abs(y) + Math.Abs(z) + Math.Abs(w);
         }
 
         public void Move(Direction.Dir dir)
