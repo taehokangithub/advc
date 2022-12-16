@@ -2,7 +2,7 @@ using System;
 
 namespace Advc.Utils
 {
-    class Loggable
+    public class Loggable
     {
         public bool AllowLogDetail { get; set; } = false;
 
