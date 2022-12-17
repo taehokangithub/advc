@@ -228,6 +228,19 @@ namespace Advc.Utils
             return ret;
         }
 
+        public void Draw(Func<ValueType, char> cb)
+        {
+            ForEach((v, p) =>
+            {
+                char c = cb(v);
+                Console.Write(c);
+                if (p.x == Max.x - 1)
+                {
+                    Console.WriteLine();
+                }
+            });            
+        }
+
         protected override void OnSetAt(ValueType val, Point p)
         {
             m_map[p.y][p.x] = val;
