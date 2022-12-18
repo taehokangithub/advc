@@ -1,5 +1,7 @@
 ﻿//#define RUN_ALL
 
+var startTime = DateTime.UtcNow;
+
 #if RUN_ALL
 Advc2022.Problem01.Start();
 Advc2022.Problem02.Start();
@@ -16,8 +18,10 @@ Advc2022.Problem12.Start();
 Advc2022.Problem13.Start();
 Advc2022.Problem14.Start();
 Advc2022.Problem15.Start();
-Advc2022.Problem16.Start();
+Advc2022.Problem16.Start(); // Takes a few minutes
 Advc2022.Problem17.Start();
 #endif
 
 Advc2022.Problem18.Start();
+
+Console.WriteLine($"Elapsed : {(DateTime.UtcNow - startTime).TotalMilliseconds}");
