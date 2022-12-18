@@ -179,6 +179,11 @@ namespace Advc.Utils
             return Math.Abs(x) + Math.Abs(y) + Math.Abs(z) + Math.Abs(w);
         }
 
+        public bool IsAdjacent(Point p)
+        {
+            return SubtractedPoint(p).ManhattanDistance() == 1;
+        }
+
         public void Move(Direction.Dir dir)
         {
             Point dirVector = Direction.DirVectors[(int)dir];
@@ -223,7 +228,10 @@ namespace Advc.Utils
         public static readonly Point Down = new Point(0, 1);
         public static readonly Point Left = new Point(-1, 0);
         public static readonly Point Right = new Point(1, 0);
+        public static readonly Point Forward = new Point(0, 0, 1);
+        public static readonly Point Backward = new Point(0, 0, -1);
         public static readonly List<Point> DirVectors = new List<Point>{Up, Down, Left, Right};
+        public static readonly List<Point> DirVectors3D = new List<Point>{Up, Down, Left, Right, Forward, Backward};
         public static Point GetDirVector(Dir dir) => DirVectors[(int)dir];
         public static Dir GetDirByVector(Point p) 
         {
