@@ -26,8 +26,8 @@ namespace Advc2022
         public static void Start()
         {
             var textData = File.ReadAllText("data/input00.txt");
-            var textArr = textData.Split(Environment.NewLine);
-            var intList = textArr.Select(t => int.Parse(t)).ToList();
+            var lines = textData.Split(Environment.NewLine);
+            var intList = lines.Select(t => int.Parse(t)).ToList();
 
             Problem00 prob1 = new();
 
