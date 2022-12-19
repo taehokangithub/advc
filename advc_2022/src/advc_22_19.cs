@@ -70,7 +70,168 @@ namespace Advc2022
             }
         }
 
-        class BluePrint
+        enum Phase { Decision, Process }
+
+        class State
+        {
+            private static int s_nextIndex = 0;
+            public int Index { get; private set; } = ++ s_nextIndex;
+            public Dictionary<Mineral, int> NumRobots { get; set; } = new();
+            public Dictionary<Mineral, int> NumMinerals { get; set; } = new();
+
+            public int Minutes { get; set; }
+            public Mineral? NextProduction { get; set; }
+            public Phase Phase { get; set; } = Phase.Decision;
+            public List<State> Path = new();
+            
+            private BluePrint m_bp;
+
+            public State(BluePrint bp) 
+            {
+                m_bp = bp;
+                NumRobots[Mineral.Ore] = 1;
+
+                foreach (Mineral mineral in Enum.GetValues<Mineral>().ToList())
+                {
+                    NumMinerals[mineral] = 0;
+                }
+
+                Minutes = 1;
+            }
+            public State(State other)
+            {
+                NumRobots = new(other.NumRobots);
+                NumMinerals = new(other.NumMinerals);
+                Minutes = other.Minutes;
+                NextProduction = other.NextProduction;
+                Phase = other.Phase;
+                Path = new(other.Path);
+
+                if (other.Path.LastOrDefault()?.ToString() != other.ToString())
+                {
+                    Path.Add(other);
+                }
+                m_bp = other.m_bp;
+            }
+
+            public override string ToString()
+            {
+                string nextStr = (NextProduction == null) ? "" : $"/ Next {NextProduction}";
+                return $"[State: {Minutes} min ({Phase}) / Resources ({string.Join(",", NumMinerals.Values)}) / Robots ({string.Join(",", NumRobots.Values)}) {nextStr} ";
+            }
+
+            public List<Mineral> GetPossibleProductions(BluePrint bp)
+            {
+                Debug.Assert(Phase == Phase.Decision);
+                List<Mineral> possibleProduction = new();
+
+                foreach (var mineral in Enum.GetValues<Mineral>().ToList())
+                {
+                    var bpRobot = bp.RobotBlueprints[mineral];
+                    bool canProduce = true;
+                    foreach (Mineral ingr in bpRobot.Ingredients.Keys)
+                    {
+                        if (!NumRobots.ContainsKey(ingr) || NumRobots[ingr] == 0)
+                        {
+                            canProduce = false;
+                        }
+                    }
+                    if (canProduce)
+                    {
+                        possibleProduction.Add(mineral);
+                    }
+                }
+
+                return possibleProduction;
+            }
+
+            public void ProcessMining()
+            {
+                Debug.Assert(Phase == Phase.Process);
+
+                foreach (var mineral in NumRobots.Keys)
+                {
+                    NumMinerals[mineral] = NumMinerals[mineral] + NumRobots[mineral];
+                }
+            }
+
+            public bool PrepareProduction()
+            {
+                Debug.Assert(Phase == Phase.Process && NextProduction != null);
+
+                Mineral robotType = NextProduction.GetValueOrDefault();
+                var bpRobot = m_bp.RobotBlueprints[robotType];
+
+                if (bpRobot.Ingredients.Any(ingr => NumMinerals[ingr.Key] < ingr.Value))
+                {
+                    return false;
+                }
+                return true;
+            }
+
+            public void ProcessProduction()
+            {
+                Debug.Assert(Phase == Phase.Process && NextProduction != null);
+
+                Mineral robotType = NextProduction.GetValueOrDefault();
+                var bpRobot = m_bp.RobotBlueprints[robotType];
+
+                bpRobot.Ingredients.ToList().ForEach(ingr => 
+                {
+                    NumMinerals[ingr.Key] -= ingr.Value;
+                    Debug.Assert(NumMinerals[ingr.Key] >= 0);
+                });
+
+                // Add a robot
+                if (!NumRobots.ContainsKey(robotType))
+                {
+                    NumRobots[robotType] = 0;
+                }
+                NumRobots[robotType] ++;
+
+                NextProduction = null;     
+            }
+
+            public int AssumedMaxGeode(int maxMinutes)
+            {
+                int remaining = maxMinutes - Minutes;
+
+                int geodeRbCnt = NumRobots.ContainsKey(Mineral.Geode) ? NumRobots[Mineral.Geode] : 0;
+                int assumedGeode = NumMinerals[Mineral.Geode];
+
+                int curObsidian = NumMinerals[Mineral.Obsidian];
+                int curObsiRobot = NumRobots.ContainsKey(Mineral.Obsidian) ? NumRobots[Mineral.Obsidian] : 0;
+                int requiredObsidian = m_bp.RobotBlueprints[Mineral.Geode].Ingredients[Mineral.Obsidian];
+
+                int curClay = NumMinerals[Mineral.Clay];
+                int curClayRobot = NumRobots.ContainsKey(Mineral.Clay) ? NumRobots[Mineral.Clay] : 0;
+                int requiredClay = m_bp.RobotBlueprints[Mineral.Obsidian].Ingredients[Mineral.Clay];
+
+                for (int i = 0; i <= remaining; i ++)
+                {
+                    assumedGeode += geodeRbCnt;
+                    curClay += curClayRobot;
+                    curObsidian += curObsiRobot;
+
+                    curClayRobot ++;
+
+                    if (curClay >= requiredClay)
+                    {
+                        curClay -= requiredClay;
+                        curObsiRobot ++;
+                    }
+
+                    if (curObsidian >= requiredObsidian)
+                    {
+                        curObsidian -= requiredObsidian;
+                        geodeRbCnt ++;
+                    }
+                }
+                return assumedGeode;
+            }
+        }
+
+        class BluePrint : Loggable
         {
             public int Index { get; init; }
             public Dictionary<Mineral, RobotBlueprint> RobotBlueprints { get; set; } = new();
@@ -88,7 +249,6 @@ namespace Advc2022
                 {
                     sb.Append($"     {rb.ToString()}{Environment.NewLine}");
                 }
-
                 return sb.ToString();
             }
 
@@ -113,11 +273,135 @@ namespace Advc2022
                 }
                 return bluePrint;
             }
+
+            private List<State> GetNextStatesForPossibleProduction(State state)
+            {
+                List<State> nextStates = new();
+                var possibleProduction = state.GetPossibleProductions(this);
+
+                foreach (var robotType in possibleProduction)
+                {
+                    var newState = new State(state);
+                    newState.NextProduction = robotType;
+                    newState.Phase = Phase.Process;
+                    nextStates.Add(newState);
+                }
+
+                return nextStates;
+            }
+
+            public int FindBestResult(int minutes)
+            {
+                State initialState = new(this);
+                //Queue<State> stateQ = new();
+
+                SortedSet<State> stateQ = new SortedSet<State>(Comparer<State>.Create((a,b) => 
+                {
+                    int assumedA = a.AssumedMaxGeode(minutes);
+                    int assumedB = b.AssumedMaxGeode(minutes);
+
+                    if (assumedA != assumedB)
+                    {
+                        return assumedB - assumedA;
+                    }
+
+                    if (a.NumMinerals[Mineral.Geode] != b.NumMinerals[Mineral.Geode])
+                    {
+                        return b.NumMinerals[Mineral.Geode] - a.NumMinerals[Mineral.Geode];
+                    }
+
+                    if (a.Minutes != b.Minutes)
+                    {
+                        return b.Minutes - a.Minutes;
+                    }
+
+                    return a.Index - b.Index;
+                }));
+
+
+                stateQ.Add(initialState);
+
+                int bestResult = 0;
+                const int logFreq = 10000;
+                int logIndex = 0;
+                int totalDiscarded = 0;
+                while (stateQ.Any())
+                {
+                    ++logIndex;
+                    var LogTrace = (string str) => { if ((logIndex) % logFreq == 0) LogDetail($"[{this.Index}/{logIndex}] {str}"); };
+
+                    var state = stateQ.First();
+                    stateQ.Remove(state);
+
+                    if (state.AssumedMaxGeode(minutes) <= bestResult)
+                    {
+                        LogTrace($" ==> discrading {state} for assumed {state.AssumedMaxGeode(minutes)} <= {bestResult}");
+                        totalDiscarded ++;
+                        continue;
+                    }
+
+                    LogTrace($"<Q {stateQ.Count}/Best {bestResult}/Discard {totalDiscarded}> {state}");
+
+                    if (state.Phase == Phase.Decision)
+                    {
+                        if (state.NextProduction == null)
+                        {
+                            GetNextStatesForPossibleProduction(state).ForEach(s => 
+                            {
+                                stateQ.Add(s);
+                                //LogTrace($"     : Enqueing {state}, cur count {stateQ.Count}");
+                            });   
+                        }
+                        else
+                        {
+                            state.Phase = Phase.Process;
+                        }
+                    }
+
+                    if (state.Phase == Phase.Process)
+                    {
+                        bool prepared = state.PrepareProduction();
+                        state.ProcessMining();
+                        if (prepared)
+                        {
+                            state.ProcessProduction();
+                        }
+                        
+                        // Check geode
+                        int geode = state.NumMinerals[Mineral.Geode];
+
+                        if (geode > bestResult)
+                        {
+                            LogTrace($" =====> Found a new best {geode} over {bestResult} at state {state}");
+                            foreach (var s in state.Path)
+                            {
+                                LogTrace($" =====> prev : {s}");
+                            }
+
+                            bestResult = geode;
+                        }
+                        
+                        if (state.Minutes >= minutes)
+                        {
+                            LogTrace($" =====> Finished : {state}");
+                        }
+                        else
+                        {
+                            var newState = new State(state);
+                            newState.Phase = Phase.Decision;
+                            newState.Minutes ++;
+                            stateQ.Add(newState);
+                        }
+                    }
+                }
+
+                return bestResult;
+            }
         }
 
-        class BluePrintSet
+        class BluePrintSet : Loggable
         {
-            public List<BluePrint> BluePrints { get; set; } = new();
+            private List<BluePrint> BluePrints { get; set; } = new();
 
             public override string ToString()
             {
@@ -139,37 +423,53 @@ namespace Advc2022
 
                 return bluePrintSet;
             }
+
+            public int FindQualityLevel(int minutes)
+            {
+                AllowLogDetail = false;
+                int ans = 0;
+                foreach (var bp in BluePrints)
+                {
+                    bp.AllowLogDetail = AllowLogDetail;
+                    int bpResult = bp.FindBestResult(minutes);
+                    LogDetail($"[BP {bp.Index}] Found best result {bpResult}");
+                    ans += (bpResult * bp.Index);
+                }
+                return ans;
+            }
+            
+            public int FindMultipliedBestResults(int maxBluePrints, int minutes)
+            {
+                AllowLogDetail = false;
+                int ans = 1;
+                for (int i = 0; i < maxBluePrints; i ++)
+                {
+                    var bp = BluePrints[i];
+                    bp.AllowLogDetail = AllowLogDetail;
+                    int bpResult = bp.FindBestResult(minutes);
+                    LogDetail($"[BP {bp.Index}] Found best result {bpResult}");
+                    ans *= bpResult;
+                }
+                return ans;
+            }
         }
 
-        private int Solve1(List<int> arr)
-        {
-            AllowLogDetail = true;
-
-            return 0;
-        }
-
-        private int Solve2(List<int> arr)
-        {
-            AllowLogDetail = true;
-
-            return 0;
-        }
-        
         public static void Start()
         {
-            var textData = File.ReadAllText("data/input19s.txt");
+            var textData = File.ReadAllText("data/input19.txt");
             var lines = textData.Split(Environment.NewLine);
 
             BluePrintSet bluePrintSet = BluePrintSet.Parse(lines);
-            Console.WriteLine(bluePrintSet);
+            //Console.WriteLine(bluePrintSet);
 
-            var ans1 = 0; //prob1.Solve1(intList);
-            var ans2 = 0; //prob1.Solve2(intList);
+            var ans1 = bluePrintSet.FindQualityLevel(24);
+            var ans2 = bluePrintSet.FindMultipliedBestResults(3, 32);
 
             Console.WriteLine($"ans = {ans1}, {ans2}");
         }
-
     }
 }
 
 
+// p1. 1589 / elap 121305.235 / elap 85180.499 with sorted set / elap 9858.964 with clay assumed
+// p2. 29348 / elap 741763.008 / elap 43815.182 with clay assumed
