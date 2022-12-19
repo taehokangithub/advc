@@ -83,6 +83,7 @@ namespace Advc2022
             public Mineral? NextProduction { get; set; }
             public Phase Phase { get; set; } = Phase.Decision;
             public List<State> Path = new();
+            public int AssumedMaxGeode { get; set; }
             
             private BluePrint m_bp;
 
@@ -192,7 +193,7 @@ namespace Advc2022
                 NextProduction = null;     
             }
 
-            public int AssumedMaxGeode(int maxMinutes)
+            public void SetAssumedMaxGeode(int maxMinutes)
             {
                 int remaining = maxMinutes - Minutes;
 
@@ -227,7 +228,7 @@ namespace Advc2022
                         geodeRbCnt ++;
                     }
                 }
-                return assumedGeode;
+                AssumedMaxGeode = assumedGeode;
             }
         }
 
@@ -297,17 +298,14 @@ namespace Advc2022
 
                 SortedSet<State> stateQ = new SortedSet<State>(Comparer<State>.Create((a,b) => 
                 {
-                    int assumedA = a.AssumedMaxGeode(minutes);
-                    int assumedB = b.AssumedMaxGeode(minutes);
-
-                    if (assumedA != assumedB)
-                    {
-                        return assumedB - assumedA;
-                    }
-
                     if (a.NumMinerals[Mineral.Geode] != b.NumMinerals[Mineral.Geode])
                     {
                         return b.NumMinerals[Mineral.Geode] - a.NumMinerals[Mineral.Geode];
+                    }
+
+                    if (a.AssumedMaxGeode != b.AssumedMaxGeode)
+                    {
+                        return b.AssumedMaxGeode - a.AssumedMaxGeode;
                     }
 
                     if (a.Minutes != b.Minutes)
@@ -318,8 +316,13 @@ namespace Advc2022
                     return a.Index - b.Index;
                 }));
 
+                var addToStateQ = (State s) => 
+                {
+                    s.SetAssumedMaxGeode(minutes);
+                    stateQ.Add(s);
+                };
 
-                stateQ.Add(initialState);
+                addToStateQ(initialState);
 
                 int bestResult = 0;
                 const int logFreq = 10000;
@@ -333,9 +336,9 @@ namespace Advc2022
                     var state = stateQ.First();
                     stateQ.Remove(state);
 
-                    if (state.AssumedMaxGeode(minutes) <= bestResult)
+                    if (state.AssumedMaxGeode <= bestResult)
                     {
-                        LogTrace($" ==> discrading {state} for assumed {state.AssumedMaxGeode(minutes)} <= {bestResult}");
+                        LogTrace($" ==> discrading {state} for assumed {state.AssumedMaxGeode} <= {bestResult}");
                         totalDiscarded ++;
                         continue;
                     }
@@ -348,9 +351,9 @@ namespace Advc2022
                         {
                             GetNextStatesForPossibleProduction(state).ForEach(s => 
                             {
-                                stateQ.Add(s);
+                                addToStateQ(s);
                                 //LogTrace($"     : Enqueing {state}, cur count {stateQ.Count}");
-                            });   
+                            });
                         }
                         else
                         {
@@ -390,7 +393,7 @@ namespace Advc2022
                             var newState = new State(state);
                             newState.Phase = Phase.Decision;
                             newState.Minutes ++;
-                            stateQ.Add(newState);
+                            addToStateQ(newState);
                         }
                     }
                 }
@@ -471,5 +474,5 @@ namespace Advc2022
 }
 
 
-// p1. 1589 / elap 121305.235 / elap 85180.499 with sorted set / elap 9858.964 with clay assumed
-// p2. 29348 / elap 741763.008 / elap 43815.182 with clay assumed
+// p1. 1589 / elap 121305.235 / 85180.499 with sorted set / 9858.964 with clay assumed / 5438.587 with cached assumption
+// p2. 29348 / elap 741763.008 / elap 43815.182 with clay assumed / 18050.621 with cached assumption
