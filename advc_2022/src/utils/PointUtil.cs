@@ -11,6 +11,8 @@ namespace Advc.Utils
         public enum Axis { x, y, z, w };
 
         public static Point Dummy = new Point();
+        public static Point MinPoint = new Point(int.MinValue, int.MinValue, int.MinValue, int.MinValue);
+        public static Point MaxPoint = new Point(int.MaxValue, int.MaxValue, int.MaxValue, int.MaxValue);
         public static int LogDimension { get; set; } = 2;
 
         public int w, x, y, z;

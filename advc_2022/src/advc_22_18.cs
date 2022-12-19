@@ -12,12 +12,22 @@ namespace Advc2022
         class CubeMap : Loggable
         {
             private HashSet<Point> m_cubeSet;
+            private Point m_minCubePos = Point.MaxPoint;
+            private Point m_maxCubePos = Point.MinPoint;
             private HashSet<Point> m_exposed = new();
             private HashSet<Point> m_trapped = new();
 
             public CubeMap(List<Point> cubes)
             {
                 m_cubeSet = new(cubes);
+
+                foreach (var cube in cubes)
+                {
+                    m_minCubePos.SetMin(cube);
+                    m_maxCubePos.SetMax(cube);
+                }
+
+                LogDetail($"min {this.m_minCubePos} max {this.m_maxCubePos}");
             }
 
             private bool IsExposedSimple(Point p, out bool isExpoed)
@@ -32,7 +42,9 @@ namespace Advc2022
                     isExpoed = false;
                     return true;
                 }
-                if (p.x == 0 || p.y == 0 || p.z == 0)
+
+                if (p.x > m_maxCubePos.x || p.y > m_maxCubePos.y || p.z > m_maxCubePos.z
+                    || p.x < m_minCubePos.x || p.y < m_minCubePos.y || p.z < m_minCubePos.z)
                 {
                     isExpoed = true;
                     return true;
@@ -135,10 +147,12 @@ namespace Advc2022
                 cubes.Add(new(coords[0], coords[1], coords[2]));
             }
 
+            CubeMap cubeMap = new(cubes);
+
             Problem18 prob1 = new();
 
-            var ans1 = prob1.Solve1(new(cubes));
-            var ans2 = prob1.Solve2(new(cubes));
+            var ans1 = prob1.Solve1(cubeMap);
+            var ans2 = prob1.Solve2(cubeMap);
 
             Console.WriteLine($"ans = {ans1}, {ans2}");
         }
