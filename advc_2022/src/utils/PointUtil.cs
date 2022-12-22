@@ -257,6 +257,15 @@ namespace Advc.Utils
 
             return GetDirByVector(vec);
         }
+
+        public static List<Dir> OrderedDirs = new List<Dir>{Dir.Up, Dir.Right, Dir.Down, Dir.Left};
+        public static Dir GetRotateDiff(Dir targetDir, Dir sourceDir)
+        {
+            int indexTarget = OrderedDirs.IndexOf(targetDir);
+            int indexSource = OrderedDirs.IndexOf(sourceDir);
+            int diff = ((indexTarget - indexSource) + 4) % 4;
+            return OrderedDirs[diff];
+        }
     }
 
     public class MovingObject
