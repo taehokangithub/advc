@@ -7,26 +7,310 @@ using System.Text;
 
 namespace Advc2022
 {
+    using Dir = Direction.Dir;
     class Problem22 : Loggable
     {
         enum Tile { Empty, Road, Wall };
-        enum Transition { Flat, Cube };
-        class Map : MapByList<Tile>
+        enum CmdType { Go, Turn };
+        enum TransitionType { Flat, Cube };
+        record Cmd(CmdType type, int length, Dir dir);
+        record SquareLink(Square square, Dir orgDir, Dir newDir);
+
+        static Dir GetLinkRotation(SquareLink sql) 
         {
-            public Point CurLoc { get; private set; } = new Point(0, 0);
-            public Direction.Dir CurDir { get; private set; } = Direction.Dir.Right;
-            public Transition Trans { get; set; } = Transition.Flat;
-            private Dictionary<(Point, Direction.Dir), Point> m_transition = new();
+            return Direction.GetRotateDiff(sql.newDir, sql.orgDir);
+        }
+
+        class Square
+        {
+            private static int s_index = 0;
+            public int Index { get; } = s_index ++;
+            public Dictionary<Dir, SquareLink> Links { get; } = new();
+            public Point GlobalLoc { get; init; }
+            public int m_length;
+
+            public Square(Point loc, int length)
+            {
+                GlobalLoc = loc;
+                m_length = length;
+            }
+
+            public bool IsInSquare(Point p)
+            {
+                return (p.x >= GlobalLoc.x && p.x < GlobalLoc.x + m_length
+                        && p.y >= GlobalLoc.y && p.y < GlobalLoc.y + m_length);
+            }
+
+            public Point GetRelativeLoc(Point globalLoc) 
+            {
+                return globalLoc.SubtractedPoint(GlobalLoc);
+            }
+
+            public Point GetGlobalLoc(Point relLoc)
+            {
+                return relLoc.AddedPoint(GlobalLoc);
+            }
+
+            public override string ToString()
+            {
+                return $"[Sq {Index}{GlobalLoc}]";
+            }
+
+        }
+
+        class Cube 
+        {
+            private int m_cubeSize;
+            private int m_maxInclusive;
+
+            private Dictionary<Point, Square> m_findCache = new();
+            private List<Square> m_squares { get; } = new();
+
             private Loggable m_logger;
 
-#region constructor 
-            public Map(string[] linesArr, Loggable logger)
+            public Cube(int length, Loggable logger)
             {
                 m_logger = logger;
-                List<string> lines = new(linesArr);
-                lines.RemoveRange(lines.Count - 2, 2);
-                SetMax(lines.Max(l => l.Length), lines.Count);
-                bool hasFoundStartingPosition = false;
+                m_cubeSize = length;
+                m_maxInclusive = m_cubeSize - 1;
+            }
+
+            public void AddNewSquare(int x, int y)
+            {
+                m_squares.Add(new Square(new(x, y), m_cubeSize));
+            }
+            
+            public Square? GetSquareByPoint(Point p)
+            {
+                if (m_findCache.ContainsKey(p))
+                {
+                    return m_findCache[p];
+                }
+
+                var square = m_squares.FirstOrDefault(s => s.IsInSquare(p));
+                if (square != null)
+                {
+                    m_findCache.Add(p, square);
+                }
+                
+                return square;
+            }
+
+            public (Point, Dir) GetTransition(Point srcPoint, Dir dir)
+            {
+                Square sq = GetSquareByPoint(srcPoint)!;
+                SquareLink sql = sq.Links[dir];
+                Debug.Assert(dir == sql.orgDir);
+
+                Dir outDir = sql.newDir;
+                Point srcRel = sq.GetRelativeLoc(srcPoint);
+                Debug.Assert(dir == Dir.Up && srcRel.y == 0
+                            || dir == Dir.Left && srcRel.x == 0
+                            || dir == Dir.Right && srcRel.x == m_maxInclusive
+                            || dir == Dir.Down && srcRel.y == m_maxInclusive);
+
+                Point outRel = srcRel;
+                Point outPoint = srcPoint;
+
+                var reverse = (bool isReverse, int x) => isReverse ? m_maxInclusive - x : x;
+
+                if (sql.newDir == sql.orgDir)
+                {
+                    if (sql.newDir == Dir.Up)
+                    {
+                        outRel.y = m_maxInclusive;
+                    }
+                    else if (sql.newDir == Dir.Right)
+                    {
+                        outRel.x = 0;
+                    }
+                    else if (sql.newDir == Dir.Left)
+                    {
+                        outRel.x = m_maxInclusive;
+                    }
+                    else if (sql.newDir == Dir.Down)
+                    {
+                        outRel.y = 0;
+                    }
+                }
+                else if (sql.newDir == Direction.Rotate(sql.orgDir, Dir.Down))
+                {
+                    if (sql.newDir == Dir.Down)
+                    {
+                        outRel.y = 0;
+                        outRel.x = reverse(true, srcRel.x);
+                    }
+                    else if (sql.newDir == Dir.Up)
+                    {
+                        outRel.y = m_maxInclusive;
+                        outRel.x = reverse(true, srcRel.x);
+                    }
+                    else if (sql.newDir == Dir.Right)
+                    {
+                        outRel.x = 0;
+                        outRel.y = reverse(true, srcRel.y);
+                    }
+                    else if (sql.newDir == Dir.Left)
+                    {
+                        outRel.x = m_maxInclusive;
+                        outRel.y = reverse(true, srcRel.y);
+                    }
+                }
+                else 
+                {
+                    if (sql.newDir == Dir.Up)
+                    {
+                        outRel.y = m_maxInclusive;
+                        outRel.x = reverse(dir == Dir.Left, srcRel.y);
+                    }
+                    else if (sql.newDir == Dir.Down)
+                    {
+                        outRel.y = 0;
+                        outRel.x = reverse(dir == Dir.Right, srcRel.y);
+                    }
+                    else if (sql.newDir == Dir.Left)
+                    {
+                        outRel.x = m_maxInclusive;
+                        outRel.y = reverse(dir == Dir.Up, srcRel.x);
+                    }
+                    else if (sql.newDir == Dir.Right)
+                    {
+                        outRel.x = 0;
+                        outRel.y = reverse(dir == Dir.Down, srcRel.x);
+                    }
+                }
+                Debug.Assert(sql.newDir == Dir.Up && outRel.y == m_maxInclusive
+                            || sql.newDir == Dir.Left && outRel.x == m_maxInclusive
+                            || sql.newDir == Dir.Right && outRel.x == 0
+                            || sql.newDir == Dir.Down && outRel.y == 0);
+
+                outPoint = sql.square.GetGlobalLoc(outRel);
+
+                m_logger.LogDetail($"Transition from {sq} to {sql}, point from {srcPoint} to {outPoint}, rel from {srcRel} to {outRel} ");
+
+                return (outPoint, outDir);
+            }
+
+            public void LinkSquares()
+            {
+                bool hasFoundAll = false;
+                const int MaxTry = 1000;
+                int cntTry = 0;
+                while (!hasFoundAll)
+                {
+                    if (cntTry ++ == MaxTry)
+                    {
+                        throw new Exception($"Can't find all links!");
+                    }
+                    hasFoundAll = true;
+                    foreach (var square in m_squares)
+                    {
+                        foreach (var dir in Enum.GetValues<Dir>())
+                        {
+                            if (!square.Links.ContainsKey(dir))
+                            {
+                                var link = FindLink(square, dir);
+                                if (link != null)
+                                {
+                                    square.Links.Add(dir, link);
+                                    m_logger.LogDetail($"{square} found link {link.square}, {link}");
+
+                                    Dir opDir = Direction.Rotate(link.newDir, Dir.Down);
+                                    if (!link.square.Links.ContainsKey(opDir))
+                                    {
+                                        Dir opDir2 = Direction.Rotate(link.orgDir, Dir.Down);
+                                        SquareLink opLink = new SquareLink(square, opDir, opDir2);
+                                        link.square.Links.Add(opDir, opLink);
+                                        m_logger.LogDetail($"=> Oplink {link.square} found link {square}, {opLink} ");
+                                    }
+                                }
+                                else
+                                {
+                                    hasFoundAll= false;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                m_logger.LogDetail($"===> Found All Links!");
+            }
+
+            private SquareLink? FindLink(Square square, Dir dir)
+            {
+                var checkPoint = square.GlobalLoc.DividedPoint(m_cubeSize).MovedPoint(dir).MultipliedPoint(m_cubeSize);
+                var target = GetSquareByPoint(checkPoint);
+                m_logger.LogDetail($"    * FindLink : trying from {square} {dir}");
+                if (target != null)
+                {
+                    return new SquareLink(target, dir, dir);
+                }
+
+                foreach (var otherDir in Enum.GetValues<Dir>())
+                {
+                    if (dir == otherDir || dir == Direction.Rotate(otherDir, Dir.Down))
+                    {
+                        continue;
+                    }
+                    if (square.Links.TryGetValue(otherDir, out var otherLink))
+                    {
+                        var otherSquare = otherLink.square;
+                        var otherLinkRotation = GetLinkRotation(otherLink);
+                        var dirToLookfor = Direction.Rotate(dir, otherLinkRotation);
+
+                        if (otherSquare.Links.TryGetValue(dirToLookfor, out var targetLink))
+                        {
+                            var targetLinkRotation = GetLinkRotation(targetLink);
+                            var newDir = Direction.Rotate(Direction.Rotate(otherDir, otherLinkRotation), targetLinkRotation);
+
+                            m_logger.LogDetail($"        * Found indirect link, from {square} to {otherLink.square} to {targetLink.square}");
+                            Debug.Assert(targetLink.square.Index != square.Index);
+                            return new SquareLink(targetLink.square, dir, newDir);
+                        }
+                    }
+                }
+#if false
+                var oppDir = Direction.Rotate(dir, Dir.Down);
+                if (square.Links.TryGetValue(oppDir, out var opp1Link))
+                {
+                    //m_logger.LogDetail($"    Trying circular, {oppDir}, found {opp1Link.square}");
+                    if (opp1Link.square.Links.TryGetValue(oppDir, out var opp2Link))
+                    {
+                        //m_logger.LogDetail($"    Trying circular, {oppDir}, found {opp2Link.square}");
+                        if (opp2Link.square.Links.TryGetValue(oppDir, out var targetLink))
+                        {
+                            m_logger.LogDetail($"        * Found circular link, from {square} to {opp1Link.square} to {opp2Link.square} to {targetLink.square}");
+                            Debug.Assert(targetLink.square.Index != square.Index);
+
+                            // 3 times on the opposite direction => linked to the original direction
+                            return new SquareLink(targetLink.square, dir, dir);
+                        }
+                    }
+                }
+#endif
+                return null;
+            }
+        }
+        
+        class Map : MapByList<Tile>
+        {
+            private List<Cmd> m_cmds = new();
+            private int m_cubeSize = int.MaxValue;
+            private Point m_curLoc;
+            private Dir m_curDir = Dir.Right;
+            private Loggable m_logger;
+            private TransitionType m_transType;
+            private Cube m_cube = new(0, new());
+
+#region parser
+            public Map(string[] lines, Loggable logger, TransitionType transType)
+            {
+                m_logger = logger;
+                m_transType = transType;
+
+                List<List<Tile>> tiles = new();
+
+                bool hasFoundStartingPoint = false;
                 foreach (var line in lines)
                 {
                     if (line.Length == 0)
@@ -34,199 +318,212 @@ namespace Advc2022
                         break;
                     }
 
-                    int numAdded = 0;
+                    List<Tile> newTiles = new();
+                    bool segmentStarted = false;
+                    int segmentLength = 0;
                     foreach (char c in line)
                     {
-                        Tile t = (c == ' ') ? Tile.Empty :
-                                (c == '#') ? Tile.Wall :
-                                (c == '.') ? Tile.Road : throw new Exception("Unknown tile {c}");
-                        
-                        if (!hasFoundStartingPosition && t == Tile.Road)
-                        {
-                            hasFoundStartingPosition = true;
-                            CurLoc = m_addPointer;
-                        }
-                        Add(t);
-                        numAdded ++;
-                    }
+                        Tile t = c == ' ' ? Tile.Empty 
+                                : c == '#' ? Tile.Wall 
+                                : c == '.' ? Tile.Road 
+                                : throw new Exception($"Unknown Tile {c}");
 
-                    for (int i = numAdded; i < Max.x; i ++)
-                    {
-                        Add(Tile.Empty);
+                        newTiles.Add(t);
+
+                        if (t != Tile.Empty)
+                        {
+                            if (!hasFoundStartingPoint)
+                            {
+                                hasFoundStartingPoint = true;
+                                m_curLoc = new(newTiles.Count - 1, 0);
+                            }
+                            segmentStarted = true;
+                        }
+
+                        segmentLength += segmentStarted ? 1 : 0;
                     }
+                    m_cubeSize = Math.Min(m_cubeSize, segmentLength);
+                    tiles.Add(newTiles);
                 }
 
-                //Draw(t => t == Tile.Empty ? '.' : t == Tile.Road ? '+' : '#');
+                SetMax(tiles.Max(t => t.Count), tiles.Count);
+                tiles.ForEach(lineOfTiles => {
+                    lineOfTiles.ForEach(t => Add(t));
+                    int toAdd = Max.x - lineOfTiles.Count;
+                    Enumerable.Range(0, toAdd).ToList().ForEach(a => Add(Tile.Empty));
+                });
+                CheckAddFinished(throwException: true);
+
+                //Console.WriteLine($"{m_cubSize}, {m_curLoc}");
+                //Draw(t => t == Tile.Empty ? '^' : t == Tile.Road ? '.' : '#');
+
+                var cmdLine = new Queue<char>(lines.Last());
+
+                while (cmdLine.Any())
+                {
+                    List<char> numStr = new();
+                    while (cmdLine.Any() && char.IsNumber(cmdLine.First()))
+                    {
+                        numStr.Add(cmdLine.Dequeue());
+                    }
+
+                    int value = int.Parse(string.Join("", numStr));
+                    m_cmds.Add(new(CmdType.Go, value, default));
+                    
+                    if (cmdLine.Any())
+                    {
+                        char c = cmdLine.Dequeue();
+                        Dir dir = c == 'R' ? Dir.Right : c == 'L' ? Dir.Left : throw new Exception($"Unknown dir {c}");
+                        m_cmds.Add(new(CmdType.Turn, default, dir));
+                    }
+                }
             }
 #endregion
             
-            private Point FindFlatTransition(Point curLoc, Direction.Dir dir)
+            private void MakeCube()
             {
-                Direction.Dir opposite = Direction.Rotate(dir, Direction.Dir.Down);
-                Point rememberCurLoc = curLoc;
-                var nextLoc = curLoc;
+                m_cube = new(m_cubeSize, m_logger);
+
+                for (int y = 0; y < Max.y; y += m_cubeSize)
+                {
+                    for (int x = 0; x < Max.x; x += m_cubeSize)
+                    {
+                        if (GetAt(x, y) != Tile.Empty)
+                        {
+                            m_cube.AddNewSquare(x, y);
+                        }
+                    }
+                }
+
+                m_cube.LinkSquares();
+            }
+
+            private Point FindFlatTransition(Point curLoc, Dir dir)
+            {
+                Dir oppDir = Direction.Rotate(dir, Dir.Down);
+                Point orgLoc = curLoc;
+                Point nextLoc = curLoc;
+
                 while (CheckBoundary(nextLoc) && GetAt(nextLoc) != Tile.Empty)
                 {
                     curLoc = nextLoc;
-                    nextLoc = curLoc.MovedPoint(opposite);
+                    nextLoc.Move(oppDir);
                 }
-                nextLoc = curLoc;
-                m_logger.LogDetail($"     Found transition from {rememberCurLoc} to {nextLoc}");
-                if (GetAt(nextLoc) == Tile.Wall)
+
+                if (GetAt(curLoc) == Tile.Wall)
                 {
-                    nextLoc = rememberCurLoc;
-                    m_logger.LogDetail($"     That's a wall! Fall back to {rememberCurLoc}");
+                    curLoc = orgLoc;
                 }
-                return nextLoc;   
+                return curLoc;
             }
 
-            private Point FindCubeTransition(Point curLoc, Direction.Dir dir)
+            private Point FindCubeTransition(Point curLoc, Dir dir)
             {
-                return FindFlatTransition(curLoc, dir);
-            }
+                var (nextLoc, nextDir) = m_cube.GetTransition(curLoc, dir);
 
-            private Point FindNextLoc(Point curLoc, Direction.Dir dir)
-            {
-                //m_logger.LogDetail($"Moving from {curLoc}, to {dir}");
-                var nextLoc = curLoc.MovedPoint(dir);
-                Tile t = CheckBoundary(nextLoc) ? GetAt(nextLoc) : Tile.Empty;
-
-                if (t == Tile.Wall)
+                m_logger.LogDetail($"Found cube tx, from {curLoc} dir {dir} => {nextLoc}, {nextDir}");
+                if (!CheckBoundary(nextLoc) || GetAt(nextLoc) == Tile.Wall)
                 {
-                    //m_logger.LogDetail($"     Found wall, stopped at {curLoc}");
                     nextLoc = curLoc;
                 }
-                else if (t == Tile.Empty)
+                else
                 {
-                    if (m_transition.ContainsKey((curLoc, dir)))
-                    {
-                        nextLoc = m_transition[(curLoc, dir)];
-                    }
-                    else
-                    {
-                        nextLoc = (Trans == Transition.Flat) ? FindFlatTransition(curLoc, dir)
-                                    : (Trans == Transition.Cube) ? FindCubeTransition(curLoc, dir)
-                                    : throw new Exception($"Unknown transition {Trans}");
-                        m_transition.Add((curLoc, dir), nextLoc);
-                    }
+                    m_curDir = nextDir;
                 }
-
-                Debug.Assert(GetAt(nextLoc) == Tile.Road);
+                
                 return nextLoc;
             }
 
-            public void Go(int length)
+            private Point FindNextPos(Point curLoc, Dir dir)
             {
+                var nextLoc = curLoc.MovedPoint(dir);
+                Tile nextTile = Tile.Empty;
+
+                if (CheckBoundary(nextLoc))
+                {
+                    nextTile = GetAt(nextLoc);
+                }
+
+                if (nextTile == Tile.Wall)
+                {
+                    nextLoc = curLoc;
+                }
+                else if (nextTile == Tile.Empty)
+                {  
+                    nextLoc = (m_transType == TransitionType.Flat) ? FindFlatTransition(curLoc, dir) 
+                            : FindCubeTransition(curLoc, dir);
+                }
+
+                m_logger.LogDetail($"Moved from {curLoc}, {dir} => {nextLoc}");
+                return nextLoc;
+            }
+            
+            private void Go(int length)
+            {
+                m_logger.LogDetail($"[GO] {m_curDir} {length}");
                 for (int i = 0; i < length; i ++)
                 {
-                    CurLoc = FindNextLoc(CurLoc, CurDir);
-                }
-                m_logger.LogDetail($"Moved {length} times to {CurDir} => {CurLoc}");
-            }
-
-            public void Turn(Direction.Dir dir)
-            {
-                Debug.Assert(dir == Direction.Dir.Left || dir == Direction.Dir.Right);
-                CurDir = Direction.Rotate(CurDir, dir);
-                m_logger.LogDetail($"Turned {dir} => {CurDir}");
-            }
-        }
-
-        class Control : Loggable
-        {
-            enum CmdType { Go, Turn };
-            record Cmd(CmdType type, int length, Direction.Dir dir);
-
-            private Map m_map;
-            private List<Cmd> m_commands = new();
-#region constructor
-            public Control(string[] lines)
-            {
-                m_map = new(lines, this);
-
-                var line = new Queue<char>(lines.Last().ToCharArray());
-
-                while (line.Any())
-                {
-                    List<char> numChars = new();
-                    while (line.Any() && char.IsNumber(line.First()))
-                    {
-                       numChars.Add(line.Dequeue());
-                    }
-                    int num = int.Parse(string.Join("", numChars));
-                    m_commands.Add(new(CmdType.Go, num, default));
-
-                    if (line.Any())
-                    {
-                        char d = line.Dequeue();
-                        Direction.Dir dir = (d == 'R') ? Direction.Dir.Right 
-                                            : (d == 'L') ? Direction.Dir.Left
-                                            : throw new Exception("Unknown dir {d}");
-                        m_commands.Add(new(CmdType.Turn, default, dir));
-                    }
+                    m_curLoc = FindNextPos(m_curLoc, m_curDir);
                 }
             }
-#endregion    
-            private void DoCommands()
+
+            private void Turn(Dir dir)
             {
-                foreach (var cmd in m_commands)
+                m_logger.LogDetail($"[Turn] {m_curDir} => {dir} => {Direction.Rotate(m_curDir, dir)}");
+                m_curDir = Direction.Rotate(m_curDir, dir);
+            }
+
+            private void RunCommands()
+            {
+                foreach (var cmd in m_cmds)
                 {
                     if (cmd.type == CmdType.Go)
                     {
-                        m_map.Go(cmd.length);
-                    }
-                    else if (cmd.type == CmdType.Turn)
-                    {
-                        m_map.Turn(cmd.dir);
+                        Go(cmd.length);
                     }
                     else 
                     {
-                        throw new Exception($"Unknown cmd tpe {cmd.type}");
+                        Turn(cmd.dir);
                     }
                 }
             }
 
-            private long GetPasswordFromLocAndDir(Point loc, Direction.Dir dir)
+            private int GetFacing(Dir dir)
             {
-                int facing = 0;
-                switch (dir) 
+                return dir == Dir.Right ? 0 
+                    : dir == Dir.Down ? 1 
+                    : dir == Dir.Left ? 2
+                    : dir == Dir.Up ? 3 
+                    : throw new UnreachableException();
+            }
+
+            public int GetPassword()
+            {
+                if (m_transType == TransitionType.Cube)
                 {
-                    case Direction.Dir.Up: facing = 3; break;
-                    case Direction.Dir.Left : facing = 2; break;
-                    case Direction.Dir.Down : facing = 1; break;
-                    case Direction.Dir.Right : facing = 0; break;
+                    MakeCube();
                 }
 
-                return 1000 * (loc.y + 1) + 4 * (loc.x + 1) + (facing);
+                RunCommands();
+
+                m_logger.LogDetail($"Finished at {m_curLoc}, {m_curDir}");
+
+                return (m_curLoc.y + 1) * 1000 + (m_curLoc.x + 1) * 4 + GetFacing(m_curDir);
             }
-
-            public long GetPassword()
-            {
-                AllowLogDetail = false;
-                DoCommands();
-                LogDetail($"loc {m_map.CurLoc} facing {m_map.CurDir}");
-
-                return GetPasswordFromLocAndDir(m_map.CurLoc, m_map.CurDir);
-            }
-
-            public long GetCubePassword()
-            {
-                AllowLogDetail = true;
-                m_map.Trans = Transition.Cube;
-                DoCommands();
-                LogDetail($"loc {m_map.CurLoc} facing {m_map.CurDir}");
-
-                return GetPasswordFromLocAndDir(m_map.CurLoc, m_map.CurDir);                
-            }
-
         }
         public static void Start()
         {
             var textData = File.ReadAllText("data/input22.txt");
             var lines = textData.Split(Environment.NewLine);
 
-            var ans1 = new Control(lines).GetPassword();
-            var ans2 = new Control(lines).GetCubePassword();
+            Problem22 prob1 = new() { AllowLogDetail = false };
+            Map map1 = new(lines, prob1, TransitionType.Flat);
+
+            Problem22 prob2 = new() { AllowLogDetail = false };
+            Map map2 = new(lines, prob2, TransitionType.Cube);
+
+            var ans1 = map1.GetPassword();
+            var ans2 = map2.GetPassword();
 
             Console.WriteLine($"ans = {ans1}, {ans2}");
         }

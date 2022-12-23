@@ -74,6 +74,9 @@ namespace Advc.Utils
             return true;
         }
 
+        abstract public void Draw(Func<ValueType, char> cb);
+        abstract public void ForEach(Action<ValueType, Point> callback);
+        
         public void SetBoundaryByActualMinMax()
         {
             SetMin(ActualMin.AddedPoint(new Point(-1, -1, -1, -1)));
@@ -107,6 +110,7 @@ namespace Advc.Utils
     class MapByDictionary<ValueType> : MapBase<ValueType>
     {
         private Dictionary<Point, ValueType> m_map = new();
+        public int Count => m_map.Count;
 
         protected override void OnSetAt(ValueType val, Point p)
         {
@@ -122,7 +126,7 @@ namespace Advc.Utils
             return default(ValueType)!;
         }
 
-        public void ForEach(Action<ValueType, Point> callback)
+        public override void ForEach(Action<ValueType, Point> callback)
         {
             for (int z = ActualMin.z; z <= ActualMax.z; z ++)
             {
@@ -137,6 +141,19 @@ namespace Advc.Utils
             }
         }
 
+        public override void Draw(Func<ValueType, char> cb)
+        {
+            ForEach((v, p) =>
+            {
+                char c = cb(v);
+                Console.Write(c);
+                if (p.x == ActualMax.x)
+                {
+                    Console.WriteLine();
+                }
+            });
+        }
+
         public bool Contains(Point p)
         {
             return m_map.ContainsKey(p);
@@ -147,8 +164,10 @@ namespace Advc.Utils
             return Contains(new Point(x, y, z, w));
         }
 
+        public void Clear()
+        {
 
-
+        }
     }
 
     class MapByList<ValueType> : MapBase<ValueType>
@@ -200,7 +219,7 @@ namespace Advc.Utils
         }
 
         // This is for read-only! Collection must not modified while iteration
-        public void ForEach(Action<ValueType, Point> callback)
+        public override void ForEach(Action<ValueType, Point> callback)
         {
             Point curPos = new();
 
@@ -228,7 +247,7 @@ namespace Advc.Utils
             return ret;
         }
 
-        public void Draw(Func<ValueType, char> cb)
+        public override void Draw(Func<ValueType, char> cb)
         {
             ForEach((v, p) =>
             {
@@ -238,7 +257,7 @@ namespace Advc.Utils
                 {
                     Console.WriteLine();
                 }
-            });            
+            });
         }
 
         protected override void OnSetAt(ValueType val, Point p)
