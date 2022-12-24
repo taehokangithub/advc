@@ -89,8 +89,8 @@ namespace Advc.Utils
             {
                 throw new ArgumentException($"[SetAt] Point {p} out of boundary");
             }
-            ActualMax.UpdateMaxCoordinate(p);
-            ActualMin.UpdateMinCoordinate(p);
+            ActualMax.SetMax(p);
+            ActualMin.SetMin(p);
             OnSetAt(v, p);
         }
 
@@ -164,10 +164,6 @@ namespace Advc.Utils
             return Contains(new Point(x, y, z, w));
         }
 
-        public void Clear()
-        {
-
-        }
     }
 
     class MapByList<ValueType> : MapBase<ValueType>

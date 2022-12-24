@@ -160,20 +160,10 @@ namespace Advc.Utils
             throw new Exception($"[Point] Unknown dimension {LogDimension}");
         }
 
-        public void UpdateMaxCoordinate(Point p)
+        public bool IsInRange(Point minInclusive, Point maxInclusive)
         {
-            x = Math.Max(x, p.x);
-            y = Math.Max(y, p.y);
-            z = Math.Max(z, p.z);
-            w = Math.Max(w, p.w);
-        }
-
-        public void UpdateMinCoordinate(Point p)
-        {
-            x = Math.Min(x, p.x);
-            y = Math.Min(y, p.y);
-            z = Math.Min(z, p.z);
-            w = Math.Min(w, p.w);
+            return x >= minInclusive.x  && x <= maxInclusive.x 
+                && y >= minInclusive.y && y <= maxInclusive.y;
         }
 
         public long ManhattanDistance()
