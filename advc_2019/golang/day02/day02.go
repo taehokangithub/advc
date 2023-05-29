@@ -7,8 +7,7 @@ import (
 )
 
 func solve_19_02_A(data string) {
-	com := computer.NewComputer()
-	com.InitMemory(data)
+	com := computer.NewComputer(data)
 	com.Set(1, 12)
 	com.Set(2, 2)
 	com.RunProgram()
@@ -20,8 +19,7 @@ func solve_19_02_B(data string) {
 	const expected = 19690720
 	for i := 0; i <= 99; i++ {
 		for j := 0; j <= 99; j++ {
-			com := computer.NewComputer()
-			com.InitMemory(data)
+			com := computer.NewComputer(data)
 			com.Set(1, i)
 			com.Set(2, j)
 			com.RunProgram()
