@@ -2,6 +2,7 @@ package day03
 
 import (
 	"fmt"
+	"math"
 	"os"
 	"strconv"
 	"strings"
@@ -13,8 +14,43 @@ type Inst struct {
 	dist int
 }
 
+type MoveMap = utils.FreeMap[int]
+
 func (inst Inst) String() string {
 	return fmt.Sprintf("[%v %d]", utils.DIR_NAMES[inst.dir], inst.dist)
+}
+
+func drawOnMap(insts []Inst) MoveMap {
+	ret := utils.NewFreeMap[int]()
+	vector := utils.NewVector2D(0, 0)
+
+	steps := 0
+	for _, inst := range insts {
+		for i := 0; i < inst.dist; i++ {
+			vector.Move(inst.dir, 1)
+			steps++
+			ret.Set(vector, steps)
+		}
+	}
+	return MoveMap(ret)
+}
+
+func findCrosses(insts []Inst, m MoveMap) MoveMap {
+	ret := utils.NewFreeMap[int]()
+	vector := utils.NewVector2D(0, 0)
+
+	steps := 0
+	for _, inst := range insts {
+		for i := 0; i < inst.dist; i++ {
+			vector.Move(inst.dir, 1)
+			steps++
+			if val, ok := m.Get(vector); ok {
+				ret.Set(vector, steps+val)
+			}
+		}
+	}
+
+	return MoveMap(ret)
 }
 
 func parseInst(str string) []Inst {
@@ -52,8 +88,35 @@ func parseInst(str string) []Inst {
 func solve01(str1 string, str2 string) int {
 	inst1 := parseInst(str1)
 	inst2 := parseInst(str2)
-	fmt.Printf("1 - %v\n2 - %v\n", inst1, inst2)
-	return 0
+
+	m := drawOnMap(inst1)
+	crosses := findCrosses(inst2, m)
+	ans := math.MaxInt
+
+	crosses.Foreach(func(v utils.Vector, val int) {
+		dist := v.ManhattanDistance()
+		if dist < ans {
+			ans = dist
+		}
+	})
+
+	return ans
+}
+
+func solve02(str1 string, str2 string) int {
+	inst1 := parseInst(str1)
+	inst2 := parseInst(str2)
+
+	m := drawOnMap(inst1)
+	crosses := findCrosses(inst2, m)
+	ans := math.MaxInt
+
+	crosses.Foreach(func(v utils.Vector, val int) {
+		if ans > val {
+			ans = val
+		}
+	})
+	return ans
 }
 
 func Solve() {
@@ -61,7 +124,12 @@ func Solve() {
 	if e != nil {
 		panic(e)
 	}
-	strs := strings.Split(string(content), "\n")
+	contentStr := strings.Replace(string(content), "\r", "", -1)
+	strs := strings.Split(contentStr, "\n")
+
 	ans1 := solve01(strs[0], strs[1])
-	fmt.Println("ans1 = ", ans1)
+	fmt.Println("DAY03 ans1", ans1)
+
+	ans2 := solve02(strs[0], strs[1])
+	fmt.Println("DAY03 ans2", ans2)
 }

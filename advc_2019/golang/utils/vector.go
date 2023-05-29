@@ -30,7 +30,7 @@ func NewVector4D(x, y, z, w int) Vector {
 	return Vector{x, y, z, w, DIMENSION_4D}
 }
 
-func (v *Vector) String() string {
+func (v Vector) String() string {
 	switch v.dimension {
 	case 2:
 		return fmt.Sprintf("[%d:%d]", v.x, v.y)
@@ -81,5 +81,5 @@ func (v *Vector) Move(dir Direction, dist int) {
 }
 
 func (v Vector) ManhattanDistance() int {
-	return v.x + v.y + v.z + v.w
+	return Abs(v.x) + Abs(v.y) + Abs(v.z) + Abs(v.w)
 }

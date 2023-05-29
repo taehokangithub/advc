@@ -1,9 +1,9 @@
-package main
+package day02
 
 import (
 	"fmt"
 	"os"
-	"taeho/advc19_go/computer"
+	"taeho/advc19_go/utils/computer"
 )
 
 func solve_19_02_A(data string) {
@@ -13,7 +13,7 @@ func solve_19_02_A(data string) {
 	com.Set(2, 2)
 	com.RunProgram()
 	ret := com.Get(0)
-	fmt.Println("ans1", ret)
+	fmt.Println("DAY02 ans1", ret)
 }
 
 func solve_19_02_B(data string) {
@@ -27,13 +27,14 @@ func solve_19_02_B(data string) {
 			com.RunProgram()
 			ret := com.Get(0)
 			if ret == expected {
-				fmt.Println("ans2", 100*i+j)
+				fmt.Println("DAY02 ans2", 100*i+j)
+				return
 			}
 		}
 	}
 }
 
-func solve_19_02() {
+func Solve() {
 	content, _ := os.ReadFile("../data/input02.txt")
 	data := string(content)
 	solve_19_02_A(data)

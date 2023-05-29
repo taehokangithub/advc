@@ -1,4 +1,4 @@
-package main
+package day01
 
 import (
 	"fmt"
@@ -39,12 +39,12 @@ func solve_19_01_B(lines []string) int {
 	return result
 }
 
-func Solve_19_01() {
+func Solve() {
 	content, _ := os.ReadFile("../data/input01.txt")
 
 	lines := strings.Split(string(content), "\n")
 
-	fmt.Println("ans1", solve_19_01_A(lines))
+	fmt.Println("DAY01 ans1", solve_19_01_A(lines))
 
-	fmt.Println("ans2", solve_19_01_B(lines))
+	fmt.Println("DAY01 ans2", solve_19_01_B(lines))
 }
