@@ -1,6 +1,8 @@
 package main
 
+import "taeho/advc19_go/day03"
+
 func main() {
-	//solve_19_01()
-	solve_19_02()
+	Solve_19_01()
+	day03.Solve()
 }

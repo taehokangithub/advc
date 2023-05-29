@@ -3,7 +3,6 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"io/ioutil"
 	"os"
 )
 
@@ -23,10 +22,10 @@ func read_file_sample_1() {
 
 func read_file_sample_2() {
 	fmt.Println("Sample reading version 2", file_name)
-	content, _ := ioutil.ReadFile(file_name)
+	content, _ := os.ReadFile(file_name)
 	fmt.Println(string(content))
 }
-func file_reading_sample() {
+func File_reading_sample() {
 	read_file_sample_1()
 	read_file_sample_2()
 

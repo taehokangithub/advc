@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"os"
 	"taeho/advc19_go/computer"
 )
 
@@ -34,7 +34,7 @@ func solve_19_02_B(data string) {
 }
 
 func solve_19_02() {
-	content, _ := ioutil.ReadFile("../data/input02.txt")
+	content, _ := os.ReadFile("../data/input02.txt")
 	data := string(content)
 	solve_19_02_A(data)
 	solve_19_02_B(data)

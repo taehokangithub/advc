@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"os"
 	"strconv"
 	"strings"
 )
@@ -39,8 +39,8 @@ func solve_19_01_B(lines []string) int {
 	return result
 }
 
-func solve_19_01() {
-	content, _ := ioutil.ReadFile("../data/input01.txt")
+func Solve_19_01() {
+	content, _ := os.ReadFile("../data/input01.txt")
 
 	lines := strings.Split(string(content), "\n")
 

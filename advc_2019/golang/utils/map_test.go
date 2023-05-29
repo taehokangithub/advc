@@ -25,3 +25,27 @@ func TestFreeMap(t *testing.T) {
 		t.Errorf("Vector %v has a wrong value %v, not %v", goodVec, v, sampleVal)
 	}
 }
+
+func TestGrid(t *testing.T) {
+	g := NewGrid[bool](NewVector2D(10, 20))
+
+	ExpectPanic(t, "GetPanicTest", func() {
+		g.Get(NewVector2D(30, 10))
+	})
+
+	ExpectPanic(t, "SetPanicTest", func() {
+		g.Set(NewVector2D(-10, 5), true)
+	})
+
+	goodVec := NewVector2D(5, 3)
+	badVec := NewVector2D(2, 7)
+	g.Set(goodVec, true)
+
+	if g.Get(badVec) {
+		t.Errorf("%v should not be true", badVec)
+	}
+
+	if !g.Get(goodVec) {
+		t.Errorf("%v should be true", goodVec)
+	}
+}
