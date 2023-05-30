@@ -14,7 +14,7 @@ type Inst struct {
 	dist int
 }
 
-type MoveMap = utils.FreeMap[int]
+type MoveMap = *utils.FreeMap[int]
 
 func (inst Inst) String() string {
 	return fmt.Sprintf("[%v %d]", utils.DIR_NAMES[inst.dir], inst.dist)
@@ -124,12 +124,13 @@ func Solve() {
 	if e != nil {
 		panic(e)
 	}
+
 	contentStr := strings.Replace(string(content), "\r", "", -1)
 	strs := strings.Split(contentStr, "\n")
 
 	ans1 := solve01(strs[0], strs[1])
-	fmt.Println("DAY03 ans1", ans1)
+	fmt.Println("DAY03 ans1", ans1, "expected", 232)
 
 	ans2 := solve02(strs[0], strs[1])
-	fmt.Println("DAY03 ans2", ans2)
+	fmt.Println("DAY03 ans2", ans2, "expected", 6084)
 }

@@ -7,7 +7,7 @@ type Grid[T MapData] struct {
 	size Vector
 }
 
-func NewGrid[T MapData](size Vector) Grid[T] {
+func NewGrid[T MapData](size Vector) *Grid[T] {
 	grid := Grid[T]{}
 	grid.size = size
 
@@ -19,7 +19,7 @@ func NewGrid[T MapData](size Vector) Grid[T] {
 	for y := 0; y < size.y; y++ {
 		grid.data[y] = make([]T, size.x)
 	}
-	return grid
+	return &grid
 }
 
 func (g *Grid[T]) Set(v Vector, val T) {

@@ -87,9 +87,9 @@ func Solve() {
 	start := 372304
 	end := 847060
 
-	ret1 := solvePart1(start, end)
-	ret2 := solvePart2(start, end)
+	ans1 := solvePart1(start, end)
+	fmt.Println("DAY04 ans1", ans1, "expected", 475)
 
-	fmt.Println("DAY04 ans1", ret1)
-	fmt.Println("DAY04 ans2", ret2)
+	ans2 := solvePart2(start, end)
+	fmt.Println("DAY04 ans2", ans2, "expected", 297)
 }

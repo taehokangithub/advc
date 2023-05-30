@@ -40,11 +40,16 @@ func solve_19_01_B(lines []string) int {
 }
 
 func Solve() {
-	content, _ := os.ReadFile("../data/input01.txt")
+	content, err := os.ReadFile("../data/input01.txt")
+	if err != nil {
+		panic(err)
+	}
 
 	lines := strings.Split(string(content), "\n")
 
-	fmt.Println("DAY01 ans1", solve_19_01_A(lines))
+	ans1 := solve_19_01_A(lines)
+	fmt.Println("DAY01 ans1", ans1, "expected", 3223398)
 
-	fmt.Println("DAY01 ans2", solve_19_01_B(lines))
+	ans2 := solve_19_01_B(lines)
+	fmt.Println("DAY01 ans2", ans2, "expected", 4832253)
 }

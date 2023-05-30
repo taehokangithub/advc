@@ -8,10 +8,10 @@ type FreeMap[T MapData] struct {
 	data map[Vector]T
 }
 
-func NewFreeMap[T MapData]() FreeMap[T] {
+func NewFreeMap[T MapData]() *FreeMap[T] {
 	m := FreeMap[T]{}
 	m.data = make(map[Vector]T)
-	return m
+	return &m
 }
 
 func (m *FreeMap[T]) Set(v Vector, val T) {

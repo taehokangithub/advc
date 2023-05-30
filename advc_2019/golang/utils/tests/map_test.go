@@ -1,14 +1,15 @@
-package utils
+package tests
 
 import (
+	"taeho/advc19_go/utils"
 	"testing"
 )
 
 func TestFreeMap(t *testing.T) {
-	m := NewFreeMap[int]()
+	m := utils.NewFreeMap[int]()
 
-	goodVec := NewVector3D(3, 4, 5)
-	badVec := NewVector2D(2, 3)
+	goodVec := utils.NewVector3D(3, 4, 5)
+	badVec := utils.NewVector2D(2, 3)
 	sampleVal := 25
 
 	m.Set(goodVec, sampleVal)
@@ -27,18 +28,18 @@ func TestFreeMap(t *testing.T) {
 }
 
 func TestGrid(t *testing.T) {
-	g := NewGrid[bool](NewVector2D(10, 20))
+	g := utils.NewGrid[bool](utils.NewVector2D(10, 20))
 
-	ExpectPanic(t, "GetPanicTest", func() {
-		g.Get(NewVector2D(30, 10))
+	expectPanic(t, "GetPanicTest", func() {
+		g.Get(utils.NewVector2D(30, 10))
 	})
 
-	ExpectPanic(t, "SetPanicTest", func() {
-		g.Set(NewVector2D(-10, 5), true)
+	expectPanic(t, "SetPanicTest", func() {
+		g.Set(utils.NewVector2D(-10, 5), true)
 	})
 
-	goodVec := NewVector2D(5, 3)
-	badVec := NewVector2D(2, 7)
+	goodVec := utils.NewVector2D(5, 3)
+	badVec := utils.NewVector2D(2, 7)
 	g.Set(goodVec, true)
 
 	if g.Get(badVec) {
