@@ -8,6 +8,13 @@ import (
 
 type Instruction int64
 type ParameterMode int64
+type ComStatus int
+
+const (
+	COMSTATUS_READY    ComStatus = 0
+	COMSTATUS_PAUSED   ComStatus = 1
+	COMSTATUS_FINISHED ComStatus = 2
+)
 
 const (
 	INST_NIL           Instruction = 0
@@ -32,14 +39,16 @@ type Computer struct {
 	pc     int
 	input  []int64
 	output []int64
+	Status ComStatus
 }
 
-func NewComputer(memstr string) Computer {
+func NewComputer(memstr string) *Computer {
 	com := Computer{}
 	com.input = make([]int64, 0)
 	com.output = make([]int64, 0)
 	com.InitMemory(memstr)
-	return com
+	com.Status = COMSTATUS_READY
+	return &com
 }
 
 func (c *Computer) InitMemory(memstr string) {
@@ -69,6 +78,12 @@ func (c *Computer) GetOutput() []int64 {
 	return c.output
 }
 
+func (c *Computer) PopOutput() int64 {
+	ret := c.output[0]
+	c.output = c.output[1:]
+	return ret
+}
+
 func (c *Computer) Set64(i int64, v int64) {
 	c.memory[i] = v
 }
@@ -95,7 +110,9 @@ func (c *Computer) DumpMemory() string {
 
 func (c *Computer) RunProgram() {
 	var inst Instruction = INST_NIL
-	for inst != INST_HALT {
+	c.Status = COMSTATUS_READY
+
+	for c.Status == COMSTATUS_READY {
 		inst = Instruction(c.memory[c.pc])
 		c.pc++
 
@@ -164,7 +181,9 @@ func (c *Computer) runInst(inst Instruction) {
 		c.Set64(saveto, op1*op2)
 	case INST_INPUT:
 		if len(c.input) == 0 {
-			panic("Input buffer is empty!")
+			c.Status = COMSTATUS_PAUSED
+			c.pc--
+			return
 		}
 		input := c.input[0]
 		c.input = c.input[1:]
@@ -204,6 +223,7 @@ func (c *Computer) runInst(inst Instruction) {
 			c.pc = int(op2)
 		}
 	case INST_HALT:
+		c.Status = COMSTATUS_FINISHED
 		return
 	default:
 		panic(fmt.Sprintf("Unknown inst {%d} at {%d}", inst, c.pc))
