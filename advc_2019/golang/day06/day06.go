@@ -7,24 +7,24 @@ import (
 	"taeho/advc19_go/utils"
 )
 
-func createGraphFromString(str string) *utils.Graph {
+func createTree(str string) *utils.Tree {
 	str = strings.Replace(str, "\r", "", -1)
 	lines := strings.Split(str, "\n")
 
-	graph := utils.NewGraph()
+	tree := utils.NewTree()
 
 	for _, line := range lines {
 		nodeNames := strings.Split(line, ")")
 		node1 := strings.TrimSpace(nodeNames[0])
 		node2 := strings.TrimSpace(nodeNames[1])
-		graph.AddEdge(node1, node2)
+		tree.AddEdge(node1, node2)
 	}
 
-	return graph
+	return tree
 }
 
 func solve01(str string) int {
-	g := createGraphFromString(str)
+	g := createTree(str)
 	g.SetRoot("COM")
 	g.SetAllDistances()
 
@@ -36,7 +36,7 @@ func solve01(str string) int {
 }
 
 func solve02(str string) int {
-	g := createGraphFromString(str)
+	g := createTree(str)
 	g.SetRoot("YOU")
 	g.SetAllDistances()
 	node := g.GetNode("SAN")

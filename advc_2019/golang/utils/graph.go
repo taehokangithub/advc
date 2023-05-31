@@ -1,44 +1,19 @@
 package utils
 
-import "fmt"
-
-type GraphEdge struct {
-	targetNode *GraphNode
-	distance   int
-}
-
-type GraphNode struct {
-	Name             string
-	DistanceFromRoot int
-	edges            map[string]GraphEdge
-}
+import (
+	"fmt"
+	"math"
+)
 
 type Graph struct {
-	Root            *GraphNode
-	HasCircularLink bool
-	nodes           map[string]*GraphNode
-}
-
-func NewGraphNode(name string) *GraphNode {
-	node := GraphNode{}
-	node.Name = name
-	node.edges = map[string]GraphEdge{}
-	return &node
+	Root  *GraphNode
+	nodes map[string]*GraphNode
 }
 
 func NewGraph() *Graph {
 	graph := Graph{}
 	graph.nodes = map[string]*GraphNode{}
-	graph.HasCircularLink = false
 	return &graph
-}
-
-func (n *GraphNode) String() string {
-	return fmt.Sprintf("[%s(%d)]", n.Name, n.DistanceFromRoot)
-}
-
-func (n *GraphNode) AddEdge(other *GraphNode, weight int) {
-	n.edges[other.Name] = GraphEdge{other, weight}
 }
 
 func (g *Graph) AddNode(name string) *GraphNode {
@@ -51,24 +26,15 @@ func (g *Graph) AddNode(name string) *GraphNode {
 	return node
 }
 
-func (g *Graph) AddEdgeWithWeight(name1, name2 string, weight int) {
-	/* It doesn't work - it can happen with a tree, if the order by edges are random
-	   Need some way to detect circular link
-
-	if !g.HasCircularLink && g.GetNode(name1) != nil && g.GetNode(name2) != nil {
-		fmt.Println("Found circular link", name1, name2)
-		g.HasCircularLink = true
-	}
-	*/
-
+func (g *Graph) AddEdgeWithDistance(name1, name2 string, distance int) {
 	node1 := g.addOrCreateNode(name1)
 	node2 := g.addOrCreateNode(name2)
-	node1.AddEdge(node2, weight)
-	node2.AddEdge(node1, weight)
+	node1.AddEdge(node2, distance)
+	node2.AddEdge(node1, distance)
 }
 
 func (g *Graph) AddEdge(name1, name2 string) {
-	g.AddEdgeWithWeight(name1, name2, 1)
+	g.AddEdgeWithDistance(name1, name2, 1)
 }
 
 func (g *Graph) SetRoot(name string) {
@@ -83,33 +49,50 @@ func (g *Graph) GetNode(name string) *GraphNode {
 	return g.nodes[name]
 }
 
-func (g *Graph) SetAllDistances() {
-	if g.HasCircularLink {
-		panic("Not implemented for circular link - requires Dijkstra")
-	} else {
-		g.Root.traverseInternal(map[*GraphNode]bool{})
-	}
-}
-
 func (g *Graph) ForEachNodes(cb func(n *GraphNode)) {
 	for _, n := range g.nodes {
 		cb(n)
 	}
 }
 
-//
-// private methods
-//
+// Dijkstra
+func (g *Graph) SetAllDistances() {
+	toVisit := make(map[*GraphNode]bool)
 
-func (node *GraphNode) traverseInternal(visitied map[*GraphNode]bool) {
-	visitied[node] = true
-	for _, edge := range node.edges {
-		if _, ok := visitied[edge.targetNode]; !ok {
-			edge.targetNode.DistanceFromRoot = node.DistanceFromRoot + edge.distance
-			edge.targetNode.traverseInternal(visitied)
+	for _, n := range g.nodes {
+		n.DistanceFromRoot = math.MaxInt
+		toVisit[n] = true
+	}
+
+	g.Root.DistanceFromRoot = 0
+
+	for node := g.Root; len(toVisit) > 1; {
+
+		delete(toVisit, node)
+
+		for _, edge := range node.edges {
+			target := edge.targetNode
+			potentialDistance := node.DistanceFromRoot + edge.distance
+
+			if target.DistanceFromRoot > potentialDistance {
+				target.DistanceFromRoot = potentialDistance
+			}
 		}
+
+		var nextVisit *GraphNode
+
+		for n := range toVisit {
+			if nextVisit == nil || nextVisit.DistanceFromRoot > n.DistanceFromRoot {
+				nextVisit = n
+			}
+		}
+		node = nextVisit
 	}
 }
+
+//
+// internal methods
+//
 
 func (g *Graph) addOrCreateNode(name string) *GraphNode {
 	if n := g.GetNode(name); n != nil {

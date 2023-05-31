@@ -7,7 +7,7 @@ import (
 )
 
 func TestGraphBasics(t *testing.T) {
-	g := utils.NewGraph()
+	g := utils.NewTree()
 
 	node1 := "Taeho"
 	node2 := "BongBong"
@@ -33,20 +33,20 @@ func TestGraphBasics(t *testing.T) {
 	}
 }
 
-func createGraphFromString(str string) *utils.Graph {
+func createTree(str string) *utils.Tree {
 	str = strings.Replace(str, "\r", "", -1)
 	lines := strings.Split(str, "\n")
 
-	graph := utils.NewGraph()
-	
+	tree := utils.NewTree()
+
 	for _, line := range lines {
 		nodeNames := strings.Split(line, ")")
 		node1 := strings.TrimSpace(nodeNames[0])
 		node2 := strings.TrimSpace(nodeNames[1])
-		graph.AddEdge(node1, node2)
+		tree.AddEdge(node1, node2)
 	}
 
-	return graph
+	return tree
 }
 
 func TestTraversAndDistance(t *testing.T) {
@@ -62,13 +62,13 @@ func TestTraversAndDistance(t *testing.T) {
 	J)K
 	K)L`
 
-	graph := createGraphFromString(str)
+	tree := createTree(str)
 
-	graph.SetRoot("COM")
-	graph.SetAllDistances()
+	tree.SetRoot("COM")
+	tree.SetAllDistances()
 
 	sumDist := 0
-	graph.ForEachNodes(func(n *utils.GraphNode) {
+	tree.ForEachNodes(func(n *utils.GraphNode) {
 		sumDist += n.DistanceFromRoot
 	})
 
@@ -93,11 +93,11 @@ func TestDistanceBetweenNodes(t *testing.T) {
 	K)YOU
 	I)SAN`
 
-	graph := createGraphFromString(str)
+	tree := createTree(str)
 
-	graph.SetRoot("YOU")
-	graph.SetAllDistances()
-	node := graph.GetNode("SAN")
+	tree.SetRoot("YOU")
+	tree.SetAllDistances()
+	node := tree.GetNode("SAN")
 	expected := 6
 
 	if node.DistanceFromRoot != expected {
