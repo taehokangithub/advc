@@ -1,7 +1,7 @@
 package utils
 
 type MapData interface {
-	int | bool
+	int64 | int32 | int | byte | bool
 }
 
 type FreeMap[T MapData] struct {
