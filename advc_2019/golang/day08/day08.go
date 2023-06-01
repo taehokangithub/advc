@@ -48,10 +48,11 @@ func solve01(str string) int {
 		})
 		if zeroCnt < leastZeroCnt {
 			chosenIndex = i
+			leastZeroCnt = zeroCnt
 		}
 	}
-	layer := layers[chosenIndex]
 
+	layer := layers[chosenIndex]
 	cnt1 := 0
 	cnt2 := 0
 	layer.Foreach(func(v utils.Vector, t byte) {

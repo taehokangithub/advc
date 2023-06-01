@@ -9,6 +9,7 @@ import (
 	"taeho/advc19_go/day06"
 	"taeho/advc19_go/day07"
 	"taeho/advc19_go/day08"
+	"taeho/advc19_go/day09"
 )
 
 func main() {
@@ -20,4 +21,5 @@ func main() {
 	day06.Solve()
 	day07.Solve()
 	day08.Solve()
+	day09.Solve()
 }

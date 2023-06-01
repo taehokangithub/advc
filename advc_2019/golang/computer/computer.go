@@ -2,6 +2,7 @@ package computer
 
 import (
 	"fmt"
+	"sort"
 	"strconv"
 	"strings"
 )
@@ -26,35 +27,41 @@ const (
 	INST_JUMP_IF_FALSE Instruction = 6
 	INST_LESS_THAN     Instruction = 7
 	INST_EQUALS        Instruction = 8
+	INST_SET_RELBASE   Instruction = 9
 	INST_HALT          Instruction = 99
 )
 
 const (
 	PARAM_MODE_POSITION  ParameterMode = 0
 	PARAM_MODE_IMMEDIATE ParameterMode = 1
+	PARAM_MODE_RELATIVE  ParameterMode = 2
 )
 
 type Computer struct {
-	memory []int64
-	pc     int
-	input  []int64
-	output []int64
-	Status ComStatus
+	memory  map[int]int64
+	pc      int64
+	input   []int64
+	output  []int64
+	relBase int64
+	Status  ComStatus
 }
 
 func NewComputer(memstr string) *Computer {
 	com := Computer{}
 	com.input = make([]int64, 0)
 	com.output = make([]int64, 0)
+	com.memory = make(map[int]int64)
 	com.InitMemory(memstr)
 	com.Status = COMSTATUS_READY
+	com.relBase = 0
 	return &com
 }
 
 func (c *Computer) InitMemory(memstr string) {
+	if len(memstr) == 0 {
+		return
+	}
 	memrunes := strings.Split(memstr, ",")
-
-	c.memory = make([]int64, len(memrunes))
 
 	for i, r := range memrunes {
 		r = strings.TrimSpace(r)
@@ -85,26 +92,32 @@ func (c *Computer) PopOutput() int64 {
 }
 
 func (c *Computer) Set64(i int64, v int64) {
-	c.memory[i] = v
+	c.memory[int(i)] = v
 }
 
 func (c *Computer) Set(i int, v int) {
 	c.memory[i] = int64(v)
 }
 
-func (c *Computer) Get(i int) int64 {
-	return c.memory[i]
+func (c *Computer) Get(i int64) int64 {
+	return c.memory[int(i)]
 }
 
 func (c *Computer) DumpMemory() string {
-	sb := strings.Builder{}
+	keys := []int{}
+	for k := range c.memory {
+		keys = append(keys, k)
+	}
+	sort.Ints(keys)
 
-	for _, v := range c.memory {
+	sb := strings.Builder{}
+	for _, k := range keys {
+		v := c.Get(int64(k))
 		sb.WriteString(fmt.Sprint(v))
 		sb.WriteRune(',')
 	}
-
 	str := sb.String()
+
 	return str[:len(str)-1]
 }
 
@@ -113,7 +126,7 @@ func (c *Computer) RunProgram() {
 	c.Status = COMSTATUS_READY
 
 	for c.Status == COMSTATUS_READY {
-		inst = Instruction(c.memory[c.pc])
+		inst = Instruction(c.Get(c.pc))
 		c.pc++
 
 		c.runInst(inst)
@@ -141,14 +154,19 @@ func (c *Computer) getParamModes(inst *Instruction) []ParameterMode {
 }
 
 func (c *Computer) getParamImmediate() int64 {
-	param := c.memory[c.pc]
+	param := c.Get(c.pc)
 	c.pc++
 	return param
 }
 
 func (c *Computer) getParamByPosition() int64 {
-	param := c.getParamImmediate()
-	return c.Get(int(param))
+	addr := c.getParamImmediate()
+	return c.Get(addr)
+}
+
+func (c *Computer) getParamByRelative() int64 {
+	addr := c.getParamImmediate() + int64(c.relBase)
+	return c.Get(addr)
 }
 
 func (c *Computer) getParam(modes *[]ParameterMode) int64 {
@@ -160,9 +178,24 @@ func (c *Computer) getParam(modes *[]ParameterMode) int64 {
 		return c.getParamImmediate()
 	case PARAM_MODE_POSITION:
 		return c.getParamByPosition()
+	case PARAM_MODE_RELATIVE:
+		return c.getParamByRelative()
 	default:
 		panic(fmt.Sprintf("Unknown parameter mode %v", mode))
 	}
+}
+
+func (c *Computer) getSavePositionParam(modes *[]ParameterMode) int64 {
+	mode := (*modes)[0]
+	*modes = (*modes)[1:]
+
+	addr := c.getParamImmediate()
+
+	if mode == PARAM_MODE_RELATIVE {
+		addr += c.relBase
+	}
+
+	return addr
 }
 
 func (c *Computer) runInst(inst Instruction) {
@@ -172,12 +205,12 @@ func (c *Computer) runInst(inst Instruction) {
 	case INST_ADD:
 		op1 := c.getParam(&modes)
 		op2 := c.getParam(&modes)
-		saveto := c.getParamImmediate()
+		saveto := c.getSavePositionParam(&modes)
 		c.Set64(saveto, op1+op2)
 	case INST_MUL:
 		op1 := c.getParam(&modes)
 		op2 := c.getParam(&modes)
-		saveto := c.getParamImmediate()
+		saveto := c.getSavePositionParam(&modes)
 		c.Set64(saveto, op1*op2)
 	case INST_INPUT:
 		if len(c.input) == 0 {
@@ -187,7 +220,7 @@ func (c *Computer) runInst(inst Instruction) {
 		}
 		input := c.input[0]
 		c.input = c.input[1:]
-		saveto := c.getParamImmediate()
+		saveto := c.getSavePositionParam(&modes)
 		c.Set64(saveto, input)
 	case INST_OUTPUT:
 		val := c.getParam(&modes)
@@ -195,7 +228,7 @@ func (c *Computer) runInst(inst Instruction) {
 	case INST_LESS_THAN:
 		op1 := c.getParam(&modes)
 		op2 := c.getParam(&modes)
-		saveto := c.getParamImmediate()
+		saveto := c.getSavePositionParam(&modes)
 		val := 0
 		if op1 < op2 {
 			val = 1
@@ -204,7 +237,7 @@ func (c *Computer) runInst(inst Instruction) {
 	case INST_EQUALS:
 		op1 := c.getParam(&modes)
 		op2 := c.getParam(&modes)
-		saveto := c.getParamImmediate()
+		saveto := c.getSavePositionParam(&modes)
 		val := 0
 		if op1 == op2 {
 			val = 1
@@ -214,14 +247,16 @@ func (c *Computer) runInst(inst Instruction) {
 		op1 := c.getParam(&modes)
 		op2 := c.getParam(&modes)
 		if op1 != 0 {
-			c.pc = int(op2)
+			c.pc = op2
 		}
 	case INST_JUMP_IF_FALSE:
 		op1 := c.getParam(&modes)
 		op2 := c.getParam(&modes)
 		if op1 == 0 {
-			c.pc = int(op2)
+			c.pc = op2
 		}
+	case INST_SET_RELBASE:
+		c.relBase += c.getParam(&modes)
 	case INST_HALT:
 		c.Status = COMSTATUS_FINISHED
 		return
