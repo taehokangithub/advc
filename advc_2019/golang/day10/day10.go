@@ -13,8 +13,7 @@ func solve01(str string) int {
 
 func solve02(str string) int {
 	ast := createAsteroidGrid(str)
-	cnt, loc := ast.getAllVisibleCount()
-	fmt.Printf("solve 2 mid, cnt %d, loc %v\n", cnt, loc)
+	_, loc := ast.getAllVisibleCount()
 	v := ast.findNthDestroyed(loc, 200)
 	return v.X*100 + v.Y
 }

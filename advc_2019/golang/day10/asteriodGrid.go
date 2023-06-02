@@ -1,7 +1,6 @@
 package day10
 
 import (
-	"fmt"
 	"math"
 	"sort"
 	"strings"
@@ -66,12 +65,15 @@ func (ast *AsteroidGrid) getVisiblesFrom(loc utils.Vector) []utils.Vector {
 			dirBase := getDirVector(dir)
 			hasFound := false
 			for target := loc.GetAdded(dirBase); ast.grid.IsValidVector(target); target.Add(dirBase) {
-				if !hasFound && !visited[target] {
-					ret = append(ret, target)
-					hasFound = true
+				if _, ok := ast.asteriods[target]; ok {
+					if !visited[target] {
+						visited[target] = true
+						if !hasFound {
+							ret = append(ret, target)
+							hasFound = true
+						}
+					}
 				}
-				//fmt.Println("checking", loc, "to", a, "dir", dir, "step", dirBase, "target", target, "visited", visited[target])
-				visited[target] = true
 			}
 		}
 	}
@@ -109,10 +111,6 @@ func (ast *AsteroidGrid) findNthDestroyed(loc utils.Vector, n int) utils.Vector 
 				return math.Atan2(float64(pa.X), float64(pa.Y)) > math.Atan2(float64(pb.X), float64(pb.Y))
 			})
 
-			for i, v := range visibles {
-				dir := v.GetSubtracted(loc)
-				fmt.Printf("[%d]th => %v, (dir %v) rad %f\n", cnt+i, v, dir, math.Atan2(float64(dir.X), float64(dir.Y)))
-			}
 			return visibles[n-cnt]
 		}
 
@@ -121,11 +119,3 @@ func (ast *AsteroidGrid) findNthDestroyed(loc utils.Vector, n int) utils.Vector 
 
 	panic("Shouldn't be here")
 }
-
-/* atan values
-(dir [1:0]) rad 0.000000
- (dir [1:-1]) rad -0.785398
-  (dir [0:-1]) rad -1.570796
-
-  (dir [-1:1]) rad 2.356194
-*/

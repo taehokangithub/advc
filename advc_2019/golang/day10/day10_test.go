@@ -61,6 +61,25 @@ func TestTotalVisibleCount(t *testing.T) {
 	}
 }
 
+func testNthInternal(t *testing.T, str string, visibleLoc utils.Vector, visibleCnt int, target utils.Vector, nth int) {
+
+	ast := createAsteroidGrid(str)
+	cnt, loc := ast.getAllVisibleCount()
+
+	if cnt != visibleCnt {
+		t.Errorf("TestNthDestroyed, visible cnt at %v is %d, expected %d", loc, cnt, visibleCnt)
+	}
+	if loc != visibleLoc {
+		t.Errorf("TestNthDestroyed, visible cnt at %v is %d, expected loc %v", loc, cnt, visibleLoc)
+	}
+
+	v := ast.findNthDestroyed(loc, nth)
+
+	if v != target {
+		t.Errorf("TestNthDestroyed, %dth location %v, expected %v", nth, v, target)
+	}
+}
+
 func TestNthDestroyed(t *testing.T) {
 	str := `.#..##.###...#######
 	##.############..##.
@@ -83,38 +102,50 @@ func TestNthDestroyed(t *testing.T) {
 	#.#.#.#####.####.###
 	###.##.####.##.#..##`
 
-	ast := createAsteroidGrid(str)
-	cnt, loc := ast.getAllVisibleCount()
+	testNthInternal(t, str, utils.NewVector2D(11, 13), 210, utils.NewVector2D(8, 2), 200)
 
-	if cnt != 210 {
-		t.Errorf("TestNthDestroyed, visible cnt at %v is %d, expected 210", loc, cnt)
-	}
-	if loc != utils.NewVector2D(11, 13) {
-		t.Errorf("TestNthDestroyed, visible cnt at %v is %d, expected loc (11, 13)", loc, cnt)
-	}
+	str2 := `.#....#####...#..
+	##...##.#####..##
+	##...#...#.#####.
+	..#.....#...###..
+	..#.#.....#....##`
 
-	v := ast.findNthDestroyed(loc, 200)
+	testNthInternal(t, str2, utils.NewVector2D(8, 3), 30, utils.NewVector2D(7, 0), 30)
 
-	if v != utils.NewVector2D(8, 2) {
-		t.Errorf("TestNthDestroyed, 200th location %v, expected (8, 2)", v)
-	}
+	str3 := `..#..###....#####....###........#
+	.##.##...#.#.......#......##....#
+	#..#..##.#..###...##....#......##
+	..####...#..##...####.#.......#.#
+	...#.#.....##...#.####.#.###.#..#
+	#..#..##.#.#.####.#.###.#.##.....
+	#.##...##.....##.#......#.....##.
+	.#..##.##.#..#....#...#...#...##.
+	.#..#.....###.#..##.###.##.......
+	.##...#..#####.#.#......####.....
+	..##.#.#.#.###..#...#.#..##.#....
+	.....#....#....##.####....#......
+	.#..##.#.........#..#......###..#
+	#.##....#.#..#.#....#.###...#....
+	.##...##..#.#.#...###..#.#.#..###
+	.#..##..##...##...#.#.#...#..#.#.
+	.#..#..##.##...###.##.#......#...
+	...#.....###.....#....#..#....#..
+	.#...###..#......#.##.#...#.####.
+	....#.##...##.#...#........#.#...
+	..#.##....#..#.......##.##.....#.
+	.#.#....###.#.#.#.#.#............
+	#....####.##....#..###.##.#.#..#.
+	......##....#.#.#...#...#..#.....
+	...#.#..####.##.#.........###..##
+	.......#....#.##.......#.#.###...
+	...#..#.#.........#...###......#.
+	.#.##.#.#.#.#........#.#.##..#...
+	.......#.##.#...........#..#.#...
+	.####....##..#..##.#.##.##..##...
+	.#.#..###.#..#...#....#.###.#..#.
+	............#...#...#.......#.#..
+	.........###.#.....#..##..#.##...`
+
+	testNthInternal(t, str3, utils.NewVector2D(27, 19), 314, utils.NewVector2D(15, 13), 200)
+
 }
-
-/*
-func TestRadian(t *testing.T) {
-	vecs := []utils.Vector{
-		utils.NewVector2D(1, 0),
-		utils.NewVector2D(1, 1),
-		utils.NewVector2D(0, 1),
-		utils.NewVector2D(-1, 1),
-		utils.NewVector2D(-1, 0),
-		utils.NewVector2D(-1, -1),
-		utils.NewVector2D(0, -1),
-		utils.NewVector2D(1, -1),
-	}
-
-	for _, v := range vecs {
-		fmt.Printf("%v => %f\n", v, math.Atan2(float64(v.X), float64(v.Y)))
-	}
-}
-*/
