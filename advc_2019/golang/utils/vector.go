@@ -1,6 +1,9 @@
 package utils
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 type Dimension byte
 
@@ -11,41 +14,41 @@ const (
 )
 
 type Vector struct {
-	x         int
-	y         int
-	z         int
-	w         int
+	X         int
+	Y         int
+	Z         int
+	W         int
 	dimension Dimension
 }
 
-func NewVector2D(x, y int) Vector {
-	return Vector{x, y, 0, 0, DIMENSION_2D}
+func NewVector2D(X, Y int) Vector {
+	return Vector{X, Y, 0, 0, DIMENSION_2D}
 }
 
-func NewVector3D(x, y, z int) Vector {
-	return Vector{x, y, z, 0, DIMENSION_3D}
+func NewVector3D(X, Y, Z int) Vector {
+	return Vector{X, Y, Z, 0, DIMENSION_3D}
 }
 
-func NewVector4D(x, y, z, w int) Vector {
-	return Vector{x, y, z, w, DIMENSION_4D}
+func NewVector4D(X, Y, Z, W int) Vector {
+	return Vector{X, Y, Z, W, DIMENSION_4D}
 }
 
 func (v Vector) String() string {
 	switch v.dimension {
 	case 2:
-		return fmt.Sprintf("[%d:%d]", v.x, v.y)
+		return fmt.Sprintf("[%d:%d]", v.X, v.Y)
 	case 3:
-		return fmt.Sprintf("[%d:%d:%d]", v.x, v.y, v.z)
+		return fmt.Sprintf("[%d:%d:%d]", v.X, v.Y, v.Z)
 	default:
-		return fmt.Sprintf("[%d:%d:%d:%d]", v.x, v.y, v.z, v.z)
+		return fmt.Sprintf("[%d:%d:%d:%d]", v.X, v.Y, v.Z, v.Z)
 	}
 }
 
 func (v *Vector) Add(other Vector) {
-	v.x += other.x
-	v.y += other.y
-	v.z += other.z
-	v.w += other.w
+	v.X += other.X
+	v.Y += other.Y
+	v.Z += other.Z
+	v.W += other.W
 }
 
 func (v Vector) GetAdded(other Vector) Vector {
@@ -53,11 +56,15 @@ func (v Vector) GetAdded(other Vector) Vector {
 	return v
 }
 
+func (v Vector) GetSubtracted(other Vector) Vector {
+	return v.GetAdded(other.GetMultiplied(-1))
+}
+
 func (v *Vector) Multiply(i int) {
-	v.x *= i
-	v.y *= i
-	v.z *= i
-	v.w *= i
+	v.X *= i
+	v.Y *= i
+	v.Z *= i
+	v.W *= i
 }
 
 func (v Vector) GetMultiplied(i int) Vector {
@@ -81,5 +88,25 @@ func (v *Vector) Move(dir Direction, dist int) {
 }
 
 func (v Vector) ManhattanDistance() int {
-	return Abs(v.x) + Abs(v.y) + Abs(v.z) + Abs(v.w)
+	return Abs(v.X) + Abs(v.Y) + Abs(v.Z) + Abs(v.W)
+}
+
+func (v Vector) GetBaseVector() Vector {
+	getBaseValue := func(a int) int {
+		if a == 0 {
+			return 0
+		}
+		return a / Abs(a)
+	}
+	return Vector{
+		dimension: v.dimension,
+		X:         getBaseValue(v.X),
+		Y:         getBaseValue(v.Y),
+		Z:         getBaseValue(v.Z),
+		W:         getBaseValue(v.W),
+	}
+}
+
+func (v Vector) GetRadian() float64 {
+	return math.Atan2(float64(v.Y), float64(v.X))
 }
