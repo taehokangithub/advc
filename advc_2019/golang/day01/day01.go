@@ -32,7 +32,6 @@ func solve_19_01_B(lines []string) int {
 				break
 			}
 			result += fuel
-			//fmt.Println("mass ", mass, "requires fuel", fuel, "total", result)
 			mass = fuel
 		}
 	}
@@ -45,7 +44,9 @@ func Solve() {
 		panic(err)
 	}
 
-	lines := strings.Split(string(content), "\n")
+	str := string(content)
+	str = strings.Replace(str, "\r", "", -1)
+	lines := strings.Split(str, "\n")
 
 	ans1 := solve_19_01_A(lines)
 	fmt.Println("DAY01 ans1", ans1, "expected", 3223398)
