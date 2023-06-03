@@ -79,7 +79,7 @@ func (g *Grid[T]) DumpToStringOnly(val T) {
 		for X := 0; X < g.Size.X; X++ {
 			v := g.Get(NewVector2D(X, Y))
 			if v == val {
-				fmt.Printf("%v", v)
+				fmt.Printf("#")
 			} else {
 				fmt.Printf(" ")
 			}

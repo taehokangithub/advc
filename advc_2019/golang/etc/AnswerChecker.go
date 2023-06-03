@@ -24,7 +24,7 @@ func AnswerChecker[T AnswerType](title string, ans T, expected T) {
 	fmt.Printf("%s<%s>%s answer %d = %v, expectd %v ", colorCyan, title, colorReset, cnt, ans, expected)
 
 	if ans != expected {
-		fmt.Printf("\n%s   ==> Wrong !!!%s\n", colorRed, colorReset)
+		fmt.Printf("%s   ==> Wrong !!!%s\n", colorRed, colorReset)
 		wrongCnt++
 	} else {
 		fmt.Printf("%s[OK]%s\n", colorGreen, colorReset)

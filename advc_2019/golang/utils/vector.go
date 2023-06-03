@@ -107,6 +107,47 @@ func (v Vector) GetBaseVector() Vector {
 	}
 }
 
-func (v Vector) GetRadian() float64 {
+func (v Vector) Atan2() float64 {
 	return math.Atan2(float64(v.Y), float64(v.X))
+}
+
+func (v Vector) Atan2Reverse() float64 {
+	return math.Atan2(float64(v.X), float64(v.Y))
+}
+
+func (v *Vector) Rotate(dir Direction) {
+	if v.dimension != DIMENSION_2D {
+		fmt.Println("Warning! Rotate is supported only for 2D vectors", dir)
+		// but go on..
+	}
+
+	switch dir {
+	case DIR_LEFT:
+		v.X, v.Y = -v.Y, v.X
+	case DIR_RIGHT:
+		v.X, v.Y = v.Y, -v.X
+	case DIR_DOWN:
+		v.Y = -v.Y
+	}
+}
+
+func (v *Vector) SetMin(other Vector) {
+	v.X = Min(v.X, other.X)
+	v.Y = Min(v.Y, other.Y)
+	v.Z = Min(v.Z, other.Z)
+	v.W = Min(v.W, other.W)
+}
+
+func (v *Vector) SetMax(other Vector) {
+	v.X = Max(v.X, other.X)
+	v.Y = Max(v.Y, other.Y)
+	v.Z = Max(v.Z, other.Z)
+	v.W = Max(v.W, other.W)
+}
+
+func (v *Vector) SetAll(val int) {
+	v.X = val
+	v.Y = val
+	v.Z = val
+	v.W = val
 }

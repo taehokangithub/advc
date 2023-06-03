@@ -1,7 +1,6 @@
 package day10
 
 import (
-	"math"
 	"sort"
 	"strings"
 	"taeho/advc19_go/utils"
@@ -108,7 +107,7 @@ func (ast *AsteroidGrid) findNthDestroyed(loc utils.Vector, n int) utils.Vector 
 			sort.Slice(visibles, func(a, b int) bool {
 				pa := visibles[a].GetSubtracted(loc)
 				pb := visibles[b].GetSubtracted(loc)
-				return math.Atan2(float64(pa.X), float64(pa.Y)) > math.Atan2(float64(pb.X), float64(pb.Y))
+				return pa.Atan2Reverse() > pb.Atan2Reverse()
 			})
 
 			return visibles[n-cnt]

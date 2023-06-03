@@ -41,7 +41,7 @@ func Solve() {
 	data := string(content)
 
 	ans1 := solve_19_02_A(data)
-	etc.AnswerChecker("DAY01", ans1, 4023471)
+	etc.AnswerChecker("DAY02", ans1, 4023471)
 
 	ans2 := solve_19_02_B(data)
 	etc.AnswerChecker("DAY02", ans2, 8051)

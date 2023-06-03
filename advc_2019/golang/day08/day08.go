@@ -95,4 +95,5 @@ func Solve() {
 	etc.AnswerChecker("DAY08", ans1, 1088)
 
 	solve02(str)
+	etc.AnswerChecker("DAY08", 0, 0)
 }
