@@ -1,9 +1,9 @@
 package day07
 
 import (
-	"fmt"
 	"os"
 	"taeho/advc19_go/computer"
+	"taeho/advc19_go/etc"
 	"taeho/advc19_go/utils"
 )
 
@@ -109,8 +109,8 @@ func Solve() {
 	str := string(content)
 
 	ans1 := solve01(str)
-	fmt.Println("DAY07 ans1", ans1, "expected", 45730)
+	etc.AnswerChecker("DAY07", ans1, 45730)
 
 	ans2 := solve02(str)
-	fmt.Println("DAY07 ans2", ans2, "expected", 5406484)
+	etc.AnswerChecker("DAY07", ans2, 5406484)
 }

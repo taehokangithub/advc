@@ -1,6 +1,9 @@
 package day04
 
-import "fmt"
+import (
+	"fmt"
+	"taeho/advc19_go/etc"
+)
 
 func doesMeetCriteria1(a int) bool {
 	str := fmt.Sprintf("%d", a)
@@ -88,8 +91,8 @@ func Solve() {
 	end := 847060
 
 	ans1 := solvePart1(start, end)
-	fmt.Println("DAY04 ans1", ans1, "expected", 475)
+	etc.AnswerChecker("DAY04", ans1, 475)
 
 	ans2 := solvePart2(start, end)
-	fmt.Println("DAY04 ans2", ans2, "expected", 297)
+	etc.AnswerChecker("DAY04", ans2, 297)
 }

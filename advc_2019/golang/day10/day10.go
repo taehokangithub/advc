@@ -1,8 +1,8 @@
 package day10
 
 import (
-	"fmt"
 	"os"
+	"taeho/advc19_go/etc"
 )
 
 func solve01(str string) int {
@@ -27,8 +27,8 @@ func Solve() {
 	str := string(content)
 
 	ans1 := solve01(str)
-	fmt.Println("DAY10 ans1", ans1, "expected", 314)
+	etc.AnswerChecker("DAY10", ans1, 314)
 
 	ans2 := solve02(str)
-	fmt.Println("DAY10 ans2", ans2, "expected", 1513)
+	etc.AnswerChecker("DAY10", ans2, 1513)
 }

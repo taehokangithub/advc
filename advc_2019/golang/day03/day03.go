@@ -6,6 +6,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"taeho/advc19_go/etc"
 	"taeho/advc19_go/utils"
 )
 
@@ -129,8 +130,8 @@ func Solve() {
 	strs := strings.Split(contentStr, "\n")
 
 	ans1 := solve01(strs[0], strs[1])
-	fmt.Println("DAY03 ans1", ans1, "expected", 232)
+	etc.AnswerChecker("DAY03", ans1, 232)
 
 	ans2 := solve02(strs[0], strs[1])
-	fmt.Println("DAY03 ans2", ans2, "expected", 6084)
+	etc.AnswerChecker("DAY03", ans2, 6084)
 }
