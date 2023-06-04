@@ -54,3 +54,22 @@ func TestGcd(t *testing.T) {
 		}
 	}
 }
+
+func TestLcm(t *testing.T) {
+	type Test struct {
+		a, b, ret int
+	}
+	tests := []Test{
+		{5, 10, 10},
+		{6, 9, 18},
+		{2, 5, 10},
+		{22, 33, 66},
+	}
+
+	for i, c := range tests {
+		got := utils.Lcm(c.a, c.b)
+		if got != c.ret {
+			t.Errorf("LCM case %d, got %d expected %d", i, got, c.ret)
+		}
+	}
+}

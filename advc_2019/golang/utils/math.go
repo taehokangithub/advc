@@ -45,3 +45,7 @@ func Gcd[T DivisableNumbers](a, b T) T {
 
 	return Gcd(small, big-small)
 }
+
+func Lcm[T DivisableNumbers](a, b T) T {
+	return a * b / Gcd(a, b)
+}

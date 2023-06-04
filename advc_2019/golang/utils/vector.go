@@ -13,6 +13,15 @@ const (
 	DIMENSION_4D Dimension = 4
 )
 
+type CoordType byte
+
+const (
+	COORD_X CoordType = 0
+	COORD_Y CoordType = 1
+	COORD_Z CoordType = 2
+	COORD_W CoordType = 3
+)
+
 type Vector struct {
 	X         int
 	Y         int
@@ -54,6 +63,20 @@ func (v *Vector) Add(other Vector) {
 func (v Vector) GetAdded(other Vector) Vector {
 	v.Add(other)
 	return v
+}
+
+func (v Vector) GetValueAt(coord CoordType) int {
+	switch coord {
+	case COORD_X:
+		return v.X
+	case COORD_Y:
+		return v.Y
+	case COORD_Z:
+		return v.Z
+	case COORD_W:
+		return v.W
+	}
+	panic(fmt.Sprintf("Unknown coord type %v", coord))
 }
 
 func (v Vector) GetSubtracted(other Vector) Vector {
