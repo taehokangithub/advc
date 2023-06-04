@@ -85,6 +85,10 @@ func (c *Computer) GetOutput() []int64 {
 	return c.output
 }
 
+func (c *Computer) HasOutput() bool {
+	return len(c.output) > 0
+}
+
 func (c *Computer) PopOutput() int64 {
 	ret := c.output[0]
 	c.output = c.output[1:]
@@ -123,7 +127,10 @@ func (c *Computer) DumpMemory() string {
 
 func (c *Computer) RunProgram() {
 	var inst Instruction = INST_NIL
-	c.Status = COMSTATUS_READY
+
+	if c.Status == COMSTATUS_PAUSED && len(c.input) > 0 {
+		c.Status = COMSTATUS_READY
+	}
 
 	for c.Status == COMSTATUS_READY {
 		inst = Instruction(c.Get(c.pc))

@@ -6,8 +6,7 @@ import (
 )
 
 func solve01(str string) int {
-	ans1 := 0
-	return ans1
+	return 0
 }
 
 func solve02(str string) int {
