@@ -29,8 +29,8 @@ func (blueprints *Blueprints) String() string {
 	var builder strings.Builder
 
 	builder.WriteString(fmt.Sprintf("%d Ingredients : \n", len(blueprints.ingrMap)))
-	for name, ingr := range blueprints.ingrMap {
-		builder.WriteString(fmt.Sprintf("    [%s]%s %d target equations%s\n", name, colorBlue, len(ingr.eqs), colorReset))
+	for name := range blueprints.ingrMap {
+		builder.WriteString(fmt.Sprintf("    [%s]%s %s\n", name, colorBlue, colorReset))
 	}
 
 	builder.WriteString(fmt.Sprintf("%d Equations : \n", len(blueprints.eqs)))

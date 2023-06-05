@@ -1,18 +1,24 @@
 package day14
 
 import (
+	"fmt"
 	"strconv"
 	"strings"
 )
 
+const (
+	INGR_FUEL = "FUEL"
+	INGR_ORE  = "ORE"
+)
+
 type Ingredient struct {
 	name string
-	eqs  []*Equation // Equations that produces itself
+	eq   *Equation
 }
 
 type EqPart struct {
 	ingredient *Ingredient
-	cnt        int
+	cnt        int64
 }
 
 type Equation struct {
@@ -29,7 +35,6 @@ type Blueprints struct {
 func newIngredient(name string) *Ingredient {
 	return &Ingredient{
 		name: name,
-		eqs:  make([]*Equation, 0),
 	}
 }
 
@@ -62,11 +67,16 @@ func (blueprints *Blueprints) AddEquationFromString(str string) {
 	eq.output = blueprints.parseEqPart(strs[1])
 
 	blueprints.eqs = append(blueprints.eqs, eq)
-	if eq.output.ingredient.name == "FUEL" {
+	outgr := eq.output.ingredient
+	if outgr.name == "FUEL" {
 		blueprints.fuelEq = eq
 	}
 
-	eq.output.ingredient.eqs = append(eq.output.ingredient.eqs, eq)
+	if outgr.eq != nil {
+		panic(fmt.Sprintf("%s already has an eq %v", outgr.name, eq))
+	}
+
+	outgr.eq = eq
 }
 
 func (blueprints *Blueprints) parseEqPart(str string) *EqPart {
@@ -80,7 +90,7 @@ func (blueprints *Blueprints) parseEqPart(str string) *EqPart {
 	ingr := blueprints.GetOrCreateIngredient(name)
 	eqPart := EqPart{
 		ingredient: ingr,
-		cnt:        cnt,
+		cnt:        int64(cnt),
 	}
 	return &eqPart
 }

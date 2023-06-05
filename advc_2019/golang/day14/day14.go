@@ -1,19 +1,21 @@
 package day14
 
 import (
-	"fmt"
 	"os"
 	"taeho/advc19_go/etc"
 )
 
-func solve01(str string) int {
-	bl := ParseBlueprint(str)
-	fmt.Println(bl)
-	return 0
+const MAX_ORE_CNT = 1000000000000
+
+func solve01(str string) int64 {
+	f := NewFactory(str)
+	f.ProduceOneFuel()
+	return f.cost
 }
 
-func solve02(str string) int {
-	return 0
+func solve02(str string) int64 {
+	f := NewFactory(str)
+	return f.ConsumeOre(MAX_ORE_CNT)
 }
 
 func Solve() {
