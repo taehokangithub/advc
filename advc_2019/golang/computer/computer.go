@@ -47,13 +47,30 @@ type Computer struct {
 }
 
 func NewComputer(memstr string) *Computer {
-	com := Computer{}
-	com.input = make([]int64, 0)
-	com.output = make([]int64, 0)
-	com.memory = make(map[int]int64)
+	com := Computer{
+		input:   make([]int64, 0),
+		output:  make([]int64, 0),
+		memory:  make(map[int]int64),
+		Status:  COMSTATUS_READY,
+		relBase: 0,
+	}
 	com.InitMemory(memstr)
-	com.Status = COMSTATUS_READY
-	com.relBase = 0
+	return &com
+}
+
+func (c *Computer) Copy() *Computer {
+	com := Computer{
+		input:   make([]int64, len(c.input)),
+		output:  make([]int64, len(c.output)),
+		memory:  make(map[int]int64),
+		Status:  c.Status,
+		relBase: c.relBase,
+	}
+	copy(com.input, c.input)
+	copy(com.output, c.output)
+	for k, v := range c.memory {
+		com.memory[k] = v
+	}
 	return &com
 }
 

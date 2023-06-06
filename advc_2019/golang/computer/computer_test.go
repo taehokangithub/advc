@@ -102,3 +102,42 @@ func TestLargeValue2(t *testing.T) {
 		t.Errorf("got %d, length %d, not 16", got, len(gotstr))
 	}
 }
+
+func TestCopy(t *testing.T) {
+	mem := "1,3,5,6,8,8,22,33,66,88,99"
+	com := NewComputer(mem)
+	com.input = []int64{3, 7, 6, 4, 12, 33}
+	com.output = []int64{2, 3, 4, 5, 6, 7}
+	com.Status = COMSTATUS_PAUSED
+	com.relBase = 11
+
+	com2 := com.Copy()
+	compareComputers(t, com, com2)
+}
+
+func compareComputers(t *testing.T, a *Computer, b *Computer) {
+	if a.Status != b.Status {
+		t.Errorf("Status different - %d vs %d", a.Status, b.Status)
+	}
+	if a.relBase != b.relBase {
+		t.Errorf("relBase different - %d vs %d", a.relBase, b.relBase)
+	}
+	for k, v := range a.memory {
+		if b.memory[k] != v {
+			t.Errorf("memory different - at %d, %d vs %d", k, a.memory[k], b.memory[k])
+			break
+		}
+	}
+	for i, v := range a.input {
+		if b.input[i] != v {
+			t.Errorf("input different - at %d, %d vs %d", i, a.input[i], b.input[i])
+			break
+		}
+	}
+	for i, v := range a.output {
+		if b.output[i] != v {
+			t.Errorf("input different - at %d, %d vs %d", i, a.output[i], b.output[i])
+			break
+		}
+	}
+}

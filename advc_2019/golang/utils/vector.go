@@ -110,6 +110,11 @@ func (v *Vector) Move(dir Direction, dist int) {
 	}
 }
 
+func (v Vector) GetMoved(dir Direction, dist int) Vector {
+	v.Move(dir, dist)
+	return v
+}
+
 func (v Vector) ManhattanDistance() int {
 	return Abs(v.X) + Abs(v.Y) + Abs(v.Z) + Abs(v.W)
 }

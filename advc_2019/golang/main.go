@@ -15,6 +15,7 @@ import (
 	"taeho/advc19_go/day12"
 	"taeho/advc19_go/day13"
 	"taeho/advc19_go/day14"
+	"taeho/advc19_go/day15"
 	"taeho/advc19_go/etc"
 )
 
@@ -33,6 +34,7 @@ func main() {
 	day12.Solve()
 	day13.Solve()
 	day14.Solve()
+	day15.Solve()
 
 	etc.FinalChecker()
 }
