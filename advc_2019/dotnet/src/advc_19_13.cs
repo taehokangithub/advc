@@ -89,7 +89,7 @@ namespace Advc2019
 
         public static void Start()
         {
-            var textData = File.ReadAllText("data/input13.txt");
+            var textData = File.ReadAllText("../data/input13.txt");
             var textArr = textData.Split(",");
             var intList = textArr.Select(t => int.Parse(t)).ToList();
 

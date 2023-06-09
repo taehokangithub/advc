@@ -350,7 +350,7 @@ namespace Advc2019
         }
         public static void Start()
         {
-            var textData = File.ReadAllText("data/input14.txt");
+            var textData = File.ReadAllText("../data/input14.txt");
 
             Advc2019_14.Reactions reactions = new(textData);
 

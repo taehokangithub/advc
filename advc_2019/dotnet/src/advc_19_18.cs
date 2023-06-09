@@ -247,10 +247,10 @@ namespace Advc2019
         
         public static void Start()
         {
-            var textData = File.ReadAllText("data/input18.txt");
+            var textData = File.ReadAllText("../data/input18.txt");
             var textArr = textData.Split(Environment.NewLine).ToList();
 
-            var textDataB = File.ReadAllText("data/input18B.txt");
+            var textDataB = File.ReadAllText("../data/input18B.txt");
             var textArrB = textDataB.Split(Environment.NewLine).ToList();
             
             Problem18 prob1 = new();

@@ -50,7 +50,7 @@ namespace Advc2019
 
         public static void Start()
         {
-            var textData = File.ReadAllText("data/input06.txt");
+            var textData = File.ReadAllText("../data/input06.txt");
             var textArr = textData.Split(Environment.NewLine);
             var pairList = textArr.Select(t => t.Split(')').ToList()).ToList();
 

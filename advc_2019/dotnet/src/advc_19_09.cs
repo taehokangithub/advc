@@ -289,7 +289,7 @@ namespace Advc2019
 
         public static void Start() 
         {
-            var textData = File.ReadAllText("data/input09.txt");
+            var textData = File.ReadAllText("../data/input09.txt");
             var textArr = textData.Split(',');
             var intList = textArr.Select(t => long.Parse(t)).ToList();
             long ans1 = Solve1(intList);

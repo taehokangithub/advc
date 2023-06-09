@@ -145,7 +145,7 @@ namespace Advc2019
         
         public static void Start()
         {
-            var textData = File.ReadAllText("data/input16.txt");
+            var textData = File.ReadAllText("../data/input16.txt");
             //var textData = "80871224585914546619083218645595";
             //var textData = "03036732577212944063491565474664";
 

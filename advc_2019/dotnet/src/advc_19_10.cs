@@ -168,7 +168,7 @@ namespace Advc2019
 
         public static void Start()
         {
-            var textData = File.ReadAllText("data/input10.txt");
+            var textData = File.ReadAllText("../data/input10.txt");
 
             Problem10 prob = new(textData);
 

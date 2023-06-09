@@ -82,7 +82,7 @@ namespace Advc2019
         {
             Point.LogDimension = 2;
 
-            var textData = File.ReadAllText("data/input11.txt");
+            var textData = File.ReadAllText("../data/input11.txt");
             var textArr = textData.Split(",");
             var intList = textArr.Select(t => long.Parse(t)).ToList();
 

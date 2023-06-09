@@ -107,7 +107,7 @@ namespace Advc2019
         }
         public static void Start()
         {
-            var textData = File.ReadAllText("data/input03.txt");
+            var textData = File.ReadAllText("../data/input03.txt");
             var textArrays = textData.Split(Environment.NewLine);
 
             var arr1 = textArrays[0].Split(",").ToList();

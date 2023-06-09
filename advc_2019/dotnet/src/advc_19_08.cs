@@ -130,7 +130,7 @@ namespace Advc2019
 
         public static void Start()
         {
-            var textData = File.ReadAllText("data/input08.txt");
+            var textData = File.ReadAllText("../data/input08.txt");
 
             int ans1 = Problem08.Solve1(textData);
             int ans2 = Problem08.Solve2(textData);
