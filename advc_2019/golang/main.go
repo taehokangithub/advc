@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"taeho/advc19_go/day01"
 	"taeho/advc19_go/day02"
 	"taeho/advc19_go/day03"
@@ -18,25 +19,44 @@ import (
 	"taeho/advc19_go/day15"
 	"taeho/advc19_go/day16"
 	"taeho/advc19_go/etc"
+	"time"
 )
 
-func main() {
-	day01.Solve()
-	day02.Solve()
-	day03.Solve()
-	day04.Solve()
-	day05.Solve()
-	day06.Solve()
-	day07.Solve()
-	day08.Solve()
-	day09.Solve()
-	day10.Solve()
-	day11.Solve()
-	day12.Solve()
-	day13.Solve()
-	day14.Solve()
-	day15.Solve()
-	day16.Solve()
+var colorReset string = "\033[0m"
+var colorTotalElapsed string = "\033[93m"
+var colorElapsed string = "\033[90m"
 
+func measureTime(f func()) {
+	t := time.Now()
+	f()
+	elapsed := time.Since(t)
+
+	fmt.Println(colorElapsed, "Elapsed ", elapsed.Milliseconds(), "ms", colorReset)
+}
+
+func runAll() {
+	measureTime(day01.Solve)
+	measureTime(day02.Solve)
+	measureTime(day03.Solve)
+	measureTime(day04.Solve)
+	measureTime(day05.Solve)
+	measureTime(day06.Solve)
+	measureTime(day07.Solve)
+	measureTime(day08.Solve)
+	measureTime(day09.Solve)
+	measureTime(day10.Solve)
+	measureTime(day11.Solve)
+	measureTime(day12.Solve)
+	measureTime(day13.Solve)
+	measureTime(day14.Solve)
+	measureTime(day15.Solve)
+	measureTime(day16.Solve)
 	etc.FinalChecker()
+}
+
+func main() {
+	t := time.Now()
+	runAll()
+	elapsed := time.Since(t)
+	fmt.Println(colorTotalElapsed, "Total Elapsed :", elapsed.Milliseconds(), "ms", colorReset)
 }

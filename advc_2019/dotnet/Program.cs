@@ -18,7 +18,13 @@ Advc2019.Problem13.Start();
 Advc2019.Problem15.Start();
 Advc2019.Problem16.Start();
 Advc2019.Problem17.Start();
+Advc2019.Problem18.Start();
 #endif 
 
-Advc2019.Problem18.Start();
+var now = DateTime.Now;
+
+Advc2019.Problem16.Start();
+
+Console.WriteLine($"Elapsed : {(DateTime.Now - now).TotalMilliseconds}ms");
+
 

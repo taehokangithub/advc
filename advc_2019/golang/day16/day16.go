@@ -6,11 +6,11 @@ import (
 )
 
 func solve01(str string) string {
-	return decodeFullPhaseGetResultAt(str, 0)
+	return decodeFullPhaseGetResultAt(str)
 }
 
-func solve02(str string) int {
-	return 0
+func solve02(str string) string {
+	return decodeRepeatedFullPhase(str, 10000)
 }
 
 func Solve() {
@@ -25,5 +25,5 @@ func Solve() {
 	etc.AnswerChecker("DAY16", ans1, "67481260")
 
 	ans2 := solve02(str)
-	etc.AnswerChecker("DAY16", ans2, 2)
+	etc.AnswerChecker("DAY16", ans2, "42178738")
 }

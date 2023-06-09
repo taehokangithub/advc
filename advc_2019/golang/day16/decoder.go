@@ -42,16 +42,64 @@ func decodeOnePhase(input string) string {
 	return builder.String()
 }
 
-func decodeFullPhaseGetResultAt(str string, location int) string {
+func decodeFullPhaseGetResultAt(str string) string {
 	for i := 0; i < FullPhases; i++ {
 		str = decodeOnePhase(str)
-		//fmt.Println(i+1, str)
 	}
 
-	return str[location : location+OutputLegth]
+	return str[:OutputLegth]
 }
 
-func decodeRepeatedFullPhaseGetResultAt(str string, repeat int, location int) string {
-	input := strings.Repeat(str, repeat)
-	return decodeFullPhaseGetResultAt(input, 0)
+func decodeReapeatedOnePhase(str string) string {
+	totalLen := len(str)
+	intarr := make([]int, totalLen)
+
+	for i, c := range str {
+		intarr[i] = int(c - '0')
+	}
+
+	backStuffValue := 0
+	for i := OutputLegth; i < totalLen; i++ {
+		backStuffValue += intarr[i]
+	}
+
+	var builder strings.Builder
+
+	for i := 0; i < OutputLegth; i++ {
+		val := 0
+		for j := i; j < OutputLegth; j++ {
+			val += intarr[j]
+		}
+		totalVal := val + backStuffValue
+		valToWrite := utils.Abs(totalVal) % 10
+		builder.WriteString(fmt.Sprint(valToWrite))
+	}
+
+	for i := OutputLegth; i < len(str); i++ {
+		valToWrite := utils.Abs(backStuffValue) % 10
+		builder.WriteString(fmt.Sprint(valToWrite))
+		backStuffValue -= intarr[i]
+	}
+
+	return builder.String()
+}
+
+func decodeRepeatedFullPhase(str string, repeat int) string {
+	loc, err := strconv.Atoi(str[:7])
+	if err != nil {
+		panic(err)
+	}
+
+	strlen := len(str)
+	totalLen := strlen * repeat
+	gap := totalLen - loc
+	requiredSets := 1 + gap/strlen
+	startAt := loc - (totalLen - strlen*requiredSets)
+	stubStr := strings.Repeat(str, requiredSets)[startAt:]
+
+	for i := 0; i < FullPhases; i++ {
+		stubStr = decodeReapeatedOnePhase(stubStr)
+	}
+
+	return stubStr[:OutputLegth]
 }

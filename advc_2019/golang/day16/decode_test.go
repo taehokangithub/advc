@@ -24,7 +24,7 @@ func TestDecodeFullPhase(t *testing.T) {
 	}
 
 	for _, tuple := range tests {
-		got := decodeFullPhaseGetResultAt(tuple[0], 0)
+		got := decodeFullPhaseGetResultAt(tuple[0])
 		if got != tuple[1] {
 			t.Errorf("TestDecodeFullPhase got %v expected %v", got, tuple[1])
 		}
@@ -32,5 +32,17 @@ func TestDecodeFullPhase(t *testing.T) {
 }
 
 func TestRepeatTest(t *testing.T) {
-	decodeRepeatedFullPhaseGetResultAt("03036732577212944063491565474664", 1, 0)
+	tests := [][2]string{
+		{"03036732577212944063491565474664", "84462026"},
+		{"02935109699940807407585447034323", "78725270"},
+		{"03081770884921959731165446850517", "53553731"},
+	}
+
+	for _, tuple := range tests {
+
+		got := decodeRepeatedFullPhase(tuple[0], 10000)
+		if got != tuple[1] {
+			t.Errorf("TestDecodeFullPhase got %v expected %v", got, tuple[1])
+		}
+	}
 }
