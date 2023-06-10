@@ -115,6 +115,10 @@ func (v Vector) GetMoved(dir Direction, dist int) Vector {
 	return v
 }
 
+func (v Vector) GetMovedOneBlock(dir Direction) Vector {
+	return v.GetMoved(dir, 1)
+}
+
 func (v Vector) ManhattanDistance() int {
 	return Abs(v.X) + Abs(v.Y) + Abs(v.Z) + Abs(v.W)
 }
@@ -157,6 +161,11 @@ func (v *Vector) Rotate(dir Direction) {
 	case DIR_DOWN:
 		v.Y = -v.Y
 	}
+}
+
+func (v Vector) GetRotated(dir Direction) Vector {
+	v.Rotate(dir)
+	return v
 }
 
 func (v *Vector) SetMin(other Vector) {

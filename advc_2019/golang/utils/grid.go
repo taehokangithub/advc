@@ -32,7 +32,8 @@ func (g *Grid[T]) Set(v Vector, val T) {
 }
 
 // sequential add to fill the grid one by one
-func (g *Grid[T]) Add(val T) {
+func (g *Grid[T]) Add(val T) Vector {
+	addedLoc := g.addPtr
 	g.Set(g.addPtr, val)
 
 	g.addPtr.X++
@@ -40,6 +41,7 @@ func (g *Grid[T]) Add(val T) {
 		g.addPtr.X = 0
 		g.addPtr.Y++
 	}
+	return addedLoc
 }
 
 func (g *Grid[T]) IsFilled() bool {
