@@ -27,6 +27,19 @@ func TestFreeMap(t *testing.T) {
 	}
 }
 
+func TestCopyGrid(t *testing.T) {
+	g := utils.NewGrid[int](utils.NewVector2D(3, 5))
+	for i := 0; i < g.Size.X*g.Size.Y; i++ {
+		g.Add(i * i)
+	}
+
+	c := g.Copy()
+
+	if g.String() != c.String() {
+		t.Errorf("Copy test failred. got : %v", c)
+	}
+}
+
 func TestGrid(t *testing.T) {
 	g := utils.NewGrid[bool](utils.NewVector2D(10, 20))
 

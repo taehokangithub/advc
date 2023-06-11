@@ -6,24 +6,34 @@ import (
 )
 
 func solve01(str string) int {
-	return 0
+	return NewKeyGrid(str).FindMinSteps()
 }
 
 func solve02(str string) int {
-	return 0
+	return NewKeyGrid(str).FindMinSteps()
 }
 
 func Solve() {
-	content, err := os.ReadFile("../data/input18.txt")
-	if err != nil {
-		panic(err)
+	{
+		content, err := os.ReadFile("../data/input18.txt")
+		if err != nil {
+			panic(err)
+		}
+
+		str := string(content)
+
+		ans1 := solve01(str)
+		etc.AnswerChecker("DAY18", ans1, 4510)
 	}
+	{
+		content, err := os.ReadFile("../data/input18B.txt")
+		if err != nil {
+			panic(err)
+		}
 
-	str := string(content)
+		str := string(content)
 
-	ans1 := solve01(str)
-	etc.AnswerChecker("DAY18", ans1, 1)
-
-	ans2 := solve02(str)
-	etc.AnswerChecker("DAY18", ans2, 2)
+		ans2 := solve02(str)
+		etc.AnswerChecker("DAY18", ans2, 1816)
+	}
 }

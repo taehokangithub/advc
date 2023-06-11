@@ -2,10 +2,6 @@ package utils
 
 import "math"
 
-type MapData interface {
-	int64 | int32 | int | byte | bool
-}
-
 type FreeMap[T MapData] struct {
 	data map[Vector]T
 	Min  Vector
