@@ -1,7 +1,6 @@
 package day18
 
 import (
-	"fmt"
 	"sort"
 )
 
@@ -51,7 +50,7 @@ func (c *candidate) PopCandidate() *keyGrid {
 	popped := c.m[poppedStr]
 
 	//fmt.Println(popped)
-	fmt.Println("steps ", popped.steps, popped.state.String())
+	//fmt.Println("steps ", popped.steps, popped.state.String())
 
 	c.arr = c.arr[1:]
 	delete(c.m, poppedStr)

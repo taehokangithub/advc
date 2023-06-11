@@ -1,6 +1,7 @@
 package day18
 
 import (
+	"os"
 	"taeho/advc19_go/utils"
 	"testing"
 )
@@ -117,6 +118,12 @@ func TestMinSteps(t *testing.T) {
 		str   string
 		steps int
 	}
+	file, err := os.ReadFile("../../data/input18.txt")
+	if err != nil {
+		panic(err)
+	}
+	mainCase := string(file)
+
 	cases := []Test{
 		{m1, 8},
 		{m2, 86},
@@ -128,6 +135,8 @@ func TestMinSteps(t *testing.T) {
 		{m7, 24},
 		{m8, 32},
 		{m9, 72},
+
+		{mainCase, 4510},
 	}
 
 	for i, c := range cases {
