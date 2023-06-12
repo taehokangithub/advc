@@ -51,6 +51,7 @@ func (search *searchSet) findNextMovesV2() {
 	for !sq.isEmpty() {
 		thisMove := sq.pop()
 		search.setVisited(thisMove.loc)
+		thisMove.steps++
 		possibleMoves := make([]move, 0, 4)
 		for _, dvec := range utils.DIR_VECTORS {
 			nextLoc := thisMove.loc.GetAdded(dvec)
@@ -63,8 +64,8 @@ func (search *searchSet) findNextMovesV2() {
 			}
 			nextMove := move{
 				myLocIndex: thisMove.myLocIndex,
-				steps:      thisMove.steps + 1,
-				loc:        thisMove.loc.GetAdded(dvec),
+				steps:      thisMove.steps,
+				loc:        nextLoc,
 			}
 			if tile == TILE_EMPTY || search.checkIfPossibleMove(nextMove, tile) {
 				possibleMoves = append(possibleMoves, nextMove)
