@@ -4,35 +4,6 @@ import (
 	"taeho/advc19_go/utils"
 )
 
-type move struct {
-	myLocIndex int
-	loc        utils.Vector
-	steps      int
-}
-
-type searchSet struct {
-	k        *keyGrid
-	visited  *utils.Grid[bool]
-	retMoves *map[rune]move
-	thisMove move
-}
-
-func newSearchSet(k *keyGrid) *searchSet {
-	return &searchSet{
-		k:        k,
-		visited:  utils.NewGrid[bool](k.grid.Size),
-		retMoves: &map[rune]move{},
-	}
-}
-
-func (search *searchSet) isVisited(v utils.Vector) bool {
-	return search.visited.Get(v)
-}
-
-func (search *searchSet) setVisited(v utils.Vector) {
-	search.visited.Set(v, true)
-}
-
 func (k *keyGrid) FindMinSteps() int {
 	c := NewCandidate()
 	c.AddCandidate(k)
@@ -41,7 +12,7 @@ func (k *keyGrid) FindMinSteps() int {
 		if kptr.HasFoundAllKeys() {
 			return kptr.steps
 		}
-		possibleStates := findPossibleMoves(kptr)
+		possibleStates := kptr.findPossibleMoves()
 		for _, ps := range possibleStates {
 			c.AddCandidate(ps)
 		}
@@ -49,8 +20,8 @@ func (k *keyGrid) FindMinSteps() int {
 	return 0
 }
 
-func findPossibleMoves(k *keyGrid) []*keyGrid {
-	ret := make([]*keyGrid, 0)
+func (k *keyGrid) findPossibleMoves() []*keyGrid {
+	ret := make([]*keyGrid, 0, 64)
 	search := newSearchSet(k)
 	for i, myloc := range k.state.myLocs {
 		search.thisMove = move{
@@ -65,51 +36,12 @@ func findPossibleMoves(k *keyGrid) []*keyGrid {
 	for _, move := range *search.retMoves {
 		ck := k.Copy()
 		tile := ck.grid.Get(move.loc)
-		keyName := makeKeyame(tile)
-		ck.state.keys[keyName] = true
-		ck.grid.Set(move.loc, TILE_EMPTY)
+		ck.SetKeyUnlocked(tile, true)
 		ck.steps += move.steps
 		ck.state.myLocs[move.myLocIndex] = move.loc
 		ret = append(ret, ck)
 	}
 	return ret
-}
-
-type searchQueue struct {
-	q []move
-}
-
-func newSearchQueue() *searchQueue {
-	return &searchQueue{
-		q: make([]move, 0, 255),
-	}
-}
-
-func (sq *searchQueue) isEmpty() bool {
-	return len(sq.q) == 0
-}
-
-func (sq *searchQueue) pop() move {
-	ret := sq.q[0]
-	sq.q = sq.q[1:]
-	return ret
-}
-
-func (sq *searchQueue) push(m move) {
-	insertAt := len(sq.q)
-	for i := 0; i < insertAt; i++ {
-		if m.steps < sq.q[i].steps {
-			insertAt = i
-			break
-		}
-	}
-
-	if insertAt >= len(sq.q) {
-		sq.q = append(sq.q, m)
-	} else {
-		sq.q = append(sq.q[:insertAt+1], sq.q[insertAt:]...)
-		sq.q[insertAt] = m
-	}
 }
 
 func (search *searchSet) findNextMovesV2() {
@@ -156,11 +88,11 @@ func (search *searchSet) checkIfPossibleMove(thisMove move) bool {
 		return false
 	}
 
-	if tile >= 'A' && tile <= 'Z' { // Door found
-		if !k.state.keys[tile] {
+	if k.IsDoor(tile) { // Door found
+		if !k.HasKeyUnlocked(tile) {
 			return false
 		}
-	} else if tile >= 'a' && tile <= 'z' { // Key found
+	} else if k.IsKey(tile) && !k.HasKeyUnlocked(tile) { // Key found
 		if existingMove, exists := (*search.retMoves)[tile]; exists {
 			if existingMove.steps <= thisMove.steps {
 				return false // discard this move

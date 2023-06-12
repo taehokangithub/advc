@@ -53,13 +53,29 @@ func (k *keyGrid) String() string {
 	return b.String()
 }
 
-func makeKeyame(c rune) rune {
-	if c >= 'a' && c <= 'z' {
+func (k *keyGrid) MakeKeyname(c rune) rune {
+	if k.IsKey(c) {
 		return 'A' + c - 'a'
-	} else if c >= 'A' && c <= 'Z' {
+	} else if k.IsDoor(c) {
 		return c
 	}
 	panic(fmt.Sprint("Unknown key name", c))
+}
+
+func (k *keyGrid) IsKey(c rune) bool {
+	return c >= 'a' && c <= 'z'
+}
+
+func (k *keyGrid) IsDoor(c rune) bool {
+	return c >= 'A' && c <= 'Z'
+}
+
+func (k *keyGrid) HasKeyUnlocked(c rune) bool {
+	return k.state.keys[k.MakeKeyname(c)]
+}
+
+func (k *keyGrid) SetKeyUnlocked(c rune, unlocked bool) {
+	k.state.keys[k.MakeKeyname(c)] = unlocked
 }
 
 func NewKeyGrid(str string) *keyGrid {
@@ -78,11 +94,10 @@ func NewKeyGrid(str string) *keyGrid {
 			if c == TILE_ME {
 				v := k.grid.Add(TILE_EMPTY)
 				k.state.myLocs = append(k.state.myLocs, v)
-			} else if c >= 'a' && c <= 'z' {
-				keyName := makeKeyame(c)
-				k.state.keys[keyName] = false
-				k.grid.Add(c)
 			} else {
+				if k.IsKey(c) {
+					k.SetKeyUnlocked(c, false)
+				}
 				k.grid.Add(c)
 			}
 		}
@@ -101,18 +116,17 @@ func (k *keyGrid) isMyLoc(v utils.Vector) bool {
 
 func (k *keyGrid) Copy() *keyGrid {
 	copied := keyGrid{
-		grid: k.grid.Copy(),
+		grid: k.grid,
 		state: solveState{
 			myLocs: make([]utils.Vector, len(k.state.myLocs)),
 			keys:   map[rune]bool{},
 		},
+		steps: k.steps,
 	}
 	copy(copied.state.myLocs, k.state.myLocs)
 
-	copied.steps = k.steps
-
 	for k, v := range k.state.keys {
-		copied.state.keys[k] = v
+		copied.SetKeyUnlocked(k, v)
 	}
 	return &copied
 }

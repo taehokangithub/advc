@@ -138,7 +138,7 @@ func TestMinSteps(t *testing.T) {
 		{m8, 32},
 		{m9, 72},
 
-		//{mainCase, 4510},
+		{mainCase, 4510},
 	}
 
 	for i, c := range cases {
