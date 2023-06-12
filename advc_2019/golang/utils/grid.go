@@ -49,6 +49,10 @@ func (g *Grid[T]) Set(v Vector, val T) {
 	if !g.IsValidVector(v) {
 		panic(fmt.Sprintf("Grid.Set, invalid vector %v, whie size is %v", v, g.Size))
 	}
+	g.SetFast(v, val)
+}
+
+func (g *Grid[T]) SetFast(v Vector, val T) {
 	g.data[v.Y][v.X] = val
 }
 
@@ -73,7 +77,7 @@ func (g *Grid[T]) Get(v Vector) T {
 	if !g.IsValidVector(v) {
 		panic(fmt.Sprintf("Grid.Get, invalid vector %v, whie size is %v", v, g.Size))
 	}
-	return g.data[v.Y][v.X]
+	return g.GetFast(v)
 }
 
 func (g *Grid[T]) GetFast(v Vector) T {

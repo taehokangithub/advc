@@ -5,16 +5,16 @@ import (
 )
 
 func (k *keyGrid) FindMinSteps() int {
-	c := NewCandidate()
-	c.AddCandidate(k)
-	for c.Count() > 0 {
-		kptr := c.PopCandidate()
+	c := NewKeyGridHeap()
+	c.PushKeyGrid(k)
+	for c.Len() > 0 {
+		kptr := c.PopKeyGrid()
 		if kptr.HasFoundAllKeys() {
 			return kptr.steps
 		}
 		possibleStates := kptr.findPossibleMoves()
 		for _, ps := range possibleStates {
-			c.AddCandidate(ps)
+			c.PushKeyGrid(ps)
 		}
 	}
 	return 0
@@ -50,18 +50,29 @@ func (search *searchSet) findNextMovesV2() {
 
 	for !sq.isEmpty() {
 		thisMove := sq.pop()
-		//fmt.Println("* popped loc", thisMove.loc, "got steps", thisMove.steps+search.k.steps, "qlen", len(sq.q), "isempty", sq.isEmpty())
 		search.setVisited(thisMove.loc)
 		possibleMoves := make([]move, 0, 4)
 		for _, dvec := range utils.DIR_VECTORS {
+			nextLoc := thisMove.loc.GetAdded(dvec)
+			tile := search.k.grid.GetFast(nextLoc)
+			if tile == TILE_WALL {
+				continue
+			}
+			if search.isVisited(nextLoc) {
+				continue
+			}
 			nextMove := move{
 				myLocIndex: thisMove.myLocIndex,
 				steps:      thisMove.steps + 1,
 				loc:        thisMove.loc.GetAdded(dvec),
 			}
-			if search.checkIfPossibleMove(nextMove) {
+			if tile == TILE_EMPTY || search.checkIfPossibleMove(nextMove, tile) {
 				possibleMoves = append(possibleMoves, nextMove)
 			}
+		}
+
+		if search.hasSearchFinished() {
+			return
 		}
 
 		for i := 0; i < len(possibleMoves); i++ {
@@ -70,17 +81,8 @@ func (search *searchSet) findNextMovesV2() {
 	}
 }
 
-func (search *searchSet) checkIfPossibleMove(thisMove move) bool {
+func (search *searchSet) checkIfPossibleMove(thisMove move, tile rune) bool {
 	k := search.k
-
-	tile := k.grid.GetFast(thisMove.loc)
-	if tile == TILE_WALL {
-		return false
-	}
-
-	if search.isVisited(thisMove.loc) {
-		return false
-	}
 
 	if k.IsDoor(tile) { // Door found
 		return k.HasKeyUnlocked(tile)

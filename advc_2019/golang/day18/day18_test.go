@@ -89,7 +89,7 @@ func TestCopyGrid(t *testing.T) {
 }
 
 func TestCandidate(t *testing.T) {
-	c := NewCandidate()
+	c := NewKeyGridHeap()
 	k := NewKeyGrid(m1)
 	k.steps = 5
 	k2 := k.Copy()
@@ -98,14 +98,23 @@ func TestCandidate(t *testing.T) {
 	k3 := k2.Copy()
 	k3.steps = 4
 	k3.state.myLocs = append(k2.state.myLocs, utils.NewVector2D(2, 5))
+	k4 := k3.Copy()
+	k4.state.keys['k'] = true
+	k4.steps = 6
+	k5 := k4.Copy()
+	k5.state.keys['j'] = true
+	k5.steps = 1
 
-	c.AddCandidate(k3)
-	c.AddCandidate(k)
-	c.AddCandidate(k2)
+	c.PushKeyGrid(k)
+	c.PushKeyGrid(k2)
+	c.PushKeyGrid(k3)
+	c.PushKeyGrid(k4)
+	c.PushKeyGrid(k5)
 
-	expected := []int{3, 4, 5}
+	expected := []int{1, 3, 4, 5, 6}
 	for i := 0; i < len(expected); i++ {
-		p := c.PopCandidate()
+		p := c.PopKeyGrid()
+		fmt.Println("got ", p.steps)
 		if p == nil {
 			t.Error("case", i, "popped no candidate")
 		} else if p.steps != expected[i] {
