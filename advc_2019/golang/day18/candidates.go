@@ -37,8 +37,6 @@ func (c *candidate) AddCandidate(k *keyGrid) {
 	}
 	if insertAt >= len(c.arr) {
 		c.arr = append(c.arr, kstr)
-	} else if insertAt == 0 {
-		c.arr = append([]string{kstr}, c.arr...)
 	} else {
 		c.arr = append(c.arr[:insertAt+1], c.arr[insertAt:]...)
 		c.arr[insertAt] = kstr
@@ -48,9 +46,6 @@ func (c *candidate) AddCandidate(k *keyGrid) {
 func (c *candidate) PopCandidate() *keyGrid {
 	poppedStr := c.arr[0]
 	popped := c.m[poppedStr]
-
-	//fmt.Println(popped)
-	//fmt.Println("steps ", popped.steps, popped.state.String())
 
 	c.arr = c.arr[1:]
 	delete(c.m, poppedStr)

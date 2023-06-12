@@ -116,3 +116,12 @@ func (k *keyGrid) Copy() *keyGrid {
 	}
 	return &copied
 }
+
+func (k *keyGrid) HasFoundAllKeys() bool {
+	for _, v := range k.state.keys {
+		if !v {
+			return false
+		}
+	}
+	return true
+}

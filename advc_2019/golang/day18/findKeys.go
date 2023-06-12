@@ -1,7 +1,6 @@
 package day18
 
 import (
-	"fmt"
 	"taeho/advc19_go/utils"
 )
 
@@ -15,6 +14,7 @@ type searchSet struct {
 	k        *keyGrid
 	visited  *utils.Grid[bool]
 	retMoves *map[rune]move
+	thisMove move
 }
 
 func newSearchSet(k *keyGrid) *searchSet {
@@ -31,25 +31,6 @@ func (search *searchSet) isVisited(v utils.Vector) bool {
 
 func (search *searchSet) setVisited(v utils.Vector) {
 	search.visited.Set(v, true)
-}
-
-func (search *searchSet) branch() *searchSet {
-	s := searchSet{
-		k:        search.k,
-		visited:  search.visited.Copy(),
-		retMoves: search.retMoves,
-	}
-
-	return &s
-}
-
-func (k *keyGrid) HasFoundAllKeys() bool {
-	for _, v := range k.state.keys {
-		if !v {
-			return false
-		}
-	}
-	return true
 }
 
 func (k *keyGrid) FindMinSteps() int {
@@ -72,16 +53,14 @@ func findPossibleMoves(k *keyGrid) []*keyGrid {
 	ret := make([]*keyGrid, 0)
 	search := newSearchSet(k)
 	for i, myloc := range k.state.myLocs {
-		nextMove := move{
+		search.thisMove = move{
 			myLocIndex: i,
 			loc:        myloc,
 			steps:      0,
 		}
 
-		search.findNextMoves(nextMove)
+		search.findNextMovesV2()
 	}
-
-	fmt.Println("searching steps", k.steps, "found", len(*search.retMoves), "moves")
 
 	for _, move := range *search.retMoves {
 		ck := k.Copy()
@@ -96,11 +75,52 @@ func findPossibleMoves(k *keyGrid) []*keyGrid {
 	return ret
 }
 
-func (search *searchSet) findNextMoves(thisMove move) {
-	for {
+type searchQueue struct {
+	q []move
+}
+
+func newSearchQueue() *searchQueue {
+	return &searchQueue{
+		q: make([]move, 0, 255),
+	}
+}
+
+func (sq *searchQueue) isEmpty() bool {
+	return len(sq.q) == 0
+}
+
+func (sq *searchQueue) pop() move {
+	ret := sq.q[0]
+	sq.q = sq.q[1:]
+	return ret
+}
+
+func (sq *searchQueue) push(m move) {
+	insertAt := len(sq.q)
+	for i := 0; i < insertAt; i++ {
+		if m.steps < sq.q[i].steps {
+			insertAt = i
+			break
+		}
+	}
+
+	if insertAt >= len(sq.q) {
+		sq.q = append(sq.q, m)
+	} else {
+		sq.q = append(sq.q[:insertAt+1], sq.q[insertAt:]...)
+		sq.q[insertAt] = m
+	}
+}
+
+func (search *searchSet) findNextMovesV2() {
+	sq := newSearchQueue()
+	sq.push(search.thisMove)
+
+	for !sq.isEmpty() {
+		thisMove := sq.pop()
+		//fmt.Println("* popped loc", thisMove.loc, "got steps", thisMove.steps+search.k.steps, "qlen", len(sq.q), "isempty", sq.isEmpty())
 		search.setVisited(thisMove.loc)
 		possibleMoves := make([]move, 0, 4)
-
 		for _, dvec := range utils.DIR_VECTORS {
 			nextMove := move{
 				myLocIndex: thisMove.myLocIndex,
@@ -113,13 +133,11 @@ func (search *searchSet) findNextMoves(thisMove move) {
 		}
 
 		numPossibleMoves := len(possibleMoves)
-		if numPossibleMoves == 0 {
-			return
+		if numPossibleMoves > 0 {
+			for i := 0; i < numPossibleMoves; i++ {
+				sq.push(possibleMoves[i])
+			}
 		}
-		for i := 1; i < numPossibleMoves; i++ {
-			search.branch().findNextMoves(possibleMoves[i])
-		}
-		thisMove = possibleMoves[0]
 	}
 }
 
