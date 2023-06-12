@@ -115,10 +115,6 @@ func TestCandidate(t *testing.T) {
 	for i := 0; i < len(expected); i++ {
 		p := c.PopKeyGrid()
 		if p == nil {
-			panic("")
-		}
-		fmt.Println("got ", p.steps)
-		if p == nil {
 			t.Error("case", i, "popped no candidate")
 		} else if p.steps != expected[i] {
 			t.Error("case", i, "got steps", p.steps, "expected", expected[i])
