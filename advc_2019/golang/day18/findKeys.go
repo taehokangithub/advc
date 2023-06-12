@@ -64,22 +64,16 @@ func (search *searchSet) findNextMovesV2() {
 			}
 		}
 
-		numPossibleMoves := len(possibleMoves)
-		if numPossibleMoves > 0 {
-			for i := 0; i < numPossibleMoves; i++ {
-				sq.push(possibleMoves[i])
-			}
+		for i := 0; i < len(possibleMoves); i++ {
+			sq.push(possibleMoves[i])
 		}
 	}
 }
 
 func (search *searchSet) checkIfPossibleMove(thisMove move) bool {
 	k := search.k
-	if !k.grid.IsValidVector(thisMove.loc) {
-		return false
-	}
 
-	tile := k.grid.Get(thisMove.loc)
+	tile := k.grid.GetFast(thisMove.loc)
 	if tile == TILE_WALL {
 		return false
 	}
@@ -89,10 +83,10 @@ func (search *searchSet) checkIfPossibleMove(thisMove move) bool {
 	}
 
 	if k.IsDoor(tile) { // Door found
-		if !k.HasKeyUnlocked(tile) {
-			return false
-		}
-	} else if k.IsKey(tile) && !k.HasKeyUnlocked(tile) { // Key found
+		return k.HasKeyUnlocked(tile)
+	}
+
+	if k.IsKey(tile) && !k.HasKeyUnlocked(tile) { // Key found
 		if existingMove, exists := (*search.retMoves)[tile]; exists {
 			if existingMove.steps <= thisMove.steps {
 				return false // discard this move

@@ -76,6 +76,10 @@ func (g *Grid[T]) Get(v Vector) T {
 	return g.data[v.Y][v.X]
 }
 
+func (g *Grid[T]) GetFast(v Vector) T {
+	return g.data[v.Y][v.X]
+}
+
 func (g *Grid[T]) Foreach(cb func(Vector, T)) {
 	for Y := 0; Y < g.Size.Y; Y++ {
 		for X := 0; X < g.Size.X; X++ {

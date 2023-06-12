@@ -4,3 +4,5 @@ advc_2019/golang_src/advc19_go
 advc_2019/golang/advc19_go.exe
 advc_2019/golang/result.txt
 advc_2019/golang/profile.prof
+advc_2019/golang/day18.test
+*.test
