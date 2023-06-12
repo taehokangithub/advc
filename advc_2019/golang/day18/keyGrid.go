@@ -8,10 +8,9 @@ import (
 )
 
 const (
-	TILE_WALL    rune = '#'
-	TILE_EMPTY   rune = '.'
-	TILE_ME      rune = '@'
-	TILE_VISITED rune = '*'
+	TILE_WALL  rune = '#'
+	TILE_EMPTY rune = '.'
+	TILE_ME    rune = '@'
 )
 
 type solveState struct {
@@ -23,12 +22,6 @@ type keyGrid struct {
 	grid  *utils.Grid[rune]
 	steps int
 	state solveState
-}
-
-type move struct {
-	myLocIndex int
-	keyLoc     utils.Vector
-	steps      int
 }
 
 func (s *solveState) String() string {

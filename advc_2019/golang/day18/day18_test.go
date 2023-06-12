@@ -1,6 +1,7 @@
 package day18
 
 import (
+	"fmt"
 	"os"
 	"taeho/advc19_go/utils"
 	"testing"
@@ -123,6 +124,7 @@ func TestMinSteps(t *testing.T) {
 		panic(err)
 	}
 	mainCase := string(file)
+	fmt.Println(mainCase[:1]) // just to avoid "unused" error in case of commenting out
 
 	cases := []Test{
 		{m1, 8},
@@ -136,7 +138,7 @@ func TestMinSteps(t *testing.T) {
 		{m8, 32},
 		{m9, 72},
 
-		{mainCase, 4510},
+		//{mainCase, 4510},
 	}
 
 	for i, c := range cases {

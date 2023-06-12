@@ -54,7 +54,7 @@ func runAll() {
 	measureTime(day15.Solve)
 	measureTime(day16.Solve)
 	measureTime(day17.Solve)
-	measureTime(day18.Solve)
+	measureTime(day18.Solve) // 48 seconds
 	etc.FinalChecker()
 }
 
