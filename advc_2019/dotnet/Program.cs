@@ -18,12 +18,12 @@ Advc2019.Problem13.Start();
 Advc2019.Problem15.Start();
 Advc2019.Problem16.Start();
 Advc2019.Problem17.Start();
-Advc2019.Problem18.Start();
+Advc2019.Problem18.Start(); // 6 minutes
 #endif 
 
 var now = DateTime.Now;
 
-Advc2019.Problem16.Start();
+Advc2019.Problem18.Start();
 
 Console.WriteLine($"Elapsed : {(DateTime.Now - now).TotalMilliseconds}ms");
 
