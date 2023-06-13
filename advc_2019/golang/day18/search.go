@@ -24,7 +24,7 @@ func (k *keyGrid) findPossibleMoves() []*keyGrid {
 	ret := make([]*keyGrid, 0, 64)
 	search := newSearchSet(k)
 	for i, myloc := range k.state.myLocs {
-		search.thisMove = move{
+		search.thisMove = &move{
 			myLocIndex: i,
 			loc:        myloc,
 			steps:      0,
@@ -45,14 +45,15 @@ func (k *keyGrid) findPossibleMoves() []*keyGrid {
 }
 
 func (search *searchSet) findNextMovesV2() {
-	sq := newSearchQueue()
-	sq.push(search.thisMove)
+	//sq := newSearchMoveHeap() // How come this is slower? 6.5 sec
+	sq := newSearchQueue() // 5 sec?
+	sq.PushMove(search.thisMove)
 
-	for !sq.isEmpty() {
-		thisMove := sq.pop()
+	for !sq.IsEmpty() {
+		thisMove := sq.PopMove()
 		search.setVisited(thisMove.loc)
 		thisMove.steps++
-		possibleMoves := make([]move, 0, 4)
+		possibleMoves := make([]*move, 0, 4)
 		for _, dvec := range utils.DIR_VECTORS {
 			nextLoc := thisMove.loc.GetAdded(dvec)
 			tile := search.k.grid.GetFast(nextLoc)
@@ -62,7 +63,7 @@ func (search *searchSet) findNextMovesV2() {
 			if search.isVisited(nextLoc) {
 				continue
 			}
-			nextMove := move{
+			nextMove := &move{
 				myLocIndex: thisMove.myLocIndex,
 				steps:      thisMove.steps,
 				loc:        nextLoc,
@@ -77,12 +78,12 @@ func (search *searchSet) findNextMovesV2() {
 		}
 
 		for i := 0; i < len(possibleMoves); i++ {
-			sq.push(possibleMoves[i])
+			sq.PushMove(possibleMoves[i])
 		}
 	}
 }
 
-func (search *searchSet) checkIfPossibleMove(thisMove move, tile rune) bool {
+func (search *searchSet) checkIfPossibleMove(thisMove *move, tile rune) bool {
 	k := search.k
 
 	if k.IsDoor(tile) { // Door found

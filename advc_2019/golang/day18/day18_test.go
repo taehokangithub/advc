@@ -74,6 +74,36 @@ const m9 = `#############
 #o#m..#i#jk.#
 #############`
 
+type searchQueueInterface interface {
+	PushMove(*move)
+	PopMove() *move
+}
+
+func testSearchQueueInterface(t *testing.T, sq searchQueueInterface) {
+	samples := []int{3, 7, 5, 8, 9, 11, 2, 3, 5}
+	expected := []int{2, 3, 3, 5, 5, 7, 8, 9, 11}
+	for _, s := range samples {
+		sq.PushMove(&move{
+			steps: s,
+		})
+	}
+
+	for i := 0; i < len(expected); i++ {
+		got := sq.PopMove().steps
+		if got != expected[i] {
+			t.Errorf("TestQueue at %d got %d expected %d", i, got, expected[i])
+		}
+	}
+}
+
+func TestSearchQueue(t *testing.T) {
+	testSearchQueueInterface(t, newSearchQueue())
+}
+
+func TestSearchHeap(t *testing.T) {
+	testSearchQueueInterface(t, newSearchMoveHeap())
+}
+
 func TestCopyGrid(t *testing.T) {
 	k := NewKeyGrid(m2)
 	k.steps = 123
