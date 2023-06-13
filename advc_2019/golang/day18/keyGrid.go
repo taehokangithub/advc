@@ -59,7 +59,7 @@ func (k *keyGrid) MakeKeyname(c rune) rune {
 	} else if k.IsDoor(c) {
 		return c
 	}
-	panic(fmt.Sprint("Unknown key name", c))
+	panic(fmt.Sprint("Unknown key name ", c))
 }
 
 func (k *keyGrid) IsKey(c rune) bool {

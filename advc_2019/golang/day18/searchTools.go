@@ -6,7 +6,6 @@ type move struct {
 	myLocIndex int
 	loc        utils.Vector
 	steps      int
-	heapIndex  int
 }
 
 type searchSet struct {

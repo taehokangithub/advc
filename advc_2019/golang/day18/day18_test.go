@@ -162,7 +162,13 @@ func TestMinSteps(t *testing.T) {
 		panic(err)
 	}
 	mainCase := string(file)
-	fmt.Println(mainCase[:1]) // just to avoid "unused" error in case of commenting out
+	file, err = os.ReadFile("../../data/input18B.txt")
+	if err != nil {
+		panic(err)
+	}
+
+	mainCase2 := string(file)
+	fmt.Println(mainCase[:1], mainCase2[:1]) // just to avoid "unused" error in case of commenting out
 
 	cases := []Test{
 		{m1, 8},
@@ -177,6 +183,7 @@ func TestMinSteps(t *testing.T) {
 		{m9, 72},
 
 		{mainCase, 4510},
+		{mainCase2, 1816},
 	}
 
 	for i, c := range cases {

@@ -7,7 +7,7 @@ import (
 
 type keyGridHeapItem struct {
 	k     *keyGrid
-	index int
+	index int // Beware! the manually managed index is required when you need to call heap.Fix()
 }
 
 type keyGridHeap struct {

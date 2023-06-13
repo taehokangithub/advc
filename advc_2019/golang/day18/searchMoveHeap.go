@@ -2,6 +2,7 @@ package day18
 
 import (
 	"container/heap"
+	"taeho/advc19_go/utils"
 )
 
 const QueueCapacity = 255
@@ -26,13 +27,10 @@ func (s *searchMoveHeap) Less(i, j int) bool {
 
 func (s *searchMoveHeap) Swap(i, j int) {
 	s.arr[i], s.arr[j] = s.arr[j], s.arr[i]
-	s.arr[i].heapIndex = i
-	s.arr[j].heapIndex = j
 }
 
 func (s *searchMoveHeap) Push(x interface{}) {
 	m := x.(*move)
-	m.heapIndex = len(s.arr)
 	s.arr = append(s.arr, m)
 }
 
@@ -41,7 +39,6 @@ func (s *searchMoveHeap) Pop() interface{} {
 	m := s.arr[index]
 
 	s.arr = s.arr[:index]
-	m.heapIndex = -1
 	return m
 }
 
@@ -55,6 +52,31 @@ func (s *searchMoveHeap) PopMove() *move {
 
 func (s *searchMoveHeap) IsEmpty() bool {
 	return s.Len() == 0
+}
+
+// -------------------------------------------------------
+// Search Ring Queue
+// -------------------------------------------------------
+type searchRingQueue struct {
+	q *utils.RingQueue[*move]
+}
+
+func newSearchRingQueue(maxSize int) *searchRingQueue {
+	return &searchRingQueue{
+		q: utils.NewRingQueue[*move](maxSize),
+	}
+}
+
+func (s *searchRingQueue) PushMove(m *move) {
+	s.q.Push(m)
+}
+
+func (s *searchRingQueue) PopMove() *move {
+	return s.q.Pop()
+}
+
+func (s *searchRingQueue) IsEmpty() bool {
+	return s.q.IsEmpty()
 }
 
 // -------------------------------------------------------

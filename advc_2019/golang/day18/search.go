@@ -4,7 +4,11 @@ import (
 	"taeho/advc19_go/utils"
 )
 
+var MovePool *utils.MemoryPool[move]
+
 func (k *keyGrid) FindMinSteps() int {
+	MovePool = utils.NewMemoryPool[move](k.grid.Size.X * k.grid.Size.Y * 20)
+
 	c := NewKeyGridHeap()
 	c.PushKeyGrid(k)
 	for c.Len() > 0 {
@@ -23,6 +27,7 @@ func (k *keyGrid) FindMinSteps() int {
 func (k *keyGrid) findPossibleMoves() []*keyGrid {
 	ret := make([]*keyGrid, 0, 64)
 	search := newSearchSet(k)
+	MovePool.Reset()
 	for i, myloc := range k.state.myLocs {
 		search.thisMove = &move{
 			myLocIndex: i,
@@ -45,8 +50,8 @@ func (k *keyGrid) findPossibleMoves() []*keyGrid {
 }
 
 func (search *searchSet) findNextMovesV2() {
-	//sq := newSearchMoveHeap() // How come this is slower? 6.5 sec
-	sq := newSearchQueue() // 5 sec?
+	sq := newSearchRingQueue(search.k.grid.Size.X * search.k.grid.Size.Y)
+
 	sq.PushMove(search.thisMove)
 
 	for !sq.IsEmpty() {
@@ -63,11 +68,11 @@ func (search *searchSet) findNextMovesV2() {
 			if search.isVisited(nextLoc) {
 				continue
 			}
-			nextMove := &move{
-				myLocIndex: thisMove.myLocIndex,
-				steps:      thisMove.steps,
-				loc:        nextLoc,
-			}
+			nextMove := MovePool.New()
+			nextMove.myLocIndex = thisMove.myLocIndex
+			nextMove.steps = thisMove.steps
+			nextMove.loc = nextLoc
+
 			if tile == TILE_EMPTY || search.checkIfPossibleMove(nextMove, tile) {
 				possibleMoves = append(possibleMoves, nextMove)
 			}
