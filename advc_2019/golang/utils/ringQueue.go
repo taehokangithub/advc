@@ -18,7 +18,12 @@ func NewRingQueue[T interface{}](maxSize int) *RingQueue[T] {
 }
 
 func (q *RingQueue[T]) getNextIndex(index int) int {
-	return (index + 1) % q.maxSize
+	// Avoided using modular operation
+	index++
+	if index >= q.maxSize {
+		index -= q.maxSize
+	}
+	return index
 }
 
 func (q *RingQueue[T]) IsFull() bool {

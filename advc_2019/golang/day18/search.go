@@ -53,14 +53,19 @@ func (search *searchSet) findNextMovesV2() {
 	sq := newSearchRingQueue(search.k.grid.Size.X * search.k.grid.Size.Y)
 
 	sq.PushMove(search.thisMove)
+	possibleMoves := make([]*move, 0, 4)
 
 	for !sq.IsEmpty() {
 		thisMove := sq.PopMove()
-		search.setVisited(thisMove.loc)
+		search.setVisited(&thisMove.loc)
 		thisMove.steps++
-		possibleMoves := make([]*move, 0, 4)
+		possibleMoves = possibleMoves[:0]
+
 		for _, dvec := range utils.DIR_VECTORS {
-			nextLoc := thisMove.loc.GetAdded(dvec)
+			nextLoc := &utils.Vector{
+				X: thisMove.loc.X + dvec.X,
+				Y: thisMove.loc.Y + dvec.Y,
+			}
 			tile := search.k.grid.GetFast(nextLoc)
 			if tile == TILE_WALL {
 				continue
@@ -71,7 +76,7 @@ func (search *searchSet) findNextMovesV2() {
 			nextMove := MovePool.New()
 			nextMove.myLocIndex = thisMove.myLocIndex
 			nextMove.steps = thisMove.steps
-			nextMove.loc = nextLoc
+			nextMove.loc = *nextLoc
 
 			if tile == TILE_EMPTY || search.checkIfPossibleMove(nextMove, tile) {
 				possibleMoves = append(possibleMoves, nextMove)

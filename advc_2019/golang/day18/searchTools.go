@@ -35,10 +35,10 @@ func (search *searchSet) hasSearchFinished() bool {
 	return search.unlockedKeys == len(*search.retMoves)
 }
 
-func (search *searchSet) isVisited(v utils.Vector) bool {
+func (search *searchSet) isVisited(v *utils.Vector) bool {
 	return search.visited.GetFast(v)
 }
 
-func (search *searchSet) setVisited(v utils.Vector) {
+func (search *searchSet) setVisited(v *utils.Vector) {
 	search.visited.SetFast(v, true)
 }
