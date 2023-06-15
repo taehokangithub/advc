@@ -12,7 +12,7 @@ type vertex struct {
 	edges []edge
 }
 
-func newVertext(loc *utils.Vector) *vertex {
+func newVertex(loc *utils.Vector) *vertex {
 	return &vertex{
 		loc:   *loc,
 		edges: make([]edge, 0, 60),
@@ -20,23 +20,37 @@ func newVertext(loc *utils.Vector) *vertex {
 }
 
 type keyGraph struct {
-	vertices []*vertex
+	vertexMap map[string]*vertex
+	k         *keyGrid
 }
 
 func newKeyGraph(k *keyGrid) *keyGraph {
 	g := &keyGraph{
-		vertices: make([]*vertex, 0, len(k.state.keys)*2+len(k.state.myLocs)+10),
+		vertexMap: make(map[string]*vertex),
+		k:         k,
 	}
 
 	k.grid.Foreach(func(loc utils.Vector, val rune) {
 		if k.IsKey(val) || k.IsDoor(val) {
-			g.vertices = append(g.vertices, newVertext(&loc))
+			g.vertexMap[loc.String()] = newVertex(&loc)
 		}
 	})
 
-	for _, l := range k.state.myLocs {
-		g.vertices = append(g.vertices, newVertext(&l))
+	for _, loc := range k.state.myLocs {
+		g.vertexMap[loc.String()] = newVertex(&loc)
 	}
 
 	return g
 }
+
+/*
+func (g *keyGraph) buildEdges() {
+	type gmove struct {
+		origin *vertex
+		loc    *utils.Vector
+		dist   int
+	}
+	sq := utils.NewRingQueue[gmove](g.k.grid.Size.X * g.k.grid.Size.Y)
+
+}
+*/
