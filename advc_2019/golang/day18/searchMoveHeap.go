@@ -2,7 +2,6 @@ package day18
 
 import (
 	"container/heap"
-	"taeho/advc19_go/utils"
 )
 
 const QueueCapacity = 255
@@ -52,31 +51,6 @@ func (s *searchMoveHeap) PopMove() *move {
 
 func (s *searchMoveHeap) IsEmpty() bool {
 	return s.Len() == 0
-}
-
-// -------------------------------------------------------
-// Search Ring Queue
-// -------------------------------------------------------
-type searchRingQueue struct {
-	q *utils.RingQueue[*move]
-}
-
-func newSearchRingQueue(maxSize int) *searchRingQueue {
-	return &searchRingQueue{
-		q: utils.NewRingQueue[*move](maxSize),
-	}
-}
-
-func (s *searchRingQueue) PushMove(m *move) {
-	s.q.Push(m)
-}
-
-func (s *searchRingQueue) PopMove() *move {
-	return s.q.Pop()
-}
-
-func (s *searchRingQueue) IsEmpty() bool {
-	return s.q.IsEmpty()
 }
 
 // -------------------------------------------------------

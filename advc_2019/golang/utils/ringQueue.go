@@ -53,3 +53,9 @@ func (q *RingQueue[T]) Pop() T {
 func (q *RingQueue[T]) Len() int {
 	return q.len
 }
+
+func (q *RingQueue[T]) Clear() {
+	q.head = 0
+	q.tail = 0
+	q.len = 0
+}

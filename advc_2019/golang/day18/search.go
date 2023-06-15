@@ -5,10 +5,11 @@ import (
 )
 
 var MovePool *utils.MemoryPool[move]
+var SearchRQ *utils.RingQueue[*move]
 
 func (k *keyGrid) FindMinSteps() int {
 	MovePool = utils.NewMemoryPool[move](k.grid.Size.X * k.grid.Size.Y * 20)
-
+	SearchRQ = utils.NewRingQueue[*move](k.grid.Size.X * k.grid.Size.Y)
 	c := NewKeyGridHeap()
 	c.PushKeyGrid(k)
 	for c.Len() > 0 {
@@ -50,13 +51,14 @@ func (k *keyGrid) findPossibleMoves() []*keyGrid {
 }
 
 func (search *searchSet) findNextMovesV2() {
-	sq := newSearchRingQueue(search.k.grid.Size.X * search.k.grid.Size.Y)
+	sq := SearchRQ
+	sq.Clear()
 
-	sq.PushMove(search.thisMove)
+	sq.Push(search.thisMove)
 	possibleMoves := make([]*move, 0, 4)
 
 	for !sq.IsEmpty() {
-		thisMove := sq.PopMove()
+		thisMove := sq.Pop()
 		search.setVisited(&thisMove.loc)
 		thisMove.steps++
 		possibleMoves = possibleMoves[:0]
@@ -88,7 +90,7 @@ func (search *searchSet) findNextMovesV2() {
 		}
 
 		for i := 0; i < len(possibleMoves); i++ {
-			sq.PushMove(possibleMoves[i])
+			sq.Push(possibleMoves[i])
 		}
 	}
 }
