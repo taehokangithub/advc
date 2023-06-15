@@ -22,6 +22,7 @@ type keyGrid struct {
 	grid  *utils.Grid[rune]
 	steps int
 	state solveState
+	graph *keyGraph
 }
 
 func (s *solveState) String() string {
@@ -59,7 +60,7 @@ func (k *keyGrid) MakeKeyname(c rune) rune {
 	} else if k.IsDoor(c) {
 		return c
 	}
-	panic(fmt.Sprint("Unknown key name ", c))
+	panic(fmt.Sprint("Unknown key name ", string(c)))
 }
 
 func (k *keyGrid) IsKey(c rune) bool {
@@ -102,6 +103,7 @@ func NewKeyGrid(str string) *keyGrid {
 			}
 		}
 	}
+
 	return &k
 }
 
@@ -122,6 +124,7 @@ func (k *keyGrid) Copy() *keyGrid {
 			keys:   map[rune]bool{},
 		},
 		steps: k.steps,
+		graph: k.graph,
 	}
 	copy(copied.state.myLocs, k.state.myLocs)
 

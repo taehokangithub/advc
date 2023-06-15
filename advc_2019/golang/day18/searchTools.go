@@ -8,6 +8,7 @@ type move struct {
 	steps      int
 }
 
+// These were used for V2
 type searchSet struct {
 	k            *keyGrid
 	visited      *utils.Grid[bool]

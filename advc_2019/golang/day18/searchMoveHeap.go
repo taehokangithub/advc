@@ -16,6 +16,10 @@ func newSearchMoveHeap() *searchMoveHeap {
 	}
 }
 
+func (s *searchMoveHeap) Clear() {
+	s.arr = s.arr[0:0]
+}
+
 func (s *searchMoveHeap) Len() int {
 	return len(s.arr)
 }

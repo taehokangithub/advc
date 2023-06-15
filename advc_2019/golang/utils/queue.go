@@ -19,3 +19,7 @@ func (q *Queue[T]) Pop() T {
 	q.data = q.data[1:]
 	return t
 }
+
+func (q *Queue[T]) Len() int {
+	return len(q.data)
+}

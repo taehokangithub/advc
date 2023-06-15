@@ -1,15 +1,13 @@
 package day18
 
-import (
-	"taeho/advc19_go/utils"
-)
-
-var MovePool *utils.MemoryPool[move]
-var SearchRQ *utils.RingQueue[*move]
+var SearchMH *searchMoveHeap
 
 func (k *keyGrid) FindMinSteps() int {
-	MovePool = utils.NewMemoryPool[move](k.grid.Size.X * k.grid.Size.Y * 20)
-	SearchRQ = utils.NewRingQueue[*move](k.grid.Size.X * k.grid.Size.Y)
+	SearchMH = newSearchMoveHeap()
+
+	k.graph = NewKeyGraph(k)
+	k.graph.BuildEdges()
+
 	c := NewKeyGridHeap()
 	c.PushKeyGrid(k)
 	for c.Len() > 0 {
@@ -17,7 +15,7 @@ func (k *keyGrid) FindMinSteps() int {
 		if kptr.HasFoundAllKeys() {
 			return kptr.steps
 		}
-		possibleStates := kptr.findPossibleMoves()
+		possibleStates := kptr.findPossibleMovesV3()
 		for _, ps := range possibleStates {
 			c.PushKeyGrid(ps)
 		}
@@ -25,7 +23,51 @@ func (k *keyGrid) FindMinSteps() int {
 	return 0
 }
 
-func (k *keyGrid) findPossibleMoves() []*keyGrid {
+func (k *keyGrid) findPossibleMovesV3() []*keyGrid {
+	ret := make([]*keyGrid, 0, 64)
+
+	for i, myloc := range k.state.myLocs {
+		SearchMH.Clear()
+		visited := map[*vertex]bool{}
+		SearchMH.PushMove(&move{
+			loc:   myloc,
+			steps: 0,
+		})
+		for SearchMH.Len() > 0 {
+			mv := SearchMH.PopMove()
+			vt := k.graph.vertexMap[mv.loc.String()]
+			visited[vt] = true
+			for targetVertex, dist := range vt.edges {
+				if visited[targetVertex] {
+					continue
+				} else if targetVertex.tile == TILE_ME || k.HasKeyUnlocked(targetVertex.tile) {
+					SearchMH.PushMove(&move{
+						loc:   targetVertex.loc,
+						steps: mv.steps + dist,
+					})
+				} else if k.IsKey(targetVertex.tile) {
+					visited[targetVertex] = true
+					ck := k.Copy()
+					ck.SetKeyUnlocked(targetVertex.tile, true)
+					ck.steps += mv.steps + dist
+					ck.state.myLocs[i] = targetVertex.loc
+					ret = append(ret, ck)
+				}
+			}
+		}
+	}
+
+	return ret
+}
+
+/* Proved to be slower - but leaving here for reference
+var MovePool *utils.MemoryPool[move]
+var SearchRQ *utils.RingQueue[*move]
+// Also needs these initialisations somewhere
+	//MovePool = utils.NewMemoryPool[move](k.grid.Size.X * k.grid.Size.Y * 20)
+	//SearchRQ = utils.NewRingQueue[*move](k.grid.Size.X * k.grid.Size.Y)
+
+func (k *keyGrid) findPossibleMovesV2() []*keyGrid {
 	ret := make([]*keyGrid, 0, 64)
 	search := newSearchSet(k)
 	MovePool.Reset()
@@ -39,12 +81,12 @@ func (k *keyGrid) findPossibleMoves() []*keyGrid {
 		search.findNextMovesV2()
 	}
 
-	for _, move := range *search.retMoves {
+	for _, mv := range *search.retMoves {
 		ck := k.Copy()
-		tile := ck.grid.Get(move.loc)
+		tile := ck.grid.Get(mv.loc)
 		ck.SetKeyUnlocked(tile, true)
-		ck.steps += move.steps
-		ck.state.myLocs[move.myLocIndex] = move.loc
+		ck.steps += mv.steps
+		ck.state.myLocs[mv.myLocIndex] = mv.loc
 		ret = append(ret, ck)
 	}
 	return ret
@@ -114,3 +156,4 @@ func (search *searchSet) checkIfPossibleMove(thisMove *move, tile rune) bool {
 
 	return true
 }
+*/

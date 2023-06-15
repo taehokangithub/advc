@@ -152,6 +152,25 @@ func TestCandidate(t *testing.T) {
 	}
 }
 
+func TestKeyGraphBuild(t *testing.T) {
+	strs := []string{m1, m2, m3, m4, m5, m6, m7, m8, m9}
+	for i, str := range strs {
+		k := NewKeyGrid(str)
+		g := NewKeyGraph(k)
+		g.BuildEdges()
+
+		for _, vt := range g.vertexMap {
+			for targetVertex, dist := range vt.edges {
+				if targetDist, ok := targetVertex.edges[vt]; !ok {
+					t.Errorf("Case [%d] %v target %v doesn't have a return edge", i, vt, targetVertex)
+				} else if targetDist != dist {
+					t.Errorf("Case [%d] %v - %v dist different : %d vs %d", i, vt, targetVertex, dist, targetDist)
+				}
+			}
+		}
+	}
+}
+
 func TestMinSteps(t *testing.T) {
 	type Test struct {
 		str   string
