@@ -7,12 +7,14 @@ import (
 const QueueCapacity = 255
 
 type searchMoveHeap struct {
-	arr []*move
+	arr     []*move
+	moveMap map[string]*move
 }
 
 func newSearchMoveHeap() *searchMoveHeap {
 	return &searchMoveHeap{
-		arr: make([]*move, 0, QueueCapacity),
+		arr:     make([]*move, 0, QueueCapacity),
+		moveMap: map[string]*move{},
 	}
 }
 
@@ -30,27 +32,42 @@ func (s *searchMoveHeap) Less(i, j int) bool {
 
 func (s *searchMoveHeap) Swap(i, j int) {
 	s.arr[i], s.arr[j] = s.arr[j], s.arr[i]
+	s.arr[i].index = i
+	s.arr[j].index = j
 }
 
 func (s *searchMoveHeap) Push(x interface{}) {
 	m := x.(*move)
+	m.index = len(s.arr)
 	s.arr = append(s.arr, m)
 }
 
 func (s *searchMoveHeap) Pop() interface{} {
 	index := len(s.arr) - 1
 	m := s.arr[index]
-
 	s.arr = s.arr[:index]
+	m.index = -1
 	return m
 }
 
 func (s *searchMoveHeap) PushMove(m *move) {
-	heap.Push(s, m)
+	str := m.loc.String()
+	if existing, ok := s.moveMap[str]; ok {
+		if existing.steps > m.steps {
+			existing.steps = m.steps
+			heap.Fix(s, existing.index)
+		}
+	} else {
+		heap.Push(s, m)
+		s.moveMap[str] = m
+	}
+
 }
 
 func (s *searchMoveHeap) PopMove() *move {
-	return heap.Pop(s).(*move)
+	m := heap.Pop(s).(*move)
+	delete(s.moveMap, m.loc.String())
+	return m
 }
 
 func (s *searchMoveHeap) IsEmpty() bool {

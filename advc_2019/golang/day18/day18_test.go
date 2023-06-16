@@ -82,10 +82,13 @@ type searchQueueInterface interface {
 func testSearchQueueInterface(t *testing.T, sq searchQueueInterface) {
 	samples := []int{3, 7, 5, 8, 9, 11, 2, 3, 5}
 	expected := []int{2, 3, 3, 5, 5, 7, 8, 9, 11}
+	locIncrement := 0
 	for _, s := range samples {
 		sq.PushMove(&move{
+			loc:   utils.NewVector2D(locIncrement, 0),
 			steps: s,
 		})
+		locIncrement++
 	}
 
 	for i := 0; i < len(expected); i++ {

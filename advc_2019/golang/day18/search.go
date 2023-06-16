@@ -1,17 +1,21 @@
 package day18
 
-import "taeho/advc19_go/utils"
+import (
+	"taeho/advc19_go/utils"
+)
 
-var SearchMH *searchMoveHeap
+var searchMH *searchMoveHeap
+var movePool *utils.MemoryPool[move]
 
 type move struct {
-	myLocIndex int
-	loc        utils.Vector
-	steps      int
+	loc   utils.Vector
+	steps int
+	index int
 }
 
 func (k *keyGrid) FindMinSteps() int {
-	SearchMH = newSearchMoveHeap()
+	searchMH = newSearchMoveHeap()
+	movePool = utils.NewMemoryPool[move](8192)
 
 	k.graph = NewKeyGraph(k)
 	k.graph.BuildEdges()
@@ -33,28 +37,28 @@ func (k *keyGrid) FindMinSteps() int {
 
 func (k *keyGrid) findPossibleMovesV3() []*keyGrid {
 	ret := make([]*keyGrid, 0, 64)
-
+	movePool.Reset()
 	for i, myloc := range k.state.myLocs {
-		SearchMH.Clear()
-		visited := map[*vertex]bool{}
-		SearchMH.PushMove(&move{
-			loc:   myloc,
-			steps: 0,
-		})
-		for SearchMH.Len() > 0 {
-			mv := SearchMH.PopMove()
+		searchMH.Clear()
+		visitGrid := utils.NewGrid[bool](k.grid.Size)
+		intialMove := movePool.New()
+		intialMove.loc = myloc
+		intialMove.steps = 0
+		searchMH.PushMove(intialMove)
+		for searchMH.Len() > 0 {
+			mv := searchMH.PopMove()
 			vt := k.graph.vertexMap[mv.loc.String()]
-			visited[vt] = true
+			visitGrid.SetFast(&mv.loc, true)
 			for targetVertex, dist := range vt.edges {
-				if visited[targetVertex] {
+				if visitGrid.GetFast(&targetVertex.loc) {
 					continue
 				} else if targetVertex.tile == TILE_ME || k.HasKeyUnlocked(targetVertex.tile) {
-					SearchMH.PushMove(&move{
-						loc:   targetVertex.loc,
-						steps: mv.steps + dist,
-					})
+					newMove := movePool.New()
+					newMove.loc = targetVertex.loc
+					newMove.steps = mv.steps + dist
+					searchMH.PushMove(newMove)
 				} else if k.IsKey(targetVertex.tile) {
-					visited[targetVertex] = true
+					visitGrid.SetFast(&targetVertex.loc, true)
 					ck := k.Copy()
 					ck.SetKeyUnlocked(targetVertex.tile, true)
 					ck.steps += mv.steps + dist
@@ -64,6 +68,5 @@ func (k *keyGrid) findPossibleMovesV3() []*keyGrid {
 			}
 		}
 	}
-
 	return ret
 }
