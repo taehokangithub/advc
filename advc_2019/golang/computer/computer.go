@@ -62,7 +62,7 @@ func (c *Computer) Copy() *Computer {
 	com := Computer{
 		input:   make([]int64, len(c.input)),
 		output:  make([]int64, len(c.output)),
-		memory:  make(map[int]int64),
+		memory:  make(map[int]int64, len(c.memory)),
 		Status:  c.Status,
 		relBase: c.relBase,
 	}
