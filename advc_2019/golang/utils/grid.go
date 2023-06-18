@@ -69,6 +69,10 @@ func (g *Grid[T]) Add(val T) Vector {
 	return addedLoc
 }
 
+func (g *Grid[T]) GetAddLoc() Vector {
+	return g.addPtr
+}
+
 func (g *Grid[T]) IsFilled() bool {
 	return g.addPtr.Y == g.Size.Y
 }
