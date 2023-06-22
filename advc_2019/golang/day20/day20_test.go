@@ -54,9 +54,6 @@ func TestPortalNameContainer(t *testing.T) {
 
 func TestPortalCreation(t *testing.T) {
 	m := NewMaze(MZ1)
-	for v, portal := range m.portals {
-		fmt.Println(v, portal)
-	}
 	fmt.Println(m.entrance, m.exit)
 	if m.entrance.X != 9 || m.entrance.Y != 2 {
 		t.Error("entrance loc is wrong", m.entrance, "expected 9,2")
@@ -64,8 +61,38 @@ func TestPortalCreation(t *testing.T) {
 	if m.exit.X != 13 || m.exit.Y != 16 {
 		t.Error("exit loc is wrong", m.exit, "expected 13, 16")
 	}
+	for _, portal := range m.portals {
+		if m.IsOuter(&portal.locInner) {
+			t.Error("loc", portal.locInner, "should be inner")
+		}
+		if !m.IsOuter(&portal.locOuter) {
+			t.Error("loc", portal.locOuter, "should be outer")
+		}
+	}
 	sampleLoc := utils.NewVector2D(11, 12)
 	if _, ok := m.portals[sampleLoc]; !ok {
 		t.Error("Sample loc", sampleLoc, "does not exist in portals")
 	}
+}
+
+func TestFindExit(t *testing.T) {
+
+	type Case struct {
+		str      string
+		expected int
+	}
+	cases := []Case{
+		{MZ1, 23},
+		//{MZ2, 58},
+	}
+
+	for i, c := range cases {
+		mz := NewMaze(c.str)
+		got := mz.FindShortestPath(false)
+
+		if got != c.expected {
+			t.Error("case", i, "got", got, "expected", c.expected)
+		}
+	}
+
 }

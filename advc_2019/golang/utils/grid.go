@@ -47,7 +47,7 @@ func (g *Grid[T]) Copy() *Grid[T] {
 
 func (g *Grid[T]) Set(v Vector, val T) {
 	if !g.IsValidVector(v) {
-		panic(fmt.Sprintf("Grid.Set, invalid vector %v, whie size is %v", v, g.Size))
+		panic(fmt.Sprintf("Grid.Set, invalid vector %v, while size is %v", v, g.Size))
 	}
 	g.SetFast(&v, val)
 }
@@ -79,7 +79,7 @@ func (g *Grid[T]) IsFilled() bool {
 
 func (g *Grid[T]) Get(v Vector) T {
 	if !g.IsValidVector(v) {
-		panic(fmt.Sprintf("Grid.Get, invalid vector %v, whie size is %v", v, g.Size))
+		panic(fmt.Sprintf("Grid.Get, invalid vector %v, while size is %v", v, g.Size))
 	}
 	return g.GetFast(&v)
 }

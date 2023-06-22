@@ -15,7 +15,7 @@ func NewMemoryPool[T interface{}](maxSize int) *MemoryPool[T] {
 
 func (m *MemoryPool[T]) New() *T {
 	if m.index == len(m.data) {
-		panic(fmt.Sprint("Memory pool if full ", m.index))
+		panic(fmt.Sprint("Memory pool is full ", m.index))
 	}
 	item := &m.data[m.index]
 	m.index++

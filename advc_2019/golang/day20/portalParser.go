@@ -60,6 +60,10 @@ func (p *PortalNameContainer) AddPartialName(c byte, loc utils.Vector) {
 	}
 }
 
+func (m *Maze) IsOuter(loc *utils.Vector) bool {
+	return loc.X == 2 || loc.X == m.grid.Size.X-3 || loc.Y == 2 || loc.Y == m.grid.Size.Y-3
+}
+
 func (p *PortalNameContainer) SetPortals(m *Maze) {
 	localPortals := map[string]*Portal{}
 	for _, g := range p.portalGates {
@@ -73,11 +77,15 @@ func (p *PortalNameContainer) SetPortals(m *Maze) {
 			m.exit = loc
 		} else {
 			if portal, ok := localPortals[g.name]; ok {
-				portal.locB = loc
+				portal.locInner = loc
+
+				if m.IsOuter(&loc) {
+					portal.locInner, portal.locOuter = portal.locOuter, portal.locInner
+				}
 			} else {
 				localPortals[g.name] = &Portal{
-					name: g.name,
-					locA: loc,
+					name:     g.name,
+					locOuter: loc,
 				}
 			}
 			tile = TILE_PORTAL
@@ -85,7 +93,7 @@ func (p *PortalNameContainer) SetPortals(m *Maze) {
 		m.grid.SetFast(&loc, tile)
 	}
 	for _, portal := range localPortals {
-		m.portals[portal.locA] = portal
-		m.portals[portal.locB] = portal
+		m.portals[portal.locInner] = portal
+		m.portals[portal.locOuter] = portal
 	}
 }

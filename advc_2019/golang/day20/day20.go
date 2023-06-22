@@ -6,11 +6,13 @@ import (
 )
 
 func solve01(str string) int {
-	return 0
+	mz := NewMaze(str)
+	return mz.FindShortestPath(false)
 }
 
 func solve02(str string) int {
-	return 0
+	mz := NewMaze(str)
+	return mz.FindShortestPath(true)
 }
 
 func Solve() {
@@ -22,8 +24,8 @@ func Solve() {
 	str := string(content)
 
 	ans1 := solve01(str)
-	etc.AnswerChecker("DAY20", ans1, 1)
+	etc.AnswerChecker("DAY20", ans1, 602)
 
 	ans2 := solve02(str)
-	etc.AnswerChecker("DAY20", ans2, 2)
+	etc.AnswerChecker("DAY20", ans2, 6986)
 }

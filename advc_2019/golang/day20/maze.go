@@ -21,9 +21,9 @@ const (
 )
 
 type Portal struct {
-	locA utils.Vector
-	locB utils.Vector
-	name string
+	locOuter utils.Vector
+	locInner utils.Vector
+	name     string
 }
 
 type Maze struct {
@@ -34,14 +34,14 @@ type Maze struct {
 }
 
 func (p *Portal) String() string {
-	return fmt.Sprint("[", p.name, ":", p.locA, p.locB, "]")
+	return fmt.Sprint("[", p.name, "/", p.locOuter, "-", p.locInner, "]")
 }
 
 func (p *Portal) GetPortalExit(loc *utils.Vector) *utils.Vector {
-	if *loc == p.locA {
-		return &p.locB
-	} else if *loc == p.locB {
-		return &p.locA
+	if *loc == p.locOuter {
+		return &p.locInner
+	} else if *loc == p.locInner {
+		return &p.locOuter
 	}
 	panic(fmt.Sprint(p.String(), "does not have entrane", *loc))
 }
@@ -55,7 +55,6 @@ func NewMaze(str string) (m *Maze) {
 		portals: make(map[utils.Vector]*Portal),
 	}
 	p := NewPortalNameContainer()
-	fmt.Println("grid size", m.grid.Size)
 
 	for _, line := range lines {
 		var tile byte = 0
@@ -76,8 +75,6 @@ func NewMaze(str string) (m *Maze) {
 			}
 			m.grid.Add(tile)
 		}
-
-		//fmt.Println("added", tile, "at", addedloc)
 	}
 
 	p.SetPortals(m)
