@@ -5,6 +5,8 @@ import (
 	"taeho/advc19_go/utils"
 )
 
+/* This model is not used! MoveGraphSearch.go is the advanced model */
+
 type Move struct {
 	loc     utils.Vector
 	dist    int
@@ -12,36 +14,21 @@ type Move struct {
 	history []utils.Vector
 }
 
-const UseHistoryForDbg = false
+const useHistoryForDbg = false
 
-const MaxPoolSize = 10000
-
-var MoveQueue *utils.RingQueue[*Move] = utils.NewRingQueue[*Move](10000)
-var MovePool *utils.MemoryPool[Move] = utils.NewMemoryPool[Move](10) //(10000000)
+var moveQueue *utils.RingQueue[*Move] = utils.NewRingQueue[*Move](10000)
 
 func (m *Maze) FindShortestPath(useLayer bool) int {
-	MoveQueue.Clear()
-	MovePool.Reset()
+	moveQueue.Clear()
 	mv := &Move{
 		loc:     m.entrance,
 		history: make([]utils.Vector, 0),
 	}
-	MoveQueue.Push(mv)
-	visited := map[int]map[string]bool{}
-
-	SetVisited := func(mv *Move) {
-		if visited[mv.layer] == nil {
-			visited[mv.layer] = map[string]bool{}
-		}
-		visited[mv.layer][mv.loc.String()] = true
-	}
-
-	GetVisited := func(mv *Move) bool {
-		return visited[mv.layer][mv.loc.String()]
-	}
+	moveQueue.Push(mv)
+	visited := NewVisitMap()
 
 	AddIfNotVisited := func(loc *utils.Vector, mv *Move, isUsingPortal bool) *Move {
-		newMv := &Move{} //MovePool.New()
+		newMv := &Move{}
 		newMv.dist = mv.dist
 		newMv.loc = *loc
 
@@ -62,29 +49,34 @@ func (m *Maze) FindShortestPath(useLayer bool) int {
 			}
 		}
 
-		if GetVisited(newMv) {
+		if visited.GetVisited(newMv.layer, &newMv.loc) {
 			return nil
 		}
 
-		if UseHistoryForDbg {
+		if useHistoryForDbg {
 			newMv.history = make([]utils.Vector, len(mv.history), len(mv.history)+1)
 			copy(newMv.history, mv.history)
 			newMv.history = append(newMv.history, *loc)
 		}
 
-		MoveQueue.Push(newMv)
+		moveQueue.Push(newMv)
 		return newMv
 	}
 
-	for !MoveQueue.IsEmpty() {
-		mv = MoveQueue.Pop()
+	for !moveQueue.IsEmpty() {
+		mv = moveQueue.Pop()
 		mv.dist++
-		SetVisited(mv)
+
+		// Beware!! The queue can contain multiple of the same move content
+		if visited.GetVisited(mv.layer, &mv.loc) {
+			continue
+		}
+		visited.SetVisited(mv.layer, &mv.loc)
 
 		if portal, ok := m.portals[mv.loc]; ok {
 			newLoc := portal.GetPortalExit(&mv.loc)
-			if newMv := AddIfNotVisited(newLoc, mv, true); newMv != nil && UseHistoryForDbg {
-				fmt.Println(mv.dist, "Used portal", portal.name, "from", mv.loc, "to", newLoc, "layer", newMv.layer, "qsize", MoveQueue.Len())
+			if newMv := AddIfNotVisited(newLoc, mv, true); newMv != nil && useHistoryForDbg {
+				fmt.Println(mv.dist, "Used portal", portal.name, "from", mv.loc, "to", newLoc, "layer", newMv.layer, "qsize", moveQueue.Len())
 			}
 		}
 		for _, dVec := range utils.DIR_VECTORS {

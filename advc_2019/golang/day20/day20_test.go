@@ -1,7 +1,6 @@
 package day20
 
 import (
-	"fmt"
 	"taeho/advc19_go/utils"
 	"testing"
 )
@@ -54,7 +53,7 @@ func TestPortalNameContainer(t *testing.T) {
 
 func TestPortalCreation(t *testing.T) {
 	m := NewMaze(MZ1)
-	fmt.Println(m.entrance, m.exit)
+
 	if m.entrance.X != 9 || m.entrance.Y != 2 {
 		t.Error("entrance loc is wrong", m.entrance, "expected 9,2")
 	}
@@ -94,5 +93,60 @@ func TestFindExit(t *testing.T) {
 			t.Error("case", i, "got", got, "expected", c.expected)
 		}
 	}
+}
 
+func TestGraph(t *testing.T) {
+	g := NewMageGraph(MZ1)
+
+	expected := 8
+	if len(g.nodes) != expected {
+		t.Error("Got", len(g.nodes), "nodes, expected", expected, g.nodes)
+	}
+}
+
+func TestMoveHeap(t *testing.T) {
+	moves := []*GraphMove{
+		{node: &Node{loc: utils.NewVector2D(1, 2)}, dist: 1},
+		{node: &Node{loc: utils.NewVector2D(2, 3)}, dist: 5},
+		{node: &Node{loc: utils.NewVector2D(1, 5)}, dist: 7},
+		{node: &Node{loc: utils.NewVector2D(2, 3)}, dist: 3},
+		{node: &Node{loc: utils.NewVector2D(1, 2)}, dist: 6},
+		{node: &Node{loc: utils.NewVector2D(5, 5)}, dist: 10},
+		{node: &Node{loc: utils.NewVector2D(1, 8)}, dist: 6},
+	}
+
+	expected := []*GraphMove{
+		{node: &Node{loc: utils.NewVector2D(1, 2)}, dist: 1},
+		{node: &Node{loc: utils.NewVector2D(2, 3)}, dist: 3},
+		{node: &Node{loc: utils.NewVector2D(1, 8)}, dist: 6},
+		{node: &Node{loc: utils.NewVector2D(1, 5)}, dist: 7},
+		{node: &Node{loc: utils.NewVector2D(5, 5)}, dist: 10},
+	}
+
+	mvHeap := NewMoveHeap()
+
+	for _, mv := range moves {
+		mvHeap.PushMove(mv)
+	}
+
+	if mvHeap.Len() != len(expected) {
+		t.Error("Contains", mvHeap.Len(), "expected", len(expected))
+		return
+	}
+
+	for _, mv := range expected {
+		heapmv := mvHeap.PopMove()
+		if mv.dist != heapmv.dist || mv.node.loc != heapmv.node.loc {
+			t.Error("Popped", heapmv, "expected", mv)
+		}
+	}
+}
+
+func TestGraphSearch(t *testing.T) {
+	g := NewMageGraph(MZ1)
+	ans := g.FindShortestPathToExit()
+	expected := 23
+	if ans != expected {
+		t.Error("Got", ans, "expected", expected)
+	}
 }
