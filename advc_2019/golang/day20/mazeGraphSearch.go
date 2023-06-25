@@ -1,6 +1,7 @@
 package day20
 
 import (
+	"fmt"
 	"taeho/advc19_go/utils"
 )
 
@@ -10,31 +11,44 @@ type GraphMove struct {
 	layer int
 }
 
+func (mv *GraphMove) GetUniqueKey() string {
+	return fmt.Sprintf("[%v:%d]", mv.node.loc, mv.layer)
+}
+
+func (mv *GraphMove) GetCost() int {
+	return mv.dist
+}
+
 func (g *MazeGraph) FindShortestPathToExit() int {
-	mvHeap := NewMoveHeap()
-	mvHeap.PushNewMove(g.nodes[g.maze.entrance], 0, 0)
+	mvHeap := utils.NewHeap[*GraphMove]()
+	mvHeap.Push(&GraphMove{
+		node: g.nodes[g.maze.entrance],
+	})
 
 	for mvHeap.Len() > 0 {
-		mv := mvHeap.PopMove()
+		mv := mvHeap.Pop()
 		tile := g.maze.grid.GetFast(&mv.node.loc)
 		if tile == TILE_EXIT {
 			return mv.dist
 		}
 
 		for otherNode, dist := range mv.node.edges {
-			mvHeap.PushNewMove(otherNode, dist+mv.dist, 0)
+			mvHeap.Push(&GraphMove{
+				node: otherNode,
+				dist: dist + mv.dist,
+			})
 		}
 	}
 	panic("Coud not find answer")
 }
 
 func (g *MazeGraph) FindLayeredShortestPathToExit() int {
-	mvHeap := NewMoveHeap()
-	mvHeap.PushNewMove(g.nodes[g.maze.entrance], 0, 0)
+	mvHeap := utils.NewHeap[*GraphMove]()
+	mvHeap.Push(&GraphMove{g.nodes[g.maze.entrance], 0, 0})
 	visited := NewVisitMap()
 
 	for mvHeap.Len() > 0 {
-		mv := mvHeap.PopMove()
+		mv := mvHeap.Pop()
 		visited.SetVisited(mv.layer, &mv.node.loc)
 
 		tile := g.maze.grid.GetFast(&mv.node.loc)
@@ -47,7 +61,7 @@ func (g *MazeGraph) FindLayeredShortestPathToExit() int {
 				if visited.GetVisited(newLayer, &otherNode.loc) {
 					continue
 				}
-				mvHeap.PushNewMove(otherNode, dist+mv.dist, newLayer)
+				mvHeap.Push(&GraphMove{otherNode, dist + mv.dist, newLayer})
 			}
 		}
 	}

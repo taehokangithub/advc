@@ -123,10 +123,10 @@ func TestMoveHeap(t *testing.T) {
 		{node: &Node{loc: utils.NewVector2D(5, 5)}, dist: 10},
 	}
 
-	mvHeap := NewMoveHeap()
+	mvHeap := utils.NewHeap[*GraphMove]()
 
 	for _, mv := range moves {
-		mvHeap.PushMove(mv)
+		mvHeap.Push(mv)
 	}
 
 	if mvHeap.Len() != len(expected) {
@@ -135,7 +135,7 @@ func TestMoveHeap(t *testing.T) {
 	}
 
 	for _, mv := range expected {
-		heapmv := mvHeap.PopMove()
+		heapmv := mvHeap.Pop()
 		if mv.dist != heapmv.dist || mv.node.loc != heapmv.node.loc {
 			t.Error("Popped", heapmv, "expected", mv)
 		}
