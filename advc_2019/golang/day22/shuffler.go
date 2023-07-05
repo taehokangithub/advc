@@ -9,10 +9,10 @@ import (
 
 type Shuffler struct {
 	instructions []*Instruction
-	size         int
+	size         int64
 }
 
-func NewShuffler(size int, str string) *Shuffler {
+func NewShuffler(size int64, str string) *Shuffler {
 	s := &Shuffler{
 		instructions: make([]*Instruction, 0, 100),
 		size:         size,
@@ -62,10 +62,10 @@ func (s *Shuffler) Shuffle() []int {
 	return deck
 }
 
-func (s *Shuffler) Analyse() {
+func (s *Shuffler) Analyse() (min, max int) {
 	isPositive := true
-	max := 0
-	min := 0
+	max = 0
+	min = 0
 	pos := 0
 
 	for _, inst := range s.instructions {
@@ -84,9 +84,10 @@ func (s *Shuffler) Analyse() {
 		}
 	}
 	fmt.Println("Finished : ", isPositive, pos, "(", min, max, ")")
+	return
 }
 
-func Shuffle(size int, str string) []int {
+func Shuffle(size int64, str string) []int {
 	s := NewShuffler(size, str)
 	return s.Shuffle()
 }
