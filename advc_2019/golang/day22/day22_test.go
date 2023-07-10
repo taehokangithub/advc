@@ -2,7 +2,6 @@ package day22
 
 import (
 	"fmt"
-	"os"
 	"testing"
 )
 
@@ -47,17 +46,36 @@ func TestShuffler(t *testing.T) {
 		if ansStr != c.ans {
 			t.Error("Case", i, "got", ansStr, "expected", c.ans)
 		}
+	}
 
+	for i, c := range cases {
+		s := NewCircularShuffler(10, c.inst)
+		ans := s.Shuffle()
+		ansStr := fmt.Sprint(ans)
+		if ansStr != c.ans {
+			t.Error("Circular Case", i, "got", ansStr, "expected", c.ans)
+		}
 	}
 }
 
-func TestAnalyse(t *testing.T) {
-	con, err := os.ReadFile("../../data/input22.txt")
-	if err != nil {
-		panic(err)
+func TestCircularBuff(t *testing.T) {
+	b := NewCircularBuff(-10, 5)
+	b.pos += 1 // -11 + 4
+
+	val := int64(150)
+	b.SetAt(7, val)
+	ret := b.GetAt(-9)
+	if ret != val {
+		t.Error("got", ret, "expected", val)
 	}
-	str := string(con)
-	s := NewShuffler(10007, str)
-	s.Analyse()
-	t.Error(1)
+}
+
+// TODO : WHY THIS SIMPLE 2 LINES FAILS? So do we need full length? set max length?
+func TestRealData(t *testing.T) {
+	str := `cut -135
+deal with increment 38`
+
+	b := NewCircularShuffler(10007, str)
+
+	b.Shuffle()
 }

@@ -70,8 +70,13 @@ func (s *Shuffler) Analyse() (min, max int) {
 
 	for _, inst := range s.instructions {
 		if inst.instType == INST_REVERSE {
+			if isPositive {
+				pos--
+			} else {
+				pos++
+			}
 			isPositive = !isPositive
-			fmt.Println("Rev : ", isPositive, pos, "(", min, max, ")")
+			//fmt.Println("Rev : ", isPositive, pos, "(", min, max, ")")
 		} else if inst.instType == INST_CUT {
 			param := inst.param
 			if !isPositive {
@@ -80,10 +85,10 @@ func (s *Shuffler) Analyse() (min, max int) {
 			pos += param
 			max = utils.Max(max, pos)
 			min = utils.Min(min, pos)
-			fmt.Println("Cut ", inst.param, ": ", isPositive, pos, "(", min, max, ")")
+			//fmt.Println("Cut ", inst.param, ": ", isPositive, pos, "(", min, max, ")")
 		}
 	}
-	fmt.Println("Finished : ", isPositive, pos, "(", min, max, ")")
+	//fmt.Println("Finished : ", isPositive, pos, "(", min, max, ")")
 	return
 }
 

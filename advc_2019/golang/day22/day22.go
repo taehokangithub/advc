@@ -1,18 +1,25 @@
 package day22
 
 import (
+	"fmt"
 	"os"
 	"taeho/advc19_go/etc"
 )
 
 func solve01(str string) int {
-	arr := Shuffle(10007, str)
+	c := NewCircularShuffler(10007, str)
+	arr := c.Shuffle()
+
+	//arr := Shuffle(10007, str)
+	ans := 0
 	for i := range arr {
 		if arr[i] == 2019 {
-			return i
+			ans = i
 		}
+		fmt.Println("[", i, "] =>", arr[i])
 	}
-	panic("No answer")
+	return ans
+	//panic("No answer")
 }
 
 func solve02(str string) int64 {

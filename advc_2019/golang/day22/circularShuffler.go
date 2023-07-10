@@ -6,106 +6,126 @@ import (
 
 type CircularShuffler struct {
 	*Shuffler
-	min int
-	max int
-	pos int
-	dir int // 1 for positive, -1 for negative
-	arr []int64
+	*CircularBuff
 }
 
 func NewCircularShuffler(size int64, str string) *CircularShuffler {
 	s := NewShuffler(size, str)
 	min, max := s.Analyse()
-	totalLen := min + max
+	if min > 0 {
+		panic(fmt.Sprintln("min should be minus, not", min))
+	}
+	totalLen := max - min + 1
+
+	fmt.Println("Analyse - min", min, "max", max, "total", totalLen)
+
+	// Test figures
+	if totalLen < 11 {
+		max = 6
+		min = -3
+	} else if int64(totalLen) > size {
+		min += totalLen - int(size)
+	}
+
+	b := NewCircularBuff(min, max)
 
 	c := &CircularShuffler{
-		Shuffler: s,
-		min:      min,
-		max:      max,
-		dir:      1,
-		arr:      make([]int64, totalLen),
-		pos:      totalLen - max,
+		Shuffler:     s,
+		CircularBuff: b,
 	}
 
+	for i := 0; i <= max; i++ {
+		c.SetAt(i, int64(i))
+	}
+	for i := -1; i >= min; i-- {
+		c.SetAt(i, size+int64(i))
+	}
+
+	fmt.Println("New circular - min", min, "max", max, "totallen", totalLen, "arrlen", len(c.arr), "curpos", b.pos)
 	return c
-}
-
-func (c *CircularShuffler) GetIndexRaw(pos int) int {
-	return (pos * c.dir) + c.pos
-}
-
-func (c *CircularShuffler) IsInBoundary(pos int) bool {
-	index := c.GetIndexRaw(pos)
-	return index <= c.max && index >= c.min
-}
-
-func (c *CircularShuffler) GetIndex(pos int) int {
-	offset := c.GetIndexRaw(pos)
-	if offset > c.max {
-		offset = (offset - c.max - 1) + c.min
-	} else if offset < c.min {
-		offset = c.max - (c.min - offset - 1)
-	}
-	if offset > c.max || offset < c.min {
-		panic(fmt.Sprintln("offset", offset, "is invalid. pos", pos, ", from curpos", c.pos, ", min", c.min, "max", c.max))
-	}
-	return offset
-}
-
-func (c *CircularShuffler) GetAt(pos int) int64 {
-	return c.arr[c.GetIndex(pos)]
-}
-
-func (c *CircularShuffler) SetAt(pos int, val int64) {
-	c.arr[c.GetIndex(pos)] = val
 }
 
 func (c *CircularShuffler) RunCut(param int) {
 	c.pos += param
-	if c.pos > c.max || c.pos < c.min {
-		panic(fmt.Sprintln("min", c.min, "max", c.max, "param", param, "pos", c.pos))
+	if c.pos > len(c.arr) {
+		c.pos -= len(c.arr)
+	} else if c.pos < 0 {
+		c.pos += len(c.arr)
 	}
 }
 
 func (c *CircularShuffler) RunReverse() {
+	c.pos -= c.dir
 	c.dir = c.dir * (-1)
 }
 
-/*
-ex: 3 for 10
-
-0 1 2 3 4 5 6 7 8 9
-0     1     2     3
-    4     5     6
-  7     8     9
-
-r : 1
-q : 3
--4 -3 -2 -1 00 +1 +2 +3 +4 +5
- 2        3  0        1
-       6
-    9
-
-
-ex : 3 for 8
-0 1 2 3 4 5 6 7
-0     1     2
-  3     4     5
-    6     7
-
-ex : 4 for 15
-0 1 2 3 4 5 6 7 8 9 A B C D E
-0       1       2       3
-  4       5       6       7
-    8       9       A       B
-      C       D       E
-*/
-
 func (c *CircularShuffler) RunIncre(param int) {
-	//remainder := c.size % int64(param)
-	//quotient := c.size / int64(param)
+	remainder := c.size % int64(param)
+	quotient := c.size / int64(param)
 
-	for i := 0; i < param; i++ {
+	curStartPos := 0
+	curStartIndex := 0
+	copied := CopyCircularBuff(c.CircularBuff)
+	finished := false
+	execution := 0
+	for !finished {
+		execution++
+		if execution > len(c.arr) {
+			panic(fmt.Sprintln("execution", execution, "exceeds", len(c.arr)))
+		}
+		// first forward should exist at any cost
+		if !c.IsInBoundary(curStartPos) {
+			if c.IsInBoundary(curStartPos + len(c.arr)) {
+				curStartPos += len(c.arr)
+			} else if c.IsInBoundary(curStartPos - len(c.arr)) {
+				curStartPos -= len(c.arr)
+			} else {
+				panic(fmt.Sprintln("failed to set the first forward at", curStartPos))
+			}
+		}
+		fmt.Println("[", execution, "]", "curpos", curStartPos, "curindex", curStartIndex, "(param", param, "remainder", remainder, "quo", quotient, ")")
+		nextStartPos := curStartPos - int(remainder)
+		nextStartIndex := curStartIndex + 1
+
+		// forward
+		for nextPos, nextIndex := curStartPos, curStartIndex; c.IsInBoundary(nextPos); nextPos += param {
+			fmt.Println("   ==> pos ", nextPos, "index", nextIndex, "value setting", copied.GetAt(nextIndex))
+			c.SetAt(nextPos, copied.GetAt(nextIndex))
+			nextIndex++
+
+			// fall-back for not finding out backward
+			nextStartPos = nextPos - int(remainder)
+			nextStartIndex = nextIndex
+		}
+
+		// backward
+		isFirst := true
+
+		for backPos, backIndex := (curStartPos - int(remainder)), (curStartIndex + int(quotient)); c.IsInBoundary(backPos); backPos -= param {
+			if backIndex > len(c.arr) {
+				fmt.Println("Backindex", backIndex, "is greater than length", len(c.arr), "is it okay?")
+				finished = true
+			} else if backIndex == len(c.arr) {
+				finished = true
+			} else {
+				fmt.Println("  ==> backpos ", backPos, "backIndex", backIndex, "setting", copied.GetAt(backIndex))
+				c.SetAt(backPos, copied.GetAt(backIndex))
+
+				if isFirst {
+					isFirst = false
+					nextStartPos = backPos + param
+					nextStartIndex = backIndex + 1
+				}
+			}
+			backIndex--
+		}
+
+		if curStartPos == nextStartPos {
+			fmt.Println("Breaking at", nextStartPos, "execution", execution)
+			break
+		}
+		curStartIndex = nextStartIndex
+		curStartPos = nextStartPos
 
 	}
 }
@@ -122,7 +142,25 @@ func (c *CircularShuffler) RunInstructions() {
 		default:
 			panic(fmt.Sprintln("Unknown inst", inst.instType))
 		}
+		if !c.SanityCheck(c.arr) {
+			panic(fmt.Sprintln("Sanity check failed after", inst))
+		}
 	}
+}
+
+func (c *CircularShuffler) SanityCheck(arr []int64) bool {
+	m := map[int64]bool{}
+	ret := true
+
+	for i := range arr {
+		if _, ok := m[arr[i]]; ok {
+			fmt.Println("Already have", arr[i], "at", i)
+			ret = false
+		}
+		m[arr[i]] = true
+	}
+	fmt.Println("Sanity check", ret)
+	return ret
 }
 
 func (c *CircularShuffler) Shuffle() []int64 {
