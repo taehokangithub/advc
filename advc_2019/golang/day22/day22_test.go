@@ -1,7 +1,7 @@
 package day22
 
 import (
-	"fmt"
+	"os"
 	"testing"
 )
 
@@ -28,6 +28,20 @@ deal with increment 9
 deal with increment 3
 cut -1`
 
+func TestRealData(t *testing.T) {
+	file, err := os.ReadFile("../../data/input22.txt")
+	if err != nil {
+		panic(err)
+	}
+
+	str := string(file)
+
+	b := NewCircularShuffler(10007, str)
+
+	b.Shuffle()
+}
+
+/*
 func TestShuffler(t *testing.T) {
 	type Case struct {
 		inst string
@@ -69,13 +83,4 @@ func TestCircularBuff(t *testing.T) {
 		t.Error("got", ret, "expected", val)
 	}
 }
-
-// TODO : WHY THIS SIMPLE 2 LINES FAILS? So do we need full length? set max length?
-func TestRealData(t *testing.T) {
-	str := `cut -135
-deal with increment 38`
-
-	b := NewCircularShuffler(10007, str)
-
-	b.Shuffle()
-}
+*/
