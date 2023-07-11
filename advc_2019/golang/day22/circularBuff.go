@@ -36,17 +36,17 @@ func CopyCircularBuff(other *CircularBuff) *CircularBuff {
 	return b
 }
 
-func (c *CircularBuff) GetIndexRaw(pos int) int {
-	return (pos * c.dir) + c.pos
+func (c *CircularBuff) GetIndexRaw(rel int) int {
+	return (rel * c.dir) + c.pos
 }
 
-func (c *CircularBuff) IsInBoundary(pos int) bool {
-	index := c.GetIndexRaw(pos)
+func (c *CircularBuff) IsInBoundary(rel int) bool {
+	index := c.GetIndex(rel)
 	return index >= 0 && index < len(c.arr)
 }
 
-func (c *CircularBuff) GetIndex(pos int) int {
-	offset := c.GetIndexRaw(pos)
+func (c *CircularBuff) GetIndex(rel int) int {
+	offset := c.GetIndexRaw(rel)
 	if offset >= len(c.arr) {
 		offset -= len(c.arr)
 	} else if offset < 0 {
@@ -55,10 +55,10 @@ func (c *CircularBuff) GetIndex(pos int) int {
 	return offset
 }
 
-func (c *CircularBuff) GetAt(pos int) int64 {
-	return c.arr[c.GetIndex(pos)]
+func (c *CircularBuff) GetAt(rel int) int64 {
+	return c.arr[c.GetIndex(rel)]
 }
 
-func (c *CircularBuff) SetAt(pos int, val int64) {
-	c.arr[c.GetIndex(pos)] = val
+func (c *CircularBuff) SetAt(rel int, val int64) {
+	c.arr[c.GetIndex(rel)] = val
 }
