@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
-	"taeho/advc19_go/utils"
 )
 
 type Shuffler struct {
@@ -62,37 +61,24 @@ func (s *Shuffler) Shuffle() []int {
 	return deck
 }
 
-func (s *Shuffler) Analyse() (min, max int) {
-	isPositive := true
-	max = 0
-	min = 0
-	pos := 0
-
-	for _, inst := range s.instructions {
-		if inst.instType == INST_REVERSE {
-			if isPositive {
-				pos--
-			} else {
-				pos++
-			}
-			isPositive = !isPositive
-			//fmt.Println("Rev : ", isPositive, pos, "(", min, max, ")")
-		} else if inst.instType == INST_CUT {
-			param := inst.param
-			if !isPositive {
-				param = -param
-			}
-			pos += param
-			max = utils.Max(max, pos)
-			min = utils.Min(min, pos)
-			//fmt.Println("Cut ", inst.param, ": ", isPositive, pos, "(", min, max, ")")
-		}
-	}
-	//fmt.Println("Finished : ", isPositive, pos, "(", min, max, ")")
-	return
+func (s *Shuffler) GetFinalPositionOf(card int64) int64 {
+	op := s.GetSingleOperation()
+	return op.Operate(card)
 }
 
-func Shuffle(size int64, str string) []int {
-	s := NewShuffler(size, str)
-	return s.Shuffle()
+func (s *Shuffler) GetCardAtAfterIterations(position int64, iteration int64) int64 {
+	op := s.GetSingleOperation()
+	itop := op.SelfMerge(iteration)
+	return itop.ReverseOperate(position)
+}
+
+func (s *Shuffler) GetSingleOperation() *LinearOperation {
+	op := NewLinearOperationFromInstruction(s.instructions[0], s.size)
+
+	for i := 1; i < len(s.instructions); i++ {
+		other := NewLinearOperationFromInstruction(s.instructions[i], s.size)
+		op.Merge(other)
+	}
+
+	return op
 }

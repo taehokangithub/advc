@@ -5,26 +5,14 @@ import (
 	"taeho/advc19_go/etc"
 )
 
-func solve01(str string) int {
-	c := NewCircularShuffler(10007, str)
-	arr := c.Shuffle()
-
-	c.SanityCheck(c.arr)
-	//arr := Shuffle(10007, str)
-	ans := 0
-	for i := range arr {
-		if arr[i] == 2019 {
-			ans = i
-		}
-		//fmt.Println("[", i, "] =>", arr[i])
-	}
-	return ans
-	//panic("No answer")
+func solve01(str string) int64 {
+	s := NewShuffler(10007, str)
+	return s.GetFinalPositionOf(2019)
 }
 
 func solve02(str string) int64 {
-	arr := Shuffle(10007, str)
-	return int64(arr[2020])
+	s := NewShuffler(119315717514047, str)
+	return s.GetCardAtAfterIterations(2020, 101741582076661)
 }
 
 func Solve() {
@@ -38,6 +26,6 @@ func Solve() {
 	ans1 := solve01(str)
 	etc.AnswerChecker("DAY22", ans1, 4086)
 
-	//ans2 := solve02(str)
-	//etc.AnswerChecker("DAY22", ans2, 2)
+	ans2 := solve02(str)
+	etc.AnswerChecker("DAY22", ans2, 1041334417227)
 }

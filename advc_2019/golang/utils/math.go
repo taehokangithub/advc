@@ -1,5 +1,7 @@
 package utils
 
+import "fmt"
+
 type Numbers interface {
 	int | int64 | int32 | float32 | float64
 }
@@ -52,7 +54,7 @@ func Lcm[T DivisableNumbers](a, b T) T {
 
 func ModularInversion[T DivisableNumbers](a T, mod T) T {
 	if a < 0 || mod <= 0 {
-		panic("Invalid input: a must be non-negative, and mod must be positive")
+		panic(fmt.Sprintf("Invalid input: a(%v) must be non-negative, and mod(%v) must be positive\n", a, mod))
 	}
 
 	// Extended Euclidean Algorithm
