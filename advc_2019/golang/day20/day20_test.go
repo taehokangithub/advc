@@ -2,7 +2,7 @@ package day20
 
 import (
 	"taeho/advc19_go/utils"
-	"testing"
+	"testing"	
 )
 
 const MZ1 string = `         A           

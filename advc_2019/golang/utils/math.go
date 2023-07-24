@@ -49,3 +49,24 @@ func Gcd[T DivisableNumbers](a, b T) T {
 func Lcm[T DivisableNumbers](a, b T) T {
 	return a * b / Gcd(a, b)
 }
+
+func ModularInversion[T DivisableNumbers](a T, mod T) T {
+	if a < 0 || mod <= 0 {
+		panic("Invalid input: a must be non-negative, and mod must be positive")
+	}
+
+	// Extended Euclidean Algorithm
+	x, y, u, v := T(0), T(1), T(1), T(0)
+	m := mod
+	for a != 0 {
+		q := m / a
+		r := m % a
+		m, a = a, r
+		x, u = u, x-q*u
+		y, v = v, y-q*v
+	}
+
+	// Ensure the result is positive
+	result := (x + mod) % mod
+	return result
+}

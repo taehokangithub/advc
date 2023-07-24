@@ -73,3 +73,30 @@ func TestLcm(t *testing.T) {
 		}
 	}
 }
+
+func TestModularInversion(t *testing.T) {
+	type Test struct {
+		a   int64
+		mod int64
+		ans int64
+	}
+	tests := []Test{
+		{7, 26, 15},
+		{15, 26, 7},
+		{9, 11, 5},
+		{5, 11, 9},
+		{8, 11, 7},
+		{7, 11, 8},
+		{2019, 119315717514047, 57323549276189},
+		{57323549276189, 119315717514047, 2019},
+		{1086238, 119315717514047, 26066090224459},
+		{26066090224459, 119315717514047, 1086238},
+	}
+
+	for _, c := range tests {
+		ans := utils.ModularInversion(c.a, c.mod)
+		if ans != c.ans {
+			t.Errorf("%v got %v expected %v", c, ans, c.ans)
+		}
+	}
+}
