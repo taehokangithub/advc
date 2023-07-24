@@ -1,6 +1,7 @@
 package day22
 
 import (
+	"fmt"
 	"os"
 	"testing"
 )
@@ -38,10 +39,10 @@ func TestRealData(t *testing.T) {
 
 	b := NewCircularShuffler(10007, str)
 
+	// it only checks no panic
 	b.Shuffle()
 }
 
-/*
 func TestShuffler(t *testing.T) {
 	type Case struct {
 		inst string
@@ -83,4 +84,3 @@ func TestCircularBuff(t *testing.T) {
 		t.Error("got", ret, "expected", val)
 	}
 }
-*/
