@@ -98,6 +98,10 @@ func (c *Computer) AddInput(input int64) {
 	c.AddInputRange([]int64{input})
 }
 
+func (c *Computer) AddInput32(input int) {
+	c.AddInput(int64(input))
+}
+
 func (c *Computer) GetOutput() []int64 {
 	return c.output
 }
@@ -110,6 +114,10 @@ func (c *Computer) PopOutput() int64 {
 	ret := c.output[0]
 	c.output = c.output[1:]
 	return ret
+}
+
+func (c *Computer) PopOutput32() int {
+	return int(c.PopOutput())
 }
 
 func (c *Computer) Set64(i int64, v int64) {
