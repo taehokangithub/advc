@@ -5,12 +5,14 @@ import (
 	"taeho/advc19_go/etc"
 )
 
-func solve01(str string) int {
-	return 0
+func solve01(str string) int64 {
+	smg := NewSmallGrid(str)
+	return smg.BiodiversityRating()
 }
 
 func solve02(str string) int {
-	return 0
+	smg := NewSmallGridMultiLevel(str)
+	return smg.CntMultiLevelAfter(200)
 }
 
 func Solve() {
@@ -22,8 +24,8 @@ func Solve() {
 	str := string(content)
 
 	ans1 := solve01(str)
-	etc.AnswerChecker("DAY24", ans1, 1)
+	etc.AnswerChecker("DAY24", ans1, 30442557)
 
 	ans2 := solve02(str)
-	etc.AnswerChecker("DAY24", ans2, 2)
+	etc.AnswerChecker("DAY24", ans2, 1987)
 }
