@@ -26,6 +26,7 @@ import (
 	"taeho/advc19_go/day22"
 	"taeho/advc19_go/day23"
 	"taeho/advc19_go/day24"
+	"taeho/advc19_go/day25"
 	"taeho/advc19_go/etc"
 	"time"
 )
@@ -67,6 +68,7 @@ func runAll() {
 	measureTime(day22.Solve)
 	measureTime(day23.Solve)
 	measureTime(day24.Solve)
+	measureTime(day25.Solve)
 	etc.FinalChecker()
 }
 
