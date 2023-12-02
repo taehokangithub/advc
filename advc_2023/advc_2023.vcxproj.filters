@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\utils">
+      <UniqueIdentifier>{18dabaf3-b013-44c8-bb4c-60c835c72b49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\solutions">
+      <UniqueIdentifier>{a8c61162-6a50-47a0-9f68-74a5537b6d87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\solutions\day01">
+      <UniqueIdentifier>{27750f04-0b4e-453b-b66b-4c0a38e5c788}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\solutions\day02">
+      <UniqueIdentifier>{b9b89460-1e4e-4714-90da-ab44b6cf5d55}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="advc_2023.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\input_utils.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\day01\day01.cpp">
+      <Filter>Source Files\solutions\day01</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\day02\day02.cpp">
+      <Filter>Source Files\solutions\day02</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\day02\games.cpp">
+      <Filter>Source Files\solutions\day02</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="utils\input_utils.h">
+      <Filter>Source Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day01\day01.h">
+      <Filter>Source Files\solutions\day01</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day02\day02.h">
+      <Filter>Source Files\solutions\day02</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day02\games.h">
+      <Filter>Source Files\solutions\day02</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

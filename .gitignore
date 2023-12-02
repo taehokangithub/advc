@@ -1,2 +1,6 @@
 
 advc_2019/result.txt
+advc_2023/.vs/
+advc_2023/packages/
+Debug/
+*.vcxproj.user
