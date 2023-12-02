@@ -29,6 +29,6 @@ Advc2022.Problem23.Start();
 Advc2022.Problem24.Start(); // Takes 10+ minutes
 #endif
 
-Advc2022.Problem24.Start();
+Advc2022.Problem25.Start();
 
 Console.WriteLine($"Elapsed : {(DateTime.UtcNow - startTime).TotalMilliseconds}");
