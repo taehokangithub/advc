@@ -27,7 +27,7 @@ namespace advc_2023::day00
 
 		//const int ans2 = part2(lines);
 		//cout << "[DAY01] PART 2 : " << ans2 << endl;
-		//assert(ans1 == 54331);
+		//assert(ans2 == 54331);
 	}
 }
 
