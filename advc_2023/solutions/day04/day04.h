@@ -1,6 +1,6 @@
 #pragma once
 
-namespace advc_2023::day00
+namespace advc_2023::day04
 {
     void solve();
 }

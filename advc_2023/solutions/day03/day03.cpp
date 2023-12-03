@@ -9,8 +9,8 @@ using namespace std;
 namespace advc_2023::day03
 {
 
-	static int part1(const vector<string>& lines)
-	{
+    static int part1(const vector<string>& lines)
+    {
         const auto grid = create_grid(lines);
         const auto numbers = extract_numbers(grid);
 
@@ -23,10 +23,10 @@ namespace advc_2023::day03
             }
         }
         return sum;
-	}
+    }
 
-	static int part2(const vector<string>& lines)
-	{
+    static int part2(const vector<string>& lines)
+    {
         const auto grid = create_grid(lines);
         const auto numbers = extract_numbers(grid);
         const auto gears = extract_gears(numbers);
@@ -40,19 +40,19 @@ namespace advc_2023::day03
             }
         }
         return sum;
-	}
+    }
 
-	void solve()
-	{
-		const auto& lines{ utils::get_lines("solutions/day03/input.txt") };
-		
-		const int ans1 = part1(lines);
-		cout << "[DAY03] PART 1 : " << ans1 << endl;
-		assert(ans1 == 539637);
+    void solve()
+    {
+        const auto& lines{ utils::get_lines("solutions/day03/input.txt") };
 
-		const int ans2 = part2(lines);
-		cout << "[DAY03] PART 2 : " << ans2 << endl;
-		assert(ans2 == 82818007);
-	}
+        const int ans1 = part1(lines);
+        cout << "[DAY03] PART 1 : " << ans1 << endl;
+        assert(ans1 == 539637);
+
+        const int ans2 = part2(lines);
+        cout << "[DAY03] PART 2 : " << ans2 << endl;
+        assert(ans2 == 82818007);
+    }
 }
 
