@@ -25,6 +25,9 @@
     <Filter Include="Source Files\solutions\day02">
       <UniqueIdentifier>{b9b89460-1e4e-4714-90da-ab44b6cf5d55}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\solutions\day03">
+      <UniqueIdentifier>{7541829e-6dd0-4551-8d2e-fd01ef57e9cd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="advc_2023.cpp">
@@ -42,6 +45,15 @@
     <ClCompile Include="solutions\day02\games.cpp">
       <Filter>Source Files\solutions\day02</Filter>
     </ClCompile>
+    <ClCompile Include="solutions\day03\day03.cpp">
+      <Filter>Source Files\solutions\day03</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\point.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\day03\gear.cpp">
+      <Filter>Source Files\solutions\day03</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utils\input_utils.h">
@@ -55,6 +67,18 @@
     </ClInclude>
     <ClInclude Include="solutions\day02\games.h">
       <Filter>Source Files\solutions\day02</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day03\day03.h">
+      <Filter>Source Files\solutions\day03</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\grid.h">
+      <Filter>Source Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\point.h">
+      <Filter>Source Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day03\gear.h">
+      <Filter>Source Files\solutions\day03</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

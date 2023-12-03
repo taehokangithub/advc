@@ -97,11 +97,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\utils\grid.h" />
     <ClInclude Include="..\utils\input_utils.h" />
+    <ClInclude Include="..\utils\point.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\utils\input_utils.cpp" />
+    <ClCompile Include="..\utils\point.cpp" />
+    <ClCompile Include="src\grid_tests.cpp" />
     <ClCompile Include="src\input_utils_tests.cpp" />
+    <ClCompile Include="src\point_tests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\advc_2023.vcxproj">
