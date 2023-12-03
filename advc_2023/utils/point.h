@@ -16,6 +16,8 @@ namespace advc_2023::utils
         Point(int _x, int _y, int _z) : x(_x), y(_y), z(_z) {}
         Point(int _x, int _y, int _z, int _w) : x(_x), y(_y), z(_z), w(_w) {}
         Point(const Point& other);
+        Point(const std::string& str) { *this = string_to_point(str); }
+
         bool operator==(const Point& p) const;
 
         void add(const Point& p);
@@ -39,7 +41,10 @@ namespace advc_2023::utils
         void set_max(const Point& p);
         void set_min(const Point& p);
 
-        std::string to_string() const;
+        std::string to_string() const;          // for debugging purpose
+        std::string to_unique_string() const;   // for being keys in a map
+
+        static Point string_to_point(const std::string& str);
 
     public:
         static int s_log_dimemsion;

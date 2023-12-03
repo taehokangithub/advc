@@ -23,6 +23,8 @@ namespace advc_2023::utils
         { 0, -1 }, { 1, 0 }, { 0, 1 }, { -1, 0 }
     };
 
+    // -------------------------------------
+
     string Point::to_string() const
     {
         stringstream ss;
@@ -41,6 +43,29 @@ namespace advc_2023::utils
         assert(s_log_dimemsion <= 4);
 
         return ss.str();
+    }
+
+    // -------------------------------------
+
+    string Point::to_unique_string() const
+    {
+        stringstream ss;
+        ss << "[" << x << ":" << y << ":" << z << ":" << w << "]";
+
+        return ss.str();
+    }
+
+    // -------------------------------------
+
+    Point Point::string_to_point(const string& str)
+    {
+        stringstream ss(str);
+        Point p;
+        char dummy;
+
+        ss >> dummy >> p.x >> dummy >> p.y >> dummy >> p.z >> dummy >> p.w >> dummy;
+
+        return p;
     }
 
     // -------------------------------------

@@ -16,6 +16,9 @@
     <ClCompile Include="src\grid_tests.cpp">
       <Filter>tests</Filter>
     </ClCompile>
+    <ClCompile Include="src\map_tests.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="tests">
@@ -27,9 +30,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\utils\input_utils.h">
-      <Filter>targets</Filter>
-    </ClInclude>
-    <ClInclude Include="..\utils\grid.h">
       <Filter>targets</Filter>
     </ClInclude>
     <ClInclude Include="..\utils\point.h">

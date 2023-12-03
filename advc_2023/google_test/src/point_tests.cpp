@@ -1,3 +1,5 @@
+#include <unordered_set>
+
 #include "gtest/gtest.h"
 #include "../../utils/point.h"
 
@@ -108,5 +110,24 @@ namespace advc_2023::google_test
 
         EXPECT_EQ(p1, expected1);
         EXPECT_EQ(p2, expected2);
+    }
+
+    TEST(Point_tests, unique_strings)
+    {
+        utils::Point p1(1, 2, 3, 5);
+        utils::Point p2(1, 2, 5, 7);
+        utils::Point p3(1, 2, 3, 5);
+
+        unordered_set<string> test_set;
+        test_set.insert(p1.to_unique_string());
+        test_set.insert(p2.to_unique_string());
+
+        EXPECT_EQ((int)test_set.size(), 2);
+
+        test_set.insert(p3.to_unique_string());
+        EXPECT_EQ((int)test_set.size(), 2);
+
+        utils::Point p_reverse(p1.to_unique_string());
+        EXPECT_EQ(p_reverse, p1);
     }
 }

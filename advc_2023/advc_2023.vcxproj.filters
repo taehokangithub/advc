@@ -80,5 +80,8 @@
     <ClInclude Include="solutions\day03\gear.h">
       <Filter>Source Files\solutions\day03</Filter>
     </ClInclude>
+    <ClInclude Include="utils\map.h">
+      <Filter>Source Files\utils</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

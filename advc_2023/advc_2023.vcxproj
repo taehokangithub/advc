@@ -159,6 +159,7 @@
     <ClInclude Include="solutions\day03\gear.h" />
     <ClInclude Include="utils\grid.h" />
     <ClInclude Include="utils\input_utils.h" />
+    <ClInclude Include="utils\map.h" />
     <ClInclude Include="utils\point.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
