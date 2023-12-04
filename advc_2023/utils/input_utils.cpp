@@ -43,16 +43,23 @@ namespace advc_2023::utils
         {
             const size_t found_pos = str.find(delimeter, pos);
 
+            string token;
+
             if (found_pos == string::npos)
             {
-                ret.push_back(str.substr(pos));
-                break;
+                token = str.substr(pos);
+                pos = str.length();
             }
-
-            const string token = str.substr(pos, found_pos - pos);
-            ret.push_back(token);
-
-            pos = found_pos + delimeter.length();
+            else
+            {
+                token = str.substr(pos, found_pos - pos);
+                pos = found_pos + delimeter.length();
+            }
+            
+            if (token.length() > 0)
+            {
+                ret.push_back(token);
+            }
         }
 
         return ret;

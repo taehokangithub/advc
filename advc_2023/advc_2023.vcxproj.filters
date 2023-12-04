@@ -60,6 +60,9 @@
     <ClCompile Include="solutions\day04\day04.cpp">
       <Filter>Source Files\solutions\day04</Filter>
     </ClCompile>
+    <ClCompile Include="solutions\day04\cards.cpp">
+      <Filter>Source Files\solutions\day04</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utils\input_utils.h">
@@ -90,6 +93,9 @@
       <Filter>Source Files\utils</Filter>
     </ClInclude>
     <ClInclude Include="solutions\day04\day04.h">
+      <Filter>Source Files\solutions\day04</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day04\cards.h">
       <Filter>Source Files\solutions\day04</Filter>
     </ClInclude>
   </ItemGroup>

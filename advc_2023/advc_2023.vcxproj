@@ -148,6 +148,7 @@
     <ClCompile Include="solutions\day02\games.cpp" />
     <ClCompile Include="solutions\day03\day03.cpp" />
     <ClCompile Include="solutions\day03\gear.cpp" />
+    <ClCompile Include="solutions\day04\cards.cpp" />
     <ClCompile Include="solutions\day04\day04.cpp" />
     <ClCompile Include="utils\input_utils.cpp" />
     <ClCompile Include="utils\point.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="solutions\day02\games.h" />
     <ClInclude Include="solutions\day03\day03.h" />
     <ClInclude Include="solutions\day03\gear.h" />
+    <ClInclude Include="solutions\day04\cards.h" />
     <ClInclude Include="solutions\day04\day04.h" />
     <ClInclude Include="utils\grid.h" />
     <ClInclude Include="utils\input_utils.h" />
