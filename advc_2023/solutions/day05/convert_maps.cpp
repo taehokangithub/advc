@@ -215,10 +215,10 @@ namespace advc_2023::day05
             for (const Seed_range& range : current_ranges)
             {
                 const auto& new_ranges = converter->convert_range(range);
-                next_ranges.insert(next_ranges.end(), new_ranges.begin(), new_ranges.end());
+                next_ranges.insert(next_ranges.end(), std::make_move_iterator(new_ranges.begin()), std::make_move_iterator(new_ranges.end()));
             }
 
-            current_ranges = next_ranges;
+            current_ranges = std::move(next_ranges);
         }
 
         std::sort(current_ranges.begin(), current_ranges.end(), [](const Seed_range& a, const Seed_range& b) {
