@@ -21,12 +21,13 @@ namespace advc_2023::day00
     {
         const auto& lines{ utils::get_lines("solutions/day00/input.txt") };
 
-        //const int ans1 = part1(lines);
+        //const auto ans1 = part1(lines);
         //cout << "[DAY00] PART 1 : " << ans1 << endl;
         //assert(ans1 == 0);
 
-        //const int ans2 = part2(lines);
+        //const auto ans2 = part2(lines);
         //cout << "[DAY00] PART 2 : " << ans2 << endl;
-        //assert(ans2 == 0);
+        //assert(ans2 == 54331);
     }
 }
+

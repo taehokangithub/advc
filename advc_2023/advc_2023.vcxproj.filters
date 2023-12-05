@@ -31,6 +31,9 @@
     <Filter Include="Source Files\solutions\day04">
       <UniqueIdentifier>{cee10498-17a5-43cb-b517-fee6670dc3a8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\solutions\day05">
+      <UniqueIdentifier>{60d9c60e-77a4-473a-acc2-53a1e72b4dcd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="advc_2023.cpp">
@@ -62,6 +65,12 @@
     </ClCompile>
     <ClCompile Include="solutions\day04\cards.cpp">
       <Filter>Source Files\solutions\day04</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\day05\day05.cpp">
+      <Filter>Source Files\solutions\day05</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\day05\convert_maps.cpp">
+      <Filter>Source Files\solutions\day05</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -97,6 +106,12 @@
     </ClInclude>
     <ClInclude Include="solutions\day04\cards.h">
       <Filter>Source Files\solutions\day04</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day05\day05.h">
+      <Filter>Source Files\solutions\day05</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day05\convert_maps.h">
+      <Filter>Source Files\solutions\day05</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
