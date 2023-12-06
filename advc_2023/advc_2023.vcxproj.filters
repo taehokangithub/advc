@@ -34,6 +34,9 @@
     <Filter Include="Source Files\solutions\day05">
       <UniqueIdentifier>{60d9c60e-77a4-473a-acc2-53a1e72b4dcd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\solutions\day06">
+      <UniqueIdentifier>{8004673d-8d2f-4090-afad-ef1460c7edf1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="advc_2023.cpp">
@@ -71,6 +74,12 @@
     </ClCompile>
     <ClCompile Include="solutions\day05\convert_maps.cpp">
       <Filter>Source Files\solutions\day05</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\day06\day06.cpp">
+      <Filter>Source Files\solutions\day06</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\day06\record_container.cpp">
+      <Filter>Source Files\solutions\day06</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -112,6 +121,12 @@
     </ClInclude>
     <ClInclude Include="solutions\day05\convert_maps.h">
       <Filter>Source Files\solutions\day05</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day06\day06.h">
+      <Filter>Source Files\solutions\day06</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day06\record_container.h">
+      <Filter>Source Files\solutions\day06</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

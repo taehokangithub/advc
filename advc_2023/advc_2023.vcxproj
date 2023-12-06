@@ -152,6 +152,8 @@
     <ClCompile Include="solutions\day04\day04.cpp" />
     <ClCompile Include="solutions\day05\convert_maps.cpp" />
     <ClCompile Include="solutions\day05\day05.cpp" />
+    <ClCompile Include="solutions\day06\day06.cpp" />
+    <ClCompile Include="solutions\day06\record_container.cpp" />
     <ClCompile Include="utils\input_utils.cpp" />
     <ClCompile Include="utils\point.cpp" />
   </ItemGroup>
@@ -165,6 +167,8 @@
     <ClInclude Include="solutions\day04\day04.h" />
     <ClInclude Include="solutions\day05\convert_maps.h" />
     <ClInclude Include="solutions\day05\day05.h" />
+    <ClInclude Include="solutions\day06\day06.h" />
+    <ClInclude Include="solutions\day06\record_container.h" />
     <ClInclude Include="utils\grid.h" />
     <ClInclude Include="utils\input_utils.h" />
     <ClInclude Include="utils\map.h" />
