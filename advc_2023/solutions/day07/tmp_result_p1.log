@@ -1,0 +1,1018 @@
+Starting Advent of Code 2023
+[DAY01] PART 1 : 54331
+[DAY01] PART 2 : 54518
+[DAY02] PART 1 : 2169
+[DAY02] PART 2 : 60948
+[DAY03] PART 1 : 539637
+[DAY03] PART 2 : 82818007
+[DAY04] PART 1 : 21105
+[DAY04] PART 2 : 5329815
+[DAY05] PART 1 : 175622908
+[DAY05] PART 2 : 5200543
+[DAY06] PART 1 : 3316275
+[DAY06] PART 2 : 27102791
+ RANK [1000] [JJJJJ:Five], bid 219, winning 219000, total 219000
+ RANK [999] [AAAAJ:Four], bid 594, winning 593406, total 812406
+ RANK [998] [AAAA3:Four], bid 145, winning 144710, total 957116
+ RANK [997] [AAATA:Four], bid 704, winning 701888, total 1659004
+ RANK [996] [AA5AA:Four], bid 565, winning 562740, total 2221744
+ RANK [995] [AKKKK:Four], bid 70, winning 69650, total 2291394
+ RANK [994] [AQAAA:Four], bid 824, winning 819056, total 3110450
+ RANK [993] [KAAAA:Four], bid 731, winning 725883, total 3836333
+ RANK [992] [KKKK6:Four], bid 574, winning 569408, total 4405741
+ RANK [991] [KKKJK:Four], bid 183, winning 181353, total 4587094
+ RANK [990] [KKTKK:Four], bid 166, winning 164340, total 4751434
+ RANK [989] [KK8KK:Four], bid 572, winning 565708, total 5317142
+ RANK [988] [KK3KK:Four], bid 577, winning 570076, total 5887218
+ RANK [987] [K9999:Four], bid 112, winning 110544, total 5997762
+ RANK [986] [K8888:Four], bid 7, winning 6902, total 6004664
+ RANK [985] [K7KKK:Four], bid 906, winning 892410, total 6897074
+ RANK [984] [QAQQQ:Four], bid 556, winning 547104, total 7444178
+ RANK [983] [QKKKK:Four], bid 747, winning 734301, total 8178479
+ RANK [982] [QQQJQ:Four], bid 831, winning 816042, total 8994521
+ RANK [981] [QQQ8Q:Four], bid 711, winning 697491, total 9692012
+ RANK [980] [QQ3QQ:Four], bid 117, winning 114660, total 9806672
+ RANK [979] [QQ2QQ:Four], bid 844, winning 826276, total 10632948
+ RANK [978] [Q9999:Four], bid 179, winning 175062, total 10808010
+ RANK [977] [Q8888:Four], bid 274, winning 267698, total 11075708
+ RANK [976] [Q6QQQ:Four], bid 133, winning 129808, total 11205516
+ RANK [975] [Q6666:Four], bid 372, winning 362700, total 11568216
+ RANK [974] [Q5QQQ:Four], bid 585, winning 569790, total 12138006
+ RANK [973] [JJ8JJ:Four], bid 359, winning 349307, total 12487313
+ RANK [972] [JTTTT:Four], bid 305, winning 296460, total 12783773
+ RANK [971] [J9999:Four], bid 400, winning 388400, total 13172173
+ RANK [970] [J6666:Four], bid 239, winning 231830, total 13404003
+ RANK [969] [J4444:Four], bid 444, winning 430236, total 13834239
+ RANK [968] [J2222:Four], bid 187, winning 181016, total 14015255
+ RANK [967] [TTTTQ:Four], bid 384, winning 371328, total 14386583
+ RANK [966] [TT7TT:Four], bid 110, winning 106260, total 14492843
+ RANK [965] [T8888:Four], bid 608, winning 586720, total 15079563
+ RANK [964] [T4444:Four], bid 595, winning 573580, total 15653143
+ RANK [963] [9999T:Four], bid 761, winning 732843, total 16385986
+ RANK [962] [99969:Four], bid 163, winning 156806, total 16542792
+ RANK [961] [99959:Four], bid 146, winning 140306, total 16683098
+ RANK [960] [99929:Four], bid 864, winning 829440, total 17512538
+ RANK [959] [99399:Four], bid 790, winning 757610, total 18270148
+ RANK [958] [97999:Four], bid 604, winning 578632, total 18848780
+ RANK [957] [93333:Four], bid 408, winning 390456, total 19239236
+ RANK [956] [888A8:Four], bid 933, winning 891948, total 20131184
+ RANK [955] [888J8:Four], bid 101, winning 96455, total 20227639
+ RANK [954] [88884:Four], bid 385, winning 367290, total 20594929
+ RANK [953] [88388:Four], bid 782, winning 745246, total 21340175
+ RANK [952] [79777:Four], bid 122, winning 116144, total 21456319
+ RANK [951] [78888:Four], bid 290, winning 275790, total 21732109
+ RANK [950] [78777:Four], bid 719, winning 683050, total 22415159
+ RANK [949] [777T7:Four], bid 136, winning 129064, total 22544223
+ RANK [948] [7777A:Four], bid 135, winning 127980, total 22672203
+ RANK [947] [7777K:Four], bid 254, winning 240538, total 22912741
+ RANK [946] [7777J:Four], bid 404, winning 382184, total 23294925
+ RANK [945] [77757:Four], bid 415, winning 392175, total 23687100
+ RANK [944] [77747:Four], bid 553, winning 522032, total 24209132
+ RANK [943] [75555:Four], bid 613, winning 578059, total 24787191
+ RANK [942] [74444:Four], bid 683, winning 643386, total 25430577
+ RANK [941] [72777:Four], bid 519, winning 488379, total 25918956
+ RANK [940] [6T666:Four], bid 9, winning 8460, total 25927416
+ RANK [939] [67777:Four], bid 437, winning 410343, total 26337759
+ RANK [938] [67666:Four], bid 51, winning 47838, total 26385597
+ RANK [937] [6666A:Four], bid 476, winning 446012, total 26831609
+ RANK [936] [66668:Four], bid 919, winning 860184, total 27691793
+ RANK [935] [66626:Four], bid 900, winning 841500, total 28533293
+ RANK [934] [63333:Four], bid 231, winning 215754, total 28749047
+ RANK [933] [62222:Four], bid 188, winning 175404, total 28924451
+ RANK [932] [5A555:Four], bid 439, winning 409148, total 29333599
+ RANK [931] [5T555:Four], bid 512, winning 476672, total 29810271
+ RANK [930] [58888:Four], bid 875, winning 813750, total 30624021
+ RANK [929] [55J55:Four], bid 141, winning 130989, total 30755010
+ RANK [928] [55955:Four], bid 422, winning 391616, total 31146626
+ RANK [927] [55585:Four], bid 936, winning 867672, total 32014298
+ RANK [926] [55565:Four], bid 283, winning 262058, total 32276356
+ RANK [925] [55545:Four], bid 143, winning 132275, total 32408631
+ RANK [924] [4KKKK:Four], bid 144, winning 133056, total 32541687
+ RANK [923] [46666:Four], bid 276, winning 254748, total 32796435
+ RANK [922] [44944:Four], bid 660, winning 608520, total 33404955
+ RANK [921] [444K4:Four], bid 962, winning 886002, total 34290957
+ RANK [920] [44442:Four], bid 566, winning 520720, total 34811677
+ RANK [919] [42222:Four], bid 722, winning 663518, total 35475195
+ RANK [918] [37777:Four], bid 159, winning 145962, total 35621157
+ RANK [917] [33733:Four], bid 313, winning 287021, total 35908178
+ RANK [916] [333J3:Four], bid 672, winning 615552, total 36523730
+ RANK [915] [33334:Four], bid 351, winning 321165, total 36844895
+ RANK [914] [2AAAA:Four], bid 19, winning 17366, total 36862261
+ RANK [913] [2Q222:Four], bid 104, winning 94952, total 36957213
+ RANK [912] [2TTTT:Four], bid 265, winning 241680, total 37198893
+ RANK [911] [23333:Four], bid 475, winning 432725, total 37631618
+ RANK [910] [22A22:Four], bid 416, winning 378560, total 38010178
+ RANK [909] [22922:Four], bid 755, winning 686295, total 38696473
+ RANK [908] [22522:Four], bid 249, winning 226092, total 38922565
+ RANK [907] [222K2:Four], bid 3, winning 2721, total 38925286
+ RANK [906] [22228:Four], bid 492, winning 445752, total 39371038
+ RANK [905] [22223:Four], bid 227, winning 205435, total 39576473
+ RANK [904] [AATTA:Full House], bid 28, winning 25312, total 39601785
+ RANK [903] [AA33A:Full House], bid 195, winning 176085, total 39777870
+ RANK [902] [AA22A:Full House], bid 955, winning 861410, total 40639280
+ RANK [901] [A9AA9:Full House], bid 676, winning 609076, total 41248356
+ RANK [900] [A8A8A:Full House], bid 342, winning 307800, total 41556156
+ RANK [899] [A6A6A:Full House], bid 125, winning 112375, total 41668531
+ RANK [898] [KKK55:Full House], bid 665, winning 597170, total 42265701
+ RANK [897] [KKK22:Full House], bid 432, winning 387504, total 42653205
+ RANK [896] [KK66K:Full House], bid 189, winning 169344, total 42822549
+ RANK [895] [KQKQK:Full House], bid 845, winning 756275, total 43578824
+ RANK [894] [KTKTK:Full House], bid 810, winning 724140, total 44302964
+ RANK [893] [K8K8K:Full House], bid 61, winning 54473, total 44357437
+ RANK [892] [QQJQJ:Full House], bid 131, winning 116852, total 44474289
+ RANK [891] [QQ4Q4:Full House], bid 857, winning 763587, total 45237876
+ RANK [890] [QQ33Q:Full House], bid 778, winning 692420, total 45930296
+ RANK [889] [QQ22Q:Full House], bid 91, winning 80899, total 46011195
+ RANK [888] [QTQQT:Full House], bid 930, winning 825840, total 46837035
+ RANK [887] [JAJAA:Full House], bid 407, winning 361009, total 47198044
+ RANK [886] [JJKKK:Full House], bid 937, winning 830182, total 48028226
+ RANK [885] [J77JJ:Full House], bid 30, winning 26550, total 48054776
+ RANK [884] [J6JJ6:Full House], bid 247, winning 218348, total 48273124
+ RANK [883] [J3JJ3:Full House], bid 66, winning 58278, total 48331402
+ RANK [882] [TT9T9:Full House], bid 196, winning 172872, total 48504274
+ RANK [881] [T4T4T:Full House], bid 507, winning 446667, total 48950941
+ RANK [880] [99669:Full House], bid 336, winning 295680, total 49246621
+ RANK [879] [99229:Full House], bid 395, winning 347205, total 49593826
+ RANK [878] [89998:Full House], bid 321, winning 281838, total 49875664
+ RANK [877] [88QQQ:Full House], bid 866, winning 759482, total 50635146
+ RANK [876] [88877:Full House], bid 322, winning 282072, total 50917218
+ RANK [875] [86688:Full House], bid 623, winning 545125, total 51462343
+ RANK [874] [77AAA:Full House], bid 969, winning 846906, total 52309249
+ RANK [873] [76767:Full House], bid 173, winning 151029, total 52460278
+ RANK [872] [75577:Full House], bid 488, winning 425536, total 52885814
+ RANK [871] [74774:Full House], bid 79, winning 68809, total 52954623
+ RANK [870] [72727:Full House], bid 538, winning 468060, total 53422683
+ RANK [869] [6TTT6:Full House], bid 642, winning 557898, total 53980581
+ RANK [868] [66226:Full House], bid 543, winning 471324, total 54451905
+ RANK [867] [64466:Full House], bid 942, winning 816714, total 55268619
+ RANK [866] [5Q5QQ:Full House], bid 858, winning 743028, total 56011647
+ RANK [865] [5T5TT:Full House], bid 979, winning 846835, total 56858482
+ RANK [864] [58858:Full House], bid 555, winning 479520, total 57338002
+ RANK [863] [55353:Full House], bid 981, winning 846603, total 58184605
+ RANK [862] [54554:Full House], bid 440, winning 379280, total 58563885
+ RANK [861] [4AA4A:Full House], bid 578, winning 497658, total 59061543
+ RANK [860] [44888:Full House], bid 898, winning 772280, total 59833823
+ RANK [859] [44433:Full House], bid 922, winning 791998, total 60625821
+ RANK [858] [39399:Full House], bid 928, winning 796224, total 61422045
+ RANK [857] [36663:Full House], bid 815, winning 698455, total 62120500
+ RANK [856] [33TTT:Full House], bid 353, winning 302168, total 62422668
+ RANK [855] [33888:Full House], bid 311, winning 265905, total 62688573
+ RANK [854] [24244:Full House], bid 992, winning 847168, total 63535741
+ RANK [853] [AAA5K:Three], bid 466, winning 397498, total 63933239
+ RANK [852] [AAA26:Three], bid 598, winning 509496, total 64442735
+ RANK [851] [AATTT:Three], bid 603, winning 513153, total 64955888
+ RANK [850] [AA48A:Three], bid 56, winning 47600, total 65003488
+ RANK [849] [AQQQ4:Three], bid 766, winning 650334, total 65653822
+ RANK [848] [AJQQQ:Three], bid 533, winning 451984, total 66105806
+ RANK [847] [ATAA8:Three], bid 120, winning 101640, total 66207446
+ RANK [846] [A99J9:Three], bid 771, winning 652266, total 66859712
+ RANK [845] [A6A66:Three], bid 569, winning 480805, total 67340517
+ RANK [844] [A66J6:Three], bid 213, winning 179772, total 67520289
+ RANK [843] [A4ATA:Three], bid 971, winning 818553, total 68338842
+ RANK [842] [A444J:Three], bid 950, winning 799900, total 69138742
+ RANK [841] [A3QQQ:Three], bid 885, winning 744285, total 69883027
+ RANK [840] [A333J:Three], bid 463, winning 388920, total 70271947
+ RANK [839] [A2AA5:Three], bid 549, winning 460611, total 70732558
+ RANK [838] [A2AQA:Three], bid 267, winning 223746, total 70956304
+ RANK [837] [A28AA:Three], bid 137, winning 114669, total 71070973
+ RANK [836] [KKKAA:Three], bid 473, winning 395428, total 71466401
+ RANK [835] [KKK6T:Three], bid 682, winning 569470, total 72035871
+ RANK [834] [KKQK5:Three], bid 599, winning 499566, total 72535437
+ RANK [833] [KKJKT:Three], bid 339, winning 282387, total 72817824
+ RANK [832] [KKJK2:Three], bid 64, winning 53248, total 72871072
+ RANK [831] [KKTTT:Three], bid 832, winning 691392, total 73562464
+ RANK [830] [KK6KA:Three], bid 568, winning 471440, total 74033904
+ RANK [829] [KK3KA:Three], bid 620, winning 513980, total 74547884
+ RANK [828] [KJQKK:Three], bid 57, winning 47196, total 74595080
+ RANK [827] [KTKK5:Three], bid 140, winning 115780, total 74710860
+ RANK [826] [KTTQT:Three], bid 949, winning 783874, total 75494734
+ RANK [825] [K9599:Three], bid 174, winning 143550, total 75638284
+ RANK [824] [K8884:Three], bid 34, winning 28016, total 75666300
+ RANK [823] [K7K4K:Three], bid 961, winning 790903, total 76457203
+ RANK [822] [K7JKK:Three], bid 262, winning 215364, total 76672567
+ RANK [821] [K33K3:Three], bid 387, winning 317727, total 76990294
+ RANK [820] [K333Q:Three], bid 681, winning 558420, total 77548714
+ RANK [819] [K22K2:Three], bid 318, winning 260442, total 77809156
+ RANK [818] [K2229:Three], bid 285, winning 233130, total 78042286
+ RANK [817] [QAKAA:Three], bid 228, winning 186276, total 78228562
+ RANK [816] [QQQ72:Three], bid 165, winning 134640, total 78363202
+ RANK [815] [QQ64Q:Three], bid 40, winning 32600, total 78395802
+ RANK [814] [QTQ6Q:Three], bid 204, winning 166056, total 78561858
+ RANK [813] [QT888:Three], bid 501, winning 407313, total 78969171
+ RANK [812] [Q9QAQ:Three], bid 491, winning 398692, total 79367863
+ RANK [811] [Q7QQJ:Three], bid 23, winning 18653, total 79386516
+ RANK [810] [Q7555:Three], bid 899, winning 728190, total 80114706
+ RANK [809] [Q5Q3Q:Three], bid 264, winning 213576, total 80328282
+ RANK [808] [Q5553:Three], bid 564, winning 455712, total 80783994
+ RANK [807] [Q33J3:Three], bid 205, winning 165435, total 80949429
+ RANK [806] [Q3343:Three], bid 99, winning 79794, total 81029223
+ RANK [805] [Q2922:Three], bid 773, winning 622265, total 81651488
+ RANK [804] [JAA7A:Three], bid 528, winning 424512, total 82076000
+ RANK [803] [JAJAJ:Three], bid 562, winning 451286, total 82527286
+ RANK [802] [JATTT:Three], bid 391, winning 313582, total 82840868
+ RANK [801] [JKJJ7:Three], bid 636, winning 509436, total 83350304
+ RANK [800] [JQKQQ:Three], bid 299, winning 239200, total 83589504
+ RANK [799] [JQQQT:Three], bid 965, winning 771035, total 84360539
+ RANK [798] [JJ56J:Three], bid 948, winning 756504, total 85117043
+ RANK [797] [J888A:Three], bid 89, winning 70933, total 85187976
+ RANK [796] [J7Q77:Three], bid 260, winning 206960, total 85394936
+ RANK [795] [J777J:Three], bid 67, winning 53265, total 85448201
+ RANK [794] [J6T66:Three], bid 364, winning 289016, total 85737217
+ RANK [793] [J6676:Three], bid 289, winning 229177, total 85966394
+ RANK [792] [J444T:Three], bid 401, winning 317592, total 86283986
+ RANK [791] [J3353:Three], bid 178, winning 140798, total 86424784
+ RANK [790] [J2227:Three], bid 863, winning 681770, total 87106554
+ RANK [789] [TKQQQ:Three], bid 716, winning 564924, total 87671478
+ RANK [788] [TQQTT:Three], bid 518, winning 408184, total 88079662
+ RANK [787] [TJTTJ:Three], bid 609, winning 479283, total 88558945
+ RANK [786] [TJTT8:Three], bid 58, winning 45588, total 88604533
+ RANK [785] [TJ888:Three], bid 525, winning 412125, total 89016658
+ RANK [784] [TTQJT:Three], bid 515, winning 403760, total 89420418
+ RANK [783] [TTTK3:Three], bid 90, winning 70470, total 89490888
+ RANK [782] [TTT75:Three], bid 443, winning 346426, total 89837314
+ RANK [781] [TTT4J:Three], bid 389, winning 303809, total 90141123
+ RANK [780] [TT97T:Three], bid 32, winning 24960, total 90166083
+ RANK [779] [T9T99:Three], bid 684, winning 532836, total 90698919
+ RANK [778] [T96TT:Three], bid 725, winning 564050, total 91262969
+ RANK [777] [T9299:Three], bid 914, winning 710178, total 91973147
+ RANK [776] [T77T7:Three], bid 55, winning 42680, total 92015827
+ RANK [775] [T777K:Three], bid 921, winning 713775, total 92729602
+ RANK [774] [T666T:Three], bid 52, winning 40248, total 92769850
+ RANK [773] [T6668:Three], bid 445, winning 343985, total 93113835
+ RANK [772] [T5J55:Three], bid 49, winning 37828, total 93151663
+ RANK [771] [T5575:Three], bid 541, winning 417111, total 93568774
+ RANK [770] [T555Q:Three], bid 558, winning 429660, total 93998434
+ RANK [769] [T44T4:Three], bid 557, winning 428333, total 94426767
+ RANK [768] [T3343:Three], bid 918, winning 705024, total 95131791
+ RANK [767] [T2666:Three], bid 530, winning 406510, total 95538301
+ RANK [766] [T25TT:Three], bid 461, winning 353126, total 95891427
+ RANK [765] [9AJAA:Three], bid 88, winning 67320, total 95958747
+ RANK [764] [9A99A:Three], bid 720, winning 550080, total 96508827
+ RANK [763] [9Q969:Three], bid 202, winning 154126, total 96662953
+ RANK [762] [9J99J:Three], bid 303, winning 230886, total 96893839
+ RANK [761] [9J994:Three], bid 883, winning 671963, total 97565802
+ RANK [760] [9J969:Three], bid 529, winning 402040, total 97967842
+ RANK [759] [99T89:Three], bid 176, winning 133584, total 98101426
+ RANK [758] [999KK:Three], bid 413, winning 313054, total 98414480
+ RANK [757] [99925:Three], bid 691, winning 523087, total 98937567
+ RANK [756] [98889:Three], bid 834, winning 630504, total 99568071
+ RANK [755] [9799J:Three], bid 705, winning 532275, total 100100346
+ RANK [754] [96333:Three], bid 915, winning 689910, total 100790256
+ RANK [753] [95595:Three], bid 333, winning 250749, total 101041005
+ RANK [752] [94T44:Three], bid 805, winning 605360, total 101646365
+ RANK [751] [94998:Three], bid 33, winning 24783, total 101671148
+ RANK [750] [94445:Three], bid 776, winning 582000, total 102253148
+ RANK [749] [939J9:Three], bid 570, winning 426930, total 102680078
+ RANK [748] [93599:Three], bid 703, winning 525844, total 103205922
+ RANK [747] [92888:Three], bid 296, winning 221112, total 103427034
+ RANK [746] [92399:Three], bid 381, winning 284226, total 103711260
+ RANK [745] [922A2:Three], bid 442, winning 329290, total 104040550
+ RANK [744] [8A883:Three], bid 764, winning 568416, total 104608966
+ RANK [743] [8QQQ3:Three], bid 508, winning 377444, total 104986410
+ RANK [742] [8Q8Q8:Three], bid 243, winning 180306, total 105166716
+ RANK [741] [8JAAA:Three], bid 626, winning 463866, total 105630582
+ RANK [740] [8J88Q:Three], bid 498, winning 368520, total 105999102
+ RANK [739] [8J828:Three], bid 973, winning 719047, total 106718149
+ RANK [738] [89979:Three], bid 842, winning 621396, total 107339545
+ RANK [737] [8988K:Three], bid 696, winning 512952, total 107852497
+ RANK [736] [88A8A:Three], bid 629, winning 462944, total 108315441
+ RANK [735] [88J8J:Three], bid 297, winning 218295, total 108533736
+ RANK [734] [88T8T:Three], bid 679, winning 498386, total 109032122
+ RANK [733] [88578:Three], bid 840, winning 615720, total 109647842
+ RANK [732] [88482:Three], bid 877, winning 641964, total 110289806
+ RANK [731] [883J8:Three], bid 940, winning 687140, total 110976946
+ RANK [730] [87778:Three], bid 695, winning 507350, total 111484296
+ RANK [729] [86999:Three], bid 545, winning 397305, total 111881601
+ RANK [728] [8555J:Three], bid 241, winning 175448, total 112057049
+ RANK [727] [83335:Three], bid 690, winning 501630, total 112558679
+ RANK [726] [82885:Three], bid 820, winning 595320, total 113153999
+ RANK [725] [7A727:Three], bid 821, winning 595225, total 113749224
+ RANK [724] [7QQQ3:Three], bid 149, winning 107876, total 113857100
+ RANK [723] [7QQ77:Three], bid 177, winning 127971, total 113985071
+ RANK [722] [7Q773:Three], bid 673, winning 485906, total 114470977
+ RANK [721] [7TJTT:Three], bid 207, winning 149247, total 114620224
+ RANK [720] [7T775:Three], bid 680, winning 489600, total 115109824
+ RANK [719] [7T772:Three], bid 657, winning 472383, total 115582207
+ RANK [718] [7877J:Three], bid 469, winning 336742, total 115918949
+ RANK [717] [77KJ7:Three], bid 425, winning 304725, total 116223674
+ RANK [716] [77979:Three], bid 524, winning 375184, total 116598858
+ RANK [715] [75477:Three], bid 94, winning 67210, total 116666068
+ RANK [714] [737T7:Three], bid 458, winning 327012, total 116993080
+ RANK [713] [7377J:Three], bid 856, winning 610328, total 117603408
+ RANK [712] [72757:Three], bid 471, winning 335352, total 117938760
+ RANK [711] [6KKKJ:Three], bid 60, winning 42660, total 117981420
+ RANK [710] [6KK66:Three], bid 362, winning 257020, total 118238440
+ RANK [709] [6QAQQ:Three], bid 794, winning 562946, total 118801386
+ RANK [708] [6J66J:Three], bid 114, winning 80712, total 118882098
+ RANK [707] [6T4TT:Three], bid 818, winning 578326, total 119460424
+ RANK [706] [6966A:Three], bid 699, winning 493494, total 119953918
+ RANK [705] [677A7:Three], bid 35, winning 24675, total 119978593
+ RANK [704] [67366:Three], bid 327, winning 230208, total 120208801
+ RANK [703] [66996:Three], bid 13, winning 9139, total 120217940
+ RANK [702] [66968:Three], bid 757, winning 531414, total 120749354
+ RANK [701] [666J9:Three], bid 298, winning 208898, total 120958252
+ RANK [700] [65556:Three], bid 835, winning 584500, total 121542752
+ RANK [699] [64766:Three], bid 837, winning 585063, total 122127815
+ RANK [698] [63833:Three], bid 470, winning 328060, total 122455875
+ RANK [697] [62622:Three], bid 784, winning 546448, total 123002323
+ RANK [696] [5AA55:Three], bid 312, winning 217152, total 123219475
+ RANK [695] [5KK7K:Three], bid 116, winning 80620, total 123300095
+ RANK [694] [5J5J5:Three], bid 785, winning 544790, total 123844885
+ RANK [693] [59A55:Three], bid 103, winning 71379, total 123916264
+ RANK [692] [599J9:Three], bid 998, winning 690616, total 124606880
+ RANK [691] [5655J:Three], bid 584, winning 403544, total 125010424
+ RANK [690] [55KK5:Three], bid 590, winning 407100, total 125417524
+ RANK [689] [55JK5:Three], bid 150, winning 103350, total 125520874
+ RANK [688] [55T56:Three], bid 235, winning 161680, total 125682554
+ RANK [687] [555K9:Three], bid 477, winning 327699, total 126010253
+ RANK [686] [555TT:Three], bid 968, winning 664048, total 126674301
+ RANK [685] [55577:Three], bid 182, winning 124670, total 126798971
+ RANK [684] [54J55:Three], bid 500, winning 342000, total 127140971
+ RANK [683] [53755:Three], bid 982, winning 670706, total 127811677
+ RANK [682] [525J5:Three], bid 499, winning 340318, total 128151995
+ RANK [681] [4A44A:Three], bid 685, winning 466485, total 128618480
+ RANK [680] [4K44K:Three], bid 424, winning 288320, total 128906800
+ RANK [679] [4Q4Q4:Three], bid 126, winning 85554, total 128992354
+ RANK [678] [4J44J:Three], bid 245, winning 166110, total 129158464
+ RANK [677] [4T777:Three], bid 592, winning 400784, total 129559248
+ RANK [676] [47377:Three], bid 200, winning 135200, total 129694448
+ RANK [675] [46446:Three], bid 802, winning 541350, total 130235798
+ RANK [674] [45544:Three], bid 282, winning 190068, total 130425866
+ RANK [673] [44K4J:Three], bid 357, winning 240261, total 130666127
+ RANK [672] [44Q34:Three], bid 957, winning 643104, total 131309231
+ RANK [671] [44JQ4:Three], bid 72, winning 48312, total 131357543
+ RANK [670] [44994:Three], bid 567, winning 379890, total 131737433
+ RANK [669] [445T4:Three], bid 865, winning 578685, total 132316118
+ RANK [668] [444A6:Three], bid 813, winning 543084, total 132859202
+ RANK [667] [44477:Three], bid 559, winning 372853, total 133232055
+ RANK [666] [3A2AA:Three], bid 170, winning 113220, total 133345275
+ RANK [665] [3JJ7J:Three], bid 984, winning 654360, total 133999635
+ RANK [664] [39T33:Three], bid 744, winning 494016, total 134493651
+ RANK [663] [39233:Three], bid 242, winning 160446, total 134654097
+ RANK [662] [38666:Three], bid 867, winning 573954, total 135228051
+ RANK [661] [366J6:Three], bid 1000, winning 661000, total 135889051
+ RANK [660] [36566:Three], bid 774, winning 510840, total 136399891
+ RANK [659] [35353:Three], bid 618, winning 407262, total 136807153
+ RANK [658] [34744:Three], bid 931, winning 612598, total 137419751
+ RANK [657] [34433:Three], bid 39, winning 25623, total 137445374
+ RANK [656] [33Q3Q:Three], bid 641, winning 420496, total 137865870
+ RANK [655] [33939:Three], bid 822, winning 538410, total 138404280
+ RANK [654] [3383J:Three], bid 726, winning 474804, total 138879084
+ RANK [653] [33636:Three], bid 310, winning 202430, total 139081514
+ RANK [652] [333AA:Three], bid 167, winning 108884, total 139190398
+ RANK [651] [333K8:Three], bid 199, winning 129549, total 139319947
+ RANK [650] [333JJ:Three], bid 997, winning 648050, total 139967997
+ RANK [649] [333J9:Three], bid 871, winning 565279, total 140533276
+ RANK [648] [3339K:Three], bid 490, winning 317520, total 140850796
+ RANK [647] [322T2:Three], bid 340, winning 219980, total 141070776
+ RANK [646] [2A2A2:Three], bid 171, winning 110466, total 141181242
+ RANK [645] [2A2J2:Three], bid 314, winning 202530, total 141383772
+ RANK [644] [2K272:Three], bid 717, winning 461748, total 141845520
+ RANK [643] [2QQQ8:Three], bid 548, winning 352364, total 142197884
+ RANK [642] [2Q22J:Three], bid 542, winning 347964, total 142545848
+ RANK [641] [2JJ22:Three], bid 932, winning 597412, total 143143260
+ RANK [640] [2J822:Three], bid 663, winning 424320, total 143567580
+ RANK [639] [2T522:Three], bid 563, winning 359757, total 143927337
+ RANK [638] [2999K:Three], bid 484, winning 308792, total 144236129
+ RANK [637] [29998:Three], bid 197, winning 125489, total 144361618
+ RANK [636] [29922:Three], bid 412, winning 262032, total 144623650
+ RANK [635] [28282:Three], bid 31, winning 19685, total 144643335
+ RANK [634] [26223:Three], bid 677, winning 429218, total 145072553
+ RANK [633] [25J22:Three], bid 233, winning 147489, total 145220042
+ RANK [632] [25522:Three], bid 770, winning 486640, total 145706682
+ RANK [631] [24484:Three], bid 278, winning 175418, total 145882100
+ RANK [630] [23242:Three], bid 751, winning 473130, total 146355230
+ RANK [629] [22K2A:Three], bid 426, winning 267954, total 146623184
+ RANK [628] [22T2T:Three], bid 97, winning 60916, total 146684100
+ RANK [627] [AAKK9:Two Pairs], bid 481, winning 301587, total 146985687
+ RANK [626] [AAKJK:Two Pairs], bid 597, winning 373722, total 147359409
+ RANK [625] [AAJQQ:Two Pairs], bid 666, winning 416250, total 147775659
+ RANK [624] [AAJ55:Two Pairs], bid 2, winning 1248, total 147776907
+ RANK [623] [AAT9T:Two Pairs], bid 809, winning 504007, total 148280914
+ RANK [622] [AA88Q:Two Pairs], bid 338, winning 210236, total 148491150
+ RANK [621] [AQA33:Two Pairs], bid 44, winning 27324, total 148518474
+ RANK [620] [A8ATT:Two Pairs], bid 514, winning 318680, total 148837154
+ RANK [619] [A84A8:Two Pairs], bid 610, winning 377590, total 149214744
+ RANK [618] [A833A:Two Pairs], bid 309, winning 190962, total 149405706
+ RANK [617] [A7A72:Two Pairs], bid 714, winning 440538, total 149846244
+ RANK [616] [A5AK5:Two Pairs], bid 539, winning 332024, total 150178268
+ RANK [615] [A5ATT:Two Pairs], bid 670, winning 412050, total 150590318
+ RANK [614] [A33TA:Two Pairs], bid 406, winning 249284, total 150839602
+ RANK [613] [A2A72:Two Pairs], bid 951, winning 582963, total 151422565
+ RANK [612] [A2A26:Two Pairs], bid 315, winning 192780, total 151615345
+ RANK [611] [KAK3A:Two Pairs], bid 273, winning 166803, total 151782148
+ RANK [610] [KA9K9:Two Pairs], bid 497, winning 303170, total 152085318
+ RANK [609] [KKTT7:Two Pairs], bid 758, winning 461622, total 152546940
+ RANK [608] [KK393:Two Pairs], bid 190, winning 115520, total 152662460
+ RANK [607] [KJ3K3:Two Pairs], bid 977, winning 593039, total 153255499
+ RANK [606] [KTK6T:Two Pairs], bid 760, winning 460560, total 153716059
+ RANK [605] [K989K:Two Pairs], bid 345, winning 208725, total 153924784
+ RANK [604] [K8228:Two Pairs], bid 449, winning 271196, total 154195980
+ RANK [603] [K6AKA:Two Pairs], bid 712, winning 429336, total 154625316
+ RANK [602] [K63K6:Two Pairs], bid 397, winning 238994, total 154864310
+ RANK [601] [K5665:Two Pairs], bid 8, winning 4808, total 154869118
+ RANK [600] [K5445:Two Pairs], bid 261, winning 156600, total 155025718
+ RANK [599] [K4A4A:Two Pairs], bid 958, winning 573842, total 155599560
+ RANK [598] [K44K9:Two Pairs], bid 18, winning 10764, total 155610324
+ RANK [597] [QQJ88:Two Pairs], bid 257, winning 153429, total 155763753
+ RANK [596] [QQ969:Two Pairs], bid 93, winning 55428, total 155819181
+ RANK [595] [QQ788:Two Pairs], bid 870, winning 517650, total 156336831
+ RANK [594] [QQ668:Two Pairs], bid 841, winning 499554, total 156836385
+ RANK [593] [QQ277:Two Pairs], bid 739, winning 438227, total 157274612
+ RANK [592] [QJTQJ:Two Pairs], bid 446, winning 264032, total 157538644
+ RANK [591] [QT4QT:Two Pairs], bid 586, winning 346326, total 157884970
+ RANK [590] [QT3QT:Two Pairs], bid 622, winning 366980, total 158251950
+ RANK [589] [Q9AAQ:Two Pairs], bid 617, winning 363413, total 158615363
+ RANK [588] [Q838Q:Two Pairs], bid 631, winning 371028, total 158986391
+ RANK [587] [Q77AA:Two Pairs], bid 995, winning 584065, total 159570456
+ RANK [586] [Q6767:Two Pairs], bid 838, winning 491068, total 160061524
+ RANK [585] [Q66TQ:Two Pairs], bid 37, winning 21645, total 160083169
+ RANK [584] [Q6565:Two Pairs], bid 943, winning 550712, total 160633881
+ RANK [583] [Q5QT5:Two Pairs], bid 169, winning 98527, total 160732408
+ RANK [582] [Q4K4K:Two Pairs], bid 826, winning 480732, total 161213140
+ RANK [581] [Q44QT:Two Pairs], bid 102, winning 59262, total 161272402
+ RANK [580] [Q44JQ:Two Pairs], bid 894, winning 518520, total 161790922
+ RANK [579] [Q3A3Q:Two Pairs], bid 373, winning 215967, total 162006889
+ RANK [578] [Q3QAA:Two Pairs], bid 999, winning 577422, total 162584311
+ RANK [577] [Q3QT3:Two Pairs], bid 11, winning 6347, total 162590658
+ RANK [576] [Q355Q:Two Pairs], bid 69, winning 39744, total 162630402
+ RANK [575] [Q3232:Two Pairs], bid 941, winning 541075, total 163171477
+ RANK [574] [Q2QJ2:Two Pairs], bid 796, winning 456904, total 163628381
+ RANK [573] [Q2626:Two Pairs], bid 554, winning 317442, total 163945823
+ RANK [572] [Q255Q:Two Pairs], bid 259, winning 148148, total 164093971
+ RANK [571] [JK8K8:Two Pairs], bid 527, winning 300917, total 164394888
+ RANK [570] [JQKQJ:Two Pairs], bid 976, winning 556320, total 164951208
+ RANK [569] [JQQKK:Two Pairs], bid 715, winning 406835, total 165358043
+ RANK [568] [JJAA7:Two Pairs], bid 654, winning 371472, total 165729515
+ RANK [567] [JJ992:Two Pairs], bid 185, winning 104895, total 165834410
+ RANK [566] [J89J8:Two Pairs], bid 451, winning 255266, total 166089676
+ RANK [565] [J79J9:Two Pairs], bid 966, winning 545790, total 166635466
+ RANK [564] [J77J9:Two Pairs], bid 448, winning 252672, total 166888138
+ RANK [563] [J77J2:Two Pairs], bid 686, winning 386218, total 167274356
+ RANK [562] [J66JK:Two Pairs], bid 667, winning 374854, total 167649210
+ RANK [561] [J6655:Two Pairs], bid 399, winning 223839, total 167873049
+ RANK [560] [J55AJ:Two Pairs], bid 363, winning 203280, total 168076329
+ RANK [559] [J5353:Two Pairs], bid 836, winning 467324, total 168543653
+ RANK [558] [J4455:Two Pairs], bid 850, winning 474300, total 169017953
+ RANK [557] [J2442:Two Pairs], bid 575, winning 320275, total 169338228
+ RANK [556] [TAT66:Two Pairs], bid 251, winning 139556, total 169477784
+ RANK [555] [TQ2TQ:Two Pairs], bid 960, winning 532800, total 170010584
+ RANK [554] [TJKKJ:Two Pairs], bid 579, winning 320766, total 170331350
+ RANK [553] [TTQ77:Two Pairs], bid 256, winning 141568, total 170472918
+ RANK [552] [TT4J4:Two Pairs], bid 198, winning 109296, total 170582214
+ RANK [551] [T6T6J:Two Pairs], bid 465, winning 256215, total 170838429
+ RANK [550] [T5TJJ:Two Pairs], bid 944, winning 519200, total 171357629
+ RANK [549] [T2Q2Q:Two Pairs], bid 153, winning 83997, total 171441626
+ RANK [548] [T232T:Two Pairs], bid 53, winning 29044, total 171470670
+ RANK [547] [9AT9T:Two Pairs], bid 392, winning 214424, total 171685094
+ RANK [546] [9K97K:Two Pairs], bid 605, winning 330330, total 172015424
+ RANK [545] [9J9TT:Two Pairs], bid 729, winning 397305, total 172412729
+ RANK [544] [99KTT:Two Pairs], bid 736, winning 400384, total 172813113
+ RANK [543] [99833:Two Pairs], bid 881, winning 478383, total 173291496
+ RANK [542] [997J7:Two Pairs], bid 727, winning 394034, total 173685530
+ RANK [541] [99525:Two Pairs], bid 779, winning 421439, total 174106969
+ RANK [540] [9922J:Two Pairs], bid 808, winning 436320, total 174543289
+ RANK [539] [98944:Two Pairs], bid 375, winning 202125, total 174745414
+ RANK [538] [97397:Two Pairs], bid 121, winning 65098, total 174810512
+ RANK [537] [969J6:Two Pairs], bid 970, winning 520890, total 175331402
+ RANK [536] [96694:Two Pairs], bid 402, winning 215472, total 175546874
+ RANK [535] [96659:Two Pairs], bid 162, winning 86670, total 175633544
+ RANK [534] [955A9:Two Pairs], bid 851, winning 454434, total 176087978
+ RANK [533] [955QQ:Two Pairs], bid 206, winning 109798, total 176197776
+ RANK [532] [95395:Two Pairs], bid 891, winning 474012, total 176671788
+ RANK [531] [94469:Two Pairs], bid 859, winning 456129, total 177127917
+ RANK [530] [94349:Two Pairs], bid 54, winning 28620, total 177156537
+ RANK [529] [93366:Two Pairs], bid 326, winning 172454, total 177328991
+ RANK [528] [92629:Two Pairs], bid 893, winning 471504, total 177800495
+ RANK [527] [922QQ:Two Pairs], bid 324, winning 170748, total 177971243
+ RANK [526] [8Q8QK:Two Pairs], bid 878, winning 461828, total 178433071
+ RANK [525] [899QQ:Two Pairs], bid 531, winning 278775, total 178711846
+ RANK [524] [899J8:Two Pairs], bid 467, winning 244708, total 178956554
+ RANK [523] [89595:Two Pairs], bid 334, winning 174682, total 179131236
+ RANK [522] [885KK:Two Pairs], bid 115, winning 60030, total 179191266
+ RANK [521] [8778A:Two Pairs], bid 280, winning 145880, total 179337146
+ RANK [520] [8778Q:Two Pairs], bid 244, winning 126880, total 179464026
+ RANK [519] [86T68:Two Pairs], bid 77, winning 39963, total 179503989
+ RANK [518] [868KK:Two Pairs], bid 325, winning 168350, total 179672339
+ RANK [517] [8585Q:Two Pairs], bid 916, winning 473572, total 180145911
+ RANK [516] [84A84:Two Pairs], bid 946, winning 488136, total 180634047
+ RANK [515] [83T38:Two Pairs], bid 987, winning 508305, total 181142352
+ RANK [514] [82J28:Two Pairs], bid 710, winning 364940, total 181507292
+ RANK [513] [82827:Two Pairs], bid 139, winning 71307, total 181578599
+ RANK [512] [7A75A:Two Pairs], bid 192, winning 98304, total 181676903
+ RANK [511] [7KK55:Two Pairs], bid 582, winning 297402, total 181974305
+ RANK [510] [7K7KA:Two Pairs], bid 4, winning 2040, total 181976345
+ RANK [509] [7QQ97:Two Pairs], bid 910, winning 463190, total 182439535
+ RANK [508] [79947:Two Pairs], bid 869, winning 441452, total 182880987
+ RANK [507] [77J88:Two Pairs], bid 29, winning 14703, total 182895690
+ RANK [506] [77646:Two Pairs], bid 155, winning 78430, total 182974120
+ RANK [505] [774AA:Two Pairs], bid 388, winning 195940, total 183170060
+ RANK [504] [76J67:Two Pairs], bid 95, winning 47880, total 183217940
+ RANK [503] [75275:Two Pairs], bid 304, winning 152912, total 183370852
+ RANK [502] [73766:Two Pairs], bid 799, winning 401098, total 183771950
+ RANK [501] [6ATTA:Two Pairs], bid 279, winning 139779, total 183911729
+ RANK [500] [6QK6Q:Two Pairs], bid 284, winning 142000, total 184053729
+ RANK [499] [6QQ62:Two Pairs], bid 656, winning 327344, total 184381073
+ RANK [498] [6J86J:Two Pairs], bid 472, winning 235056, total 184616129
+ RANK [497] [69963:Two Pairs], bid 86, winning 42742, total 184658871
+ RANK [496] [68J68:Two Pairs], bid 151, winning 74896, total 184733767
+ RANK [495] [67A7A:Two Pairs], bid 978, winning 484110, total 185217877
+ RANK [494] [66QJQ:Two Pairs], bid 547, winning 270218, total 185488095
+ RANK [493] [66TT7:Two Pairs], bid 634, winning 312562, total 185800657
+ RANK [492] [669TT:Two Pairs], bid 208, winning 102336, total 185902993
+ RANK [491] [6644K:Two Pairs], bid 485, winning 238135, total 186141128
+ RANK [490] [66282:Two Pairs], bid 272, winning 133280, total 186274408
+ RANK [489] [65K5K:Two Pairs], bid 734, winning 358926, total 186633334
+ RANK [488] [65568:Two Pairs], bid 238, winning 116144, total 186749478
+ RANK [487] [63Q63:Two Pairs], bid 909, winning 442683, total 187192161
+ RANK [486] [636J3:Two Pairs], bid 47, winning 22842, total 187215003
+ RANK [485] [5KJK5:Two Pairs], bid 226, winning 109610, total 187324613
+ RANK [484] [5QQ88:Two Pairs], bid 956, winning 462704, total 187787317
+ RANK [483] [5TT99:Two Pairs], bid 337, winning 162771, total 187950088
+ RANK [482] [59KK5:Two Pairs], bid 817, winning 393794, total 188343882
+ RANK [481] [588A5:Two Pairs], bid 483, winning 232323, total 188576205
+ RANK [480] [57A75:Two Pairs], bid 194, winning 93120, total 188669325
+ RANK [479] [57JJ7:Two Pairs], bid 721, winning 345359, total 189014684
+ RANK [478] [56TT6:Two Pairs], bid 478, winning 228484, total 189243168
+ RANK [477] [55TJT:Two Pairs], bid 985, winning 469845, total 189713013
+ RANK [476] [5588J:Two Pairs], bid 632, winning 300832, total 190013845
+ RANK [475] [55779:Two Pairs], bid 302, winning 143450, total 190157295
+ RANK [474] [54KK5:Two Pairs], bid 621, winning 294354, total 190451649
+ RANK [473] [52665:Two Pairs], bid 798, winning 377454, total 190829103
+ RANK [472] [52454:Two Pairs], bid 211, winning 99592, total 190928695
+ RANK [471] [4AAQ4:Two Pairs], bid 532, winning 250572, total 191179267
+ RANK [470] [4AA74:Two Pairs], bid 860, winning 404200, total 191583467
+ RANK [469] [4KK4J:Two Pairs], bid 96, winning 45024, total 191628491
+ RANK [468] [4Q43Q:Two Pairs], bid 48, winning 22464, total 191650955
+ RANK [467] [4T49T:Two Pairs], bid 756, winning 353052, total 192004007
+ RANK [466] [49898:Two Pairs], bid 746, winning 347636, total 192351643
+ RANK [465] [484J8:Two Pairs], bid 750, winning 348750, total 192700393
+ RANK [464] [48334:Two Pairs], bid 748, winning 347072, total 193047465
+ RANK [463] [464Q6:Two Pairs], bid 268, winning 124084, total 193171549
+ RANK [462] [44QTT:Two Pairs], bid 73, winning 33726, total 193205275
+ RANK [461] [44J77:Two Pairs], bid 38, winning 17518, total 193222793
+ RANK [460] [44229:Two Pairs], bid 848, winning 390080, total 193612873
+ RANK [459] [3AJA3:Two Pairs], bid 687, winning 315333, total 193928206
+ RANK [458] [3A883:Two Pairs], bid 346, winning 158468, total 194086674
+ RANK [457] [3A39A:Two Pairs], bid 587, winning 268259, total 194354933
+ RANK [456] [393J9:Two Pairs], bid 74, winning 33744, total 194388677
+ RANK [455] [3434K:Two Pairs], bid 216, winning 98280, total 194486957
+ RANK [454] [33KAK:Two Pairs], bid 645, winning 292830, total 194779787
+ RANK [453] [33799:Two Pairs], bid 71, winning 32163, total 194811950
+ RANK [452] [3232T:Two Pairs], bid 912, winning 412224, total 195224174
+ RANK [451] [32237:Two Pairs], bid 164, winning 73964, total 195298138
+ RANK [450] [2AQ2A:Two Pairs], bid 628, winning 282600, total 195580738
+ RANK [449] [2QKQ2:Two Pairs], bid 108, winning 48492, total 195629230
+ RANK [448] [2J88J:Two Pairs], bid 275, winning 123200, total 195752430
+ RANK [447] [2J5J2:Two Pairs], bid 964, winning 430908, total 196183338
+ RANK [446] [2J233:Two Pairs], bid 430, winning 191780, total 196375118
+ RANK [445] [2TT77:Two Pairs], bid 464, winning 206480, total 196581598
+ RANK [444] [29Q92:Two Pairs], bid 788, winning 349872, total 196931470
+ RANK [443] [28682:Two Pairs], bid 332, winning 147076, total 197078546
+ RANK [442] [27267:Two Pairs], bid 644, winning 284648, total 197363194
+ RANK [441] [26269:Two Pairs], bid 902, winning 397782, total 197760976
+ RANK [440] [25T52:Two Pairs], bid 450, winning 198000, total 197958976
+ RANK [439] [23277:Two Pairs], bid 733, winning 321787, total 198280763
+ RANK [438] [22AA9:Two Pairs], bid 959, winning 420042, total 198700805
+ RANK [437] [22884:Two Pairs], bid 316, winning 138092, total 198838897
+ RANK [436] [22838:Two Pairs], bid 638, winning 278168, total 199117065
+ RANK [435] [22779:Two Pairs], bid 913, winning 397155, total 199514220
+ RANK [434] [22344:Two Pairs], bid 201, winning 87234, total 199601454
+ RANK [433] [AAJ68:One Pair], bid 379, winning 164107, total 199765561
+ RANK [432] [AA538:One Pair], bid 252, winning 108864, total 199874425
+ RANK [431] [AK76K:One Pair], bid 255, winning 109905, total 199984330
+ RANK [430] [AK484:One Pair], bid 953, winning 409790, total 200394120
+ RANK [429] [AJA42:One Pair], bid 980, winning 420420, total 200814540
+ RANK [428] [AJJ96:One Pair], bid 398, winning 170344, total 200984884
+ RANK [427] [A9Q92:One Pair], bid 697, winning 297619, total 201282503
+ RANK [426] [A8JAT:One Pair], bid 456, winning 194256, total 201476759
+ RANK [425] [A88J9:One Pair], bid 552, winning 234600, total 201711359
+ RANK [424] [A5T5K:One Pair], bid 6, winning 2544, total 201713903
+ RANK [423] [A4A8K:One Pair], bid 83, winning 35109, total 201749012
+ RANK [422] [A4JA6:One Pair], bid 460, winning 194120, total 201943132
+ RANK [421] [A4452:One Pair], bid 420, winning 176820, total 202119952
+ RANK [420] [A33KQ:One Pair], bid 119, winning 49980, total 202169932
+ RANK [419] [A2797:One Pair], bid 383, winning 160477, total 202330409
+ RANK [418] [A233T:One Pair], bid 633, winning 264594, total 202595003
+ RANK [417] [KAATJ:One Pair], bid 118, winning 49206, total 202644209
+ RANK [416] [KA772:One Pair], bid 701, winning 291616, total 202935825
+ RANK [415] [KA2J2:One Pair], bid 534, winning 221610, total 203157435
+ RANK [414] [KKT72:One Pair], bid 890, winning 368460, total 203525895
+ RANK [413] [KK726:One Pair], bid 839, winning 346507, total 203872402
+ RANK [412] [KJTK7:One Pair], bid 648, winning 266976, total 204139378
+ RANK [411] [KJ95J:One Pair], bid 849, winning 348939, total 204488317
+ RANK [410] [KJ2AK:One Pair], bid 493, winning 202130, total 204690447
+ RANK [409] [KTKAJ:One Pair], bid 220, winning 89980, total 204780427
+ RANK [408] [KTK95:One Pair], bid 307, winning 125256, total 204905683
+ RANK [407] [KT97K:One Pair], bid 708, winning 288156, total 205193839
+ RANK [406] [KT67K:One Pair], bid 989, winning 401534, total 205595373
+ RANK [405] [K8584:One Pair], bid 803, winning 325215, total 205920588
+ RANK [404] [K56AA:One Pair], bid 323, winning 130492, total 206051080
+ RANK [403] [K4J99:One Pair], bid 63, winning 25389, total 206076469
+ RANK [402] [K4457:One Pair], bid 924, winning 371448, total 206447917
+ RANK [401] [K3K92:One Pair], bid 457, winning 183257, total 206631174
+ RANK [400] [QA5Q6:One Pair], bid 429, winning 171600, total 206802774
+ RANK [399] [QA36Q:One Pair], bid 502, winning 200298, total 207003072
+ RANK [398] [QKTT3:One Pair], bid 718, winning 285764, total 207288836
+ RANK [397] [QQ3K7:One Pair], bid 742, winning 294574, total 207583410
+ RANK [396] [QJ7Q2:One Pair], bid 789, winning 312444, total 207895854
+ RANK [395] [QJ63Q:One Pair], bid 895, winning 353525, total 208249379
+ RANK [394] [Q96JJ:One Pair], bid 12, winning 4728, total 208254107
+ RANK [393] [Q94A9:One Pair], bid 210, winning 82530, total 208336637
+ RANK [392] [Q89AA:One Pair], bid 105, winning 41160, total 208377797
+ RANK [391] [Q846Q:One Pair], bid 441, winning 172431, total 208550228
+ RANK [390] [Q664J:One Pair], bid 17, winning 6630, total 208556858
+ RANK [389] [Q5AA9:One Pair], bid 428, winning 166492, total 208723350
+ RANK [388] [Q5K22:One Pair], bid 20, winning 7760, total 208731110
+ RANK [387] [Q4JQK:One Pair], bid 123, winning 47601, total 208778711
+ RANK [386] [Q3379:One Pair], bid 113, winning 43618, total 208822329
+ RANK [385] [Q2QT5:One Pair], bid 24, winning 9240, total 208831569
+ RANK [384] [Q23A3:One Pair], bid 27, winning 10368, total 208841937
+ RANK [383] [JA884:One Pair], bid 411, winning 157413, total 208999350
+ RANK [382] [JA5Q5:One Pair], bid 986, winning 376652, total 209376002
+ RANK [381] [JKK73:One Pair], bid 855, winning 325755, total 209701757
+ RANK [380] [JK833:One Pair], bid 600, winning 228000, total 209929757
+ RANK [379] [JQK2Q:One Pair], bid 546, winning 206934, total 210136691
+ RANK [378] [JQ92Q:One Pair], bid 152, winning 57456, total 210194147
+ RANK [377] [JQ8Q3:One Pair], bid 78, winning 29406, total 210223553
+ RANK [376] [JQ64J:One Pair], bid 806, winning 303056, total 210526609
+ RANK [375] [JJQ23:One Pair], bid 651, winning 244125, total 210770734
+ RANK [374] [JJ32A:One Pair], bid 222, winning 83028, total 210853762
+ RANK [373] [JT757:One Pair], bid 596, winning 222308, total 211076070
+ RANK [372] [JT3J8:One Pair], bid 692, winning 257424, total 211333494
+ RANK [371] [J898Q:One Pair], bid 26, winning 9646, total 211343140
+ RANK [370] [J868K:One Pair], bid 804, winning 297480, total 211640620
+ RANK [369] [J8669:One Pair], bid 504, winning 185976, total 211826596
+ RANK [368] [J7KAA:One Pair], bid 394, winning 144992, total 211971588
+ RANK [367] [J766K:One Pair], bid 887, winning 325529, total 212297117
+ RANK [366] [J5925:One Pair], bid 650, winning 237900, total 212535017
+ RANK [365] [J4AA7:One Pair], bid 996, winning 363540, total 212898557
+ RANK [364] [J49AA:One Pair], bid 709, winning 258076, total 213156633
+ RANK [363] [J4667:One Pair], bid 829, winning 300927, total 213457560
+ RANK [362] [J448A:One Pair], bid 903, winning 326886, total 213784446
+ RANK [361] [J4324:One Pair], bid 175, winning 63175, total 213847621
+ RANK [360] [J3A63:One Pair], bid 819, winning 294840, total 214142461
+ RANK [359] [J2AQJ:One Pair], bid 100, winning 35900, total 214178361
+ RANK [358] [J2TJQ:One Pair], bid 84, winning 30072, total 214208433
+ RANK [357] [J29TJ:One Pair], bid 147, winning 52479, total 214260912
+ RANK [356] [TAK5A:One Pair], bid 827, winning 294412, total 214555324
+ RANK [355] [TA3J3:One Pair], bid 601, winning 213355, total 214768679
+ RANK [354] [TKK82:One Pair], bid 658, winning 232932, total 215001611
+ RANK [353] [TQA6T:One Pair], bid 293, winning 103429, total 215105040
+ RANK [352] [TQT25:One Pair], bid 85, winning 29920, total 215134960
+ RANK [351] [TJJ62:One Pair], bid 82, winning 28782, total 215163742
+ RANK [350] [TT478:One Pair], bid 138, winning 48300, total 215212042
+ RANK [349] [T8A2T:One Pair], bid 65, winning 22685, total 215234727
+ RANK [348] [T89JJ:One Pair], bid 938, winning 326424, total 215561151
+ RANK [347] [T88J7:One Pair], bid 480, winning 166560, total 215727711
+ RANK [346] [T7742:One Pair], bid 967, winning 334582, total 216062293
+ RANK [345] [T3JT4:One Pair], bid 494, winning 170430, total 216232723
+ RANK [344] [T346T:One Pair], bid 920, winning 316480, total 216549203
+ RANK [343] [9A5J5:One Pair], bid 843, winning 289149, total 216838352
+ RANK [342] [9A4JJ:One Pair], bid 168, winning 57456, total 216895808
+ RANK [341] [9QJ5Q:One Pair], bid 768, winning 261888, total 217157696
+ RANK [340] [9JQ7Q:One Pair], bid 403, winning 137020, total 217294716
+ RANK [339] [9J55K:One Pair], bid 772, winning 261708, total 217556424
+ RANK [338] [9TJTA:One Pair], bid 738, winning 249444, total 217805868
+ RANK [337] [9TJT5:One Pair], bid 335, winning 112895, total 217918763
+ RANK [336] [9T2JT:One Pair], bid 489, winning 164304, total 218083067
+ RANK [335] [98628:One Pair], bid 619, winning 207365, total 218290432
+ RANK [334] [98386:One Pair], bid 791, winning 264194, total 218554626
+ RANK [333] [9739A:One Pair], bid 689, winning 229437, total 218784063
+ RANK [332] [96TJ6:One Pair], bid 130, winning 43160, total 218827223
+ RANK [331] [969J2:One Pair], bid 787, winning 260497, total 219087720
+ RANK [330] [9636K:One Pair], bid 560, winning 184800, total 219272520
+ RANK [329] [94J34:One Pair], bid 929, winning 305641, total 219578161
+ RANK [328] [9484J:One Pair], bid 212, winning 69536, total 219647697
+ RANK [327] [9363K:One Pair], bid 988, winning 323076, total 219970773
+ RANK [326] [922TA:One Pair], bid 495, winning 161370, total 220132143
+ RANK [325] [8A8T7:One Pair], bid 14, winning 4550, total 220136693
+ RANK [324] [8A244:One Pair], bid 828, winning 268272, total 220404965
+ RANK [323] [8KTK6:One Pair], bid 396, winning 127908, total 220532873
+ RANK [322] [8KT98:One Pair], bid 868, winning 279496, total 220812369
+ RANK [321] [8K4J4:One Pair], bid 780, winning 250380, total 221062749
+ RANK [320] [8J9K8:One Pair], bid 459, winning 146880, total 221209629
+ RANK [319] [8J798:One Pair], bid 191, winning 60929, total 221270558
+ RANK [318] [8J6JT:One Pair], bid 21, winning 6678, total 221277236
+ RANK [317] [8T9TJ:One Pair], bid 602, winning 190834, total 221468070
+ RANK [316] [8T468:One Pair], bid 203, winning 64148, total 221532218
+ RANK [315] [8986Q:One Pair], bid 905, winning 285075, total 221817293
+ RANK [314] [8949J:One Pair], bid 462, winning 145068, total 221962361
+ RANK [313] [88QJ3:One Pair], bid 237, winning 74181, total 222036542
+ RANK [312] [88Q74:One Pair], bid 854, winning 266448, total 222302990
+ RANK [311] [86JK6:One Pair], bid 431, winning 134041, total 222437031
+ RANK [310] [864A8:One Pair], bid 405, winning 125550, total 222562581
+ RANK [309] [8355T:One Pair], bid 378, winning 116802, total 222679383
+ RANK [308] [83362:One Pair], bid 872, winning 268576, total 222947959
+ RANK [307] [7A882:One Pair], bid 111, winning 34077, total 222982036
+ RANK [306] [7Q5JJ:One Pair], bid 209, winning 63954, total 223045990
+ RANK [305] [7JA73:One Pair], bid 221, winning 67405, total 223113395
+ RANK [304] [7JQQ6:One Pair], bid 664, winning 201856, total 223315251
+ RANK [303] [7JQ9J:One Pair], bid 62, winning 18786, total 223334037
+ RANK [302] [7J927:One Pair], bid 904, winning 273008, total 223607045
+ RANK [301] [7TQ78:One Pair], bid 214, winning 64414, total 223671459
+ RANK [300] [79554:One Pair], bid 767, winning 230100, total 223901559
+ RANK [299] [7929T:One Pair], bid 317, winning 94783, total 223996342
+ RANK [298] [787K2:One Pair], bid 436, winning 129928, total 224126270
+ RANK [297] [77Q69:One Pair], bid 740, winning 219780, total 224346050
+ RANK [296] [77Q38:One Pair], bid 269, winning 79624, total 224425674
+ RANK [295] [77JAT:One Pair], bid 215, winning 63425, total 224489099
+ RANK [294] [7696K:One Pair], bid 882, winning 259308, total 224748407
+ RANK [293] [75K7J:One Pair], bid 393, winning 115149, total 224863556
+ RANK [292] [75J3J:One Pair], bid 923, winning 269516, total 225133072
+ RANK [291] [74T48:One Pair], bid 248, winning 72168, total 225205240
+ RANK [290] [73A63:One Pair], bid 994, winning 288260, total 225493500
+ RANK [289] [72AQ7:One Pair], bid 308, winning 89012, total 225582512
+ RANK [288] [72899:One Pair], bid 193, winning 55584, total 225638096
+ RANK [287] [727TJ:One Pair], bid 75, winning 21525, total 225659621
+ RANK [286] [723A3:One Pair], bid 509, winning 145574, total 225805195
+ RANK [285] [6K96J:One Pair], bid 418, winning 119130, total 225924325
+ RANK [284] [6QKA6:One Pair], bid 635, winning 180340, total 226104665
+ RANK [283] [6QQK5:One Pair], bid 993, winning 281019, total 226385684
+ RANK [282] [6JK22:One Pair], bid 889, winning 250698, total 226636382
+ RANK [281] [6J9A6:One Pair], bid 661, winning 185741, total 226822123
+ RANK [280] [6J6KA:One Pair], bid 250, winning 70000, total 226892123
+ RANK [279] [6T6AK:One Pair], bid 589, winning 164331, total 227056454
+ RANK [278] [6T36J:One Pair], bid 983, winning 273274, total 227329728
+ RANK [277] [6T26Q:One Pair], bid 795, winning 220215, total 227549943
+ RANK [276] [69JQ6:One Pair], bid 328, winning 90528, total 227640471
+ RANK [275] [69353:One Pair], bid 581, winning 159775, total 227800246
+ RANK [274] [687J8:One Pair], bid 637, winning 174538, total 227974784
+ RANK [273] [68365:One Pair], bid 76, winning 20748, total 227995532
+ RANK [272] [677K5:One Pair], bid 879, winning 239088, total 228234620
+ RANK [271] [67228:One Pair], bid 453, winning 122763, total 228357383
+ RANK [270] [65T69:One Pair], bid 370, winning 99900, total 228457283
+ RANK [269] [655A3:One Pair], bid 536, winning 144184, total 228601467
+ RANK [268] [65268:One Pair], bid 225, winning 60300, total 228661767
+ RANK [267] [6376J:One Pair], bid 576, winning 153792, total 228815559
+ RANK [266] [5KAJJ:One Pair], bid 707, winning 188062, total 229003621
+ RANK [265] [5KK68:One Pair], bid 234, winning 62010, total 229065631
+ RANK [264] [5Q8JQ:One Pair], bid 833, winning 219912, total 229285543
+ RANK [263] [5Q6JQ:One Pair], bid 330, winning 86790, total 229372333
+ RANK [262] [5JKK9:One Pair], bid 816, winning 213792, total 229586125
+ RANK [261] [5JJKQ:One Pair], bid 390, winning 101790, total 229687915
+ RANK [260] [5J866:One Pair], bid 132, winning 34320, total 229722235
+ RANK [259] [595J3:One Pair], bid 180, winning 46620, total 229768855
+ RANK [258] [584K4:One Pair], bid 896, winning 231168, total 230000023
+ RANK [257] [57A73:One Pair], bid 861, winning 221277, total 230221300
+ RANK [256] [57866:One Pair], bid 537, winning 137472, total 230358772
+ RANK [255] [56TKK:One Pair], bid 343, winning 87465, total 230446237
+ RANK [254] [552Q4:One Pair], bid 246, winning 62484, total 230508721
+ RANK [253] [54TJ4:One Pair], bid 479, winning 121187, total 230629908
+ RANK [252] [5456J:One Pair], bid 87, winning 21924, total 230651832
+ RANK [251] [4KK76:One Pair], bid 358, winning 89858, total 230741690
+ RANK [250] [4K942:One Pair], bid 652, winning 163000, total 230904690
+ RANK [249] [4K43A:One Pair], bid 455, winning 113295, total 231017985
+ RANK [248] [4QJ24:One Pair], bid 331, winning 82088, total 231100073
+ RANK [247] [4J686:One Pair], bid 421, winning 103987, total 231204060
+ RANK [246] [4J557:One Pair], bid 975, winning 239850, total 231443910
+ RANK [245] [4J252:One Pair], bid 954, winning 233730, total 231677640
+ RANK [244] [4TT2Q:One Pair], bid 646, winning 157624, total 231835264
+ RANK [243] [48543:One Pair], bid 743, winning 180549, total 232015813
+ RANK [242] [48285:One Pair], bid 172, winning 41624, total 232057437
+ RANK [241] [47886:One Pair], bid 580, winning 139780, total 232197217
+ RANK [240] [4734Q:One Pair], bid 454, winning 108960, total 232306177
+ RANK [239] [46J74:One Pair], bid 380, winning 90820, total 232396997
+ RANK [238] [458KK:One Pair], bid 350, winning 83300, total 232480297
+ RANK [237] [44T29:One Pair], bid 892, winning 211404, total 232691701
+ RANK [236] [445K3:One Pair], bid 945, winning 223020, total 232914721
+ RANK [235] [4456Q:One Pair], bid 911, winning 214085, total 233128806
+ RANK [234] [42AJJ:One Pair], bid 873, winning 204282, total 233333088
+ RANK [233] [42T92:One Pair], bid 732, winning 170556, total 233503644
+ RANK [232] [423Q2:One Pair], bid 769, winning 178408, total 233682052
+ RANK [231] [3A878:One Pair], bid 762, winning 176022, total 233858074
+ RANK [230] [3KQJ3:One Pair], bid 482, winning 110860, total 233968934
+ RANK [229] [3Q63J:One Pair], bid 224, winning 51296, total 234020230
+ RANK [228] [3J822:One Pair], bid 134, winning 30552, total 234050782
+ RANK [227] [3TT6Q:One Pair], bid 107, winning 24289, total 234075071
+ RANK [226] [3T87T:One Pair], bid 218, winning 49268, total 234124339
+ RANK [225] [39866:One Pair], bid 434, winning 97650, total 234221989
+ RANK [224] [384T4:One Pair], bid 294, winning 65856, total 234287845
+ RANK [223] [37329:One Pair], bid 295, winning 65785, total 234353630
+ RANK [222] [35K38:One Pair], bid 763, winning 169386, total 234523016
+ RANK [221] [3558J:One Pair], bid 908, winning 200668, total 234723684
+ RANK [220] [343K8:One Pair], bid 624, winning 137280, total 234860964
+ RANK [219] [33TQ5:One Pair], bid 934, winning 204546, total 235065510
+ RANK [218] [332A6:One Pair], bid 423, winning 92214, total 235157724
+ RANK [217] [32Q3J:One Pair], bid 300, winning 65100, total 235222824
+ RANK [216] [2A7A5:One Pair], bid 807, winning 174312, total 235397136
+ RANK [215] [2K72A:One Pair], bid 468, winning 100620, total 235497756
+ RANK [214] [2K24Q:One Pair], bid 301, winning 64414, total 235562170
+ RANK [213] [2Q729:One Pair], bid 591, winning 125883, total 235688053
+ RANK [212] [2Q644:One Pair], bid 232, winning 49184, total 235737237
+ RANK [211] [2Q2JK:One Pair], bid 874, winning 184414, total 235921651
+ RANK [210] [2Q28K:One Pair], bid 361, winning 75810, total 235997461
+ RANK [209] [2J72Q:One Pair], bid 847, winning 177023, total 236174484
+ RANK [208] [2TJ2A:One Pair], bid 92, winning 19136, total 236193620
+ RANK [207] [2TT37:One Pair], bid 344, winning 71208, total 236264828
+ RANK [206] [2T5T7:One Pair], bid 286, winning 58916, total 236323744
+ RANK [205] [29A49:One Pair], bid 486, winning 99630, total 236423374
+ RANK [204] [28K55:One Pair], bid 270, winning 55080, total 236478454
+ RANK [203] [26A5A:One Pair], bid 662, winning 134386, total 236612840
+ RANK [202] [23A62:One Pair], bid 266, winning 53732, total 236666572
+ RANK [201] [23J5J:One Pair], bid 148, winning 29748, total 236696320
+ RANK [200] [223K8:One Pair], bid 181, winning 36200, total 236732520
+ RANK [199] [AK72Q:None], bid 42, winning 8358, total 236740878
+ RANK [198] [AK562:None], bid 510, winning 100980, total 236841858
+ RANK [197] [AQT54:None], bid 972, winning 191484, total 237033342
+ RANK [196] [AQ746:None], bid 371, winning 72716, total 237106058
+ RANK [195] [AT895:None], bid 369, winning 71955, total 237178013
+ RANK [194] [AT382:None], bid 749, winning 145306, total 237323319
+ RANK [193] [A9Q47:None], bid 352, winning 67936, total 237391255
+ RANK [192] [A82J9:None], bid 775, winning 148800, total 237540055
+ RANK [191] [A7JQ9:None], bid 925, winning 176675, total 237716730
+ RANK [190] [A6K32:None], bid 926, winning 175940, total 237892670
+ RANK [189] [A67TQ:None], bid 990, winning 187110, total 238079780
+ RANK [188] [A65KT:None], bid 410, winning 77080, total 238156860
+ RANK [187] [A63Q7:None], bid 287, winning 53669, total 238210529
+ RANK [186] [A53K4:None], bid 506, winning 94116, total 238304645
+ RANK [185] [A3QJ9:None], bid 688, winning 127280, total 238431925
+ RANK [184] [A2TJ4:None], bid 846, winning 155664, total 238587589
+ RANK [183] [A295J:None], bid 700, winning 128100, total 238715689
+ RANK [182] [A284J:None], bid 713, winning 129766, total 238845455
+ RANK [181] [A2637:None], bid 503, winning 91043, total 238936498
+ RANK [180] [KA89J:None], bid 754, winning 135720, total 239072218
+ RANK [179] [KQJ53:None], bid 367, winning 65693, total 239137911
+ RANK [178] [KQJ43:None], bid 792, winning 140976, total 239278887
+ RANK [177] [KQ436:None], bid 263, winning 46551, total 239325438
+ RANK [176] [KJ785:None], bid 668, winning 117568, total 239443006
+ RANK [175] [KJ582:None], bid 551, winning 96425, total 239539431
+ RANK [174] [KT89A:None], bid 271, winning 47154, total 239586585
+ RANK [173] [K9Q34:None], bid 292, winning 50516, total 239637101
+ RANK [172] [K956A:None], bid 223, winning 38356, total 239675457
+ RANK [171] [K94QJ:None], bid 505, winning 86355, total 239761812
+ RANK [170] [K8A4Q:None], bid 659, winning 112030, total 239873842
+ RANK [169] [K7A3J:None], bid 825, winning 139425, total 240013267
+ RANK [168] [K7J84:None], bid 128, winning 21504, total 240034771
+ RANK [167] [K653J:None], bid 728, winning 121576, total 240156347
+ RANK [166] [K642A:None], bid 16, winning 2656, total 240159003
+ RANK [165] [K478Q:None], bid 917, winning 151305, total 240310308
+ RANK [164] [K3T7J:None], bid 741, winning 121524, total 240431832
+ RANK [163] [K3T75:None], bid 368, winning 59984, total 240491816
+ RANK [162] [K2T54:None], bid 229, winning 37098, total 240528914
+ RANK [161] [K2458:None], bid 22, winning 3542, total 240532456
+ RANK [160] [QAK45:None], bid 365, winning 58400, total 240590856
+ RANK [159] [QAJT9:None], bid 606, winning 96354, total 240687210
+ RANK [158] [QA873:None], bid 435, winning 68730, total 240755940
+ RANK [157] [QA3JT:None], bid 974, winning 152918, total 240908858
+ RANK [156] [QJK32:None], bid 349, winning 54444, total 240963302
+ RANK [155] [QJ927:None], bid 154, winning 23870, total 240987172
+ RANK [154] [QJ83A:None], bid 897, winning 138138, total 241125310
+ RANK [153] [Q9685:None], bid 80, winning 12240, total 241137550
+ RANK [152] [Q7394:None], bid 517, winning 78584, total 241216134
+ RANK [151] [Q635A:None], bid 561, winning 84711, total 241300845
+ RANK [150] [Q5624:None], bid 41, winning 6150, total 241306995
+ RANK [149] [Q3T45:None], bid 675, winning 100575, total 241407570
+ RANK [148] [Q3648:None], bid 36, winning 5328, total 241412898
+ RANK [147] [Q3592:None], bid 649, winning 95403, total 241508301
+ RANK [146] [Q2TA7:None], bid 513, winning 74898, total 241583199
+ RANK [145] [Q2486:None], bid 814, winning 118030, total 241701229
+ RANK [144] [JA3T5:None], bid 781, winning 112464, total 241813693
+ RANK [143] [JT4QA:None], bid 409, winning 58487, total 241872180
+ RANK [142] [J9TK2:None], bid 737, winning 104654, total 241976834
+ RANK [141] [J9568:None], bid 735, winning 103635, total 242080469
+ RANK [140] [J8AK3:None], bid 161, winning 22540, total 242103009
+ RANK [139] [J6K8Q:None], bid 329, winning 45731, total 242148740
+ RANK [138] [J39Q5:None], bid 544, winning 75072, total 242223812
+ RANK [137] [J39T6:None], bid 669, winning 91653, total 242315465
+ RANK [136] [J3892:None], bid 550, winning 74800, total 242390265
+ RANK [135] [J2QK6:None], bid 433, winning 58455, total 242448720
+ RANK [134] [J259T:None], bid 927, winning 124218, total 242572938
+ RANK [133] [TAJK4:None], bid 852, winning 113316, total 242686254
+ RANK [132] [TAJ7K:None], bid 68, winning 8976, total 242695230
+ RANK [131] [TKQJ7:None], bid 678, winning 88818, total 242784048
+ RANK [130] [TK6Q9:None], bid 801, winning 104130, total 242888178
+ RANK [129] [TQ94K:None], bid 991, winning 127839, total 243016017
+ RANK [128] [TQ623:None], bid 427, winning 54656, total 243070673
+ RANK [127] [TJ486:None], bid 320, winning 40640, total 243111313
+ RANK [126] [T9346:None], bid 356, winning 44856, total 243156169
+ RANK [125] [T82J9:None], bid 291, winning 36375, total 243192544
+ RANK [124] [T7Q85:None], bid 862, winning 106888, total 243299432
+ RANK [123] [T743K:None], bid 417, winning 51291, total 243350723
+ RANK [122] [T6789:None], bid 886, winning 108092, total 243458815
+ RANK [121] [T658J:None], bid 414, winning 50094, total 243508909
+ RANK [120] [T5KQ8:None], bid 745, winning 89400, total 243598309
+ RANK [119] [T45Q8:None], bid 306, winning 36414, total 243634723
+ RANK [118] [T3A89:None], bid 625, winning 73750, total 243708473
+ RANK [117] [T3K95:None], bid 614, winning 71838, total 243780311
+ RANK [116] [T3K48:None], bid 288, winning 33408, total 243813719
+ RANK [115] [T397K:None], bid 217, winning 24955, total 243838674
+ RANK [114] [T378Q:None], bid 156, winning 17784, total 243856458
+ RANK [113] [T29Q8:None], bid 753, winning 85089, total 243941547
+ RANK [112] [T28AK:None], bid 706, winning 79072, total 244020619
+ RANK [111] [T25K6:None], bid 106, winning 11766, total 244032385
+ RANK [110] [9A624:None], bid 611, winning 67210, total 244099595
+ RANK [109] [9A425:None], bid 952, winning 103768, total 244203363
+ RANK [108] [9Q58A:None], bid 366, winning 39528, total 244242891
+ RANK [107] [9J46Q:None], bid 786, winning 84102, total 244326993
+ RANK [106] [9TJ3K:None], bid 386, winning 40916, total 244367909
+ RANK [105] [9T78J:None], bid 355, winning 37275, total 244405184
+ RANK [104] [98QTA:None], bid 184, winning 19136, total 244424320
+ RANK [103] [97J8Q:None], bid 593, winning 61079, total 244485399
+ RANK [102] [97345:None], bid 947, winning 96594, total 244581993
+ RANK [101] [958AK:None], bid 230, winning 23230, total 244605223
+ RANK [100] [9573K:None], bid 674, winning 67400, total 244672623
+ RANK [99] [9536K:None], bid 630, winning 62370, total 244734993
+ RANK [98] [8AT6K:None], bid 382, winning 37436, total 244772429
+ RANK [97] [8A3QK:None], bid 812, winning 78764, total 244851193
+ RANK [96] [8K9J6:None], bid 160, winning 15360, total 244866553
+ RANK [95] [897J4:None], bid 730, winning 69350, total 244935903
+ RANK [94] [89763:None], bid 823, winning 77362, total 245013265
+ RANK [93] [893K7:None], bid 253, winning 23529, total 245036794
+ RANK [92] [87524:None], bid 98, winning 9016, total 245045810
+ RANK [91] [86A74:None], bid 723, winning 65793, total 245111603
+ RANK [90] [854J9:None], bid 348, winning 31320, total 245142923
+ RANK [89] [8534K:None], bid 693, winning 61677, total 245204600
+ RANK [88] [8473A:None], bid 627, winning 55176, total 245259776
+ RANK [87] [83A64:None], bid 653, winning 56811, total 245316587
+ RANK [86] [827T9:None], bid 583, winning 50138, total 245366725
+ RANK [85] [7AT9J:None], bid 354, winning 30090, total 245396815
+ RANK [84] [7KAQ5:None], bid 724, winning 60816, total 245457631
+ RANK [83] [7KQ8T:None], bid 888, winning 73704, total 245531335
+ RANK [82] [7QJ3T:None], bid 319, winning 26158, total 245557493
+ RANK [81] [7T426:None], bid 127, winning 10287, total 245567780
+ RANK [80] [79236:None], bid 830, winning 66400, total 245634180
+ RANK [79] [7856A:None], bid 186, winning 14694, total 245648874
+ RANK [78] [76K4T:None], bid 360, winning 28080, total 245676954
+ RANK [77] [76Q39:None], bid 698, winning 53746, total 245730700
+ RANK [76] [7692Q:None], bid 516, winning 39216, total 245769916
+ RANK [75] [72JAQ:None], bid 573, winning 42975, total 245812891
+ RANK [74] [728JQ:None], bid 236, winning 17464, total 245830355
+ RANK [73] [72543:None], bid 487, winning 35551, total 245865906
+ RANK [72] [6A93Q:None], bid 901, winning 64872, total 245930778
+ RANK [71] [6KT75:None], bid 474, winning 33654, total 245964432
+ RANK [70] [6K58A:None], bid 783, winning 54810, total 246019242
+ RANK [69] [6T5JK:None], bid 419, winning 28911, total 246048153
+ RANK [68] [697A4:None], bid 438, winning 29784, total 246077937
+ RANK [67] [682AJ:None], bid 765, winning 51255, total 246129192
+ RANK [66] [67AJ4:None], bid 281, winning 18546, total 246147738
+ RANK [65] [67Q25:None], bid 374, winning 24310, total 246172048
+ RANK [64] [6743A:None], bid 376, winning 24064, total 246196112
+ RANK [63] [67324:None], bid 643, winning 40509, total 246236621
+ RANK [62] [65T2J:None], bid 607, winning 37634, total 246274255
+ RANK [61] [657T9:None], bid 797, winning 48617, total 246322872
+ RANK [60] [649KQ:None], bid 702, winning 42120, total 246364992
+ RANK [59] [63J2A:None], bid 647, winning 38173, total 246403165
+ RANK [58] [63954:None], bid 496, winning 28768, total 246431933
+ RANK [57] [637AT:None], bid 109, winning 6213, total 246438146
+ RANK [56] [63582:None], bid 511, winning 28616, total 246466762
+ RANK [55] [5KT69:None], bid 447, winning 24585, total 246491347
+ RANK [54] [5K4Q9:None], bid 43, winning 2322, total 246493669
+ RANK [53] [5T78K:None], bid 129, winning 6837, total 246500506
+ RANK [52] [598K2:None], bid 277, winning 14404, total 246514910
+ RANK [51] [59628:None], bid 777, winning 39627, total 246554537
+ RANK [50] [57AQ4:None], bid 880, winning 44000, total 246598537
+ RANK [49] [574T8:None], bid 811, winning 39739, total 246638276
+ RANK [48] [56T28:None], bid 752, winning 36096, total 246674372
+ RANK [47] [564KJ:None], bid 158, winning 7426, total 246681798
+ RANK [46] [54387:None], bid 939, winning 43194, total 246724992
+ RANK [45] [53J2Q:None], bid 25, winning 1125, total 246726117
+ RANK [44] [5376K:None], bid 671, winning 29524, total 246755641
+ RANK [43] [53462:None], bid 46, winning 1978, total 246757619
+ RANK [42] [4AQ9T:None], bid 522, winning 21924, total 246779543
+ RANK [41] [4KA6T:None], bid 526, winning 21566, total 246801109
+ RANK [40] [4QAT3:None], bid 655, winning 26200, total 246827309
+ RANK [39] [4Q835:None], bid 50, winning 1950, total 246829259
+ RANK [38] [4J86Q:None], bid 540, winning 20520, total 246849779
+ RANK [37] [4J7A3:None], bid 884, winning 32708, total 246882487
+ RANK [36] [4T9QJ:None], bid 876, winning 31536, total 246914023
+ RANK [35] [4T8J3:None], bid 907, winning 31745, total 246945768
+ RANK [34] [49QK8:None], bid 853, winning 29002, total 246974770
+ RANK [33] [496TJ:None], bid 571, winning 18843, total 246993613
+ RANK [32] [4836J:None], bid 588, winning 18816, total 247012429
+ RANK [31] [47J56:None], bid 258, winning 7998, total 247020427
+ RANK [30] [4736K:None], bid 59, winning 1770, total 247022197
+ RANK [29] [436AJ:None], bid 639, winning 18531, total 247040728
+ RANK [28] [3Q64T:None], bid 615, winning 17220, total 247057948
+ RANK [27] [3J786:None], bid 521, winning 14067, total 247072015
+ RANK [26] [3T7Q4:None], bid 240, winning 6240, total 247078255
+ RANK [25] [395KQ:None], bid 1, winning 25, total 247078280
+ RANK [24] [39427:None], bid 694, winning 16656, total 247094936
+ RANK [23] [3857Q:None], bid 520, winning 11960, total 247106896
+ RANK [22] [37A85:None], bid 142, winning 3124, total 247110020
+ RANK [21] [36AKT:None], bid 616, winning 12936, total 247122956
+ RANK [20] [36J58:None], bid 935, winning 18700, total 247141656
+ RANK [19] [3694A:None], bid 523, winning 9937, total 247151593
+ RANK [18] [35TQA:None], bid 81, winning 1458, total 247153051
+ RANK [17] [352Q4:None], bid 640, winning 10880, total 247163931
+ RANK [16] [3465T:None], bid 377, winning 6032, total 247169963
+ RANK [15] [3452K:None], bid 452, winning 6780, total 247176743
+ RANK [14] [2K6Q8:None], bid 793, winning 11102, total 247187845
+ RANK [13] [2QJAK:None], bid 124, winning 1612, total 247189457
+ RANK [12] [2QJ39:None], bid 15, winning 180, total 247189637
+ RANK [11] [2Q83T:None], bid 963, winning 10593, total 247200230
+ RANK [10] [2TQA5:None], bid 535, winning 5350, total 247205580
+ RANK [9] [2T43Q:None], bid 45, winning 405, total 247205985
+ RANK [8] [29TA7:None], bid 347, winning 2776, total 247208761
+ RANK [7] [27TQ8:None], bid 5, winning 35, total 247208796
+ RANK [6] [2693A:None], bid 800, winning 4800, total 247213596
+ RANK [5] [26578:None], bid 10, winning 50, total 247213646
+ RANK [4] [264A7:None], bid 341, winning 1364, total 247215010
+ RANK [3] [249K8:None], bid 612, winning 1836, total 247216846
+ RANK [2] [23K47:None], bid 759, winning 1518, total 247218364
+ RANK [1] [237AQ:None], bid 157, winning 157, total 247218521
+[DAY07] PART 1 : 247218521
+Finished! took 3009 ms
+
+D:\work\advc\advc_2023\x64\Debug\advc_2023.exe (process 18692) exited with code 0.
+Press any key to close this window . . .

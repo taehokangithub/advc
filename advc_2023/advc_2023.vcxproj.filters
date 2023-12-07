@@ -37,6 +37,9 @@
     <Filter Include="Source Files\solutions\day06">
       <UniqueIdentifier>{8004673d-8d2f-4090-afad-ef1460c7edf1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\solutions\day07">
+      <UniqueIdentifier>{c21aeafa-bec9-4b98-a254-67171f882df9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="advc_2023.cpp">
@@ -80,6 +83,15 @@
     </ClCompile>
     <ClCompile Include="solutions\day06\record_container.cpp">
       <Filter>Source Files\solutions\day06</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\day07\day07.cpp">
+      <Filter>Source Files\solutions\day07</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\day07\bids_set.cpp">
+      <Filter>Source Files\solutions\day07</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\day07\hands.cpp">
+      <Filter>Source Files\solutions\day07</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -127,6 +139,15 @@
     </ClInclude>
     <ClInclude Include="solutions\day06\record_container.h">
       <Filter>Source Files\solutions\day06</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day07\day07.h">
+      <Filter>Source Files\solutions\day07</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day07\bids_set.h">
+      <Filter>Source Files\solutions\day07</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day07\hands.h">
+      <Filter>Source Files\solutions\day07</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
