@@ -40,6 +40,9 @@
     <Filter Include="Source Files\solutions\day07">
       <UniqueIdentifier>{c21aeafa-bec9-4b98-a254-67171f882df9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\solutions\day08">
+      <UniqueIdentifier>{fb556f68-991d-49df-9749-2b0bf333875a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="advc_2023.cpp">
@@ -92,6 +95,12 @@
     </ClCompile>
     <ClCompile Include="solutions\day07\hands.cpp">
       <Filter>Source Files\solutions\day07</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\day08\day08.cpp">
+      <Filter>Source Files\solutions\day08</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\day08\navigator.cpp">
+      <Filter>Source Files\solutions\day08</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +157,12 @@
     </ClInclude>
     <ClInclude Include="solutions\day07\hands.h">
       <Filter>Source Files\solutions\day07</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day08\day08.h">
+      <Filter>Source Files\solutions\day08</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day08\navigator.h">
+      <Filter>Source Files\solutions\day08</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

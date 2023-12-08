@@ -157,6 +157,8 @@
     <ClCompile Include="solutions\day07\bids_set.cpp" />
     <ClCompile Include="solutions\day07\day07.cpp" />
     <ClCompile Include="solutions\day07\hands.cpp" />
+    <ClCompile Include="solutions\day08\day08.cpp" />
+    <ClCompile Include="solutions\day08\navigator.cpp" />
     <ClCompile Include="utils\input_utils.cpp" />
     <ClCompile Include="utils\point.cpp" />
   </ItemGroup>
@@ -175,6 +177,8 @@
     <ClInclude Include="solutions\day07\bids_set.h" />
     <ClInclude Include="solutions\day07\day07.h" />
     <ClInclude Include="solutions\day07\hands.h" />
+    <ClInclude Include="solutions\day08\day08.h" />
+    <ClInclude Include="solutions\day08\navigator.h" />
     <ClInclude Include="utils\grid.h" />
     <ClInclude Include="utils\input_utils.h" />
     <ClInclude Include="utils\map.h" />
