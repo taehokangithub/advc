@@ -26,24 +26,6 @@ namespace advc_2023::day09
 
     // --------------------------------------------------------
 
-    static string numbers_to_string(const Numbers& numbers)
-    {
-        stringstream ss;
-        ss << "[";
-        for (int i = 0; i < (int)numbers.size(); i++)
-        {
-            ss << numbers[i];
-            if (i < (int)numbers.size() - 1)
-            {
-                ss << ",";
-            }
-        }
-        ss << "]";
-        return ss.str();
-    }
-
-    // --------------------------------------------------------
-
     int History::get_extrapolation(Dir dir) const
     {
         vector<Numbers> diffs;
