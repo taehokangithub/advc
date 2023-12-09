@@ -159,6 +159,9 @@
     <ClCompile Include="solutions\day07\hands.cpp" />
     <ClCompile Include="solutions\day08\day08.cpp" />
     <ClCompile Include="solutions\day08\navigator.cpp" />
+    <ClCompile Include="solutions\day09\day09.cpp" />
+    <ClCompile Include="solutions\day09\history_container.cpp" />
+    <ClCompile Include="solutions\day10\day10.cpp" />
     <ClCompile Include="utils\input_utils.cpp" />
     <ClCompile Include="utils\point.cpp" />
   </ItemGroup>
@@ -179,6 +182,9 @@
     <ClInclude Include="solutions\day07\hands.h" />
     <ClInclude Include="solutions\day08\day08.h" />
     <ClInclude Include="solutions\day08\navigator.h" />
+    <ClInclude Include="solutions\day09\day09.h" />
+    <ClInclude Include="solutions\day09\history_container.h" />
+    <ClInclude Include="solutions\day10\day10.h" />
     <ClInclude Include="utils\grid.h" />
     <ClInclude Include="utils\input_utils.h" />
     <ClInclude Include="utils\map.h" />
