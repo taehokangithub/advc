@@ -117,6 +117,12 @@
     <ClCompile Include="solutions\day10\day10.cpp">
       <Filter>Source Files\solutions\day10</Filter>
     </ClCompile>
+    <ClCompile Include="solutions\day10\pipes.cpp">
+      <Filter>Source Files\solutions\day10</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\day10\tile_type.cpp">
+      <Filter>Source Files\solutions\day10</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utils\input_utils.h">
@@ -186,6 +192,12 @@
       <Filter>Source Files\solutions\day09</Filter>
     </ClInclude>
     <ClInclude Include="solutions\day10\day10.h">
+      <Filter>Source Files\solutions\day10</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day10\pipes.h">
+      <Filter>Source Files\solutions\day10</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day10\tile_type.h">
       <Filter>Source Files\solutions\day10</Filter>
     </ClInclude>
   </ItemGroup>

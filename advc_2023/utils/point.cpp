@@ -23,6 +23,11 @@ namespace advc_2023::utils
         { 0, -1 }, { 1, 0 }, { 0, 1 }, { -1, 0 }
     };
 
+    const vector<Dir> Point::s_dirs =
+    {
+        Dir::Up, Dir::Right, Dir::Down, Dir::Left
+    };
+
     // -------------------------------------
 
     string Point::to_string() const
@@ -66,6 +71,22 @@ namespace advc_2023::utils
         ss >> dummy >> p.x >> dummy >> p.y >> dummy >> p.z >> dummy >> p.w >> dummy;
 
         return p;
+    }
+
+    // -------------------------------------
+
+    Dir Point::get_opposite_dir(Dir dir)
+    {
+        switch (dir)
+        {
+        case Dir::Down: return Dir::Up;
+        case Dir::Right: return Dir::Left;
+        case Dir::Up: return Dir::Down;
+        case Dir::Left: return Dir::Right;
+        }
+
+        assert(false);
+        return Dir::Up;
     }
 
     // -------------------------------------

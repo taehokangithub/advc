@@ -12,9 +12,10 @@ namespace advc_2023::utils
     {
     public:
         void set_size(const Point& p);
+        void set_size(int x, int y) { set_size(Point(x, y)); }
         const Point& get_size() const { return m_size; }
 
-        void add_element(const T& val);
+        Point add_element(const T& val);
         void set(const Point& p, const T& val);
         bool is_all_set() const;
         bool is_valid_point(const Point& p) const;
@@ -48,8 +49,10 @@ namespace advc_2023::utils
     // -------------------------------------------------
 
     template <typename T>
-    void Grid<T>::add_element(const T& val)
+    Point Grid<T>::add_element(const T& val)
     {
+        Point ret = m_add_point;
+
         set(m_add_point, val);
 
         m_add_point.x++;
@@ -61,6 +64,8 @@ namespace advc_2023::utils
             m_add_point.y++;
             assert(m_add_point.y <= m_size.y);
         }
+
+        return ret;
     }
 
     // -------------------------------------------------

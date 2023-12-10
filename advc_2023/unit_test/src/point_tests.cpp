@@ -130,4 +130,16 @@ namespace advc_2023::google_test
         utils::Point p_reverse(p1.to_unique_string());
         EXPECT_EQ(p_reverse, p1);
     }
+
+    TEST(Point_tests, dir_test)
+    {
+        for (utils::Dir dir : utils::Point::s_dirs)
+        {
+            const auto opp_dir = utils::Point::get_opposite_dir(dir);
+            EXPECT_NE(dir, opp_dir);
+
+            const auto dir_back = utils::Point::get_opposite_dir(opp_dir);
+            EXPECT_EQ(dir, dir_back);
+        }
+    }
 }

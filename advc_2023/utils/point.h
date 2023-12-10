@@ -45,11 +45,13 @@ namespace advc_2023::utils
         std::string to_unique_string() const;   // for being keys in a map
 
         static Point string_to_point(const std::string& str);
+        static Dir get_opposite_dir(Dir dir);
 
     public:
         static int s_log_dimemsion;
         static const std::vector<Point> s_dir_8;
         static const std::vector<Point> s_dir_4;
+        static const std::vector<Dir> s_dirs;
 
         int x{ 0 };
         int y{ 0 };

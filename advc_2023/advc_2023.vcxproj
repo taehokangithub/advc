@@ -133,6 +133,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -162,6 +163,8 @@
     <ClCompile Include="solutions\day09\day09.cpp" />
     <ClCompile Include="solutions\day09\history_container.cpp" />
     <ClCompile Include="solutions\day10\day10.cpp" />
+    <ClCompile Include="solutions\day10\pipes.cpp" />
+    <ClCompile Include="solutions\day10\tile_type.cpp" />
     <ClCompile Include="utils\input_utils.cpp" />
     <ClCompile Include="utils\point.cpp" />
   </ItemGroup>
@@ -185,6 +188,8 @@
     <ClInclude Include="solutions\day09\day09.h" />
     <ClInclude Include="solutions\day09\history_container.h" />
     <ClInclude Include="solutions\day10\day10.h" />
+    <ClInclude Include="solutions\day10\pipes.h" />
+    <ClInclude Include="solutions\day10\tile_type.h" />
     <ClInclude Include="utils\grid.h" />
     <ClInclude Include="utils\input_utils.h" />
     <ClInclude Include="utils\map.h" />
