@@ -49,6 +49,9 @@
     <Filter Include="Source Files\solutions\day10">
       <UniqueIdentifier>{5ece4c66-3408-429f-9222-0bfd5b6b0a83}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\solutions\day11">
+      <UniqueIdentifier>{fe008719-078f-4cf1-8cf3-564705762ed7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="advc_2023.cpp">
@@ -122,6 +125,9 @@
     </ClCompile>
     <ClCompile Include="solutions\day10\tile_type.cpp">
       <Filter>Source Files\solutions\day10</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\day11\day11.cpp">
+      <Filter>Source Files\solutions\day11</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -199,6 +205,9 @@
     </ClInclude>
     <ClInclude Include="solutions\day10\tile_type.h">
       <Filter>Source Files\solutions\day10</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day11\day11.h">
+      <Filter>Source Files\solutions\day11</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

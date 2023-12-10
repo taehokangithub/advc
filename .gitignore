@@ -2,7 +2,7 @@
 advc_2019/result.txt
 advc_2023/.vs/
 advc_2023/packages/
-Debug/
+x64/
 *.vcxproj.user
 advc_2019/golang_src/advc19_go
 advc_2019/golang/advc19_go.exe
@@ -12,4 +12,4 @@ advc_2019/golang/day18.test
 *.test
 advc_2019/golang/day18.test.exe
 advc_2019/golang/result2.txt
-
+*.pdb

@@ -26,10 +26,10 @@ namespace advc_2023::utils
         const Point& get_min() const { return m_min; }
         const Point& get_max() const { return m_max; }
 
-        const std::map<std::string, T> get_data() const { return m_map; }
+        const std::map<Point, T> get_data() const { return m_map; }
 
     private:
-        std::map<std::string, T> m_map;
+        std::map<Point, T> m_map;
         
         Point m_max{ min_int, min_int, min_int, min_int };
         Point m_min{ max_int, max_int, max_int, max_int };
@@ -42,7 +42,7 @@ namespace advc_2023::utils
     void Map<T>::set(const Point& p, const T& val)
     {
 
-        m_map[p.to_unique_string()] = val;
+        m_map[p] = val;
         m_max.set_max(p);
         m_min.set_min(p);
     }
@@ -63,7 +63,7 @@ namespace advc_2023::utils
     template <typename T>
     bool Map<T>::exists(const Point& p) const
     {
-        const auto ite = m_map.find(p.to_unique_string());
+        const auto ite = m_map.find(p);
         return ite != m_map.end();
     }
 
@@ -72,7 +72,7 @@ namespace advc_2023::utils
     template <typename T>
     T Map<T>::get(const Point& p) const
     {
-        if (const auto ite = m_map.find(p.to_unique_string()); ite != m_map.end())
+        if (const auto ite = m_map.find(p); ite != m_map.end())
         {
             return ite->second;
         }

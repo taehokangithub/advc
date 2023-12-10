@@ -54,10 +54,15 @@ namespace advc_2023::utils
 
     string Point::to_unique_string() const
     {
+        // As it takes to long using stringstream, now we use snprintf
+        char buf[256];
+        std::snprintf(buf, sizeof(buf), "[%d:%d:%d:%d]", x, y, z, w);
+        return string(buf);
+        /*
         stringstream ss;
         ss << "[" << x << ":" << y << ":" << z << ":" << w << "]";
 
-        return ss.str();
+        return ss.str(); */
     }
 
     // -------------------------------------
@@ -123,6 +128,25 @@ namespace advc_2023::utils
     bool Point::operator==(const Point& p) const
     {
         return x == p.x && y == p.y && z == p.z && w == p.w;
+    }
+
+    // -------------------------------------
+
+    bool Point::operator<(const Point& p) const
+    {
+        if (x != p.x)
+        {
+            return x < p.x;
+        }
+        if (y != p.y)
+        {
+            return y < p.y;
+        }
+        if (z != p.z)
+        {
+            return z < p.z;
+        }
+        return w < p.w;
     }
 
     // -------------------------------------

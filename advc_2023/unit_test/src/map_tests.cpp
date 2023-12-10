@@ -98,4 +98,31 @@ namespace advc_2023::google_test
         const auto& data = my_map.get_data();
         EXPECT_EQ((int)data.size(), 6);
     }
+
+    TEST(Map_tests, operator_test)
+    {
+        utils::Point a(1, 5, 7, 8);
+        utils::Point b(1, 5, 7, 9);
+        utils::Point c(1, 5, 5, 8);
+        utils::Point d(1, 3, 5, 8);
+        utils::Point e(1, 6, 5, 8);
+        utils::Point f(2, 5, 7, 8);
+        utils::Point g(-1, 5, 7, 8);
+        utils::Point h(2, -1, -2, -3);
+
+        EXPECT_TRUE(a < b);
+        EXPECT_FALSE(b < a);
+        EXPECT_TRUE(c < a);
+        EXPECT_FALSE(a < c);
+        EXPECT_TRUE(d < a);
+        EXPECT_FALSE(a < d);
+        EXPECT_TRUE(a < e);
+        EXPECT_FALSE(e < a);
+        EXPECT_TRUE(a < f);
+        EXPECT_FALSE(f < a);
+        EXPECT_TRUE(g < a);
+        EXPECT_FALSE(a < g);
+        EXPECT_TRUE(a < h);
+        EXPECT_FALSE(h < a);
+    }
 }
