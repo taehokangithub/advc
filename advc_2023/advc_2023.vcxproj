@@ -167,6 +167,8 @@
     <ClCompile Include="solutions\day10\tile_type.cpp" />
     <ClCompile Include="solutions\day11\day11.cpp" />
     <ClCompile Include="solutions\day11\galaxy.cpp" />
+    <ClCompile Include="solutions\day12\day12.cpp" />
+    <ClCompile Include="solutions\day12\internal_file_template.cpp" />
     <ClCompile Include="utils\input_utils.cpp" />
     <ClCompile Include="utils\point.cpp" />
   </ItemGroup>
@@ -194,6 +196,8 @@
     <ClInclude Include="solutions\day10\tile_type.h" />
     <ClInclude Include="solutions\day11\day11.h" />
     <ClInclude Include="solutions\day11\galaxy.h" />
+    <ClInclude Include="solutions\day12\day12.h" />
+    <ClInclude Include="solutions\day12\internal_file_template.h" />
     <ClInclude Include="utils\grid.h" />
     <ClInclude Include="utils\input_utils.h" />
     <ClInclude Include="utils\map.h" />

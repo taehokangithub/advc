@@ -52,6 +52,9 @@
     <Filter Include="Source Files\solutions\day11">
       <UniqueIdentifier>{fe008719-078f-4cf1-8cf3-564705762ed7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\solutions\day12">
+      <UniqueIdentifier>{e6828dd7-92a0-4aa0-83b4-e2710110af39}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="advc_2023.cpp">
@@ -131,6 +134,12 @@
     </ClCompile>
     <ClCompile Include="solutions\day11\galaxy.cpp">
       <Filter>Source Files\solutions\day11</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\day12\day12.cpp">
+      <Filter>Source Files\solutions\day12</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\day12\internal_file_template.cpp">
+      <Filter>Source Files\solutions\day12</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -214,6 +223,12 @@
     </ClInclude>
     <ClInclude Include="solutions\day11\galaxy.h">
       <Filter>Source Files\solutions\day11</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day12\day12.h">
+      <Filter>Source Files\solutions\day12</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day12\internal_file_template.h">
+      <Filter>Source Files\solutions\day12</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
