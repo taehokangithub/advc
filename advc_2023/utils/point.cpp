@@ -208,6 +208,16 @@ namespace advc_2023::utils
 
     // -------------------------------------
 
+    int Point::get_manhattan_distance(const Point& rhs) const
+    {
+        return std::abs(x - rhs.x) 
+            + std::abs(y - rhs.y) 
+            + std::abs(z - rhs.z) 
+            + std::abs(w - rhs.w);
+    }
+
+    // -------------------------------------
+
     void Point::muliply(int val)
     {
         x *= val;

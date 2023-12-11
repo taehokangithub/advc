@@ -129,6 +129,9 @@
     <ClCompile Include="solutions\day11\day11.cpp">
       <Filter>Source Files\solutions\day11</Filter>
     </ClCompile>
+    <ClCompile Include="solutions\day11\galaxy.cpp">
+      <Filter>Source Files\solutions\day11</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utils\input_utils.h">
@@ -207,6 +210,9 @@
       <Filter>Source Files\solutions\day10</Filter>
     </ClInclude>
     <ClInclude Include="solutions\day11\day11.h">
+      <Filter>Source Files\solutions\day11</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day11\galaxy.h">
       <Filter>Source Files\solutions\day11</Filter>
     </ClInclude>
   </ItemGroup>

@@ -6,7 +6,8 @@
 
 namespace advc_2023::utils
 {
-    enum class Dir { Up, Right, Down, Left };
+    enum class Dir : uint8_t { Up, Right, Down, Left };
+    enum class Axis : uint8_t { X, Y, Z, W };
     
     class Point
     {
@@ -38,6 +39,8 @@ namespace advc_2023::utils
 
         void rotate(Dir dir);
         Point get_rotated(Dir dir) const;
+
+        int get_manhattan_distance(const Point& rhs) const;
 
         void set_max(const Point& p);
         void set_min(const Point& p);

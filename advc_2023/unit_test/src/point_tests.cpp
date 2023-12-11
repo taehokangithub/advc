@@ -131,6 +131,17 @@ namespace advc_2023::google_test
         EXPECT_EQ(p_reverse, p1);
     }
 
+    TEST(Point_tests, distance_test)
+    {
+        utils::Point p1(1, 2, 3, -5);
+        utils::Point p2(1, 2, -5, 7);
+        utils::Point p3(-5, -3, 3, 5);
+
+        EXPECT_EQ(p1.get_manhattan_distance(p2), 20);
+        EXPECT_EQ(p1.get_manhattan_distance(p3), 21);
+        EXPECT_EQ(p2.get_manhattan_distance(p3), 21);
+    }
+
     TEST(Point_tests, dir_test)
     {
         for (utils::Dir dir : utils::Point::s_dirs)
