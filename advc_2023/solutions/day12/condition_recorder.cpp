@@ -16,10 +16,10 @@ namespace advc_2023::day12
 {
     //----------------------------------------------------------------
 
-    bool Tiles::expect(uint8_t number, int pos)
+    bool Condition::expect(uint8_t number, int pos) const
     {
         // must be a start of damaged
-        assert(pos == 0 || m_tiles[pos - 1] == tile_type::normal);
+        assert(pos == 0 || m_tiles[pos - 1] != tile_type::damaged);
 
         const int end_index = pos + number;
         if (end_index > (int)m_tiles.size())
@@ -41,11 +41,7 @@ namespace advc_2023::day12
 
             const auto tile = m_tiles[pos];
 
-            if (tile == tile_type::unknown)
-            {
-                m_tiles[pos] = tile_type::damaged;
-            }
-            else if (tile == tile_type::normal)    // "unknown" is fine
+            if (tile == tile_type::normal)    // "unknown" is fine
             {
                 return false;
             }
@@ -53,44 +49,24 @@ namespace advc_2023::day12
             pos++;
         }
 
-        if (end_index < (int)m_tiles.size())
-        {
-            m_tiles[end_index] = tile_type::normal;
-        }
-
         return true;
     }
 
     //----------------------------------------------------------------
 
-    void Tiles::unfold(int count)
+    uint64_t Condition::get_possible_count_internal(int condition_index, const int pos, tile_type override_type) const
     {
-        const auto original = m_tiles;
-
-        for (int i = 0; i < count - 1; i++)
-        {
-            m_tiles.push_back(tile_type::unknown);
-
-            m_tiles.insert(m_tiles.end(), original.begin(), original.end());
-        }
-    }
-
-    //----------------------------------------------------------------
-
-    uint64_t Tiles::get_possible_counts()
-    {
-        int condition_index = 0;
-
         DBG_OUT1 << "Entering " << to_string() << endl;
 
-        for (int i = 0; i < (int) m_tiles.size(); i++)
+        for (int i = pos; i < (int) m_tiles.size(); i++)
         {
-            const auto tile = m_tiles[i];
-            assert(tile != tile_type::error);
-            DBG_OUT1 << " : [" << i << "] " << get_tile_char(tile) << endl;
+            const auto tile = (override_type == tile_type::none) ? m_tiles[i] : override_type;
+            override_type = tile_type::none;
+
+            assert(tile != tile_type::none);
 
             // We have found all numbers
-            if (condition_index >= (int)m_cond->get_expected().size())
+            if (condition_index >= (int)m_expected.size())
             {
                 if (tile == tile_type::damaged)
                 {
@@ -102,7 +78,7 @@ namespace advc_2023::day12
             {
                 if (tile == tile_type::damaged)
                 {
-                    const int expected_number = m_cond->get_expected()[condition_index];
+                    const int expected_number = m_expected[condition_index];
                     DBG_OUT1 << "  expecting [" << condition_index << "] " << expected_number << ":";
 
                     if (false == expect(expected_number, i)) // expected number could not exist
@@ -117,37 +93,30 @@ namespace advc_2023::day12
                 }
                 else if (tile == tile_type::unknown)
                 {
-                    const string& keystr = m_cond->get_tile_str().substr(i) + std::to_string(condition_index);
-                    auto& cached_answer = m_cond->get_cached_answers();
+                    const int64_t key = i + (((int64_t)condition_index) << 32);
                     
-                    if (auto ite = cached_answer.find(keystr); ite != cached_answer.end())
+                    if (auto ite = m_cached_answers.find(key); ite != m_cached_answers.end())
                     {
-                        DBG_OUT1 << "Hitting cache " << ite->first << " = " << ite->second << ", total cache " << cached_answer.size() << endl;
+                        DBG_OUT1 << "Hitting cache " << ite->first << " = " << ", total cache " << m_cached_answers.size() << endl;
                         return ite->second;
                     }
 
                     DBG_OUT1 << "   ==> branching " << endl;
-                    Tiles t1(*this);
-                    Tiles t2(*this);
 
-                    // Decide their fate to continue
-                    t1.m_tiles[i] = tile_type::damaged;
-                    t2.m_tiles[i] = tile_type::normal;
-
-                    const auto ans1 = t1.get_possible_counts();
-                    const auto ans2 = t2.get_possible_counts();
+                    const auto ans1 = get_possible_count_internal(condition_index, i, tile_type::damaged);
+                    const auto ans2 = get_possible_count_internal(condition_index, i, tile_type::normal);
                     const auto ans = ans1 + ans2;
 
-                    cached_answer[keystr] = ans;
+                    m_cached_answers[key] = ans;
 
-                    DBG_OUT1 << "==> saving answers of " << keystr << " : " << ans1 << " + " << ans2 << " => " << ans << ", TOTAL CACHE " << cached_answer.size() << endl;
+                    DBG_OUT1 << "==> saving answers of " << key << " : " << ans1 << " + " << ans2 << " => " << ans << ", TOTAL CACHE " << m_cached_answers.size() << endl;
 
                     return ans1 + ans2;
                 }
             }
         }
 
-        if (condition_index != (int)m_cond->get_expected().size())
+        if (condition_index != (int)m_expected.size())
         {
             return 0;
         }
@@ -160,29 +129,34 @@ namespace advc_2023::day12
 
     void Condition::unfold(int count)
     {
-        m_tiles->unfold(count);
-
-        const auto original = m_expected;
+        const auto original_expected = m_expected;
 
         for (int i = 0; i < count - 1; i++)
         {
-            m_expected.insert(m_expected.end(), original.begin(), original.end());
+            m_expected.insert(m_expected.end(), original_expected.begin(), original_expected.end());
             m_tile_str += '?' + m_tile_str;
         }
 
+        const auto original_tiles = m_tiles;
+
+        for (int i = 0; i < count - 1; i++)
+        {
+            m_tiles.push_back(tile_type::unknown);
+
+            m_tiles.insert(m_tiles.end(), original_tiles.begin(), original_tiles.end());
+        }
     }
 
     //----------------------------------------------------------------
 
     uint64_t Condition::get_possible_counts() const
     {
-        Tiles copied_tiles(*m_tiles); 
-         
+        
         DBG_OUT1 << "------------------------------------" << endl;
 
-        const auto ans = copied_tiles.get_possible_counts();  // it's a non-const method so we use copied one
+        const auto ans = get_possible_count_internal(0, 0, tile_type::none);
 
-        DBG_OUT2 << "!!!! FINAL ANSWER " << ans << " FROM " << m_tiles->to_string() << endl << endl;
+        DBG_OUT2 << "!!!! FINAL ANSWER " << ans << " FROM " << m_tile_str << endl << endl;
 
         return ans;
     }

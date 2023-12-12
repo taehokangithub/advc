@@ -19,32 +19,17 @@ namespace advc_2023::day12
         }
 
         assert(false);
-        return tile_type::error;
+        return tile_type::none;
     }
 
     //----------------------------------------------------------------
 
-    char Tiles::get_tile_char(tile_type t)
-    {
-        switch (t)
-        {
-        case tile_type::damaged: return '#';
-        case tile_type::normal: return '.';
-        case tile_type::unknown: return '?';
-        }
-
-        assert(false);
-        return 'X';
-    }
-
-    //----------------------------------------------------------------
-
-    string Tiles::to_string() const
+    string Condition::to_string() const
     {
         stringstream ss;
 
-        ss << "[" << m_cond->get_tile_str() << "](";
-        for (const auto num : m_cond->get_expected())
+        ss << "[" << m_tile_str << "](";
+        for (const auto num : m_expected)
         {
             const char c = static_cast<char>(num + '0');
             ss << c << " " ;
@@ -53,16 +38,6 @@ namespace advc_2023::day12
 
         ss << ")";
         return ss.str();
-    }
-
-    //----------------------------------------------------------------
-
-    void Tiles::parses(const std::string& line)
-    {
-        for (const char c : line)
-        {
-            m_tiles.push_back(get_tile_type(c));
-        }
     }
 
     //----------------------------------------------------------------
@@ -84,9 +59,10 @@ namespace advc_2023::day12
         }
 
         m_tile_str = tile_part;
-        m_tiles = make_unique<Tiles>(this);
-        m_tiles->parses(tile_part);
-        
+        for (const char c : tile_part)
+        {
+            m_tiles.push_back(get_tile_type(c));
+        }
     }
 
     //----------------------------------------------------------------
