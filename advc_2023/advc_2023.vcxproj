@@ -170,6 +170,8 @@
     <ClCompile Include="solutions\day12\condition_recorder_parser.cpp" />
     <ClCompile Include="solutions\day12\day12.cpp" />
     <ClCompile Include="solutions\day12\condition_recorder.cpp" />
+    <ClCompile Include="solutions\day13\day13.cpp" />
+    <ClCompile Include="solutions\day13\patterns.cpp" />
     <ClCompile Include="utils\input_utils.cpp" />
     <ClCompile Include="utils\point.cpp" />
   </ItemGroup>
@@ -199,6 +201,8 @@
     <ClInclude Include="solutions\day11\galaxy.h" />
     <ClInclude Include="solutions\day12\day12.h" />
     <ClInclude Include="solutions\day12\condition_recorder.h" />
+    <ClInclude Include="solutions\day13\day13.h" />
+    <ClInclude Include="solutions\day13\patterns.h" />
     <ClInclude Include="utils\grid.h" />
     <ClInclude Include="utils\input_utils.h" />
     <ClInclude Include="utils\map.h" />

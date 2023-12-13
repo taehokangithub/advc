@@ -55,6 +55,9 @@
     <Filter Include="Source Files\solutions\day12">
       <UniqueIdentifier>{e6828dd7-92a0-4aa0-83b4-e2710110af39}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\solutions\day13">
+      <UniqueIdentifier>{707ff7cf-3044-4470-b984-1a7b1f6bf60a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="advc_2023.cpp">
@@ -144,6 +147,12 @@
     <ClCompile Include="solutions\day12\condition_recorder_parser.cpp">
       <Filter>Source Files\solutions\day12</Filter>
     </ClCompile>
+    <ClCompile Include="solutions\day13\patterns.cpp">
+      <Filter>Source Files\solutions\day13</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\day13\day13.cpp">
+      <Filter>Source Files\solutions\day13</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utils\input_utils.h">
@@ -232,6 +241,12 @@
     </ClInclude>
     <ClInclude Include="solutions\day12\condition_recorder.h">
       <Filter>Source Files\solutions\day12</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day13\patterns.h">
+      <Filter>Source Files\solutions\day13</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day13\day13.h">
+      <Filter>Source Files\solutions\day13</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -6,10 +6,9 @@
 
 using namespace std;
 
-
 namespace advc_2023::utils
 {
-    vector<string> get_lines(const string& file_name)
+    vector<string> get_lines(const string& file_name, line_option lopt)
     {
         ifstream fin(file_name);
         vector<string> lines;
@@ -25,7 +24,7 @@ namespace advc_2023::utils
             string line;
             std::getline(fin, line);
 
-            if (line.length())
+            if (lopt == line_option::dont_skip_empty_line || line.length())
             {
                 lines.push_back(line);
             }
