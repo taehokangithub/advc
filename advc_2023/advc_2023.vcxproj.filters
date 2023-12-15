@@ -58,6 +58,12 @@
     <Filter Include="Source Files\solutions\day13">
       <UniqueIdentifier>{707ff7cf-3044-4470-b984-1a7b1f6bf60a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\solutions\day14">
+      <UniqueIdentifier>{a1140144-d248-4de9-9335-a6cc09e249bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\solutions\day15">
+      <UniqueIdentifier>{bed80d65-fa87-4881-b46c-a2be533e9aec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="advc_2023.cpp">
@@ -153,6 +159,18 @@
     <ClCompile Include="solutions\day13\day13.cpp">
       <Filter>Source Files\solutions\day13</Filter>
     </ClCompile>
+    <ClCompile Include="solutions\day14\rocks.cpp">
+      <Filter>Source Files\solutions\day14</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\day14\day14.cpp">
+      <Filter>Source Files\solutions\day14</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\day15\day15.cpp">
+      <Filter>Source Files\solutions\day15</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\day15\hash.cpp">
+      <Filter>Source Files\solutions\day15</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utils\input_utils.h">
@@ -247,6 +265,18 @@
     </ClInclude>
     <ClInclude Include="solutions\day13\day13.h">
       <Filter>Source Files\solutions\day13</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day14\day14.h">
+      <Filter>Source Files\solutions\day14</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day14\rocks.h">
+      <Filter>Source Files\solutions\day14</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day15\day15.h">
+      <Filter>Source Files\solutions\day15</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day15\hash.h">
+      <Filter>Source Files\solutions\day15</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

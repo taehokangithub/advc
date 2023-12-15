@@ -172,6 +172,10 @@
     <ClCompile Include="solutions\day12\condition_recorder.cpp" />
     <ClCompile Include="solutions\day13\day13.cpp" />
     <ClCompile Include="solutions\day13\patterns.cpp" />
+    <ClCompile Include="solutions\day14\day14.cpp" />
+    <ClCompile Include="solutions\day14\rocks.cpp" />
+    <ClCompile Include="solutions\day15\day15.cpp" />
+    <ClCompile Include="solutions\day15\hash.cpp" />
     <ClCompile Include="utils\input_utils.cpp" />
     <ClCompile Include="utils\point.cpp" />
   </ItemGroup>
@@ -203,6 +207,10 @@
     <ClInclude Include="solutions\day12\condition_recorder.h" />
     <ClInclude Include="solutions\day13\day13.h" />
     <ClInclude Include="solutions\day13\patterns.h" />
+    <ClInclude Include="solutions\day14\day14.h" />
+    <ClInclude Include="solutions\day14\rocks.h" />
+    <ClInclude Include="solutions\day15\day15.h" />
+    <ClInclude Include="solutions\day15\hash.h" />
     <ClInclude Include="utils\grid.h" />
     <ClInclude Include="utils\input_utils.h" />
     <ClInclude Include="utils\map.h" />
