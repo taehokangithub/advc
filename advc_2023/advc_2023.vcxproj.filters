@@ -64,6 +64,9 @@
     <Filter Include="Source Files\solutions\day15">
       <UniqueIdentifier>{bed80d65-fa87-4881-b46c-a2be533e9aec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\solutions\day16">
+      <UniqueIdentifier>{f1fb0680-3c42-4e14-9852-b08e3cf0d59c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="advc_2023.cpp">
@@ -171,6 +174,15 @@
     <ClCompile Include="solutions\day15\hash.cpp">
       <Filter>Source Files\solutions\day15</Filter>
     </ClCompile>
+    <ClCompile Include="solutions\day16\contraption.cpp">
+      <Filter>Source Files\solutions\day16</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\day16\day16.cpp">
+      <Filter>Source Files\solutions\day16</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\actor.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utils\input_utils.h">
@@ -277,6 +289,15 @@
     </ClInclude>
     <ClInclude Include="solutions\day15\hash.h">
       <Filter>Source Files\solutions\day15</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day16\contraption.h">
+      <Filter>Source Files\solutions\day16</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day16\day16.h">
+      <Filter>Source Files\solutions\day16</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\actor.h">
+      <Filter>Source Files\utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

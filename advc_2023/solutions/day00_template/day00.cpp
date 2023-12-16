@@ -26,6 +26,8 @@ namespace advc_2023::day00
 
     void solve()
     {
+        test();
+        
         const auto& lines{ utils::get_lines("solutions/day00/data/input.txt") };
 
         const auto ans1 = part1(lines);

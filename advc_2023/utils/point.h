@@ -9,7 +9,7 @@ namespace advc_2023::utils
     enum class Dir : uint8_t { Up, Right, Down, Left };
     enum class Axis : uint8_t { X, Y, Z, W };
     
-    class Point
+    struct Point
     {
     public:
         Point() {}
@@ -56,6 +56,8 @@ namespace advc_2023::utils
         static const std::vector<Point> s_dir_8;
         static const std::vector<Point> s_dir_4;
         static const std::vector<Dir> s_dirs;
+        static const std::vector<std::string> s_dir_names;
+        static std::string get_dir_name(Dir dir) { return s_dir_names[(int)dir]; }
 
         int x{ 0 };
         int y{ 0 };

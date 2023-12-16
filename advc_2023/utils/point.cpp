@@ -28,6 +28,11 @@ namespace advc_2023::utils
         Dir::Up, Dir::Right, Dir::Down, Dir::Left
     };
 
+    const vector<string> Point::s_dir_names =
+    {
+        "Up", "Right", "Down", "Left"
+    };
+
     // -------------------------------------
 
     string Point::to_string() const
