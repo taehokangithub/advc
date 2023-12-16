@@ -45,48 +45,48 @@ namespace advc_2023::day16
     {
         beam_vector bv;
 
-        const tile_type tt = m_grid.get(beam->location);
+        const tile_type tt = m_grid.get(beam.location);
 
         switch (tt)
         {
         case tile_type::mirror_up:
-            switch (beam->dir)
+            switch (beam.dir)
             {
-            case utils::Dir::Right: beam->dir = utils::Dir::Up; break;
-            case utils::Dir::Left: beam->dir = utils::Dir::Down; break;
-            case utils::Dir::Up: beam->dir = utils::Dir::Right; break;
-            case utils::Dir::Down: beam->dir = utils::Dir::Left; break;
+            case utils::Dir::Right: beam.dir = utils::Dir::Up; break;
+            case utils::Dir::Left: beam.dir = utils::Dir::Down; break;
+            case utils::Dir::Up: beam.dir = utils::Dir::Right; break;
+            case utils::Dir::Down: beam.dir = utils::Dir::Left; break;
             default: assert(false);
             }
             break;
 
         case tile_type::mirror_down:
-            switch (beam->dir)
+            switch (beam.dir)
             {
-            case utils::Dir::Right: beam->dir = utils::Dir::Down; break;
-            case utils::Dir::Left: beam->dir = utils::Dir::Up; break;
-            case utils::Dir::Up: beam->dir = utils::Dir::Left; break;
-            case utils::Dir::Down: beam->dir = utils::Dir::Right; break;
+            case utils::Dir::Right: beam.dir = utils::Dir::Down; break;
+            case utils::Dir::Left: beam.dir = utils::Dir::Up; break;
+            case utils::Dir::Up: beam.dir = utils::Dir::Left; break;
+            case utils::Dir::Down: beam.dir = utils::Dir::Right; break;
             default: assert(false);
             }
             break;
 
         case tile_type::pass_horizontal:
-            if (beam->dir == utils::Dir::Down || beam->dir == utils::Dir::Up)
+            if (beam.dir == utils::Dir::Down || beam.dir == utils::Dir::Up)
             {
-                beam->dir = utils::Dir::Left;
-                auto new_beam = make_shared<utils::Actor>(*beam);
-                new_beam->dir = utils::Dir::Right;
+                beam.dir = utils::Dir::Left;
+                auto new_beam = beam_type(beam);
+                new_beam.dir = utils::Dir::Right;
                 bv.push_back(new_beam);
             }
             break;
 
         case tile_type::pass_vertical:
-            if (beam->dir == utils::Dir::Left || beam->dir == utils::Dir::Right)
+            if (beam.dir == utils::Dir::Left || beam.dir == utils::Dir::Right)
             {
-                beam->dir = utils::Dir::Up;
-                auto new_beam = make_shared<utils::Actor>(*beam);
-                new_beam->dir = utils::Dir::Down;
+                beam.dir = utils::Dir::Up;
+                auto new_beam = beam_type(beam);
+                new_beam.dir = utils::Dir::Down;
                 bv.push_back(new_beam);
             }
             break;
@@ -105,9 +105,9 @@ namespace advc_2023::day16
 
     uint32_t Search::get_unique_id(const beam_type& beam)
     {
-        const auto x = static_cast<uint8_t>(beam->location.x);
-        const auto y = static_cast<uint8_t>(beam->location.y);
-        const auto dir = static_cast<uint8_t>(beam->dir);
+        const auto x = static_cast<uint8_t>(beam.location.x);
+        const auto y = static_cast<uint8_t>(beam.location.y);
+        const auto dir = static_cast<uint8_t>(beam.dir);
 
         return (x << 16) + (y << 8) + dir;
     }
@@ -120,28 +120,30 @@ namespace advc_2023::day16
         beam_vector new_beams;
         bool has_anything_moved = false;
 
-        for (auto beam : data.beams)
+        for (auto& beam : data.beams)
         {
-            if (m_grid.is_valid_point(beam->location))
+            if (m_grid.is_valid_point(beam.location))
             {
                 const auto unique_id = data.get_unique_id(beam);
                 if (data.visited.find(unique_id) == data.visited.end())
                 {
                     data.visited.insert(unique_id);
                     has_anything_moved = true;
-                    data.energised.set(beam->location, true);
+                    data.energised.set(beam.location, true);
 
-                    const auto new_beam = handle_reflection(beam);
+                    auto new_beam = handle_reflection(beam);
 
                     if (new_beam.size())
                     {
                         assert(new_beam.size() == 1);
 
-                        new_beam.front()->move();
-                        new_beams.push_back(new_beam.front());
+                        beam_type& nb = new_beam.front();
+                        nb.move();
+
+                        new_beams.push_back(nb);
                     }
 
-                    beam->move();
+                    beam.move();
                 }
             }
         }
@@ -155,7 +157,7 @@ namespace advc_2023::day16
     int Contraption::count_energised(const beam_type& starting_beam) const
     {
         Search data;
-        data.beams.push_back(make_shared<utils::Actor>(*starting_beam));
+        data.beams.push_back(beam_type(starting_beam));
 
         while (handle_beams_one_tick(data));
 
@@ -166,7 +168,7 @@ namespace advc_2023::day16
 
     int Contraption::count_energised() const
     {
-        const auto starting_beam = make_shared<utils::Actor>(utils::Point(0, 0), utils::Dir::Right);
+        const auto starting_beam = beam_type(utils::Point(0, 0), utils::Dir::Right);
 
         return count_energised(starting_beam);
     }
@@ -180,29 +182,29 @@ namespace advc_2023::day16
 
         for (int x = 0; x < size.x; x++)
         {
-            const auto starting_beam1 = make_shared<utils::Actor>(utils::Point(x, 0), utils::Dir::Down);
-            const auto starting_beam2 = make_shared<utils::Actor>(utils::Point(x, size.y - 1), utils::Dir::Up);
+            const auto starting_beam1 = beam_type(utils::Point(x, 0), utils::Dir::Down);
+            const auto starting_beam2 = beam_type(utils::Point(x, size.y - 1), utils::Dir::Up);
 
             auto ans = count_energised(starting_beam1);
-            DBG_OUT << starting_beam1->to_string() << " => " << ans << endl;
+            DBG_OUT << starting_beam1.to_string() << " => " << ans << endl;
             ret = std::max(ans, ret);
 
             ans = count_energised(starting_beam2);
-            DBG_OUT << starting_beam2->to_string() << " => " << ans << endl;
+            DBG_OUT << starting_beam2.to_string() << " => " << ans << endl;
             ret = std::max(ans, ret);
         }
 
         for (int y = 0; y < size.y; y++)
         {
-            const auto starting_beam1 = make_shared<utils::Actor>(utils::Point(0, y), utils::Dir::Right);
-            const auto starting_beam2 = make_shared<utils::Actor>(utils::Point(size.x - 1, y), utils::Dir::Left);
+            const auto starting_beam1 = beam_type(utils::Point(0, y), utils::Dir::Right);
+            const auto starting_beam2 = beam_type(utils::Point(size.x - 1, y), utils::Dir::Left);
 
             auto ans = count_energised(starting_beam1);
-            DBG_OUT << starting_beam1->to_string() << " => " << ans << endl;
+            DBG_OUT << starting_beam1.to_string() << " => " << ans << endl;
             ret = std::max(ans, ret);
 
             ans = count_energised(starting_beam2);
-            DBG_OUT << starting_beam2->to_string() << " => " << ans << endl;
+            DBG_OUT << starting_beam2.to_string() << " => " << ans << endl;
             ret = std::max(ans, ret);
         }
         

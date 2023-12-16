@@ -8,8 +8,8 @@
 
 namespace advc_2023::day16
 {
-    using beam_vector = std::vector<std::shared_ptr<utils::Actor>>;
-    using beam_type = std::shared_ptr<utils::Actor>;
+    using beam_vector = std::vector<utils::Actor>;
+    using beam_type = utils::Actor;
 
     struct Search
     {
@@ -31,6 +31,7 @@ namespace advc_2023::day16
             pass_horizontal,
             pass_vertical
         };
+
     public:
         void parse(const std::vector<std::string>& lines);
         int count_energised() const;
