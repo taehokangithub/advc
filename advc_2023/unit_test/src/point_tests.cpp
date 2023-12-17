@@ -78,6 +78,33 @@ namespace advc_2023::google_test
         EXPECT_EQ(result_right, p_right);
     }
 
+    TEST(Point_tests, rotate_dir)
+    {
+        utils::Dir dir{ utils::Dir::Right };
+
+        auto dir1 = utils::Point::get_rotated_dir(dir, utils::Dir::Right);
+        auto dir2 = utils::Point::get_rotated_dir(dir1, utils::Dir::Right);
+        auto dir3 = utils::Point::get_rotated_dir(dir2, utils::Dir::Right);
+        auto dir4 = utils::Point::get_rotated_dir(dir3, utils::Dir::Right);
+
+        EXPECT_NE(dir, dir1);
+        EXPECT_NE(dir, dir2);
+        EXPECT_NE(dir, dir3);
+        EXPECT_EQ(dir, dir4);
+
+        dir = utils::Dir::Down;
+
+        dir1 = utils::Point::get_rotated_dir(dir, utils::Dir::Left);
+        dir2 = utils::Point::get_rotated_dir(dir1, utils::Dir::Left);
+        dir3 = utils::Point::get_rotated_dir(dir2, utils::Dir::Left);
+        dir4 = utils::Point::get_rotated_dir(dir3, utils::Dir::Left);
+
+        EXPECT_NE(dir, dir1);
+        EXPECT_NE(dir, dir2);
+        EXPECT_NE(dir, dir3);
+        EXPECT_EQ(dir, dir4);
+    }
+
     TEST(Point_tests, set_max)
     {
         utils::Point p1(3, -5);

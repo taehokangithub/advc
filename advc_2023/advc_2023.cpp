@@ -17,6 +17,7 @@
 #include "solutions/day14/day14.h"
 #include "solutions/day15/day15.h"
 #include "solutions/day16/day16.h"
+#include "solutions/day17/day17.h"
 
 using namespace advc_2023;
 using namespace std;
@@ -43,6 +44,7 @@ int main()
     day14::solve();
     day15::solve();
     day16::solve();
+    day17::solve();
 
     const auto end_time = chrono::high_resolution_clock::now();
     const auto duration = chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);

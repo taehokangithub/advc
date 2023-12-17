@@ -101,6 +101,43 @@ namespace advc_2023::utils
 
     // -------------------------------------
 
+    Dir Point::get_rotated_dir(Dir dir, Dir rotate)
+    {
+        switch (rotate)
+        {
+        case Dir::Up: return dir;
+        case Dir::Down: return get_opposite_dir(dir);
+        case Dir::Left:
+        {
+            switch (dir)
+            {
+            case Dir::Up: return Dir::Left;
+            case Dir::Left: return Dir::Down;
+            case Dir::Right: return Dir::Up;
+            case Dir::Down: return Dir::Right;
+            }
+            assert(false);
+            break;
+        }
+        case Dir::Right:
+        {
+            switch (dir)
+            {
+            case Dir::Up: return Dir::Right;
+            case Dir::Left: return Dir::Up;
+            case Dir::Right: return Dir::Down;
+            case Dir::Down: return Dir::Left;
+            }
+            assert(false);
+            break;
+        }
+        }
+        assert(false);
+        return Dir();
+    }
+
+    // -------------------------------------
+
     Point::Point(const Point& other)
     {
         x = other.x;

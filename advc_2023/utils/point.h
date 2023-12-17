@@ -50,6 +50,8 @@ namespace advc_2023::utils
 
         static Point string_to_point(const std::string& str);
         static Dir get_opposite_dir(Dir dir);
+        static Dir get_rotated_dir(Dir dir, Dir rotate);
+        static std::string get_dir_name(Dir dir) { return s_dir_names[(int)dir]; }
 
     public:
         static int s_log_dimemsion;
@@ -57,7 +59,7 @@ namespace advc_2023::utils
         static const std::vector<Point> s_dir_4;
         static const std::vector<Dir> s_dirs;
         static const std::vector<std::string> s_dir_names;
-        static std::string get_dir_name(Dir dir) { return s_dir_names[(int)dir]; }
+        
 
         int x{ 0 };
         int y{ 0 };

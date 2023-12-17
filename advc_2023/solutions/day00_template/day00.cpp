@@ -21,7 +21,9 @@ namespace advc_2023::day00
 
     static void test()
     {
+#ifdef _DEBUG        
         const auto& lines{ utils::get_lines("solutions/day00/data/input_s1.txt") };
+#endif        
     }
 
     void solve()
