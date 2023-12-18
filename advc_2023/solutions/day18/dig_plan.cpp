@@ -15,19 +15,6 @@ constexpr bool DISABLE_DBG_OUT = true;
 
 namespace advc_2023::day18
 {
-    char get_char_for_cell_type(const cell_type ct)
-    {
-        switch (ct)
-        {
-        case cell_type::external: return '.';
-        case cell_type::internal: return 'O';
-        case cell_type::edge: return '#';
-        }
-        return ' ';
-    }
-
-    // ------------------------------------------------------
-
     void Dig_plan::parse(const vector<string>& lines)
     {
         for (const auto& line : lines)

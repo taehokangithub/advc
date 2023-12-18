@@ -5,24 +5,6 @@
 
 namespace advc_2023::day18
 {
-    enum cell_type 
-    {
-        none,
-        external,
-        internal,
-        edge,
-    };
-
-    // --------------------------------------------------------
-
-    struct Cell
-    {
-        cell_type   type{ cell_type::none };
-        std::string colour;
-    };
-
-    // --------------------------------------------------------
-
     struct Dig_instruction
     {
         utils::Dir dir;
