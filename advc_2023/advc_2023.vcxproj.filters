@@ -70,6 +70,9 @@
     <Filter Include="Source Files\solutions\day17">
       <UniqueIdentifier>{efa3bccd-205f-4fba-8619-00c65f87cbe9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\solutions\day18">
+      <UniqueIdentifier>{714dcccf-48c2-4484-8df5-cc327c255c51}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="advc_2023.cpp">
@@ -192,6 +195,12 @@
     <ClCompile Include="solutions\day17\heat_map.cpp">
       <Filter>Source Files\solutions\day17</Filter>
     </ClCompile>
+    <ClCompile Include="solutions\day18\day18.cpp">
+      <Filter>Source Files\solutions\day18</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\day18\dig_plan.cpp">
+      <Filter>Source Files\solutions\day18</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utils\input_utils.h">
@@ -313,6 +322,12 @@
     </ClInclude>
     <ClInclude Include="solutions\day17\heat_map.h">
       <Filter>Source Files\solutions\day17</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day18\day18.h">
+      <Filter>Source Files\solutions\day18</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day18\dig_plan.h">
+      <Filter>Source Files\solutions\day18</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -34,8 +34,8 @@ namespace advc_2023::utils
         void divide(int val);
         Point get_divided(int val) const;
 
-        void move(Dir dir);
-        Point get_moved(Dir dir) const;
+        void move(Dir dir, int distance = 1);
+        Point get_moved(Dir dir, int distance = 1) const;
 
         void rotate(Dir dir);
         Point get_rotated(Dir dir) const;

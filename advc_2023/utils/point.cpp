@@ -304,18 +304,19 @@ namespace advc_2023::utils
 
     // -------------------------------------
 
-    void Point::move(Dir dir)
+    void Point::move(Dir dir, int distance)
     {
         int dir_index = (int)dir;
-        add(s_dir_4[dir_index]);
+        const auto base_vector = s_dir_4[dir_index];
+        add(base_vector.get_multipled(distance));
     }
 
     // -------------------------------------
 
-    Point Point::get_moved(Dir dir) const
+    Point Point::get_moved(Dir dir, int distance) const
     {
         Point ret(*this);
-        ret.move(dir);
+        ret.move(dir, distance);
         return ret;
     }
 

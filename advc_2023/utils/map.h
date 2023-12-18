@@ -17,11 +17,14 @@ namespace advc_2023::utils
     public:
         void set(const Point& p, const T& val);
         bool is_valid_point(const Point& p) const;
+
         bool exists(const Point& p) const;
+        bool exists(int x, int y) const { return exists(Point(x, y)); }
+        bool exists(int x, int y, int z) const { return exists(Point(x, y, z)); }
 
         T get(const Point& p) const;
-        T get(int x, int y) const { return get(utils::Point(x, y)); }
-        T get(int x, int y, int z) const { return get(utils::Point(x, y, z)); };
+        T get(int x, int y) const { return get(Point(x, y)); }
+        T get(int x, int y, int z) const { return get(Point(x, y, z)); };
         
         const Point& get_min() const { return m_min; }
         const Point& get_max() const { return m_max; }

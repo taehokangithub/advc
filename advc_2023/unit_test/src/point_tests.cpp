@@ -48,16 +48,16 @@ namespace advc_2023::google_test
     {
         const utils::Point p(10, 11);
 
-        const utils::Point p_up(10, 10);
-        const utils::Point p_down(10, 12);
-        const utils::Point p_left(9, 11);
-        const utils::Point p_right(11, 11);
+        const utils::Point p_up(10, 9);
+        const utils::Point p_down(10, 17);
+        const utils::Point p_left(-1, 11);
+        const utils::Point p_right(15, 11);
 
 
-        const auto result_move_up = p.get_moved(utils::Dir::Up);
-        const auto result_move_down = p.get_moved(utils::Dir::Down);
-        const auto result_move_left = p.get_moved(utils::Dir::Left);
-        const auto result_move_right = p.get_moved(utils::Dir::Right);
+        const auto result_move_up = p.get_moved(utils::Dir::Up, 2);
+        const auto result_move_down = p.get_moved(utils::Dir::Down, 6);
+        const auto result_move_left = p.get_moved(utils::Dir::Left, 11);
+        const auto result_move_right = p.get_moved(utils::Dir::Right, 5);
 
         EXPECT_EQ(result_move_up, p_up);
         EXPECT_EQ(result_move_down, p_down);

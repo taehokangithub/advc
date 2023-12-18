@@ -180,6 +180,8 @@
     <ClCompile Include="solutions\day16\day16.cpp" />
     <ClCompile Include="solutions\day17\day17.cpp" />
     <ClCompile Include="solutions\day17\heat_map.cpp" />
+    <ClCompile Include="solutions\day18\day18.cpp" />
+    <ClCompile Include="solutions\day18\dig_plan.cpp" />
     <ClCompile Include="utils\actor.cpp" />
     <ClCompile Include="utils\input_utils.cpp" />
     <ClCompile Include="utils\point.cpp" />
@@ -220,6 +222,8 @@
     <ClInclude Include="solutions\day16\day16.h" />
     <ClInclude Include="solutions\day17\day17.h" />
     <ClInclude Include="solutions\day17\heat_map.h" />
+    <ClInclude Include="solutions\day18\day18.h" />
+    <ClInclude Include="solutions\day18\dig_plan.h" />
     <ClInclude Include="utils\actor.h" />
     <ClInclude Include="utils\grid.h" />
     <ClInclude Include="utils\input_utils.h" />
