@@ -73,6 +73,9 @@
     <Filter Include="Source Files\solutions\day18">
       <UniqueIdentifier>{714dcccf-48c2-4484-8df5-cc327c255c51}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\solutions\day19">
+      <UniqueIdentifier>{f0965563-7758-4950-b59d-cf3da98cd1e4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="advc_2023.cpp">
@@ -201,6 +204,18 @@
     <ClCompile Include="solutions\day18\dig_plan.cpp">
       <Filter>Source Files\solutions\day18</Filter>
     </ClCompile>
+    <ClCompile Include="solutions\day19\day19.cpp">
+      <Filter>Source Files\solutions\day19</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\day19\rules_system_parser.cpp">
+      <Filter>Source Files\solutions\day19</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\day19\rules_system.cpp">
+      <Filter>Source Files\solutions\day19</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\day19\ranges.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utils\input_utils.h">
@@ -328,6 +343,15 @@
     </ClInclude>
     <ClInclude Include="solutions\day18\dig_plan.h">
       <Filter>Source Files\solutions\day18</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day19\day19.h">
+      <Filter>Source Files\solutions\day19</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day19\rules_system.h">
+      <Filter>Source Files\solutions\day19</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day19\ranges.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -193,6 +193,44 @@ namespace advc_2023::utils
 
     // -------------------------------------
 
+    int Point::get(Axis axis) const
+    {
+        switch (axis)
+        {
+        case Axis::X: return x;
+        case Axis::Y: return y;
+        case Axis::Z: return z;
+        case Axis::W: return w;
+        default:
+            assert(false);
+        }
+        return 0;
+    }
+
+    // -------------------------------------
+
+    void Point::set(Axis axis, int val)
+    {
+        switch (axis)
+        {
+        case Axis::X: x = val; break;
+        case Axis::Y: y = val; break;
+        case Axis::Z: z = val; break;
+        case Axis::W: w = val; break;
+        default:
+            assert(false);
+        }
+    }
+
+    // -------------------------------------
+
+    int Point::add_all_axis() const
+    {
+        return x + y + z + w;
+    }
+
+    // -------------------------------------
+
     void Point::sub(const Point& p)
     {
         x -= p.x;

@@ -22,6 +22,10 @@ namespace advc_2023::utils
         bool operator==(const Point& p) const;
         bool operator<(const Point& p) const;
 
+        int get(Axis axis) const;
+        void set(Axis axis, int val);
+        int add_all_axis() const;
+
         void add(const Point& p);
         Point get_added(const Point& p) const;
 
