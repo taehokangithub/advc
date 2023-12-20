@@ -216,6 +216,12 @@
     <ClCompile Include="solutions\day19\ranges.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="solutions\day20\modules.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\day20\day20.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utils\input_utils.h">
@@ -351,6 +357,12 @@
       <Filter>Source Files\solutions\day19</Filter>
     </ClInclude>
     <ClInclude Include="solutions\day19\ranges.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day20\day20.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day20\modules.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
