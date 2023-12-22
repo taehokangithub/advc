@@ -3,14 +3,13 @@
 #include <sstream>
 #include <vector>
 
+#include "input_utils.h"
 #include "point.h"
-
 
 using namespace std;
 
 namespace advc_2023::utils
 {
-    int Point::s_log_dimemsion{ 2 };
     const vector<Point> Point::s_dir_8 =
     {
         { -1, -1 }, { 0, -1 }, { 1, -1 },
@@ -38,19 +37,17 @@ namespace advc_2023::utils
     string Point::to_string() const
     {
         stringstream ss;
-        ss << "[" << x << ":" << y;
+        ss << "[" << x << ":" << y << "]";
 
-        if (s_log_dimemsion >= 3)
-        {
-            ss << ":" << z;
-        }
-        if (s_log_dimemsion == 4)
-        {
-            ss << ":" << w;
-        }
-        ss << "]";
+        return ss.str();
+    }
 
-        assert(s_log_dimemsion <= 4);
+    // -------------------------------------
+
+    std::string Point::to_string_3d() const
+    {
+        stringstream ss;
+        ss << "[" << x << ":" << y << ":" << z << "]";
 
         return ss.str();
     }
@@ -63,16 +60,11 @@ namespace advc_2023::utils
         char buf[256];
         std::snprintf(buf, sizeof(buf), "[%d:%d:%d:%d]", x, y, z, w);
         return string(buf);
-        /*
-        stringstream ss;
-        ss << "[" << x << ":" << y << ":" << z << ":" << w << "]";
-
-        return ss.str(); */
     }
 
     // -------------------------------------
 
-    Point Point::string_to_point(const string& str)
+    Point Point::unique_string_to_point(const string& str)
     {
         stringstream ss(str);
         Point p;
@@ -80,6 +72,29 @@ namespace advc_2023::utils
 
         ss >> dummy >> p.x >> dummy >> p.y >> dummy >> p.z >> dummy >> p.w >> dummy;
 
+        return p;
+    }
+
+    // -------------------------------------
+
+    Point Point::parse_from_comma_string(const std::string& str)
+    {
+        const auto s = split(str, ",");
+        assert(s.size() >= 2 && s.size() <= 4);
+
+        Point p;
+
+        p.x = stoi(s[0]);
+        p.y = stoi(s[1]);
+
+        if (s.size() > 2)
+        {
+            p.z = stoi(s[2]);
+        }
+        if (s.size() > 3)
+        {
+            p.w = stoi(s[3]);
+        }
         return p;
     }
 

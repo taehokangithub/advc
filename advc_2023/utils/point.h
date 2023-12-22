@@ -17,7 +17,7 @@ namespace advc_2023::utils
         Point(int _x, int _y, int _z) : x(_x), y(_y), z(_z) {}
         Point(int _x, int _y, int _z, int _w) : x(_x), y(_y), z(_z), w(_w) {}
         Point(const Point& other);
-        Point(const std::string& str) { *this = string_to_point(str); }
+        Point(const std::string& str) { *this = unique_string_to_point(str); }
 
         bool operator==(const Point& p) const;
         bool operator<(const Point& p) const;
@@ -50,15 +50,16 @@ namespace advc_2023::utils
         void set_min(const Point& p);
 
         std::string to_string() const;          // for debugging purpose
+        std::string to_string_3d() const;         
         std::string to_unique_string() const;   // for being keys in a map
 
-        static Point string_to_point(const std::string& str);
+        static Point unique_string_to_point(const std::string& str);
+        static Point parse_from_comma_string(const std::string& str);
         static Dir get_opposite_dir(Dir dir);
         static Dir get_rotated_dir(Dir dir, Dir rotate);
         static std::string get_dir_name(Dir dir) { return s_dir_names[(int)dir]; }
 
     public:
-        static int s_log_dimemsion;
         static const std::vector<Point> s_dir_8;
         static const std::vector<Point> s_dir_4;
         static const std::vector<Dir> s_dirs;

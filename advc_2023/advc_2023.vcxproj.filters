@@ -228,6 +228,12 @@
     <ClCompile Include="solutions\day21\garden.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="solutions\day22\day22.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\day22\brick.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utils\input_utils.h">
@@ -375,6 +381,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="solutions\day21\garden.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day22\day22.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day22\brick.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

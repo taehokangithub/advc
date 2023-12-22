@@ -190,6 +190,8 @@
     <ClCompile Include="solutions\day20\modules.cpp" />
     <ClCompile Include="solutions\day21\day21.cpp" />
     <ClCompile Include="solutions\day21\garden.cpp" />
+    <ClCompile Include="solutions\day22\day22.cpp" />
+    <ClCompile Include="solutions\day22\brick.cpp" />
     <ClCompile Include="utils\actor.cpp" />
     <ClCompile Include="utils\input_utils.cpp" />
     <ClCompile Include="utils\point.cpp" />
@@ -239,6 +241,8 @@
     <ClInclude Include="solutions\day20\modules.h" />
     <ClInclude Include="solutions\day21\day21.h" />
     <ClInclude Include="solutions\day21\garden.h" />
+    <ClInclude Include="solutions\day22\day22.h" />
+    <ClInclude Include="solutions\day22\brick.h" />
     <ClInclude Include="utils\actor.h" />
     <ClInclude Include="utils\grid.h" />
     <ClInclude Include="utils\input_utils.h" />
