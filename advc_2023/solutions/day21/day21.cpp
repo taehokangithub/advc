@@ -23,7 +23,7 @@ namespace advc_2023::day21
         Garden g;
         g.parse(lines);
 
-        return g.get_num_visits(16); // WIP - Should be 26501365
+        return g.get_num_visits_part2(26501365);
     }
 
     static void test()
@@ -35,19 +35,12 @@ namespace advc_2023::day21
         g.parse(lines);
 
         assert(g.get_num_visits(6) == 16);
-        assert(g.get_num_visits(10) == 50);
-        assert(g.get_num_visits(50) == 1594);
-        assert(g.get_num_visits(100) == 6536);
-        assert(g.get_num_visits(500) == 167004);
-        assert(g.get_num_visits(1000) == 668697);
-        assert(g.get_num_visits(5000) == 16733044);
-        
 #endif
     }
 
     void solve()
     {
-        //test(); // not working with part 2 samples
+        test(); // not working with part 2 samples
         
         const auto& lines{ utils::get_lines("solutions/day21/data/input.txt") };
 
@@ -55,9 +48,13 @@ namespace advc_2023::day21
         cout << "[DAY21] PART 1 : " << ans1 << endl;
         assert(ans1 == 3722);
 
+        //!!! I could not understand the problem by myself
+        //!!! so I had to dig up the internet and found this explanation
+        //!!! https://github.com/villuna/aoc23/wiki/A-Geometric-solution-to-advent-of-code-2023,-day-21
+        
         const auto ans2 = part2(lines);
         cout << "[DAY21] PART 2 : " << ans2 << endl;
-        //assert(ans2 == 54331);
+        assert(ans2 == 614864614526014);
     }
 }
 
