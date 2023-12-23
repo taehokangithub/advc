@@ -47,11 +47,13 @@ namespace advc_2023::day22
 
         const auto ans1 = part1(lines);
         cout << "[DAY22] PART 1 : " << ans1 << endl;
-        //assert(ans1 == 0);    // 517 high
+        assert(ans1 == 454);
 
+#ifndef _DEBUG // takes 9 secs in debug
         const auto ans2 = part2(lines);
         cout << "[DAY22] PART 2 : " << ans2 << endl;
-        //assert(ans2 == 54331);
+        assert(ans2 == 74287);
+#endif
     }
 }
 

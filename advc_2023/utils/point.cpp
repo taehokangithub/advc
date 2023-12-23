@@ -189,6 +189,17 @@ namespace advc_2023::utils
 
     // -------------------------------------
 
+    bool Point::operator!=(const Point& p) const
+    {
+        if (*this == p)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    // -------------------------------------
+
     bool Point::operator<(const Point& p) const
     {
         if (x != p.x)

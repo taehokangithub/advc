@@ -76,6 +76,18 @@
     <Filter Include="Source Files\solutions\day19">
       <UniqueIdentifier>{f0965563-7758-4950-b59d-cf3da98cd1e4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\solutions\day20">
+      <UniqueIdentifier>{cbfe296c-e184-46c0-b3c1-b1a3be2931d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\solutions\day21">
+      <UniqueIdentifier>{90867ebe-1516-46a9-b280-40897d360e3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\solutions\day22">
+      <UniqueIdentifier>{3da94497-cfd4-4939-bb8e-334712e99501}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\solutions\day23">
+      <UniqueIdentifier>{eba4732d-69b8-424a-af45-d72d1cea48a1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="advc_2023.cpp">
@@ -213,25 +225,34 @@
     <ClCompile Include="solutions\day19\rules_system.cpp">
       <Filter>Source Files\solutions\day19</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\day19\ranges.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="solutions\day20\day20.cpp">
+      <Filter>Source Files\solutions\day20</Filter>
     </ClCompile>
     <ClCompile Include="solutions\day20\modules.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\solutions\day20</Filter>
     </ClCompile>
-    <ClCompile Include="solutions\day20\day20.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="solutions\day21\day21.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="solutions\day21\garden.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="solutions\day19\ranges.cpp">
+      <Filter>Source Files\solutions\day19</Filter>
     </ClCompile>
     <ClCompile Include="solutions\day22\day22.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\solutions\day22</Filter>
     </ClCompile>
     <ClCompile Include="solutions\day22\brick.cpp">
+      <Filter>Source Files\solutions\day22</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\day21\day21.cpp">
+      <Filter>Source Files\solutions\day21</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\day21\garden.cpp">
+      <Filter>Source Files\solutions\day21</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\day23\day23.cpp">
+      <Filter>Source Files\solutions\day23</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\day23\hiking.cpp">
+      <Filter>Source Files\solutions\day23</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\day23\graph.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -368,25 +389,34 @@
     <ClInclude Include="solutions\day19\rules_system.h">
       <Filter>Source Files\solutions\day19</Filter>
     </ClInclude>
-    <ClInclude Include="solutions\day19\ranges.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="solutions\day20\modules.h">
+      <Filter>Source Files\solutions\day20</Filter>
     </ClInclude>
     <ClInclude Include="solutions\day20\day20.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="solutions\day20\modules.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files\solutions\day20</Filter>
     </ClInclude>
     <ClInclude Include="solutions\day21\day21.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files\solutions\day21</Filter>
     </ClInclude>
     <ClInclude Include="solutions\day21\garden.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files\solutions\day21</Filter>
     </ClInclude>
     <ClInclude Include="solutions\day22\day22.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files\solutions\day22</Filter>
     </ClInclude>
     <ClInclude Include="solutions\day22\brick.h">
+      <Filter>Source Files\solutions\day22</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day19\ranges.h">
+      <Filter>Source Files\solutions\day19</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day23\day23.h">
+      <Filter>Source Files\solutions\day23</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day23\hiking.h">
+      <Filter>Source Files\solutions\day23</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day23\graph.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

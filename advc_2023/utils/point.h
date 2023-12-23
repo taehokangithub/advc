@@ -20,6 +20,7 @@ namespace advc_2023::utils
         Point(const std::string& str) { *this = unique_string_to_point(str); }
 
         bool operator==(const Point& p) const;
+        bool operator!=(const Point& p) const;
         bool operator<(const Point& p) const;
 
         int get(Axis axis) const;

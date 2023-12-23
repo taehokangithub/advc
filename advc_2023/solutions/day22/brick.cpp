@@ -262,7 +262,7 @@ namespace advc_2023::day22
                     chained_away.insert(brick);
                     chain_reaction_internal(brick, chained_away);
                     sum += (int)(chained_away.size() - 1);
-                    cout << "checking chain reaction for " << brick->to_string() << " " << (chained_away.size()- 1) << " sum " << sum << endl;
+                    //cout << "checking chain reaction for " << brick->to_string() << " " << (chained_away.size()- 1) << " sum " << sum << endl;
                 }
             }
         }
