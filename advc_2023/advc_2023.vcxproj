@@ -202,6 +202,8 @@
     <ClCompile Include="solutions\day24\day24.cpp" />
     <ClCompile Include="solutions\day24\hailstone.cpp" />
     <ClCompile Include="solutions\day24\line3d.cpp" />
+    <ClCompile Include="solutions\day25\components.cpp" />
+    <ClCompile Include="solutions\day25\day25.cpp" />
     <ClCompile Include="utils\actor.cpp" />
     <ClCompile Include="utils\input_utils.cpp" />
     <ClCompile Include="utils\math.cpp" />
@@ -260,6 +262,8 @@
     <ClInclude Include="solutions\day24\day24.h" />
     <ClInclude Include="solutions\day24\hailstone.h" />
     <ClInclude Include="solutions\day24\line3d.h" />
+    <ClInclude Include="solutions\day25\components.h" />
+    <ClInclude Include="solutions\day25\day25.h" />
     <ClInclude Include="utils\actor.h" />
     <ClInclude Include="utils\grid.h" />
     <ClInclude Include="utils\input_utils.h" />

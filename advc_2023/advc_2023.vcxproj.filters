@@ -91,6 +91,9 @@
     <Filter Include="Source Files\solutions\day24">
       <UniqueIdentifier>{6b989ad5-443a-4b85-8236-dbdf4ef8863d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\solutions\day25">
+      <UniqueIdentifier>{b7d28540-baa1-4cfd-a219-f81ea9229dc0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="advc_2023.cpp">
@@ -270,6 +273,12 @@
     <ClCompile Include="utils\math.cpp">
       <Filter>Source Files\utils</Filter>
     </ClCompile>
+    <ClCompile Include="solutions\day25\components.cpp">
+      <Filter>Source Files\solutions\day25</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\day25\day25.cpp">
+      <Filter>Source Files\solutions\day25</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utils\input_utils.h">
@@ -445,6 +454,12 @@
     </ClInclude>
     <ClInclude Include="utils\math.h">
       <Filter>Source Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day25\components.h">
+      <Filter>Source Files\solutions\day25</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day25\day25.h">
+      <Filter>Source Files\solutions\day25</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
