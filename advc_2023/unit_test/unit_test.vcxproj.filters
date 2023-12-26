@@ -19,6 +19,15 @@
     <ClCompile Include="src\map_tests.cpp">
       <Filter>tests</Filter>
     </ClCompile>
+    <ClCompile Include="src\math_test.cpp">
+      <Filter>tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\utils\actor.cpp">
+      <Filter>targets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\utils\math.cpp">
+      <Filter>targets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="tests">
@@ -33,6 +42,15 @@
       <Filter>targets</Filter>
     </ClInclude>
     <ClInclude Include="..\utils\point.h">
+      <Filter>targets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\utils\math.h">
+      <Filter>targets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\utils\actor.h">
+      <Filter>targets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\utils\grid.h">
       <Filter>targets</Filter>
     </ClInclude>
   </ItemGroup>

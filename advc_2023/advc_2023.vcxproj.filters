@@ -88,6 +88,9 @@
     <Filter Include="Source Files\solutions\day23">
       <UniqueIdentifier>{eba4732d-69b8-424a-af45-d72d1cea48a1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\solutions\day24">
+      <UniqueIdentifier>{6b989ad5-443a-4b85-8236-dbdf4ef8863d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="advc_2023.cpp">
@@ -255,6 +258,18 @@
     <ClCompile Include="solutions\day23\graph.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="solutions\day24\day24.cpp">
+      <Filter>Source Files\solutions\day24</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\day24\hailstone.cpp">
+      <Filter>Source Files\solutions\day24</Filter>
+    </ClCompile>
+    <ClCompile Include="solutions\day24\line3d.cpp">
+      <Filter>Source Files\solutions\day24</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\math.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utils\input_utils.h">
@@ -418,6 +433,18 @@
     </ClInclude>
     <ClInclude Include="solutions\day23\graph.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day24\day24.h">
+      <Filter>Source Files\solutions\day24</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day24\hailstone.h">
+      <Filter>Source Files\solutions\day24</Filter>
+    </ClInclude>
+    <ClInclude Include="solutions\day24\line3d.h">
+      <Filter>Source Files\solutions\day24</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\math.h">
+      <Filter>Source Files\utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

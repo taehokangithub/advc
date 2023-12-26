@@ -199,8 +199,12 @@
     <ClCompile Include="solutions\day23\day23.cpp" />
     <ClCompile Include="solutions\day23\hiking.cpp" />
     <ClCompile Include="solutions\day23\graph.cpp" />
+    <ClCompile Include="solutions\day24\day24.cpp" />
+    <ClCompile Include="solutions\day24\hailstone.cpp" />
+    <ClCompile Include="solutions\day24\line3d.cpp" />
     <ClCompile Include="utils\actor.cpp" />
     <ClCompile Include="utils\input_utils.cpp" />
+    <ClCompile Include="utils\math.cpp" />
     <ClCompile Include="utils\point.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -253,10 +257,14 @@
     <ClInclude Include="solutions\day23\day23.h" />
     <ClInclude Include="solutions\day23\hiking.h" />
     <ClInclude Include="solutions\day23\graph.h" />
+    <ClInclude Include="solutions\day24\day24.h" />
+    <ClInclude Include="solutions\day24\hailstone.h" />
+    <ClInclude Include="solutions\day24\line3d.h" />
     <ClInclude Include="utils\actor.h" />
     <ClInclude Include="utils\grid.h" />
     <ClInclude Include="utils\input_utils.h" />
     <ClInclude Include="utils\map.h" />
+    <ClInclude Include="utils\math.h" />
     <ClInclude Include="utils\point.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
