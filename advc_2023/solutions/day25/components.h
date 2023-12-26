@@ -11,6 +11,7 @@ namespace advc_2023::day25
     {
         std::string name;
         std::vector<std::shared_ptr<Edge>> edges;
+        int index;
     };
 
     // --------------------------------------------------------
@@ -36,5 +37,6 @@ namespace advc_2023::day25
         int get_cluster_count(std::shared_ptr<const Node> start_node, const std::vector<std::shared_ptr<const Edge>>& disabled) const;
 
         std::unordered_map<std::string, std::shared_ptr<Node>> m_nodes;
+        int node_index{};
     };
 }

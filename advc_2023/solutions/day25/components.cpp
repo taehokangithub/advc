@@ -55,6 +55,7 @@ namespace advc_2023::day25
         }
         auto new_node = m_nodes[name] = make_shared<Node>();
         new_node->name = name;
+        new_node->index = node_index++;
 
         return new_node;
     }
@@ -64,10 +65,15 @@ namespace advc_2023::day25
     shared_ptr<const Edge> Components::get_most_visited_edge(const vector<shared_ptr<const Edge>>& disabled) const
     {
         unordered_map<shared_ptr<const Edge>, int> edge_visit_count;
+        vector<bool> visited_nodes(m_nodes.size());
 
         for (const auto& [name, start_node] : m_nodes)
         {
-            unordered_set<shared_ptr<const Node>> visited_nodes;
+            for (int i = 0; i < (int)visited_nodes.size(); i++)
+            {
+                visited_nodes[i] = false;
+            }
+
             queue<shared_ptr<const Node>> q;
 
             q.push(start_node);
@@ -81,9 +87,9 @@ namespace advc_2023::day25
                     if (std::find(disabled.begin(), disabled.end(), edge) == disabled.end())
                     {
                         const auto& other_node = edge->get_other(node);
-                        if (visited_nodes.find(other_node) == visited_nodes.end())
+                        if (!visited_nodes[other_node->index])
                         {
-                            visited_nodes.insert(other_node);
+                            visited_nodes[other_node->index] = true;
                             q.push(other_node);
                             edge_visit_count[edge]++;
                         }

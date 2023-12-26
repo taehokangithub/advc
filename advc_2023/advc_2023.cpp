@@ -36,7 +36,6 @@ int main()
 
     cout << "Starting Advent of Code 2023" << endl;
 
-#if true
     day01::solve();
     day02::solve();
     day03::solve();
@@ -62,8 +61,6 @@ int main()
     day23::solve();
     day24::solve();
     day25::solve();
-#endif
-    
 
     const auto end_time = chrono::high_resolution_clock::now();
     const auto duration = chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
