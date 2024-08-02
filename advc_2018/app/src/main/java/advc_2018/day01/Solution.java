@@ -52,6 +52,6 @@ public class Solution
         var lines = helper.readLinesFromFile("input.txt");
         
         helper.answerChecker(solve1(lines), 437);
-        helper.answerCheckerDontThrow(solve2(lines), 0);
+        helper.answerCheckerDontThrow(solve2(lines), 655);
     }
 }

@@ -61,7 +61,7 @@ public class AdvcHelper implements IAdvcHelper
 
         if (!answer.toString().equals(target.toString()))
         {
-            String msg = String.format("%s Wrong answer! %s != %s", header, answer.toString(), target.toString());
+            String msg = String.format("%sWrong answer! %s != %s", header, answer.toString(), target.toString());
 
             if (eThrowException == EThrowException.Yes)
             {
@@ -74,7 +74,7 @@ public class AdvcHelper implements IAdvcHelper
         }
         else
         {
-            System.out.println(String.format(header + "correct answer! " + answer.toString()));
+            System.out.println(String.format(header + "Correct! " + answer.toString()));
         }
     } 
 }
