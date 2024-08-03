@@ -8,10 +8,13 @@ import java.util.List;
 
 public class AdvcHelper implements IAdvcHelper
 {
-    private final String m_name;
-    private int m_part = 0;
-    private enum EThrowException { Yes, No };
+    private enum EThrowException { Yes, No }
     private enum EIncreasePartNum { Yes, No }
+    private enum EPrintResult { Yes, No }
+
+    private int m_part = 0;
+    private final String m_name;
+
     private final String colourDefault = "\033[0m";
     private final String colourRed= "\033[31m";
     private final String colourBlue = "\033[34m";
@@ -40,20 +43,20 @@ public class AdvcHelper implements IAdvcHelper
 
     public <T> void answerChecker(T answer, T target)
     {
-        answerCheckerInternal(answer, target, EThrowException.Yes, EIncreasePartNum.Yes);
+        answerCheckerInternal(answer, target, EThrowException.Yes, EIncreasePartNum.Yes, EPrintResult.Yes);
     }
 
     public <T> void answerCheckerDontThrow(T answer, T target)
     {
-        answerCheckerInternal(answer, target,  EThrowException.No, EIncreasePartNum.Yes);
+        answerCheckerInternal(answer, target,  EThrowException.No, EIncreasePartNum.Yes, EPrintResult.Yes);
     }
 
     public <T> void answerCheckerTestInput(T answer, T target)
     {
-        answerCheckerInternal(answer, target,  EThrowException.Yes, EIncreasePartNum.No);
+        answerCheckerInternal(answer, target,  EThrowException.Yes, EIncreasePartNum.No, EPrintResult.No);
     }
    
-    private <T> void answerCheckerInternal(T answer, T target, EThrowException eThrowException, EIncreasePartNum eIncreasePartNum)
+    private <T> void answerCheckerInternal(T answer, T target, EThrowException eThrowException, EIncreasePartNum eIncreasePartNum, EPrintResult ePrintResult)
     {
         if (eIncreasePartNum == EIncreasePartNum.Yes)
         {
@@ -75,7 +78,7 @@ public class AdvcHelper implements IAdvcHelper
                 System.err.println(msg);
             }            
         }
-        else
+        else if (ePrintResult == EPrintResult.Yes)
         {
             System.out.println(String.format(header + answer.toString()));
         }

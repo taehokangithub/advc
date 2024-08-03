@@ -7,5 +7,6 @@ public class App {
     public static void main(String[] args) {
         advc_2018.day01.Solution.run();
         advc_2018.day02.Solution.run();
+        advc_2018.day03.Solution.run();
     }
 }
