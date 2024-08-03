@@ -12,6 +12,9 @@ public class AdvcHelper implements IAdvcHelper
     private int m_part = 0;
     private enum EThrowException { Yes, No };
     private enum EIncreasePartNum { Yes, No }
+    private final String colourDefault = "\033[0m";
+    private final String colourRed= "\033[31m";
+    private final String colourBlue = "\033[34m";
 
     public AdvcHelper(String name)
     {
@@ -57,11 +60,11 @@ public class AdvcHelper implements IAdvcHelper
             m_part ++;
         }
 
-        String header = String.format("[%s/part%d] ", m_name, m_part);
+        String header = String.format("%s[%s/part%d]%s ", colourBlue, m_name, m_part, colourDefault);
 
         if (!answer.toString().equals(target.toString()))
         {
-            String msg = String.format("%sWrong answer! %s != %s", header, answer.toString(), target.toString());
+            String msg = String.format("%s%sWrong answer!%s %s != %s", header, colourRed, colourDefault, answer.toString(), target.toString());
 
             if (eThrowException == EThrowException.Yes)
             {
@@ -74,7 +77,7 @@ public class AdvcHelper implements IAdvcHelper
         }
         else
         {
-            System.out.println(String.format(header + "Correct! " + answer.toString()));
+            System.out.println(String.format(header + answer.toString()));
         }
     } 
 }

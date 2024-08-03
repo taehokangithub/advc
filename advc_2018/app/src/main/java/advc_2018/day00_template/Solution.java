@@ -21,7 +21,7 @@ public class Solution
         
         var lines = helper.readLinesFromFile("input.txt");
         
-        helper.answerChecker(solve1(lines), 0);
-        helper.answerChecker(solve2(lines), 0);
+        helper.answerCheckerDontThrow(solve1(lines), 0);
+        helper.answerCheckerDontThrow(solve2(lines), 0);
     }
 }
