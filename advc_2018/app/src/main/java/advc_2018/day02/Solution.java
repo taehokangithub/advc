@@ -72,11 +72,19 @@ public class Solution
         return mostMatch;
     }
 
+    public static void test(IAdvcHelper helper)
+    {
+        var lines = helper.readLinesFromFile("input_test.txt");
+
+        helper.answerCheckerTestInput(solve2(lines), "fgij");
+    }
+
+
     public static void run()
     {
         IAdvcHelper helper = new AdvcHelper("day02");
         
-        helper.answerCheckerTestInput(solve2(helper.readLinesFromFile("input2.txt")), "fgij");
+        test(helper);
 
         var lines = helper.readLinesFromFile("input.txt");
         

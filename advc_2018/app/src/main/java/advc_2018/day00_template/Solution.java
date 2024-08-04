@@ -15,9 +15,18 @@ public class Solution
         return 0;
     }
 
+    public static void test(IAdvcHelper helper)
+    {
+        var lines = helper.readLinesFromFile("input_test.txt");
+
+        helper.answerCheckerTestInput(solve1(lines), 0);
+    }
+
     public static void run()
     {
         IAdvcHelper helper = new AdvcHelper("day00");
+
+        test(helper);
         
         var lines = helper.readLinesFromFile("input.txt");
         

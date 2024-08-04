@@ -8,5 +8,6 @@ public class App {
         advc_2018.day01.Solution.run();
         advc_2018.day02.Solution.run();
         advc_2018.day03.Solution.run();
+        advc_2018.day04.Solution.run();
     }
 }

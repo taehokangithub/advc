@@ -17,7 +17,7 @@ public class Solution
 
     public static void test(IAdvcHelper helper)
     {
-        var lines = helper.readLinesFromFile("input2.txt");
+        var lines = helper.readLinesFromFile("input_test.txt");
 
         helper.answerCheckerTestInput(solve1(lines, new Claims(lines)), 4);
     }
