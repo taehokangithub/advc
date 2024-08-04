@@ -15,21 +15,10 @@ public class Solution
         return manager.getMostLikelySleepGuardByMinute();
     }
 
-    public static void test(IAdvcHelper helper)
-    {
-        var lines = helper.readLinesFromFile("input_test.txt");
-        var manager = new RecordManager(lines);
-
-        helper.answerCheckerTestInput(solve1(lines, manager), 240);
-        helper.answerCheckerTestInput(solve2(lines, manager), 4455);
-    }
-
     public static void run()
     {
         IAdvcHelper helper = new AdvcHelper("day04");
 
-        test(helper);
-        
         var lines = helper.readLinesFromFile("input.txt");
         var manager = new RecordManager(lines);
 

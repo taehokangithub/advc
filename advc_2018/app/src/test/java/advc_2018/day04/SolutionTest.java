@@ -1,11 +1,15 @@
 package advc_2018.day04;
 
 import org.junit.jupiter.api.Test;
+
+import advc_utils.Etc.AdvcHelper;
+import advc_utils.Etc.IAdvcHelper;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-public class day04test {
+public class SolutionTest {
     @Test
-    void GuardRecordParserTest1()
+    void testGuardRecordParserTest1()
     {
         GuardRawRecord record = new GuardRawRecord("[1518-11-01 00:30] falls asleep");
 
@@ -18,7 +22,8 @@ public class day04test {
         assertTrue(record.getRecordType() == EGuardRecordType.FallsAsleep);
     }
 
-    void GuardRecordParserTest2()
+    @Test
+    void testGuardRecordParserTest2()
     {
         GuardRawRecord record = new GuardRawRecord("[2024-09-23 23:47] Guard #1907 begins shift");
 
@@ -29,5 +34,16 @@ public class day04test {
         assertTrue(record.getHour() == 23);
         assertTrue(record.getMinute() == 47);
         assertTrue(record.getRecordType() == EGuardRecordType.BeginsShift);
+    }
+
+    @Test
+    void testInput()
+    {
+        IAdvcHelper helper = new AdvcHelper("day04");
+        var lines = helper.readLinesFromFile("input_test.txt");
+        var manager = new RecordManager(lines);
+
+        helper.answerCheckerTestInput(Solution.solve1(lines, manager), 240);
+        helper.answerCheckerTestInput(Solution.solve2(lines, manager), 4455);
     }
 }

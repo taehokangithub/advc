@@ -15,18 +15,9 @@ public class Solution
         return claims.getSingleClaimedID();
     }
 
-    public static void test(IAdvcHelper helper)
-    {
-        var lines = helper.readLinesFromFile("input_test.txt");
-
-        helper.answerCheckerTestInput(solve1(lines, new Claims(lines)), 4);
-    }
-
     public static void run()
     {
         IAdvcHelper helper = new AdvcHelper("day03");
-
-        test(helper);
 
         var lines = helper.readLinesFromFile("input.txt");
         var claims = new Claims(lines);
