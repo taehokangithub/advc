@@ -5,9 +5,15 @@ package advc_2018;
 
 public class App {
     public static void main(String[] args) {
+        final long startTime = System.currentTimeMillis();
+
         advc_2018.day01.Solution.run();
         advc_2018.day02.Solution.run();
         advc_2018.day03.Solution.run();
         advc_2018.day04.Solution.run();
+        advc_2018.day05.Solution.run();
+
+        System.out.println();
+        System.out.println(String.format("Finished - total %dms", System.currentTimeMillis() - startTime));
     }
 }

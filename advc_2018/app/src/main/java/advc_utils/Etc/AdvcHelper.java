@@ -18,6 +18,8 @@ public class AdvcHelper implements IAdvcHelper
     private final String colourDefault = "\033[0m";
     private final String colourRed= "\033[31m";
     private final String colourBlue = "\033[34m";
+    private final String colourGray = "\033[90m";
+    private long startTime = System.currentTimeMillis();
 
     public AdvcHelper(String name)
     {
@@ -80,7 +82,11 @@ public class AdvcHelper implements IAdvcHelper
         }
         else if (ePrintResult == EPrintResult.Yes)
         {
-            System.out.println(String.format(header + answer.toString()));
+            final long curTime = System.currentTimeMillis();
+            String timeFooter = String.format(" %s(%dms)%s  ", colourGray, curTime - startTime, colourDefault);
+            System.out.println(header + answer.toString() + timeFooter);
+
+            startTime = curTime;
         }
     } 
 }
