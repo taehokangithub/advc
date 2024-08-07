@@ -49,7 +49,7 @@ public class Claims
     public int getMultipleClaimedTiles()
     {
         AtomicInteger count = new AtomicInteger(0);
-        m_map.forEach((IPoint p, Integer val) -> {
+        m_map.forEachTile((IPoint p, Integer val) -> {
             if (val > 1)
             {
                 count.incrementAndGet();

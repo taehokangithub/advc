@@ -1,4 +1,4 @@
-package advc_2018.day05;
+package advc_2018.day00_template;
 
 import advc_utils.Etc.AdvcHelper;
 import advc_utils.Etc.IAdvcHelper;
@@ -10,10 +10,10 @@ public class SolutionTest
     @Test
     void testInput()
     {
-        IAdvcHelper helper = new AdvcHelper("day05");
+        IAdvcHelper helper = new AdvcHelper("day00");
         var lines = helper.readLinesFromFile("input_test.txt");
         
-        helper.answerCheckerTestInput(Solution.solve1(lines.getFirst()), 10);
-        helper.answerCheckerTestInput(Solution.solve2(lines.getFirst()), 4);
+        helper.answerCheckerTestInput(Solution.solve1(lines), 0);
+        helper.answerCheckerTestInput(Solution.solve2(lines), 0);
     }
 }

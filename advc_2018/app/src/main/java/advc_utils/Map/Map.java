@@ -4,9 +4,6 @@ import java.util.HashMap;
 
 import advc_utils.Points.*;
 
-// TODO : TEST ERROR, 
-//      ; CREATE A TEST FOR POINT FROM STRING (PARSING)
-
 public class Map<T> implements IMap<T>
 {
     private HashMap<String, T> m_HashMap = new HashMap<>();
@@ -46,12 +43,28 @@ public class Map<T> implements IMap<T>
         return m_max;
     }
 
+    public int getCount()
+    {
+        return m_HashMap.size();
+    }
+
     // Loops for each points stored in the map, calling the given ForEachCB
-    public void forEach(ForEachCB<T> cb)
+    public void forEachTile(ForEachTileCB<T> cb)
     {
         for (var entry : m_HashMap.entrySet())
         {
-            cb.forEachPoint(new Point(entry.getKey()), entry.getValue());
+            cb.forEachTile(new Point(entry.getKey()), entry.getValue());
+        }
+    }
+
+    public void forEachSpacePoint(ForEachSpacePointCB cb)
+    {
+        for (long y = m_min.getYlong(); y <= m_max.getYlong(); y ++)
+        {
+            for (long x = m_min.getXlong(); x <= m_max.getXlong(); x++)
+            {
+                cb.forEachSpacePoint(new Point(x, y));
+            }
         }
     }
 }

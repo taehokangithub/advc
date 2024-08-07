@@ -1,7 +1,5 @@
 package advc_2018.day05;
 
-import java.util.HashSet;
-
 public class Reduction 
 {
     public static String reduceSpecific(String str, char target)

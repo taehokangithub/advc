@@ -13,6 +13,7 @@ public class MapTest {
     private enum Tile { WALL, ROAD, HUMAN, ERROR };
 
     private Map<Tile> m_map;
+    private int m_cntLoop;
 
     public Tile getTileFromChar(char c)
     {
@@ -45,6 +46,33 @@ public class MapTest {
 
         //max : 100, 21, 122, 7
         //min : -190, -21, -32, -21
+    }
+
+    @Test
+    void testSpacePointLoopCount()
+    {
+        m_cntLoop = 0;
+        m_map.forEachSpacePoint((IPoint) ->
+        {
+            m_cntLoop ++;
+        });
+
+        IPoint maxPoint = m_map.getMax();
+        IPoint minPoint = m_map.getMin();
+
+        final int expected = (maxPoint.getX() - minPoint.getX() + 1) * (maxPoint.getY() - minPoint.getY() + 1);
+        assertTrue(m_cntLoop == expected);
+    }
+    
+    @Test
+    void testTileLoopCount()
+    {
+        m_cntLoop = 0;
+        m_map.forEachTile((IPoint p, Tile t) ->
+        {
+            m_cntLoop ++;
+        });
+        assertTrue(m_cntLoop == 10);
     }
 
     @Test
