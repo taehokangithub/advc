@@ -115,6 +115,9 @@ public class PointTest {
 
         p = new Point(-7, 2);
         assertTrue(p.getManhattanDistance() == 9);
+
+        final long distance = p.getManhattanDistance(new Point(3, 5));
+        assertTrue(distance == 13, "distance " + distance);
     }
 
     @Test

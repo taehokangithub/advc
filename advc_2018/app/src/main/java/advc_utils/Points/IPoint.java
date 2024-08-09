@@ -38,6 +38,7 @@ public interface IPoint
 
     // Manhattan distance : sum of all axis values
     long getManhattanDistance();
+    long getManhattanDistance(IPoint other);
 
     // Min/max setter : compare all axis values of this and other, and sets the min or max value
     // This is usefule when setting the min/max coordination of all the given points

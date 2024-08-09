@@ -27,8 +27,7 @@ public class AreaMap
 
             for (var tilePoint : m_map.getTilePoints())
             {
-                IPoint diff = spacePoint.getSubbed(tilePoint);
-                final var manhattanDistance = (int)diff.getManhattanDistance();
+                final var manhattanDistance = (int)spacePoint.getManhattanDistance(tilePoint);
 
                 if (manhattanDistance < minDistance)
                 {
