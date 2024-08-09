@@ -38,14 +38,17 @@ public class AreaMap
                 }
             }
 
-            if (m_map.isBoundary(spacePoint))
+            if (!boundaryNodes.contains(minId))
             {
-                boundaryNodes.add(minId);
-                internalNodes.remove(minId);
-            }
-            else if (!boundaryNodes.contains(minId))
-            {
-                internalNodes.put(minId, internalNodes.getOrDefault(minId, 0) + 1);
+                if (m_map.isBoundary(spacePoint))
+                {
+                    boundaryNodes.add(minId);
+                    internalNodes.remove(minId);
+                }
+                else
+                {
+                    internalNodes.put(minId, internalNodes.getOrDefault(minId, 0) + 1);
+                }
             }
         });
         
