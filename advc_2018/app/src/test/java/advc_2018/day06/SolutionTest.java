@@ -21,7 +21,7 @@ public class SolutionTest
     @Test
     void testInput()
     {
-        m_helper.answerCheckerTestInput(Solution.solve1(m_lines), 0);
+        m_helper.answerCheckerTestInput(Solution.solve1(m_lines), 17);
         m_helper.answerCheckerTestInput(Solution.solve2(m_lines), 0);
     }
 

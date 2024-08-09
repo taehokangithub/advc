@@ -21,8 +21,6 @@ class AreaMapParser
             final long y = Long.parseLong(parts[1]);
             IPoint point = new Point(x, y);
 
-            System.out.println("Parsed point " + point + " from " + line);
-
             map.setTile(point, new AreaNode(point));
         }
 

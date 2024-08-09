@@ -12,6 +12,7 @@ public class App {
         advc_2018.day03.Solution.run();
         advc_2018.day04.Solution.run();
         advc_2018.day05.Solution.run();
+        advc_2018.day06.Solution.run();
 
         System.out.println();
         System.out.println(String.format("Finished - total %dms", System.currentTimeMillis() - startTime));

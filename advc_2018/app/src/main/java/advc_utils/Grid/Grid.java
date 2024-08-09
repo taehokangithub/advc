@@ -35,7 +35,7 @@ public class Grid<T> implements IGrid<T>
             assertTrue(false);
             return null;
         }
-        return m_grid.get(p.getY()).get(p.getX());
+        return m_grid.get((int)p.getY()).get((int)p.getX());
     }
 
     @Override
@@ -44,7 +44,7 @@ public class Grid<T> implements IGrid<T>
         assertTrue(p.getNumAxis() == 2); // ensure it's a 2D point
         assertTrue(isValid(p));
      
-        m_grid.get(p.getY()).set(p.getX(), tile);
+        m_grid.get((int)p.getY()).set((int)p.getX(), tile);
     }
 
     @Override
@@ -77,7 +77,7 @@ public class Grid<T> implements IGrid<T>
         forEach((p, t) ->
         {
             sb.append(m_tileToChar.get(t));
-            if (p.getXlong() == m_size.x - 1)
+            if (p.getX() == m_size.x - 1)
             {
                 sb.append("\n");
             }

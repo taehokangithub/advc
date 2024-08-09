@@ -20,19 +20,44 @@ public class AreaMap
         HashSet<Integer> boundaryNodes = new HashSet<>();
         HashMap<Integer, Integer> internalNodes = new HashMap<>();
 
-        m_map.forEachSpacePoint((IPoint p) ->
+        m_map.forEachSpacePoint((IPoint spacePoint) ->
         {
-            // TODO : the forEach can't add up simple integer. too bad. 
-            // might need a different method that returns a collection of points or entries
+            int minDistance = Integer.MAX_VALUE;
+            int minId = Integer.MAX_VALUE;
 
-            // TODO : for each space point, find the nearest node.
-            //        check if this is a boundary point
-            m_map.forEachTile((IPoint tilePoint, AreaNode node) ->
+            for (var tilePoint : m_map.getTilePoints())
             {
+                IPoint diff = spacePoint.getSubbed(tilePoint);
+                final var manhattanDistance = (int)diff.getManhattanDistance();
 
-            });
+                if (manhattanDistance < minDistance)
+                {
+                    final var node = m_map.getTile(tilePoint);
+                    minId = node.getId();
+                    minDistance = manhattanDistance;
+                }
+            }
+
+            if (m_map.isBoundary(spacePoint))
+            {
+                boundaryNodes.add(minId);
+                internalNodes.remove(minId);
+            }
+            else if (!boundaryNodes.contains(minId))
+            {
+                internalNodes.put(minId, internalNodes.getOrDefault(minId, 0) + 1);
+            }
         });
         
-        return 0;
+        int largestAreaValue = Integer.MIN_VALUE;
+
+        for (var areaValue : internalNodes.values())
+        {
+            if (areaValue > largestAreaValue)
+            {
+                largestAreaValue = areaValue;
+            }
+        }
+        return largestAreaValue;
     }
 }

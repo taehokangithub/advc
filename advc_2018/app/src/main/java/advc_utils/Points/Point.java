@@ -84,7 +84,7 @@ public class Point implements IPoint
             {
                 sb.append(",");
             }
-            sb.append(Long.toString(getAxisValueLong(axisArray[i])));
+            sb.append(Long.toString(getAxisValue(axisArray[i])));
         }
 
         sb.append("]");
@@ -115,7 +115,13 @@ public class Point implements IPoint
     }
 
     @Override
-    public long getAxisValueLong(EAxis axis)
+    public int hashCode()
+    {
+        return (int) ((this.x << 24) + (this.y << 16) + (this.z << 8) + this.w);
+    }
+
+    @Override
+    public long getAxisValue(EAxis axis)
     {
         switch(axis)
         {
@@ -261,7 +267,7 @@ public class Point implements IPoint
         long sum = 0;
         for (var axis : EAxis.values())
         {
-            sum += getAxisValue(axis);
+            sum += Math.abs(getAxisValue(axis));
         }
         return sum;
     }
@@ -281,6 +287,6 @@ public class Point implements IPoint
         for (var axis : EAxis.values())
         {
             setAxisValue(axis, Math.min(getAxisValue(axis), other.getAxisValue(axis)));
-        }        
+        }
     }
 }

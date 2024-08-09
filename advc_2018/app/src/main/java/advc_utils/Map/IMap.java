@@ -1,6 +1,7 @@
 package advc_utils.Map;
 
 import advc_utils.Points.*;
+import java.util.Collection;
 
 public interface IMap<T>
 {
@@ -18,6 +19,9 @@ public interface IMap<T>
     // Returns if the map contains the given point
     boolean contains(IPoint p);
 
+    // Returns if the given point is on the boundary of the map
+    boolean isBoundary(IPoint p);
+
     // Count of registered points
     int getCount();
 
@@ -26,6 +30,9 @@ public interface IMap<T>
 
     // Setter
     void setTile(IPoint p, T tile);
+
+    // Returns all registered points
+    Collection<IPoint> getTilePoints();
 
     // min/max coordinate getters
     IPoint getMin();

@@ -6,8 +6,7 @@ public interface IPoint
     public enum EDir { UP, RIGHT, DOWN, LEFT }
 
     // Generic getter for the given axis
-    default int getAxisValue(EAxis axis) { return (int) getAxisValueLong(axis); }
-    long getAxisValueLong(EAxis axis);
+    long getAxisValue(EAxis axis);
 
     // Generic setter for the given axis and value
     void setAxisValue(EAxis axis, long val);
@@ -46,14 +45,8 @@ public interface IPoint
     void setMin(IPoint other);
 
     // Default getters for IPoint interface
-    // int version needed for index operation in List
-    default int getX() { return getAxisValue(EAxis.X); }
-    default int getY() { return getAxisValue(EAxis.Y); }
-    default int getZ() { return getAxisValue(EAxis.Z); }
-    default int getW() { return getAxisValue(EAxis.W); }
-
-    default long getXlong() { return getAxisValueLong(EAxis.X); }
-    default long getYlong() { return getAxisValueLong(EAxis.Y); }
-    default long getZlong() { return getAxisValueLong(EAxis.Z); }
-    default long getWlong() { return getAxisValueLong(EAxis.W); }    
+    default long getX() { return getAxisValue(EAxis.X); }
+    default long getY() { return getAxisValue(EAxis.Y); }
+    default long getZ() { return getAxisValue(EAxis.Z); }
+    default long getW() { return getAxisValue(EAxis.W); }    
 }

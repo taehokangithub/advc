@@ -111,10 +111,10 @@ public class PointTest {
     void testManhattan()
     {
         IPoint p = new Point(1, 3, -7, -9);
-        assertTrue(p.getManhattanDistance() == -12);
+        assertTrue(p.getManhattanDistance() == 20);
 
         p = new Point(-7, 2);
-        assertTrue(p.getManhattanDistance() == -5);
+        assertTrue(p.getManhattanDistance() == 9);
     }
 
     @Test
@@ -161,6 +161,15 @@ public class PointTest {
         pmax.setMax(p4);
 
         assertTrue(pmax.equals(new Point(5, 11)));
+    }
+
+    @Test
+    void testConstructor()
+    {
+        IPoint p = new Point(Long.MAX_VALUE);
+        Point p2 = new Point(Long.MAX_VALUE, Long.MAX_VALUE, Long.MAX_VALUE, Long.MAX_VALUE);
+
+        assertTrue(p.equals(p2));
     }
 
     @Test

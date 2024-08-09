@@ -60,7 +60,7 @@ public class MapTest {
         IPoint maxPoint = m_map.getMax();
         IPoint minPoint = m_map.getMin();
 
-        final int expected = (maxPoint.getX() - minPoint.getX() + 1) * (maxPoint.getY() - minPoint.getY() + 1);
+        final long expected = (maxPoint.getX() - minPoint.getX() + 1) * (maxPoint.getY() - minPoint.getY() + 1);
         assertTrue(m_cntLoop == expected);
     }
     
@@ -96,5 +96,17 @@ public class MapTest {
     {
         assertTrue(m_map.getMax().equals(new Point(100, 21, 122, 7)));
         assertTrue(m_map.getMin().equals(new Point(-190, -21, -32, -21)));
+    }
+
+    @Test
+    void testMinMax2()
+    {
+        Map<Integer> map = new Map<>();
+
+        map.setTile(new Point(3,5,6,7), 0);
+        map.setTile(new Point(1,2,9,8), 1);
+
+        assertTrue(map.getMax().equals(new Point(3, 5, 9, 8)), map.getMax().toString());
+        assertTrue(map.getMin().equals(new Point(1, 2, 6, 7)), map.getMin().toString());
     }
 }

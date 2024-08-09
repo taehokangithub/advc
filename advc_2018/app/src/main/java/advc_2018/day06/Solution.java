@@ -22,7 +22,7 @@ public class Solution
         
         var lines = helper.readLinesFromFile("input.txt");
         
-        helper.answerCheckerDontThrow(solve1(lines), 0);
+        helper.answerChecker(solve1(lines), 4887);
         helper.answerCheckerDontThrow(solve2(lines), 0);
     }
 }
