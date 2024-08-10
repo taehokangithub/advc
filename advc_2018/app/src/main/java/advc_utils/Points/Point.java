@@ -275,10 +275,13 @@ public class Point implements IPoint
     @Override
     public long getManhattanDistance(IPoint other) {
         long sum = 0;
-        for (var axis : EAxis.values())
-        {
-            sum += Math.abs(getAxisValue(axis) - other.getAxisValue(axis));
-        }
+
+        // quick version
+        sum += Math.abs(this.x - other.getX());
+        sum += Math.abs(this.y - other.getY());
+        sum += Math.abs(this.z - other.getZ());
+        sum += Math.abs(this.w - other.getW());
+
         return sum;
     }
 

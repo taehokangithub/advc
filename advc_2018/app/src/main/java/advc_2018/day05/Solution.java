@@ -6,12 +6,12 @@ public class Solution
 {
     public static long solve1(String line)
     {
-        return Reduction.reduce(line).length();
+        return Reduction.reduce(new StringBuilder(line));
     }
 
     public static long solve2(String line)
     {
-        return Reduction.reduceBestStrategy(line).length();
+        return Reduction.reduceBestStrategy(new StringBuilder(line));
     }
 
     public static void run()

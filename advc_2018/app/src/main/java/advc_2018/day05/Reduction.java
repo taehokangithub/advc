@@ -2,7 +2,7 @@ package advc_2018.day05;
 
 public class Reduction 
 {
-    public static String reduceSpecific(String str, char target)
+    public static StringBuilder reduceSpecific(StringBuilder str, char target)
     {
         StringBuilder sb = new StringBuilder();
 
@@ -15,24 +15,24 @@ public class Reduction
             }
         }
 
-        str = sb.toString();
-        return str;
+        return sb;
     }
 
-    public static String reduce(String str)
+    public static int reduce(StringBuilder sbSource)
     {
         boolean hasReacted = true;
 
+        StringBuilder sbTarget = new StringBuilder(sbSource.length());
+
         while (hasReacted)
         {
-            StringBuilder sb = new StringBuilder(str.length());
             hasReacted = false;
-
+            
             int i;
-            for (i = 0; i < str.length() - 1; i++)
+            for (i = 0; i < sbSource.length() - 1; i++)
             {
-                final char a = str.charAt(i);
-                final char b = str.charAt(i + 1);
+                final char a = sbSource.charAt(i);
+                final char b = sbSource.charAt(i + 1);
 
                 if (canReact(a, b))
                 {
@@ -41,34 +41,36 @@ public class Reduction
                 }
                 else
                 {
-                    sb.append(a);
+                    sbTarget.append(a);
                 }
             }
-            if (i == str.length() - 1)
+            if (i == sbSource.length() - 1)
             {
-                sb.append(str.charAt(i));
+                sbTarget.append(sbSource.charAt(i));
             }
-            str = sb.toString();
+            
+            // swap & reuse
+            StringBuilder tmp = sbSource;
+            sbSource = sbTarget;
+            sbTarget = tmp;
+            sbTarget.setLength(0);
         }
 
-        return str;
+        return sbSource.length();
     }
 
-    public static String reduceBestStrategy(String str)
+    public static int reduceBestStrategy(StringBuilder sb)
     {
-        String minStr = str;
+        int minLen = sb.length();
 
         for (char c = 'a'; c <= 'z'; c ++)
         {
-            String newStr1 = reduceSpecific(str, c);
-            String newStr2 = reduce(newStr1);
+            final int ret = reduce(reduceSpecific(sb, c));
 
-            if (newStr2.length() < minStr.length())
-            {
-                minStr = newStr2;
-            }
+            minLen = Math.min(minLen, ret);
         }
-        return minStr;
+        
+        return minLen;
     }
 
     private static boolean canReact(final char a, final char b)

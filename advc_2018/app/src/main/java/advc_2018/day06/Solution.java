@@ -5,15 +5,14 @@ import java.util.List;
 
 public class Solution 
 {
-    public static long solve1(List<String> lines)
+    public static long solve1(List<String> lines, AreaMap areaMap)
     {
-        AreaMap areaMap = new AreaMap(lines);
         return areaMap.getLargestInternalArea();
     }
 
-    public static long solve2(List<String> lines)
+    public static long solve2(List<String> lines, AreaMap areaMap)
     {
-        return 0;
+        return areaMap.getSafeAreas();
     }
 
     public static void run()
@@ -21,8 +20,10 @@ public class Solution
         IAdvcHelper helper = new AdvcHelper("day06");
         
         var lines = helper.readLinesFromFile("input.txt");
+        AreaMap areaMap = new AreaMap(lines);
+        areaMap.analyse(10000);
         
-        helper.answerChecker(solve1(lines), 4887);
-        helper.answerCheckerDontThrow(solve2(lines), 0);
+        helper.answerChecker(solve1(lines, areaMap), 4887);
+        helper.answerChecker(solve2(lines, areaMap), 34096);
     }
 }
