@@ -10,8 +10,6 @@ public class Worker
     private PriorityQueue<INode> m_pq;
     private HashSet<String> m_visited;
     private int m_baseSeconds;
-    private int m_id; 
-    private static int s_id_seed = 0;
 
     public Worker(PriorityQueue<INode> pq, HashSet<String> visited, int baseSeconds)
     {
@@ -19,8 +17,6 @@ public class Worker
         m_baseSeconds = baseSeconds;
         m_visited = visited;
         m_job = null;
-        s_id_seed ++;
-        m_id = s_id_seed;
     }
 
     public void run()
