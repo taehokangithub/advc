@@ -78,11 +78,23 @@ public class Node implements INode
     @Override
     public boolean addEdge(INode target)
     {
-        return this.addEdge(target, 1);
+        return this.addDirectedEdge(target, 1, Edge.Dir.NotDirected);
     }
 
     @Override
     public boolean addEdge(INode target, long distance)
+    {
+        return this.addDirectedEdge(target, distance, Edge.Dir.NotDirected);
+    }
+
+    @Override
+    public boolean addDirectedEdge(INode target, Edge.Dir dir)
+    {
+        return this.addDirectedEdge(target, 1, dir);
+    }
+
+    @Override
+    public boolean addDirectedEdge(INode target, long distance, Edge.Dir dir)
     {
         if (target == this)
         {
@@ -98,6 +110,7 @@ public class Node implements INode
         Edge edge = new Edge();
         edge.distance = distance;
         edge.target = target;
+        edge.dir = dir;
         m_edges.put(target.getName(), edge);
 
         return true;

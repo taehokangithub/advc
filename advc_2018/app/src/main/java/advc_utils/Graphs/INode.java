@@ -21,5 +21,7 @@ public interface INode extends Comparable<INode>{
     // Edges
     boolean addEdge(INode target);
     boolean addEdge(INode target, long distance);
+    boolean addDirectedEdge(INode target, Edge.Dir dir);
+    boolean addDirectedEdge(INode target, long distance, Edge.Dir dir);
     Collection<Edge> getEdges();
 }

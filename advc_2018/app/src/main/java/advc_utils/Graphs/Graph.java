@@ -35,6 +35,30 @@ public class Graph implements IGraph
     }
 
     @Override
+    public void addDirectedEdge(String name1, String name2, int distance)
+    {
+        var node1 = getOrCreateNode(name1);
+        var node2 = getOrCreateNode(name2);
+
+        if (!node1.addDirectedEdge(node2, distance, Edge.Dir.EdgeTargetIsDestination) 
+            || !node2.addDirectedEdge(node1, distance, Edge.Dir.EdgeTargetIsSource))
+        {
+            throw new IllegalArgumentException("Error! possibly duplicated node between " + node1.getName() + " and " + node2.getName());
+        }
+        
+        if (m_root == null)
+        {
+            m_root = node1;
+        }
+    }
+
+    @Override
+    public void addDirectedEdge(String name1, String name2)
+    {
+        this.addDirectedEdge(name1, name2, 1);
+    }
+
+    @Override
     public void addEdge(String name1, String name2, int distance)
     {
         var node1 = getOrCreateNode(name1);
