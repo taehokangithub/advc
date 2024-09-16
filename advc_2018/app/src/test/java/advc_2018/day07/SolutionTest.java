@@ -23,12 +23,14 @@ public class SolutionTest
     @Test
     void testInput()
     {
-        m_helper.answerCheckerTestInput(Solution.solve1(m_lines), "CABDFE");
-        m_helper.answerCheckerTestInput(Solution.solve2(m_lines, 0, 2), 15);
+        var solution = new Solution();
+
+        m_helper.answerCheckerTestInput(solution.solve1(m_lines), "CABDFE");
+        m_helper.answerCheckerTestInput(solution.solve2(m_lines, 0, 2), 15);
     }
 
     @Test
-    void testPars()
+    void testParse()
     {
         JobGraph jg = new JobGraph(m_lines);
         var graph = jg.get();

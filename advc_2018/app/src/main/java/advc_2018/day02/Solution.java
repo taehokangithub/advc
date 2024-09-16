@@ -4,9 +4,13 @@ import advc_utils.Etc.*;
 import java.util.HashMap;
 import java.util.List;
 
+import org.junit.jupiter.api.Test;
+
 public class Solution 
 {
-    public static long solve1(List<String> lines)
+    private IAdvcHelper m_helper = new AdvcHelper("day02");
+
+    public long solve1(List<String> lines)
     {
         long cnt2 = 0;
         long cnt3 = 0;
@@ -38,7 +42,7 @@ public class Solution
         return cnt2 * cnt3;
     }
 
-    public static String solve2(List<String> lines)
+    public String solve2(List<String> lines)
     {
         String mostMatch = "";
         int mostCount = 0;
@@ -72,23 +76,19 @@ public class Solution
         return mostMatch;
     }
 
-    public static void test(IAdvcHelper helper)
+    public void run()
     {
-        var lines = helper.readLinesFromFile("input_test.txt");
-
-        helper.answerCheckerTestInput(solve2(lines), "fgij");
+        var lines = m_helper.readLinesFromFile("input.txt");
+        
+        m_helper.answerChecker(solve1(lines), 4712);
+        m_helper.answerChecker(solve2(lines), "lufjygedpvfbhftxiwnaorzmq");
     }
 
-
-    public static void run()
+    @Test
+    public void test()
     {
-        IAdvcHelper helper = new AdvcHelper("day02");
-        
-        test(helper);
+        var lines = m_helper.readLinesFromFile("input_test.txt");
 
-        var lines = helper.readLinesFromFile("input.txt");
-        
-        helper.answerChecker(solve1(lines), 4712);
-        helper.answerChecker(solve2(lines), "lufjygedpvfbhftxiwnaorzmq");
+        m_helper.answerCheckerTestInput(solve2(lines), "fgij");
     }
 }

@@ -3,27 +3,42 @@ package advc_2018.day06;
 import advc_utils.Etc.*;
 import java.util.List;
 
+import org.junit.jupiter.api.Test;
+
 public class Solution 
 {
-    public static long solve1(List<String> lines, AreaMap areaMap)
+    private IAdvcHelper m_helper = new AdvcHelper("day06");
+
+    public long solve1(List<String> lines, AreaMap areaMap)
     {
         return areaMap.getLargestInternalArea();
     }
 
-    public static long solve2(List<String> lines, AreaMap areaMap)
+    public long solve2(List<String> lines, AreaMap areaMap)
     {
         return areaMap.getSafeAreas();
     }
 
-    public static void run()
+    public void run()
     {
-        IAdvcHelper helper = new AdvcHelper("day06");
-        
-        var lines = helper.readLinesFromFile("input.txt");
+        var lines = m_helper.readLinesFromFile("input.txt");
+
         AreaMap areaMap = new AreaMap(lines);
         areaMap.analyse(10000);
         
-        helper.answerChecker(solve1(lines, areaMap), 4887);
-        helper.answerChecker(solve2(lines, areaMap), 34096);
+        m_helper.answerChecker(solve1(lines, areaMap), 4887);
+        m_helper.answerChecker(solve2(lines, areaMap), 34096);
     }
+
+    @Test
+    void test()
+    {   
+        var lines = m_helper.readLinesFromFile("input_test.txt");
+
+        AreaMap areaMap = new AreaMap(lines);
+        areaMap.analyse(32);
+
+        m_helper.answerCheckerTestInput(solve1(lines, areaMap), 17);
+        m_helper.answerCheckerTestInput(solve2(lines, areaMap), 16);
+    }    
 }

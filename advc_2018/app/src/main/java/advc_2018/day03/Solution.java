@@ -3,29 +3,41 @@ package advc_2018.day03;
 import advc_utils.Etc.*;
 import java.util.List;
 
+import org.junit.jupiter.api.Test;
+
 public class Solution 
 {
-    public static long solve1(List<String> lines, Claims claims)
+    private IAdvcHelper m_helper = new AdvcHelper("day03");
+
+    public long solve1(List<String> lines, Claims claims)
     {
         return claims.getMultipleClaimedTiles();
     }
 
-    public static long solve2(List<String> lines, Claims claims)
+    public long solve2(List<String> lines, Claims claims)
     {
         return claims.getSingleClaimedID();
     }
 
-    public static void run()
+    public void run()
     {
-        IAdvcHelper helper = new AdvcHelper("day03");
-
-        var lines = helper.readLinesFromFile("input.txt");
+        var lines = m_helper.readLinesFromFile("input.txt");
         var claims = new Claims(lines);
 
         final var ans1 = solve1(lines, claims);
         final var ans2 = solve2(lines, claims);
 
-        helper.answerChecker(ans1, 107043);
-        helper.answerChecker(ans2, 346);
+        m_helper.answerChecker(ans1, 107043);
+        m_helper.answerChecker(ans2, 346);
+    }
+
+    @Test
+    void testInput()
+    {
+        var lines = m_helper.readLinesFromFile("input_test.txt");
+        var claims = new Claims(lines);
+        
+        m_helper.answerCheckerTestInput(solve1(lines, claims), 4);
+        m_helper.answerCheckerTestInput(solve2(lines, claims), 3);
     }
 }

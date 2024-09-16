@@ -32,6 +32,15 @@ testing {
     }
 }
 
+sourceSets {
+    test {
+        java {
+            srcDirs = ['src/main/java', 'src/test/java']
+        }
+    }
+}
+
+
 // Apply a specific Java toolchain to ease working on different environments.
 java {
     toolchain {

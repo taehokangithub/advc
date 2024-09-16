@@ -35,15 +35,4 @@ public class SolutionTest {
         assertTrue(record.getMinute() == 47);
         assertTrue(record.getRecordType() == EGuardRecordType.BeginsShift);
     }
-
-    @Test
-    void testInput()
-    {
-        IAdvcHelper helper = new AdvcHelper("day04");
-        var lines = helper.readLinesFromFile("input_test.txt");
-        var manager = new RecordManager(lines);
-
-        helper.answerCheckerTestInput(Solution.solve1(lines, manager), 240);
-        helper.answerCheckerTestInput(Solution.solve2(lines, manager), 4455);
-    }
 }
