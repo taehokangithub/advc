@@ -1,8 +1,5 @@
 package advc_2018.day04;
 
-import advc_utils.Etc.AdvcHelper;
-import advc_utils.Etc.IAdvcHelper;
-
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
