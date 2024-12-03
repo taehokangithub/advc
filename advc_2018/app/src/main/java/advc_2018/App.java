@@ -7,6 +7,7 @@ public class App {
     public static void main(String[] args) {
         final long startTime = System.currentTimeMillis();
 
+        new advc_2018.day00_template.Solution().run();
         new advc_2018.day01.Solution().run();
         new advc_2018.day02.Solution().run();
         new advc_2018.day03.Solution().run();

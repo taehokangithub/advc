@@ -5,7 +5,7 @@ import shutil
 import requests
 
 SESSION_COOKIE="53616c7465645f5f7509ccafdaef8e2c4e4a2f435d525dfeb75069ee7e97b901a916d754ade0f5524f12b0abb7fc6fe3a0ec09b4c3f157c8e88edcc1cae270ad"
-YEAR="2018"
+YEAR="2024"
 EXIT_ON_EXIST=True
 
 def exit_if_needed(error_code):
