@@ -63,7 +63,7 @@ public class Solution
 
     private List<Integer> removeElement(List<Integer> srcList, int at)
     {
-        List<Integer> removed = new ArrayList();
+        List<Integer> removed = new ArrayList<Integer>();
 
         for (int i = 0; i < srcList.size(); i ++)
         {

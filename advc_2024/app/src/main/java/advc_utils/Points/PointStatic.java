@@ -5,7 +5,7 @@ public final class PointStatic {
         new Point(0, -1),   // up
         new Point(1, 0), // right
         new Point(0, 1), // down
-        new Point (-1, 0)   // lefg
+        new Point(-1, 0)   // left
     };
 
     public static final Point[] Dir8Points = { 
