@@ -17,6 +17,9 @@ public interface IGraph
     void addDirectedEdge(String name1, String name2);
     void addDirectedEdge(String name1, String name2, int distance);
 
+    void addOneWayEdge(String name1, String name2, int distnace);
+    void addOneWayEdge(String name1, String name2);
+
     // Manually set root node
     void setRoot(String name);
     INode getRoot();
