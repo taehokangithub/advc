@@ -4,7 +4,7 @@ import os
 import shutil
 import requests
 
-SESSION_COOKIE="53616c7465645f5f7509ccafdaef8e2c4e4a2f435d525dfeb75069ee7e97b901a916d754ade0f5524f12b0abb7fc6fe3a0ec09b4c3f157c8e88edcc1cae270ad"
+SESSION_COOKIE="53616c7465645f5f928f0c9551c7bd911ede4a4061b3e6e61b414cf6b2ba38b93c0a32f77292fb892c970d4793934275f13ad46cc2524c61273db4adb211ab12"
 YEAR="2024"
 EXIT_ON_EXIST=True
 
@@ -32,7 +32,7 @@ def download_input_data(dst_data_folder, day):
                 file.write(response.text)
             print(f"* Downloaded input data and saved to {filename}")
         else:
-            print(f"[ERROR!] Failed to fetch input data: {response.status_code}")    
+            print(f"[ERROR!] Failed to fetch input data: {response.status_code} {url}")
 
 def change_day_value(dst_java_folder, day) :
     for java_file_path in glob.glob(os.path.join(dst_java_folder, "*.java")):

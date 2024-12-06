@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import advc_utils.Grid.*;
-import advc_utils.Points.Point;
+import advc_utils.Points.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -43,6 +43,24 @@ public class GridTest {
 
         m_lines = Arrays.asList(m_text.split("\n"));
         m_grid.initialiseGrid(m_lines, this::getTileFromChar);
+    }
+
+    @Test
+    void CopyConstructorTest()
+    {
+        var newGrid = new Grid<Tile>(m_grid);
+        var size = newGrid.getSize();
+
+        assertTrue(size.equals(m_grid.getSize()));
+
+        for (int y = 0; y < size.getY(); y ++)
+        {
+            for (int x = 0; x < size.getX(); x ++)
+            {
+                IPoint thisPoint = new Point(x, y);
+                assertEquals(newGrid.getTile(thisPoint), m_grid.getTile(thisPoint));
+            }
+        }
     }
 
     @Test

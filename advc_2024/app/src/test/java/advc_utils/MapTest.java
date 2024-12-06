@@ -52,7 +52,7 @@ public class MapTest {
     void testSpacePointLoopCount()
     {
         m_cntLoop = 0;
-        m_map.forEachSpacePoint((IPoint) ->
+        m_map.forEachSpacePoint((_) ->
         {
             m_cntLoop ++;
         });
@@ -68,7 +68,7 @@ public class MapTest {
     void testTileLoopCount()
     {
         m_cntLoop = 0;
-        m_map.forEachTile((IPoint p, Tile t) ->
+        m_map.forEachTile((_, _) ->
         {
             m_cntLoop ++;
         });

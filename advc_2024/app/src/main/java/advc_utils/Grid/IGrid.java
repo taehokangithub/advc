@@ -18,24 +18,38 @@ public interface IGrid<T>
         void forEachPoint(IPoint p, T val);
     }
 
+    interface ForEachRawCB<T>
+    {
+        void forEachPoint(long x, long y, T val);
+    }
+
     // Initialise : read string data from lines, convert it to a Grid, with a char-tile conversion callback
     void initialiseGrid(List<String> lines, CharToTileCB<T> cb);
+
+    // Initialise an empty grid
+    void initialiseGrid(IPoint size, T defaultValue);
 
     // Get the size of the grid - 2d point (x ,y)
     IPoint getSize();
 
     // Returns if the given point is inside the grid's valid coordinate range (x, y)
     boolean isValid(IPoint p);
+    boolean isValid(long x, long y);
 
     // Getter : returns the tile of the given point (x, y)
     T getTile(IPoint p);
+    T getTile(long x, long y);
+    T getTileFast(long x, long y);
 
     // Setter
     void setTile(IPoint p, T tile);
+    void setTile(long x, long y, T tile);
+    void setTileFast(long x, long y, T tile);
 
     // Returns the string representation of the grid
     String getGridString();
 
     // Loops for each tile in the grid, calling the given ForEachCB
     void forEach(ForEachCB<T> cb);
+    void forEachRaw(ForEachRawCB<T> cb);
 }
