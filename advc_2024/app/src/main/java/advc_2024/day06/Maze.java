@@ -119,26 +119,33 @@ public class Maze
 
     private void moveActorByRule(Actor actor, Grid<Tile> grid)
     {
-        IPoint orgDirection = actor.GetVelocity();
+        // Emergency optimisation - normally shouldn't do that
+        Point actorLoc = (Point) actor.GetLocation();
 
         for (int i = 0; i < 4; i ++)
         {
             IPoint direction = actor.GetVelocity();
-            IPoint nextTurn = actor.GetLocation().getAdded(direction);
-            if (grid.isValid(nextTurn) && grid.getTileFast(nextTurn.getX(), nextTurn.getY()) == Tile.Block)
+            final long nextX = actorLoc.x + direction.getX();
+            final long nextY = actorLoc.y + direction.getY();
+
+            if (grid.isValidFast(nextX, nextY) && grid.getTileFast(nextX, nextY) == Tile.Block)
             {
                 actor.SetVelocity(direction.getRotated(EDir.RIGHT));
-                if (actor.GetVelocity().equals(orgDirection))
-                {
-                    throw new IllegalStateException("Can't rotate - movement stuck");
-                }
+
+                /* no idea why it doesn work (memory full) : need to investigate
+                System.out.print("Velocity from " + direction.toString());
+                direction.rotate(EDir.RIGHT);
+                System.out.print(" to " + direction.toString());
+                actor.SetVelocity(direction);
+                System.out.println(" to  " + actor.GetVelocity().toString());
+                */
             }
             else 
             {
+                actorLoc.x = nextX;
+                actorLoc.y = nextY;
                 break;
             }
         }
-
-        actor.MoveOneTurn();
     }
 }

@@ -51,11 +51,11 @@ public class Grid<T> implements IGrid<T>
     public boolean isValid(IPoint p)
     {
         assertTrue(p.getNumAxis() == 2); // ensure it's a 2D point
-        return isValid(p.getX(), p.getY());
+        return isValidFast(p.getX(), p.getY());
     }
 
     @Override
-    public boolean isValid(long x, long y)
+    public boolean isValidFast(long x, long y)
     {
         return x >= 0 && y >= 0 && x < m_size.getX() && y < m_size.getY();
     }
@@ -64,18 +64,12 @@ public class Grid<T> implements IGrid<T>
     public T getTile(IPoint p) 
     {
         assertTrue(p.getNumAxis() == 2); // ensure it's a 2D point
-        return getTile(p.getX(), p.getY());
-    }
-
-    @Override
-    public T getTile(long x, long y)
-    {
-        if (!isValid(x, y))
+        if (!isValid(p))
         {
             assertTrue(false);
             return null;
         }
-        return getTileFast(x, y);
+        return getTileFast(p.getX(), p.getY());
     }
 
     @Override
@@ -88,17 +82,11 @@ public class Grid<T> implements IGrid<T>
     public void setTile(IPoint p, T tile)
     {
         assertTrue(p.getNumAxis() == 2); // ensure it's a 2D point
-        setTile(p.getX(), p.getY(), tile);
-    }
-
-    @Override
-    public void setTile(long x, long y, T tile)
-    {
-        if (!isValid(x, y))
+        if (!isValid(p))
         {
             throw new IllegalArgumentException();
-        }
-        setTileFast(x, y, tile);
+        }        
+        setTileFast(p.getX(), p.getY(), tile);
     }
 
     @Override
