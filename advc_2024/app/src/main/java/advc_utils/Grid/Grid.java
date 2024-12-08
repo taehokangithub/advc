@@ -34,10 +34,18 @@ public class Grid<T> implements IGrid<T>
                 lineList.add(other.getTile(new Point(x, y)));
             }
         }
+
+        m_tileToChar = other.getTileToCharMap();
     }
 
     @Override
     public Point getSize() { return m_size; }
+
+    @Override
+    public Map<T, Character> getTileToCharMap()
+    {
+        return m_tileToChar;
+    }
 
     @Override
     public boolean isValid(IPoint p)
@@ -143,10 +151,16 @@ public class Grid<T> implements IGrid<T>
     @Override
     public String getGridString()
     {
+        return getGridString(c -> m_tileToChar.get(c));
+    }
+
+    @Override
+    public String getGridString(TileToCharCB<T> cb)
+    {
         StringBuilder sb = new StringBuilder();
         forEach((p, t) ->
         {
-            sb.append(m_tileToChar.get(t));
+            sb.append("" + cb.getCharFromTile(t));
             if (p.getX() == m_size.x - 1)
             {
                 sb.append("\n");

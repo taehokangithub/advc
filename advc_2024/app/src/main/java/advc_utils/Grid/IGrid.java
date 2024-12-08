@@ -1,6 +1,7 @@
 package advc_utils.Grid;
 
 import java.util.List;
+import java.util.Map;
 
 import advc_utils.Points.IPoint;
 
@@ -10,6 +11,11 @@ public interface IGrid<T>
     interface CharToTileCB<T>
     {
         T getTileFromChar(char c);
+    }
+
+    interface TileToCharCB<T>
+    {
+        char getCharFromTile(T tile);
     }
 
     // Callback for looping for each tiles in a grid
@@ -28,6 +34,8 @@ public interface IGrid<T>
 
     // Initialise an empty grid
     void initialiseGrid(IPoint size, T defaultValue);
+
+    Map<T, Character> getTileToCharMap();
 
     // Get the size of the grid - 2d point (x ,y)
     IPoint getSize();
@@ -48,6 +56,7 @@ public interface IGrid<T>
 
     // Returns the string representation of the grid
     String getGridString();
+    String getGridString(TileToCharCB<T> cb);
 
     // Loops for each tile in the grid, calling the given ForEachCB
     void forEach(ForEachCB<T> cb);
