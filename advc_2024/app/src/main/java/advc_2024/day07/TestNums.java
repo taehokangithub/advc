@@ -66,14 +66,14 @@ public class TestNums {
         return sb.toString();        
     }
 
-    public List<Operator> getPossibleOperators(boolean useConcate)
+    public boolean hasPossibleOperators(boolean useConcate)
     {
         List<Operator> operators = new ArrayList<Operator>();
 
-        return getPossibleOperatorInternal(operators, useConcate);
+        return hasPossibleOperatorInternal(operators, useConcate);
     }
 
-    private List<Operator> getPossibleOperatorInternal(List<Operator> operators, boolean useConcate)
+    private boolean hasPossibleOperatorInternal(List<Operator> operators, boolean useConcate)
     {
         if (m_numbers.size() == operators.size() + 1)
         {   
@@ -83,33 +83,31 @@ public class TestNums {
                 result = calculate(operators.get(i), result, m_numbers.get(i + 1));
             }
 
-            if (result == m_targetNumber)
-            {
-                return operators;
-            }
-            return null;
+            return result == m_targetNumber;
         }
         
-        var ans1 = AppendOperatorAndCall(operators, Operator.Add, useConcate);
-        if (ans1 != null)
+        operators.add(Operator.Add);
+        var ans1 = hasPossibleOperatorInternal(operators, useConcate);
+
+        if (ans1)
         {
             return ans1;
         }
 
-        var ans2 = AppendOperatorAndCall(operators, Operator.Multi, useConcate);
-        if (ans2 != null || !useConcate)
+        operators.set(operators.size() - 1, Operator.Multi);
+        var ans2 = hasPossibleOperatorInternal(operators, useConcate);
+
+        if (ans2 || !useConcate)
         {
+            operators.removeLast();
             return ans2;
         }
 
-        return AppendOperatorAndCall(operators, Operator.Concat, useConcate);
-    }
+        operators.set(operators.size() - 1, Operator.Concat);
+        var ans3 = hasPossibleOperatorInternal(operators, useConcate);
+        operators.removeLast();
 
-    private List<Operator> AppendOperatorAndCall(List<Operator> operators, Operator newOp, boolean useConcate)
-    {
-        List<Operator> newOperators = new ArrayList<Operator>(operators);
-        newOperators.add(newOp);
-        return getPossibleOperatorInternal(newOperators, useConcate);
+        return ans3;
     }
 
     private long calculate(Operator op, long num1, long num2)

@@ -20,7 +20,7 @@ public class TestNumsManager
         long sum = 0;
         for (var testNums : m_testNums)
         {
-            if (testNums.getPossibleOperators(useConcate) != null)
+            if (testNums.hasPossibleOperators(useConcate))
             {
                 sum += testNums.getTargetNumber();
             }
