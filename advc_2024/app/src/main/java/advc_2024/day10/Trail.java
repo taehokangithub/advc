@@ -75,16 +75,13 @@ public class Trail
                         }
                         visited.add(newLoc.toString());
                     }
-
                     if (newVal == VAL_HIGHEST)
                     {
                         sum ++;  // found!
                         m_logger.log("Found path from %s to %s, total %d so far", trailhead.toString(), newLoc.toString(), sum);
-
                     }
                     else
                     {
-                        m_logger.log("Moving from %s(%d) to %s(%d)", curLoc.toString(), curVal, newLoc.toString(), newVal);
                         q.add(newLoc);
                     }
                 }
