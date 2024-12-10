@@ -1,14 +1,14 @@
 package advc_utils.Points;
 
 public final class PointStatic {
-    public static final Point[] Dir4Points = { 
+    public static final IPoint[] Dir4Points = { 
         new Point(0, -1),   // up
         new Point(1, 0), // right
         new Point(0, 1), // down
         new Point(-1, 0)   // left
     };
 
-    public static final Point[] Dir8Points = { 
+    public static final IPoint[] Dir8Points = { 
         new Point(-1, -1), new Point(0, -1), new Point(1, -1), 
         new Point(-1, 0), new Point(1, 0), 
         new Point(-1, 1), new Point(0, 1), new Point(1, 1), 
